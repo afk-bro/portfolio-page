@@ -1,0 +1,79 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 850 >>
+stream
+BT
+/F1 24 Tf
+220 750 Td
+(Your Name) Tj
+0 -30 Td
+/F1 14 Tf
+(Senior Full-Stack Engineer) Tj
+0 -50 Td
+/F1 12 Tf
+(PROFESSIONAL SUMMARY) Tj
+0 -20 Td
+/F1 10 Tf
+(Experienced full-stack engineer with expertise in modern web technologies.) Tj
+0 -15 Td
+(Passionate about building scalable applications and delivering high-quality solutions.) Tj
+0 -40 Td
+/F1 12 Tf
+(EXPERIENCE) Tj
+0 -20 Td
+/F1 10 Tf
+(Senior Software Engineer - Tech Company \(2020 - Present\)) Tj
+0 -15 Td
+(- Led development of customer-facing web applications) Tj
+0 -15 Td
+(- Mentored junior developers and conducted code reviews) Tj
+0 -15 Td
+(- Implemented CI/CD pipelines and improved deployment processes) Tj
+0 -40 Td
+/F1 12 Tf
+(SKILLS) Tj
+0 -20 Td
+/F1 10 Tf
+(Languages: JavaScript, TypeScript, Python, Go) Tj
+0 -15 Td
+(Frontend: React, Next.js, Vue.js, HTML5, CSS3) Tj
+0 -15 Td
+(Backend: Node.js, Express, Django, PostgreSQL, MongoDB) Tj
+0 -15 Td
+(Tools: Git, Docker, Kubernetes, AWS, CI/CD) Tj
+0 -40 Td
+/F1 12 Tf
+(EDUCATION) Tj
+0 -20 Td
+/F1 10 Tf
+(Bachelor of Science in Computer Science) Tj
+0 -15 Td
+(University Name - Graduation Year) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f
+0000000009 00000 n
+0000000058 00000 n
+0000000115 00000 n
+0000000266 00000 n
+0000001168 00000 n
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1245
+%%EOF
