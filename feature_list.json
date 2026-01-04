@@ -363,7 +363,7 @@
       "Step 13: Locate target roles section",
       "Step 14: Verify roles being sought are clearly stated"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -383,7 +383,7 @@
       "Step 12: Verify text like 'typically respond within 48 hours' exists",
       "Step 13: Verify preferred contact method is indicated"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
