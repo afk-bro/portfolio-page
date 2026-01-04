@@ -269,7 +269,7 @@
       "Step 14: Verify live demo link if project has one",
       "Step 15: Verify project metadata (date, duration, team size) is shown"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -286,7 +286,7 @@
       "Step 9: Verify technologies match what's shown on project card",
       "Step 10: Switch to dark mode and verify badge visibility"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -304,7 +304,7 @@
       "Step 10: Verify demo link has status indicator if applicable",
       "Step 11: Verify links have hover states"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
