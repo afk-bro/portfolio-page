@@ -7,6 +7,23 @@ import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { calculateReadingTime } from '@/lib/utils'
 
+// Get related projects based on shared technologies or domain
+function getRelatedProjects(currentProject: ReturnType<typeof getProjectBySlug>, limit: number = 2) {
+  if (!currentProject) return []
+  const otherProjects = projects.filter((p) => p.slug !== currentProject.slug)
+  const scored = otherProjects.map((project) => {
+    let score = 0
+    if (project.domain === currentProject.domain) score += 5
+    const sharedTechs = project.technologies.filter((tech) =>
+      currentProject.technologies.map((t) => t.toLowerCase()).includes(tech.toLowerCase())
+    )
+    score += sharedTechs.length * 2
+    if (project.type === currentProject.type) score += 1
+    return { project, score, sharedTechs }
+  })
+  return scored.filter((item) => item.score > 0).sort((a, b) => b.score - a.score).slice(0, limit)
+}
+
 interface ProjectPageProps {
   params: { slug: string }
 }
@@ -55,6 +72,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null
   const nextProject =
     currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null
+
+  // Get related projects
+  const relatedProjects = getRelatedProjects(project, 2)
 
   return (
     <article className="section">
@@ -220,6 +240,66 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           <div className="prose-content">
             <p>{project.description}</p>
           </div>
+        )}
+
+        {/* Related Projects */}
+        {relatedProjects.length > 0 && (
+          <section id="related-projects" className="mt-16 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+            <h2 className="text-h3 text-neutral-900 dark:text-neutral-50 mb-6">
+              Related Projects
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {relatedProjects.map(({ project: relatedProject, sharedTechs }) => (
+                <Link
+                  key={relatedProject.id}
+                  href={`/projects/${relatedProject.slug}`}
+                  className="card p-6 hover:shadow-lg transition-shadow group"
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <Badge
+                      variant={
+                        relatedProject.status === 'complete'
+                          ? 'success'
+                          : relatedProject.status === 'in-progress'
+                            ? 'warning'
+                            : 'default'
+                      }
+                      size="sm"
+                    >
+                      {relatedProject.status === 'complete'
+                        ? 'Complete'
+                        : relatedProject.status === 'in-progress'
+                          ? 'In Progress'
+                          : 'Archived'}
+                    </Badge>
+                    <Badge variant="default" size="sm">
+                      {relatedProject.domain}
+                    </Badge>
+                  </div>
+                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                    {relatedProject.title}
+                  </h3>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 line-clamp-2">
+                    {relatedProject.summary}
+                  </p>
+                  {sharedTechs.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {sharedTechs.slice(0, 3).map((tech) => (
+                        <Badge key={tech} variant="primary" size="sm">
+                          {tech}
+                        </Badge>
+                      ))}
+                      {sharedTechs.length > 3 && (
+                        <Badge variant="default" size="sm">
+                          +{sharedTechs.length - 3}
+                        </Badge>
+                      )}
+                    </div>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </section>
         )}
 
         {/* Project Navigation */}

@@ -323,7 +323,7 @@
       "Step 11: Click 'Next Project' if available",
       "Step 12: Verify navigation to next project in sequence"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
