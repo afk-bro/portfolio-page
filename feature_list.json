@@ -530,7 +530,7 @@
       "Step 13: Navigate to /projects and click a project",
       "Step 14: Verify project detail page loads"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -547,7 +547,7 @@
       "Step 9: Test LinkedIn link similarly",
       "Step 10: Navigate to project page and test GitHub repo link"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
