@@ -179,7 +179,7 @@
       "Step 13: Verify filtering works for that category",
       "Step 14: Clear all filters and verify full list returns"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -196,7 +196,7 @@
       "Step 9: Verify TypeScript projects are shown",
       "Step 10: Verify filter state is visually indicated (selected state)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
