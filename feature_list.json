@@ -407,7 +407,7 @@
       "Step 16: Verify success message or toast appears",
       "Step 17: Verify form is cleared or confirmation shown"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -566,7 +566,7 @@
       "Step 11: Verify title includes project name",
       "Step 12: Verify meta description is project-specific"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -585,7 +585,7 @@
       "Step 11: Verify project-specific OG tags are set",
       "Step 12: Verify og:image shows project-related image"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -758,7 +758,7 @@
       "Step 6: Check .eslintrc configuration exists",
       "Step 7: Verify strict rules are enabled"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -1237,7 +1237,7 @@
       "Step 9: Navigate to /about and verify same structure",
       "Step 10: Verify sections use <section> or <article> appropriately"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -1254,7 +1254,7 @@
       "Step 9: Verify labels describe destination (e.g., 'GitHub profile')",
       "Step 10: Run accessibility audit to catch any unlabeled elements"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -1288,7 +1288,7 @@
       "Step 9: Repeat for message field",
       "Step 10: Verify all form fields have proper label association"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

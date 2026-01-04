@@ -1,13 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Metadata } from 'next'
 import { Mail, Github, Linkedin, Clock, Send, CheckCircle } from 'lucide-react'
 import { siteMetadata } from '@/data/metadata'
 import { Button } from '@/components/ui/Button'
-
-// Note: Metadata can't be exported from a client component
-// Move this to a separate file or use generateMetadata in a server component wrapper
 
 const contactMethods = [
   {
