@@ -1,0 +1,1709 @@
+[
+  {
+    "category": "functional",
+    "description": "Next.js project initializes, builds, and runs correctly with TypeScript",
+    "steps": [
+      "Step 1: Run 'pnpm install' to install dependencies",
+      "Step 2: Verify package.json contains Next.js, React, and TypeScript dependencies",
+      "Step 3: Verify tsconfig.json exists with strict mode enabled",
+      "Step 4: Run 'pnpm build' to build the production bundle",
+      "Step 5: Verify build completes successfully with exit code 0",
+      "Step 6: Verify no TypeScript errors in build output",
+      "Step 7: Verify static pages are generated in .next directory",
+      "Step 8: Run 'pnpm start' to start production server",
+      "Step 9: Navigate to http://localhost:3000",
+      "Step 10: Verify the homepage loads without errors",
+      "Step 11: Verify no console errors in browser developer tools"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Development server starts and enables hot module replacement",
+    "steps": [
+      "Step 1: Run 'pnpm dev' to start development server",
+      "Step 2: Navigate to http://localhost:3000",
+      "Step 3: Verify the homepage loads without errors",
+      "Step 4: Verify no console errors in browser developer tools"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Homepage hero section displays complete professional identity with CTAs",
+    "steps": [
+      "Step 1: Navigate to homepage (http://localhost:3000)",
+      "Step 2: Verify hero section is visible above the fold",
+      "Step 3: Verify professional name is displayed prominently as largest text",
+      "Step 4: Verify role/title is clearly visible (e.g., 'Senior Full-Stack Engineer')",
+      "Step 5: Verify value proposition text describes unique value",
+      "Step 6: Verify hero section has proper visual hierarchy",
+      "Step 7: Locate 'View Projects' primary CTA button",
+      "Step 8: Click 'View Projects' button and verify navigation to /projects",
+      "Step 9: Navigate back to homepage",
+      "Step 10: Locate 'Download Resume' secondary CTA button",
+      "Step 11: Verify resume button initiates download or navigates to /resume",
+      "Step 12: Verify availability indicator shows current status"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Homepage proof strip displays concrete quality signals and metrics",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Scroll to proof strip section below hero",
+      "Step 3: Verify proof strip section is visually distinct",
+      "Step 4: Verify at least 3 quality signals are displayed",
+      "Step 5: Verify signals include concrete metrics (e.g., test coverage, years experience)",
+      "Step 6: Verify signals have icons or visual indicators",
+      "Step 7: Verify text is scannable and concise",
+      "Step 8: Verify section works in both light and dark modes",
+      "Step 9: Resize viewport to mobile width",
+      "Step 10: Verify proof strip remains readable on mobile"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Homepage featured projects section showcases 2-3 key projects with full interactivity",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Scroll to featured projects section",
+      "Step 3: Verify section header 'Featured Projects' or similar is visible",
+      "Step 4: Count the number of project cards displayed",
+      "Step 5: Verify 2-3 project cards are shown (not more, not less)",
+      "Step 6: Verify each card has project title",
+      "Step 7: Verify each card has project summary/description",
+      "Step 8: Verify each card displays technology badges",
+      "Step 9: Verify each card has a visual (image or placeholder)",
+      "Step 10: Hover over first project card and verify hover effect",
+      "Step 11: Click on first project card",
+      "Step 12: Verify navigation to individual project page (/projects/[slug])"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Homepage skills section displays categorized skills with proficiency indicators",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Scroll to skills section",
+      "Step 3: Verify skills section header is visible",
+      "Step 4: Verify skills are grouped into categories (frontend, backend, devops, etc.)",
+      "Step 5: Verify at least 3 different skill categories exist",
+      "Step 6: Verify each category has a clear heading",
+      "Step 7: Verify each skill has a name displayed",
+      "Step 8: Verify each skill has a proficiency indicator (bar, dots, or level)",
+      "Step 9: Verify skill icons are displayed where appropriate",
+      "Step 10: Verify skills are sorted logically within categories",
+      "Step 11: Switch to dark mode and verify skills display correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Homepage displays availability indicator and call-to-action footer",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Look for availability indicator (e.g., 'Open to opportunities')",
+      "Step 3: Verify indicator is clearly visible with appropriate color",
+      "Step 4: Scroll to bottom of page",
+      "Step 5: Verify CTA section exists before footer",
+      "Step 6: Verify CTA has compelling headline",
+      "Step 7: Verify contact button or links are present",
+      "Step 8: Click on contact link/button",
+      "Step 9: Verify navigation to /contact or contact action",
+      "Step 10: Navigate back and verify footer social links are present"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Navigation bar displays all sections, is sticky, and highlights current page",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Verify navigation bar is visible at top of page",
+      "Step 3: Verify navigation includes: Home link or logo",
+      "Step 4: Verify navigation includes: Projects link",
+      "Step 5: Verify navigation includes: About link",
+      "Step 6: Verify navigation includes: Resume link",
+      "Step 7: Verify navigation includes: Contact link",
+      "Step 8: Scroll down the page significantly",
+      "Step 9: Verify navigation bar remains visible (sticky behavior)",
+      "Step 10: Click on 'About' in navigation",
+      "Step 11: Verify navigation to /about page",
+      "Step 12: Verify 'About' link is highlighted as current page",
+      "Step 13: Click on 'Projects' link",
+      "Step 14: Verify 'Projects' is now highlighted and 'About' is not"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Mobile navigation uses hamburger menu with full functionality",
+    "steps": [
+      "Step 1: Set viewport to mobile size (375px width)",
+      "Step 2: Navigate to homepage",
+      "Step 3: Verify hamburger menu icon is visible",
+      "Step 4: Verify main nav links are hidden (not visible)",
+      "Step 5: Click hamburger menu icon",
+      "Step 6: Verify mobile menu opens with animation",
+      "Step 7: Verify all navigation links are visible in menu",
+      "Step 8: Verify menu has appropriate styling/backdrop",
+      "Step 9: Click on 'Projects' link in mobile menu",
+      "Step 10: Verify navigation to /projects page",
+      "Step 11: Verify mobile menu closes after navigation",
+      "Step 12: Open mobile menu again",
+      "Step 13: Click outside menu or press escape",
+      "Step 14: Verify menu closes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Projects page displays filterable project grid with all filter options",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Verify projects page header is visible",
+      "Step 3: Verify project grid displays all projects",
+      "Step 4: Count total number of projects displayed",
+      "Step 5: Verify filter controls section is visible",
+      "Step 6: Locate technology filter options",
+      "Step 7: Click on a technology filter (e.g., 'React')",
+      "Step 8: Verify grid updates to show only matching projects",
+      "Step 9: Verify filtered count is less than total",
+      "Step 10: Clear the technology filter",
+      "Step 11: Verify all projects are displayed again",
+      "Step 12: Apply a different filter type (domain or status)",
+      "Step 13: Verify filtering works for that category",
+      "Step 14: Clear all filters and verify full list returns"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Projects can be filtered by technology stack (React, Python, Go, TypeScript, etc.)",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Locate technology filter options",
+      "Step 3: Note the total project count",
+      "Step 4: Click on 'React' filter",
+      "Step 5: Verify only projects using React are displayed",
+      "Step 6: Verify each visible project has React in its tech stack",
+      "Step 7: Clear filter",
+      "Step 8: Click on 'TypeScript' filter if available",
+      "Step 9: Verify TypeScript projects are shown",
+      "Step 10: Verify filter state is visually indicated (selected state)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Projects can be filtered by domain (web, backend, AI/ML, devops)",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Locate domain filter options",
+      "Step 3: Click on 'backend' domain filter",
+      "Step 4: Verify only backend projects are displayed",
+      "Step 5: Clear filter",
+      "Step 6: Click on 'web' or 'frontend' domain filter",
+      "Step 7: Verify only web/frontend projects are displayed",
+      "Step 8: Clear filter",
+      "Step 9: Click on 'AI/ML' domain filter if available",
+      "Step 10: Verify AI/ML projects are displayed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Projects can be filtered by type (professional, open-source, learning, personal)",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Locate type filter options",
+      "Step 3: Click on 'open-source' type filter",
+      "Step 4: Verify only open-source projects are displayed",
+      "Step 5: Verify each project has open-source indicator",
+      "Step 6: Clear filter",
+      "Step 7: Click on 'professional' type filter",
+      "Step 8: Verify only professional projects are displayed",
+      "Step 9: Clear filter",
+      "Step 10: Click on 'personal' or 'learning' filter if available"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Projects can be filtered by status (complete, in-progress, archived)",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Locate status filter options",
+      "Step 3: Click on 'in-progress' status filter",
+      "Step 4: Verify only in-progress projects are displayed",
+      "Step 5: Verify each project shows WIP or in-progress indicator",
+      "Step 6: Clear filter",
+      "Step 7: Click on 'complete' status filter",
+      "Step 8: Verify only complete projects are displayed",
+      "Step 9: Clear filter",
+      "Step 10: Click on 'archived' filter if available"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Individual project case study page displays complete standardized structure",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Click on first project card to open project detail",
+      "Step 3: Verify page URL matches /projects/[slug] pattern",
+      "Step 4: Verify project title is displayed as H1",
+      "Step 5: Verify technology stack badges are displayed near top",
+      "Step 6: Verify 'Problem' section is present with content",
+      "Step 7: Verify 'Constraints' section is present or mentioned",
+      "Step 8: Verify 'Solution' section is present with detailed content",
+      "Step 9: Verify 'Architecture' section or diagram is present",
+      "Step 10: Verify 'Key Features' section lists main features",
+      "Step 11: Verify 'Tradeoffs' section discusses decisions made",
+      "Step 12: Verify 'What I'd Do Next' or reflection section exists",
+      "Step 13: Verify GitHub repository link is clickable",
+      "Step 14: Verify live demo link if project has one",
+      "Step 15: Verify project metadata (date, duration, team size) is shown"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Project page displays technology stack with proper badges and links",
+    "steps": [
+      "Step 1: Navigate to any project detail page",
+      "Step 2: Locate technology stack section",
+      "Step 3: Verify technology badges are displayed",
+      "Step 4: Count number of technologies shown",
+      "Step 5: Verify each badge shows technology name clearly",
+      "Step 6: Verify badges have consistent styling",
+      "Step 7: Verify badges have appropriate colors or icons",
+      "Step 8: Check if technologies are clickable (filter by tech)",
+      "Step 9: Verify technologies match what's shown on project card",
+      "Step 10: Switch to dark mode and verify badge visibility"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Project page displays external links with proper behavior and status indicators",
+    "steps": [
+      "Step 1: Navigate to any project detail page",
+      "Step 2: Locate project links section (GitHub, Live Demo)",
+      "Step 3: Verify GitHub repository link is present",
+      "Step 4: Verify GitHub link has appropriate icon",
+      "Step 5: Click GitHub link",
+      "Step 6: Verify it opens in new tab (target=_blank)",
+      "Step 7: Verify original tab remains on portfolio",
+      "Step 8: Close new tab and return to project page",
+      "Step 9: If live demo exists, verify demo link is present",
+      "Step 10: Verify demo link has status indicator if applicable",
+      "Step 11: Verify links have hover states"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Project page shows related projects and navigation between projects",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Note the order of projects",
+      "Step 3: Click on first project to view detail",
+      "Step 4: Scroll to bottom of case study content",
+      "Step 5: Verify 'Related Projects' section exists",
+      "Step 6: Verify at least 1-2 related projects are shown",
+      "Step 7: Verify related projects are relevant (similar tech or domain)",
+      "Step 8: Click on a related project",
+      "Step 9: Verify navigation to that project's page",
+      "Step 10: Locate prev/next project navigation",
+      "Step 11: Click 'Next Project' if available",
+      "Step 12: Verify navigation to next project in sequence"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Resume page provides complete resume access with multiple format options",
+    "steps": [
+      "Step 1: Navigate to /resume",
+      "Step 2: Verify resume page header is visible",
+      "Step 3: Verify PDF viewer is embedded OR prominent download available",
+      "Step 4: If PDF viewer: verify resume content is visible and readable",
+      "Step 5: If PDF viewer: verify can scroll through resume",
+      "Step 6: Locate download button(s)",
+      "Step 7: Verify PDF download option exists",
+      "Step 8: Click PDF download button",
+      "Step 9: Verify PDF file downloads successfully",
+      "Step 10: Check for additional format options (DOCX, TXT)",
+      "Step 11: Verify 'Last Updated' timestamp is visible",
+      "Step 12: Verify timestamp shows a reasonable recent date"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "About page displays comprehensive professional narrative and career information",
+    "steps": [
+      "Step 1: Navigate to /about",
+      "Step 2: Verify about page header is visible",
+      "Step 3: Verify professional headshot or avatar is displayed",
+      "Step 4: Verify professional narrative section has substantial content",
+      "Step 5: Verify narrative spans multiple paragraphs",
+      "Step 6: Verify career background information is present",
+      "Step 7: Scroll to career section",
+      "Step 8: Verify timeline or career journey visualization exists",
+      "Step 9: Verify at least 2-3 career milestones are shown",
+      "Step 10: Verify each milestone has date and description",
+      "Step 11: Locate 'How I Work' section",
+      "Step 12: Verify collaboration preferences are described",
+      "Step 13: Locate target roles section",
+      "Step 14: Verify roles being sought are clearly stated"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Contact page provides complete contact options with response expectations",
+    "steps": [
+      "Step 1: Navigate to /contact",
+      "Step 2: Verify contact page header is visible",
+      "Step 3: Verify email contact method is displayed",
+      "Step 4: Verify email is clickable (mailto: link)",
+      "Step 5: Verify GitHub link is present with icon",
+      "Step 6: Click GitHub link and verify external navigation",
+      "Step 7: Return to contact page",
+      "Step 8: Verify LinkedIn link is present with icon",
+      "Step 9: Click LinkedIn link and verify external navigation",
+      "Step 10: Return to contact page",
+      "Step 11: Look for response time information",
+      "Step 12: Verify text like 'typically respond within 48 hours' exists",
+      "Step 13: Verify preferred contact method is indicated"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Contact form validates input, submits successfully, and provides feedback",
+    "steps": [
+      "Step 1: Navigate to /contact",
+      "Step 2: Locate contact form",
+      "Step 3: Leave all fields empty",
+      "Step 4: Click submit button",
+      "Step 5: Verify validation error messages appear for required fields",
+      "Step 6: Fill in name field with 'Test User'",
+      "Step 7: Submit form with only name filled",
+      "Step 8: Verify email validation error appears",
+      "Step 9: Enter invalid email format (e.g., 'notanemail')",
+      "Step 10: Verify email format error message appears",
+      "Step 11: Enter valid email 'test@example.com'",
+      "Step 12: Submit with empty message field",
+      "Step 13: Verify message required error appears",
+      "Step 14: Fill in message field with 'This is a test message'",
+      "Step 15: Submit the complete form",
+      "Step 16: Verify success message or toast appears",
+      "Step 17: Verify form is cleared or confirmation shown"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Theme toggle switches between light, dark, and system modes with persistence",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Locate theme toggle button in navigation or settings",
+      "Step 3: Note current theme (check background and text colors)",
+      "Step 4: Click theme toggle",
+      "Step 5: Verify theme changes (background, text, component colors)",
+      "Step 6: Click toggle again to switch to next mode",
+      "Step 7: Verify theme changes appropriately",
+      "Step 8: Navigate to /about page",
+      "Step 9: Verify selected theme persists across navigation",
+      "Step 10: Refresh the browser (F5)",
+      "Step 11: Verify theme preference persists after refresh",
+      "Step 12: Verify no flash of wrong theme on page load"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "System theme preference is respected on first visit and can be overridden",
+    "steps": [
+      "Step 1: Set OS/browser to dark mode preference",
+      "Step 2: Clear site localStorage/cookies",
+      "Step 3: Navigate to homepage in incognito/private window",
+      "Step 4: Verify site automatically uses dark theme",
+      "Step 5: Set OS to light mode preference",
+      "Step 6: Open new incognito window",
+      "Step 7: Navigate to homepage",
+      "Step 8: Verify site automatically uses light theme",
+      "Step 9: Manually toggle to dark mode",
+      "Step 10: Verify manual selection overrides system preference"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Code snippets display with syntax highlighting and copy functionality",
+    "steps": [
+      "Step 1: Navigate to a project detail page containing code snippets",
+      "Step 2: Locate code snippet section",
+      "Step 3: Verify code has syntax highlighting (colored keywords)",
+      "Step 4: Verify line numbers are displayed",
+      "Step 5: Verify code block has distinct background styling",
+      "Step 6: Verify code uses monospace font",
+      "Step 7: Locate copy button on code block",
+      "Step 8: Click copy button",
+      "Step 9: Verify visual feedback (button changes, tooltip, or checkmark)",
+      "Step 10: Open a text editor and paste",
+      "Step 11: Verify code was copied correctly",
+      "Step 12: Verify code maintains proper formatting"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "404 page displays helpful content and navigation for missing routes",
+    "steps": [
+      "Step 1: Navigate to a non-existent route (e.g., /nonexistent-page-xyz)",
+      "Step 2: Verify 404 page is displayed",
+      "Step 3: Verify helpful message explains page was not found",
+      "Step 4: Verify navigation links to main pages are provided",
+      "Step 5: Verify 'Go Home' or 'Back to Homepage' link exists",
+      "Step 6: Click 'Go Home' link",
+      "Step 7: Verify navigation to homepage succeeds",
+      "Step 8: Navigate to invalid project slug (e.g., /projects/fake-project-123)",
+      "Step 9: Verify 404 page displays for invalid project",
+      "Step 10: Verify navigation still works from 404 page"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Sitemap.xml is generated with all pages and proper formatting",
+    "steps": [
+      "Step 1: Navigate to /sitemap.xml",
+      "Step 2: Verify XML sitemap is returned (not 404)",
+      "Step 3: Verify XML is properly formatted",
+      "Step 4: Verify sitemap includes homepage URL",
+      "Step 5: Verify sitemap includes /projects page",
+      "Step 6: Verify sitemap includes /about page",
+      "Step 7: Verify sitemap includes /resume page",
+      "Step 8: Verify sitemap includes /contact page",
+      "Step 9: Verify sitemap includes individual project pages",
+      "Step 10: Verify all URLs use correct domain"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Robots.txt is present with proper crawl directives and sitemap reference",
+    "steps": [
+      "Step 1: Navigate to /robots.txt",
+      "Step 2: Verify robots.txt file is returned",
+      "Step 3: Verify User-agent directive is present",
+      "Step 4: Verify sitemap URL is referenced",
+      "Step 5: Verify no important pages are disallowed",
+      "Step 6: Verify _next or build artifacts are handled appropriately"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "All internal navigation links work correctly across the entire site",
+    "steps": [
+      "Step 1: Start at homepage",
+      "Step 2: Click 'Projects' navigation link",
+      "Step 3: Verify navigation to /projects succeeds",
+      "Step 4: Click 'About' navigation link",
+      "Step 5: Verify navigation to /about succeeds",
+      "Step 6: Click 'Resume' navigation link",
+      "Step 7: Verify navigation to /resume succeeds",
+      "Step 8: Click 'Contact' navigation link",
+      "Step 9: Verify navigation to /contact succeeds",
+      "Step 10: Click logo or 'Home' to return to homepage",
+      "Step 11: Verify homepage loads correctly",
+      "Step 12: Click any CTA button and verify navigation",
+      "Step 13: Navigate to /projects and click a project",
+      "Step 14: Verify project detail page loads"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "External links open in new tab with proper security attributes",
+    "steps": [
+      "Step 1: Navigate to /contact page",
+      "Step 2: Right-click GitHub link and inspect element",
+      "Step 3: Verify target='_blank' attribute is present",
+      "Step 4: Verify rel='noopener noreferrer' or similar is present",
+      "Step 5: Click GitHub link",
+      "Step 6: Verify link opens in new browser tab",
+      "Step 7: Verify original tab remains on portfolio site",
+      "Step 8: Close new tab and return to portfolio",
+      "Step 9: Test LinkedIn link similarly",
+      "Step 10: Navigate to project page and test GitHub repo link"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Page metadata (title, description) is set correctly and uniquely for each page",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Inspect page title in browser tab",
+      "Step 3: Verify title includes name and professional context",
+      "Step 4: View page source and find meta description",
+      "Step 5: Verify description is unique and relevant to homepage",
+      "Step 6: Navigate to /projects",
+      "Step 7: Verify title updates to reflect Projects page",
+      "Step 8: Navigate to /about",
+      "Step 9: Verify title includes 'About' context",
+      "Step 10: Navigate to a project detail page",
+      "Step 11: Verify title includes project name",
+      "Step 12: Verify meta description is project-specific"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "OpenGraph and Twitter card metadata is complete for social sharing",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: View page source",
+      "Step 3: Verify og:title meta tag is present",
+      "Step 4: Verify og:description meta tag is present",
+      "Step 5: Verify og:image meta tag is present with valid URL",
+      "Step 6: Verify og:url meta tag is present",
+      "Step 7: Verify og:type meta tag is present",
+      "Step 8: Verify twitter:card meta tag is present",
+      "Step 9: Verify twitter:title meta tag is present",
+      "Step 10: Navigate to a project page",
+      "Step 11: Verify project-specific OG tags are set",
+      "Step 12: Verify og:image shows project-related image"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Skip-to-content link is accessible and functions correctly",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Press Tab key as first keyboard interaction",
+      "Step 3: Verify 'Skip to content' or 'Skip to main' link appears/focuses",
+      "Step 4: Verify skip link is visually visible when focused",
+      "Step 5: Press Enter on skip link",
+      "Step 6: Verify focus moves to main content area",
+      "Step 7: Verify main content is now keyboard navigable",
+      "Step 8: Navigate to /projects and repeat test",
+      "Step 9: Verify skip link works consistently across pages"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "All interactive elements are fully keyboard accessible",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Use Tab key to navigate through all interactive elements",
+      "Step 3: Verify all navigation links can be focused",
+      "Step 4: Verify all buttons can be focused",
+      "Step 5: Press Enter on focused navigation link",
+      "Step 6: Verify navigation occurs",
+      "Step 7: Navigate to /contact",
+      "Step 8: Tab through form fields",
+      "Step 9: Verify all form inputs can be focused via Tab",
+      "Step 10: Fill form using only keyboard",
+      "Step 11: Submit form using Enter key",
+      "Step 12: Verify form submission works via keyboard"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Focus indicators are visible and meet contrast requirements",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Use Tab to focus on first interactive element",
+      "Step 3: Verify visible focus indicator (outline, ring, or background)",
+      "Step 4: Verify focus indicator has sufficient contrast (3:1 minimum)",
+      "Step 5: Tab through navigation links",
+      "Step 6: Verify each link shows visible focus indicator",
+      "Step 7: Tab to CTA buttons",
+      "Step 8: Verify buttons show clear focus indicator",
+      "Step 9: Navigate to /contact and tab through form",
+      "Step 10: Verify form fields show focus indicators",
+      "Step 11: Switch to dark mode and verify focus indicators still visible"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "All images have appropriate and meaningful alt text",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Inspect hero image or avatar (if present)",
+      "Step 3: Verify alt attribute is present and descriptive",
+      "Step 4: Navigate to /about page",
+      "Step 5: Inspect profile photo",
+      "Step 6: Verify alt text describes the image meaningfully",
+      "Step 7: Navigate to /projects",
+      "Step 8: Inspect project card images",
+      "Step 9: Verify each project image has alt text",
+      "Step 10: Navigate to project detail page",
+      "Step 11: Inspect any screenshots or diagrams",
+      "Step 12: Verify architecture diagrams have descriptive alt text"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "JSON-LD structured data is present and valid for Person schema",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: View page source",
+      "Step 3: Search for 'application/ld+json' script tag",
+      "Step 4: Verify script tag with type application/ld+json exists",
+      "Step 5: Parse the JSON content",
+      "Step 6: Verify @context is 'https://schema.org'",
+      "Step 7: Verify @type is 'Person'",
+      "Step 8: Verify 'name' property is present",
+      "Step 9: Verify 'jobTitle' property is present",
+      "Step 10: Verify 'url' property matches site URL",
+      "Step 11: Copy JSON-LD and validate at schema.org validator"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Performance achieves Lighthouse score 90+ on mobile for all pages",
+    "steps": [
+      "Step 1: Build production version with 'pnpm build'",
+      "Step 2: Start production server with 'pnpm start'",
+      "Step 3: Open Chrome DevTools and go to Lighthouse tab",
+      "Step 4: Run Lighthouse audit on homepage (mobile mode)",
+      "Step 5: Verify Performance score is 90 or higher",
+      "Step 6: Verify LCP (Largest Contentful Paint) is under 2.5 seconds",
+      "Step 7: Verify CLS (Cumulative Layout Shift) is under 0.1",
+      "Step 8: Run audit on /projects page",
+      "Step 9: Verify Performance score is 90 or higher",
+      "Step 10: Run audit on a project detail page",
+      "Step 11: Verify Performance score is 90 or higher"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Accessibility achieves Lighthouse accessibility score 100",
+    "steps": [
+      "Step 1: Run Lighthouse audit on homepage",
+      "Step 2: Navigate to Accessibility section of report",
+      "Step 3: Verify Accessibility score is 100",
+      "Step 4: If not 100, note and fix any issues",
+      "Step 5: Run audit on /about page",
+      "Step 6: Verify Accessibility score is 100",
+      "Step 7: Run audit on /contact page",
+      "Step 8: Verify Accessibility score is 100",
+      "Step 9: Run audit on /projects page",
+      "Step 10: Verify Accessibility score is 100",
+      "Step 11: Run audit on a project detail page",
+      "Step 12: Verify Accessibility score is 100"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "SEO achieves Lighthouse SEO score 100 across all pages",
+    "steps": [
+      "Step 1: Run Lighthouse audit on homepage",
+      "Step 2: Navigate to SEO section of report",
+      "Step 3: Verify SEO score is 100",
+      "Step 4: Run audit on /projects page",
+      "Step 5: Verify SEO score is 100",
+      "Step 6: Run audit on /about page",
+      "Step 7: Verify SEO score is 100",
+      "Step 8: Run audit on project detail pages",
+      "Step 9: Verify SEO score is 100 for project pages",
+      "Step 10: Verify all pages have unique titles and descriptions"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "TypeScript strict mode compiles without errors throughout codebase",
+    "steps": [
+      "Step 1: Verify tsconfig.json has 'strict': true",
+      "Step 2: Run 'pnpm typecheck' or 'npx tsc --noEmit'",
+      "Step 3: Verify no TypeScript errors are reported",
+      "Step 4: Verify all components have proper type annotations",
+      "Step 5: Verify props interfaces are defined",
+      "Step 6: Verify data files have proper types",
+      "Step 7: Make intentional type error and verify it's caught",
+      "Step 8: Fix error and verify clean typecheck"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "ESLint passes with no errors and enforces code quality",
+    "steps": [
+      "Step 1: Run 'pnpm lint' or 'npx eslint .'",
+      "Step 2: Verify no ESLint errors are reported",
+      "Step 3: Check for any warnings on critical rules",
+      "Step 4: Verify accessibility eslint plugin rules pass",
+      "Step 5: Verify React hooks rules pass",
+      "Step 6: Check .eslintrc configuration exists",
+      "Step 7: Verify strict rules are enabled"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Content data files validate against Zod schemas",
+    "steps": [
+      "Step 1: Locate data validation scripts or schemas",
+      "Step 2: Find Zod schema definitions for Project type",
+      "Step 3: Run schema validation on projects data",
+      "Step 4: Verify all projects pass schema validation",
+      "Step 5: Find Zod schema for Skill type",
+      "Step 6: Run validation on skills data",
+      "Step 7: Find Zod schema for Metadata type",
+      "Step 8: Run validation on site metadata",
+      "Step 9: Intentionally break data and verify validation fails",
+      "Step 10: Fix data and verify validation passes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Security headers are properly configured in production",
+    "steps": [
+      "Step 1: Build and deploy site to production/preview",
+      "Step 2: Use browser dev tools to inspect response headers",
+      "Step 3: Verify Content-Security-Policy header is present",
+      "Step 4: Verify X-Frame-Options is set to 'DENY' or 'SAMEORIGIN'",
+      "Step 5: Verify X-Content-Type-Options is 'nosniff'",
+      "Step 6: Verify Referrer-Policy is set appropriately",
+      "Step 7: Verify Permissions-Policy is configured",
+      "Step 8: Use security header checker tool to validate",
+      "Step 9: Verify no security warnings in report"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Contact form has honeypot and rate limiting spam protection",
+    "steps": [
+      "Step 1: Navigate to /contact",
+      "Step 2: Inspect form HTML source",
+      "Step 3: Verify hidden honeypot field exists (visually hidden)",
+      "Step 4: Verify honeypot field has tabindex=-1 or similar",
+      "Step 5: Fill visible form fields with valid data",
+      "Step 6: Submit form normally",
+      "Step 7: Verify success message appears",
+      "Step 8: Use dev tools to fill honeypot field",
+      "Step 9: Submit form with honeypot filled",
+      "Step 10: Verify form is rejected or silently discarded",
+      "Step 11: Submit form multiple times rapidly",
+      "Step 12: Verify rate limiting kicks in after several submissions"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Images are optimized using next/image with proper formats and lazy loading",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Open browser Network tab, filter by images",
+      "Step 3: Verify images are served in WebP or AVIF format",
+      "Step 4: Verify images have appropriate sizes for viewport",
+      "Step 5: Scroll page slowly and observe network requests",
+      "Step 6: Verify below-fold images load lazily (on scroll)",
+      "Step 7: Inspect image elements in dev tools",
+      "Step 8: Verify next/image attributes are present",
+      "Step 9: Resize viewport and verify responsive images",
+      "Step 10: Verify no layout shift when images load (CLS)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Fonts are optimized, preloaded, and display without FOIT",
+    "steps": [
+      "Step 1: View page source of homepage",
+      "Step 2: Look for font preload links in <head>",
+      "Step 3: Verify preload links have correct font URLs",
+      "Step 4: Verify font-display: swap is used",
+      "Step 5: Throttle network to Slow 3G in dev tools",
+      "Step 6: Hard refresh the page",
+      "Step 7: Verify no Flash of Invisible Text (FOIT)",
+      "Step 8: Verify fallback fonts display immediately",
+      "Step 9: Verify custom fonts load smoothly",
+      "Step 10: Verify minimal Flash of Unstyled Text (FOUT)"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Homepage hero section has correct visual hierarchy and spacing",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Take screenshot of hero section",
+      "Step 3: Verify name is the largest text element (approximately 2.5rem+)",
+      "Step 4: Verify role/title is second largest text",
+      "Step 5: Verify value proposition is readable body size",
+      "Step 6: Verify CTA buttons are visually prominent",
+      "Step 7: Verify adequate whitespace around all elements",
+      "Step 8: Verify vertical rhythm is consistent",
+      "Step 9: Verify hero doesn't feel cramped or too sparse",
+      "Step 10: Verify hero looks balanced on desktop viewport"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Typography follows design system scale consistently across all pages",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Inspect H1 element and verify size (approximately 2.5rem)",
+      "Step 3: Navigate to /about page",
+      "Step 4: Verify H1 uses same size as homepage",
+      "Step 5: Inspect H2 elements and verify size (approximately 2rem)",
+      "Step 6: Verify H3 is smaller than H2 (approximately 1.5rem)",
+      "Step 7: Verify body text is consistent size (1rem)",
+      "Step 8: Verify line-height creates readable paragraphs",
+      "Step 9: Verify font family is consistent throughout",
+      "Step 10: Verify code uses monospace font"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Color palette uses professional blue/teal primary with proper semantic colors",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Inspect primary CTA button color",
+      "Step 3: Verify primary color is professional blue or teal",
+      "Step 4: Inspect body text color",
+      "Step 5: Verify text uses slate gray tones",
+      "Step 6: Inspect background colors",
+      "Step 7: Verify backgrounds use neutral colors",
+      "Step 8: Navigate to /projects and find status badges",
+      "Step 9: Verify 'complete' status uses green",
+      "Step 10: Verify 'in-progress' status uses amber/yellow",
+      "Step 11: Switch to dark mode and verify colors adapt"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Buttons have consistent styling with proper hover and focus states",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Locate primary CTA button (e.g., 'View Projects')",
+      "Step 3: Verify primary button has solid filled background",
+      "Step 4: Locate secondary button if present",
+      "Step 5: Verify secondary button has different styling (outline/ghost)",
+      "Step 6: Hover over primary button",
+      "Step 7: Verify hover state changes (darker background, shadow)",
+      "Step 8: Verify transition is smooth (approximately 150ms)",
+      "Step 9: Tab to focus button",
+      "Step 10: Verify focus state is visible and distinct from hover"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Project cards have consistent layout, sizing, and interaction states",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: View project cards in grid layout",
+      "Step 3: Verify all cards have identical dimensions",
+      "Step 4: Verify consistent spacing/gap between cards",
+      "Step 5: Verify each card has image/preview area",
+      "Step 6: Verify each card has title, description, tech badges",
+      "Step 7: Verify technology badges have consistent styling",
+      "Step 8: Hover over first card and verify hover effect",
+      "Step 9: Verify hover effect is subtle (shadow, lift, or border)",
+      "Step 10: Verify transition is smooth",
+      "Step 11: Switch to dark mode and verify cards look good"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Navigation bar styling is consistent with proper active states",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Inspect navigation bar styling",
+      "Step 3: Verify nav has appropriate background (solid or blur)",
+      "Step 4: Verify nav links use consistent typography",
+      "Step 5: Navigate to /about",
+      "Step 6: Verify 'About' link is visually highlighted as active",
+      "Step 7: Navigate to /projects",
+      "Step 8: Verify 'Projects' link is now active",
+      "Step 9: Verify navigation has subtle shadow or border separator",
+      "Step 10: Switch to dark mode and verify nav adapts"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Footer has consistent styling with proper organization and links",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Scroll to footer section",
+      "Step 3: Verify footer has visually distinct background",
+      "Step 4: Verify social links have appropriate icons",
+      "Step 5: Verify icons are sized consistently",
+      "Step 6: Verify copyright or attribution text is present",
+      "Step 7: Verify footer spacing is adequate",
+      "Step 8: Navigate to /about",
+      "Step 9: Verify footer is identical across pages",
+      "Step 10: Switch to dark mode and verify footer adapts"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Responsive design adapts correctly at mobile breakpoint (375px)",
+    "steps": [
+      "Step 1: Set viewport width to 375px (iPhone SE size)",
+      "Step 2: Navigate to homepage",
+      "Step 3: Verify all content fits within viewport",
+      "Step 4: Verify no horizontal scrolling is required",
+      "Step 5: Verify text remains readable (not too small)",
+      "Step 6: Verify buttons are tappable size (minimum 44px)",
+      "Step 7: Verify navigation uses mobile hamburger menu",
+      "Step 8: Navigate to /projects",
+      "Step 9: Verify project grid adapts to single column",
+      "Step 10: Navigate to /contact",
+      "Step 11: Verify form fields are full width and usable"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Responsive design adapts correctly at tablet breakpoint (768px)",
+    "steps": [
+      "Step 1: Set viewport width to 768px (iPad portrait)",
+      "Step 2: Navigate to homepage",
+      "Step 3: Verify layout adapts appropriately to tablet",
+      "Step 4: Verify hero section uses tablet-appropriate sizing",
+      "Step 5: Navigate to /projects",
+      "Step 6: Verify project grid shows 2 columns",
+      "Step 7: Verify navigation is full width (not mobile menu)",
+      "Step 8: Verify spacing adjusts for tablet viewport",
+      "Step 9: Navigate to /about",
+      "Step 10: Verify content layout is appropriate for tablet"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Responsive design uses max-width constraint on large screens (1280px+)",
+    "steps": [
+      "Step 1: Set viewport width to 1440px or larger",
+      "Step 2: Navigate to homepage",
+      "Step 3: Verify content is max-width constrained (not stretching full)",
+      "Step 4: Verify content is centered horizontally",
+      "Step 5: Verify adequate margins on sides",
+      "Step 6: Navigate to /projects",
+      "Step 7: Verify project grid shows 3 or more columns",
+      "Step 8: Verify grid doesn't stretch uncomfortably wide",
+      "Step 9: Navigate to /about",
+      "Step 10: Verify text paragraphs have readable line length"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Dark mode has proper contrast, colors, and no visual issues",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Enable dark mode via theme toggle",
+      "Step 3: Verify background changes to dark color",
+      "Step 4: Verify text changes to light color with good contrast",
+      "Step 5: Verify all text is readable throughout page",
+      "Step 6: Verify buttons adapt colors appropriately",
+      "Step 7: Verify images/cards have appropriate treatment",
+      "Step 8: Verify no elements 'disappear' in dark mode",
+      "Step 9: Navigate to all other pages",
+      "Step 10: Verify dark mode is consistent across site",
+      "Step 11: Verify no jarring color combinations"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Text contrast meets WCAG AA standards (4.5:1 minimum for body text)",
+    "steps": [
+      "Step 1: Navigate to homepage in light mode",
+      "Step 2: Use contrast checker tool (or browser extension)",
+      "Step 3: Check body text against background",
+      "Step 4: Verify contrast ratio is at least 4.5:1",
+      "Step 5: Check heading text contrast",
+      "Step 6: Verify headings meet 4.5:1 or 3:1 for large text",
+      "Step 7: Check link text contrast",
+      "Step 8: Switch to dark mode",
+      "Step 9: Verify all text maintains 4.5:1 contrast in dark mode",
+      "Step 10: Check button text contrast on colored backgrounds"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Hover states have smooth 150ms transitions throughout the site",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Hover over navigation links",
+      "Step 3: Verify color transition is smooth (not instant snap)",
+      "Step 4: Estimate transition duration (should be ~150ms)",
+      "Step 5: Hover over CTA buttons",
+      "Step 6: Verify button hover transition is smooth",
+      "Step 7: Navigate to /projects",
+      "Step 8: Hover over project cards",
+      "Step 9: Verify card hover effect transitions smoothly",
+      "Step 10: Verify no jarring or slow transitions"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Entrance animations on scroll are subtle and not distracting",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Note any initial animations that play",
+      "Step 3: Scroll down slowly to next section",
+      "Step 4: Verify section animates in subtly (fade-up or fade-in)",
+      "Step 5: Verify animation is quick (under 500ms)",
+      "Step 6: Verify animation is not distracting or bouncy",
+      "Step 7: Continue scrolling through page",
+      "Step 8: Verify all sections animate consistently",
+      "Step 9: Scroll back up",
+      "Step 10: Verify animations don't replay on scroll up"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Reduced motion preference disables all non-essential animations",
+    "steps": [
+      "Step 1: Enable 'reduce motion' in OS accessibility settings",
+      "Step 2: Navigate to homepage",
+      "Step 3: Scroll down page",
+      "Step 4: Verify no scroll-triggered animations occur",
+      "Step 5: Hover over buttons and links",
+      "Step 6: Verify transitions are instant or very minimal",
+      "Step 7: Click theme toggle",
+      "Step 8: Verify theme switch is instant (no animation)",
+      "Step 9: Verify page is fully functional without animations",
+      "Step 10: Verify content is not missing due to animation removal"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Technology badges have consistent border-radius, padding, and sizing",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Examine technology badges on project cards",
+      "Step 3: Verify all badges have same border-radius",
+      "Step 4: Verify all badges have consistent horizontal padding",
+      "Step 5: Verify all badges have consistent vertical padding",
+      "Step 6: Verify font size is consistent across badges",
+      "Step 7: Navigate to a project detail page",
+      "Step 8: Verify badges match styling from projects page",
+      "Step 9: Switch to dark mode",
+      "Step 10: Verify badges remain readable and styled"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Loading states use skeleton placeholders that match final layout",
+    "steps": [
+      "Step 1: Throttle network to Slow 3G in dev tools",
+      "Step 2: Navigate to homepage",
+      "Step 3: Observe initial load state",
+      "Step 4: Verify skeleton placeholders appear during load",
+      "Step 5: Verify skeletons match approximate layout of final content",
+      "Step 6: Verify skeletons have subtle animation (pulse or shimmer)",
+      "Step 7: Verify smooth transition from skeleton to real content",
+      "Step 8: Navigate to /projects with throttled network",
+      "Step 9: Verify project cards show skeleton states",
+      "Step 10: Verify no layout shift when content loads"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Form inputs have proper styling for normal, focus, error, and success states",
+    "steps": [
+      "Step 1: Navigate to /contact",
+      "Step 2: Inspect form input fields in normal state",
+      "Step 3: Verify inputs have clear border styling",
+      "Step 4: Click into a field (focus state)",
+      "Step 5: Verify focus state has visible ring or border change",
+      "Step 6: Submit empty form to trigger errors",
+      "Step 7: Verify error state shows red border or indicator",
+      "Step 8: Verify error message is styled and visible",
+      "Step 9: Fill valid data and submit",
+      "Step 10: Verify success state styling if applicable"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Code blocks have distinct styling with proper syntax highlighting colors",
+    "steps": [
+      "Step 1: Navigate to project detail page with code snippets",
+      "Step 2: Locate code block element",
+      "Step 3: Verify code has dark or distinct background color",
+      "Step 4: Verify syntax highlighting uses multiple colors",
+      "Step 5: Verify keywords are colored distinctly",
+      "Step 6: Verify strings have different color than keywords",
+      "Step 7: Verify monospace font is used (JetBrains Mono or similar)",
+      "Step 8: Verify proper padding inside code block",
+      "Step 9: Verify border-radius matches design system",
+      "Step 10: Switch to dark mode and verify code block adapts"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Page layout uses max-width constraint and is centered on all pages",
+    "steps": [
+      "Step 1: Navigate to homepage on wide screen (1920px width)",
+      "Step 2: Verify main content doesn't stretch full browser width",
+      "Step 3: Verify content is horizontally centered",
+      "Step 4: Verify max-width is approximately 1280px",
+      "Step 5: Navigate to /about",
+      "Step 6: Verify same max-width and centering applies",
+      "Step 7: Navigate to /projects",
+      "Step 8: Verify same constraints apply",
+      "Step 9: Navigate to /contact",
+      "Step 10: Verify form doesn't stretch uncomfortably wide"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Generous whitespace exists between major sections on all pages",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Scroll through page and observe section spacing",
+      "Step 3: Verify spacing between hero and next section is generous (64px+)",
+      "Step 4: Verify consistent spacing between all major sections",
+      "Step 5: Navigate to /about",
+      "Step 6: Verify adequate whitespace between sections",
+      "Step 7: Navigate to project detail page",
+      "Step 8: Verify case study sections have proper spacing",
+      "Step 9: Verify no sections feel cramped together",
+      "Step 10: Verify page feels professional and breathable"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Back to top button appears on scroll and functions correctly",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Verify back-to-top button is not visible at top",
+      "Step 3: Scroll down past the fold",
+      "Step 4: Verify back-to-top button appears",
+      "Step 5: Click the back-to-top button",
+      "Step 6: Verify smooth scroll animation to top",
+      "Step 7: Verify page is at top position",
+      "Step 8: Verify button disappears or becomes inactive at top"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Semantic HTML structure uses correct landmark elements",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: View page source or inspect with dev tools",
+      "Step 3: Verify <header> element exists and contains navigation",
+      "Step 4: Verify <nav> element exists with role='navigation'",
+      "Step 5: Verify <main> element wraps primary page content",
+      "Step 6: Verify there is only one <main> element",
+      "Step 7: Verify <footer> element exists at bottom",
+      "Step 8: Verify proper heading hierarchy (single h1, then h2, h3)",
+      "Step 9: Navigate to /about and verify same structure",
+      "Step 10: Verify sections use <section> or <article> appropriately"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "ARIA labels are present on all icon-only interactive elements",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Locate theme toggle button (usually icon-only)",
+      "Step 3: Inspect element and verify aria-label is present",
+      "Step 4: Verify label describes action (e.g., 'Toggle dark mode')",
+      "Step 5: Locate mobile menu button (hamburger icon)",
+      "Step 6: Verify aria-label is present (e.g., 'Open menu')",
+      "Step 7: Navigate to footer and locate social icon links",
+      "Step 8: Verify each social link has aria-label",
+      "Step 9: Verify labels describe destination (e.g., 'GitHub profile')",
+      "Step 10: Run accessibility audit to catch any unlabeled elements"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Modal/dialog closes with Escape key and traps focus correctly",
+    "steps": [
+      "Step 1: Navigate to page with modal (mobile menu or lightbox)",
+      "Step 2: Open the modal/dialog",
+      "Step 3: Verify focus is moved inside modal",
+      "Step 4: Press Tab multiple times",
+      "Step 5: Verify focus stays trapped within modal",
+      "Step 6: Press Escape key",
+      "Step 7: Verify modal closes",
+      "Step 8: Verify focus returns to element that opened modal",
+      "Step 9: Reopen modal and click outside/backdrop",
+      "Step 10: Verify modal closes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Form labels are properly associated with inputs using for/id",
+    "steps": [
+      "Step 1: Navigate to /contact",
+      "Step 2: Inspect form in dev tools",
+      "Step 3: Find label element for name field",
+      "Step 4: Verify label has 'for' attribute",
+      "Step 5: Verify corresponding input has matching 'id'",
+      "Step 6: Click on the label text 'Name'",
+      "Step 7: Verify name input receives focus",
+      "Step 8: Repeat for email field",
+      "Step 9: Repeat for message field",
+      "Step 10: Verify all form fields have proper label association"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Error messages are properly announced to screen readers",
+    "steps": [
+      "Step 1: Navigate to /contact",
+      "Step 2: Submit empty form to trigger validation errors",
+      "Step 3: Inspect error message elements",
+      "Step 4: Verify errors have role='alert' or aria-live='assertive'",
+      "Step 5: Verify errors are associated with inputs via aria-describedby",
+      "Step 6: Verify error container uses aria-atomic if needed",
+      "Step 7: Use screen reader to verify errors are announced",
+      "Step 8: Fix one error and verify update is announced",
+      "Step 9: Submit valid form and verify success is announced"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Status badges use semantic colors consistently (green/amber/red)",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Find project with 'complete' or 'finished' status",
+      "Step 3: Verify status badge uses green color",
+      "Step 4: Find project with 'in-progress' or 'WIP' status",
+      "Step 5: Verify status badge uses amber/yellow color",
+      "Step 6: Find archived or deprecated project if available",
+      "Step 7: Verify status uses red or gray color",
+      "Step 8: Verify status text is also present (not just color)",
+      "Step 9: Switch to dark mode",
+      "Step 10: Verify status colors remain distinguishable"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Canonical URLs are set correctly to prevent duplicate content",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: View page source",
+      "Step 3: Find <link rel='canonical'> tag in head",
+      "Step 4: Verify canonical URL matches expected homepage URL",
+      "Step 5: Navigate to /projects",
+      "Step 6: Verify canonical URL is set for projects page",
+      "Step 7: Navigate to project detail page",
+      "Step 8: Verify canonical URL uses clean slug",
+      "Step 9: Try accessing page with trailing slash",
+      "Step 10: Verify canonical still points to non-trailing version"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Project detail page has working prev/next navigation",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Note the order of projects displayed",
+      "Step 3: Click second project in list",
+      "Step 4: Scroll to bottom of project page",
+      "Step 5: Locate prev/next project navigation",
+      "Step 6: Verify 'Previous Project' link exists and shows first project",
+      "Step 7: Verify 'Next Project' link exists and shows third project",
+      "Step 8: Click 'Next Project'",
+      "Step 9: Verify navigation to next project page",
+      "Step 10: Click 'Previous Project' twice",
+      "Step 11: Verify navigation back to second and then first project"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Toast notifications appear for form submissions and auto-dismiss",
+    "steps": [
+      "Step 1: Navigate to /contact",
+      "Step 2: Fill in valid contact form data",
+      "Step 3: Submit form",
+      "Step 4: Verify toast notification appears on screen",
+      "Step 5: Verify toast shows success message",
+      "Step 6: Verify toast has appropriate styling (green for success)",
+      "Step 7: Wait for auto-dismiss (typically 3-5 seconds)",
+      "Step 8: Verify toast disappears automatically",
+      "Step 9: Alternatively, click close button if present",
+      "Step 10: Verify toast dismisses on close click"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Project filters can be combined for multi-criteria filtering",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Note total number of projects",
+      "Step 3: Apply 'React' technology filter",
+      "Step 4: Note filtered count",
+      "Step 5: Additionally apply 'complete' status filter",
+      "Step 6: Verify only projects matching BOTH criteria show",
+      "Step 7: Verify count is reduced further",
+      "Step 8: Clear status filter",
+      "Step 9: Verify projects now show all React projects",
+      "Step 10: Add domain filter",
+      "Step 11: Verify three-way filtering works correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Filter state is reflected in URL for shareable filtered views",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Apply technology filter (e.g., 'React')",
+      "Step 3: Observe URL in browser address bar",
+      "Step 4: Verify URL includes query parameter (e.g., ?tech=react)",
+      "Step 5: Apply additional filter (e.g., status=complete)",
+      "Step 6: Verify URL includes both parameters",
+      "Step 7: Copy the full URL",
+      "Step 8: Open URL in new incognito tab",
+      "Step 9: Verify filters are pre-applied on page load",
+      "Step 10: Verify filtered results match original"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Print stylesheet optimizes resume page for physical printing",
+    "steps": [
+      "Step 1: Navigate to /resume",
+      "Step 2: Open print preview (Ctrl+P or Cmd+P)",
+      "Step 3: Verify layout is optimized for print (single column)",
+      "Step 4: Verify navigation bar is hidden in print",
+      "Step 5: Verify footer is hidden or minimal in print",
+      "Step 6: Verify colors are print-friendly (no dark backgrounds)",
+      "Step 7: Verify content fits on standard pages",
+      "Step 8: Verify no cut-off content at page breaks",
+      "Step 9: Verify links are visible or URLs are shown",
+      "Step 10: Cancel print and verify normal view returns"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Environment variables are documented and app works without optional vars",
+    "steps": [
+      "Step 1: Check for .env.example file in repository",
+      "Step 2: Verify NEXT_PUBLIC_SITE_URL is documented",
+      "Step 3: Verify optional variables are marked as optional",
+      "Step 4: Remove or unset all optional environment variables",
+      "Step 5: Run 'pnpm build'",
+      "Step 6: Verify build succeeds without optional vars",
+      "Step 7: Start server and navigate to site",
+      "Step 8: Verify site works without analytics configured",
+      "Step 9: Set NEXT_PUBLIC_SITE_URL",
+      "Step 10: Verify site URL appears in metadata correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "404 errors for invalid routes don't break application state",
+    "steps": [
+      "Step 1: Navigate to /projects page normally",
+      "Step 2: Navigate to invalid project (e.g., /projects/does-not-exist-xyz)",
+      "Step 3: Verify 404 page displays",
+      "Step 4: Verify application remains responsive",
+      "Step 5: Click navigation link to go to /about",
+      "Step 6: Verify /about page loads correctly",
+      "Step 7: Navigate back to /projects",
+      "Step 8: Verify projects page works normally",
+      "Step 9: Verify no JavaScript errors in console",
+      "Step 10: Verify theme and other state is preserved"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Tooltips appear on hover with helpful contextual information",
+    "steps": [
+      "Step 1: Navigate to page with elements that have tooltips",
+      "Step 2: Locate skill badges or technology icons with tooltips",
+      "Step 3: Hover over element for 300-500ms",
+      "Step 4: Verify tooltip appears with helpful text",
+      "Step 5: Verify tooltip has proper styling (background, shadow)",
+      "Step 6: Verify tooltip is positioned correctly (not off-screen)",
+      "Step 7: Move mouse away from element",
+      "Step 8: Verify tooltip disappears",
+      "Step 9: Verify tooltip doesn't flicker on mouse movement",
+      "Step 10: Tab to element and verify tooltip shows on focus"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Case study sections can be deep-linked via URL anchors",
+    "steps": [
+      "Step 1: Navigate to project detail page",
+      "Step 2: Inspect section headings for ID attributes",
+      "Step 3: Note ID of 'Solution' section (e.g., 'solution')",
+      "Step 4: Navigate to URL with anchor: /projects/[slug]#solution",
+      "Step 5: Verify page scrolls to Solution section",
+      "Step 6: Verify Solution section is visible in viewport",
+      "Step 7: Test anchor for 'Problem' section",
+      "Step 8: Verify Problem section is navigated to",
+      "Step 9: Test anchor for 'Architecture' section",
+      "Step 10: Verify anchors work for all major sections"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Project page displays time investment indicator (duration)",
+    "steps": [
+      "Step 1: Navigate to project detail page",
+      "Step 2: Look for time investment or duration information",
+      "Step 3: Verify indicator shows project duration",
+      "Step 4: Verify format is clear (e.g., '2 weeks', '3 months')",
+      "Step 5: Navigate to another project",
+      "Step 6: Verify duration information is displayed consistently",
+      "Step 7: Verify duration appears in same location across projects"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Project page shows team vs solo attribution clearly",
+    "steps": [
+      "Step 1: Navigate to project detail page",
+      "Step 2: Look for team/solo indicator in project metadata",
+      "Step 3: Verify indicator shows 'Solo project' or similar",
+      "Step 4: Navigate to a team project if available",
+      "Step 5: Verify 'Team project' indicator is shown",
+      "Step 6: If team project, verify role or contribution is mentioned",
+      "Step 7: Verify attribution is consistent across all projects"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Lucide React icons are used consistently throughout the site",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Locate icons in navigation, hero, or footer",
+      "Step 3: Verify icons are from Lucide React library (consistent style)",
+      "Step 4: Verify all icons have consistent stroke width",
+      "Step 5: Verify icon sizes are consistent (e.g., all 20px or 24px)",
+      "Step 6: Verify icons align properly with adjacent text",
+      "Step 7: Navigate to /contact",
+      "Step 8: Verify social icons match style from other pages",
+      "Step 9: Switch to dark mode",
+      "Step 10: Verify icons adapt color appropriately"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Bundle size is optimized with route-based code splitting",
+    "steps": [
+      "Step 1: Run 'pnpm build' and observe output",
+      "Step 2: Check bundle analyzer or build output for chunk sizes",
+      "Step 3: Verify main/shared bundle is under 100KB gzipped",
+      "Step 4: Open homepage in browser with Network tab open",
+      "Step 5: Observe initial JS bundle size loaded",
+      "Step 6: Navigate to /projects",
+      "Step 7: Verify additional chunk is loaded (code splitting)",
+      "Step 8: Navigate to project detail page",
+      "Step 9: Verify another chunk loads if needed",
+      "Step 10: Verify no unnecessary re-downloads of cached chunks"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "No console errors or warnings in production build",
+    "steps": [
+      "Step 1: Build production version with 'pnpm build'",
+      "Step 2: Start production server with 'pnpm start'",
+      "Step 3: Open browser console",
+      "Step 4: Navigate to homepage",
+      "Step 5: Verify no console errors appear",
+      "Step 6: Navigate to /projects",
+      "Step 7: Verify no errors or React warnings",
+      "Step 8: Navigate to /about, /resume, /contact",
+      "Step 9: Verify no errors on any page",
+      "Step 10: Interact with forms and filters",
+      "Step 11: Verify no runtime errors appear"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Text is resizable up to 200% without content loss or overlap",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Use browser zoom to increase to 150%",
+      "Step 3: Verify all content is still visible",
+      "Step 4: Verify no text is cut off or overlapping",
+      "Step 5: Increase zoom to 200%",
+      "Step 6: Verify content reflows appropriately",
+      "Step 7: Verify no horizontal scrolling is required",
+      "Step 8: Verify navigation still functional",
+      "Step 9: Navigate to /contact",
+      "Step 10: Verify form is still usable at 200% zoom"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Color is not the sole indicator of meaning (text labels always present)",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Look at project status indicators",
+      "Step 3: Verify status has text label in addition to color",
+      "Step 4: Verify status meaning is clear without seeing color",
+      "Step 5: Navigate to /contact",
+      "Step 6: Submit invalid form to trigger errors",
+      "Step 7: Verify errors have text messages, not just red styling",
+      "Step 8: Verify form validation doesn't rely only on color",
+      "Step 9: Check success states have text confirmation",
+      "Step 10: Verify a colorblind user could understand all states"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Clear all filters functionality resets project view completely",
+    "steps": [
+      "Step 1: Navigate to /projects",
+      "Step 2: Note total number of projects visible",
+      "Step 3: Apply multiple filters (tech, status, type)",
+      "Step 4: Verify filtered results show fewer projects",
+      "Step 5: Locate 'Clear filters' or 'Reset' button",
+      "Step 6: Click clear/reset button",
+      "Step 7: Verify all filters are removed visually",
+      "Step 8: Verify all projects are displayed again",
+      "Step 9: Verify project count matches original total",
+      "Step 10: Verify URL query parameters are cleared"
+    ],
+    "passes": false
+  },
+  {
+    "category": "style",
+    "description": "Profile/avatar image is consistent across homepage and about page",
+    "steps": [
+      "Step 1: Navigate to homepage",
+      "Step 2: Look for profile image or avatar",
+      "Step 3: Note the image source and appearance",
+      "Step 4: Navigate to /about page",
+      "Step 5: Locate profile image on about page",
+      "Step 6: Verify same image is used",
+      "Step 7: Verify image sizing is appropriate for each context",
+      "Step 8: Verify image is professional quality",
+      "Step 9: Verify image has proper border-radius styling",
+      "Step 10: Switch to dark mode and verify image looks good"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Trailing slash URL handling is consistent (no duplicate content)",
+    "steps": [
+      "Step 1: Navigate to /about",
+      "Step 2: Note the final URL in address bar",
+      "Step 3: Navigate to /about/ (with trailing slash)",
+      "Step 4: Verify consistent behavior (redirect or same page)",
+      "Step 5: Verify no duplicate content served",
+      "Step 6: Check canonical URL in page source",
+      "Step 7: Verify canonical points to consistent version",
+      "Step 8: Test /projects with and without trailing slash",
+      "Step 9: Verify same consistent behavior"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Preconnect hints are set for external resources to improve performance",
+    "steps": [
+      "Step 1: View page source of homepage",
+      "Step 2: Look for <link rel='preconnect'> tags in head",
+      "Step 3: If using Google Fonts, verify preconnect to fonts.googleapis.com",
+      "Step 4: If using analytics, verify preconnect to analytics domain",
+      "Step 5: Verify preconnect includes crossorigin where needed",
+      "Step 6: Verify dns-prefetch as fallback if used",
+      "Step 7: Check Network tab for connection timing improvements",
+      "Step 8: Verify no unnecessary preconnects to unused domains"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Reading time estimate is displayed for case study content",
+    "steps": [
+      "Step 1: Navigate to project detail page",
+      "Step 2: Look for reading time estimate near title or metadata",
+      "Step 3: Verify estimate is displayed (e.g., '5 min read')",
+      "Step 4: Estimate content length manually",
+      "Step 5: Verify reading time seems reasonable for content length",
+      "Step 6: Navigate to a longer case study",
+      "Step 7: Verify reading time is proportionally longer",
+      "Step 8: Navigate to a shorter case study",
+      "Step 9: Verify reading time is proportionally shorter"
+    ],
+    "passes": false
+  },
+  {
+    "category": "functional",
+    "description": "Error boundary catches runtime errors and shows friendly fallback",
+    "steps": [
+      "Step 1: Intentionally add a component that throws an error",
+      "Step 2: Navigate to page with error-throwing component",
+      "Step 3: Verify error boundary catches the error",
+      "Step 4: Verify user-friendly error message is shown",
+      "Step 5: Verify page doesn't show raw error stack",
+      "Step 6: Verify navigation to other pages still works",
+      "Step 7: Verify rest of application remains functional",
+      "Step 8: Remove error-causing code",
+      "Step 9: Verify normal operation resumes"
+    ],
+    "passes": false
+  }
+]
