@@ -15,7 +15,7 @@
       "Step 10: Verify the homepage loads without errors",
       "Step 11: Verify no console errors in browser developer tools"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -26,7 +26,7 @@
       "Step 3: Verify the homepage loads without errors",
       "Step 4: Verify no console errors in browser developer tools"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -45,7 +45,7 @@
       "Step 11: Verify resume button initiates download or navigates to /resume",
       "Step 12: Verify availability indicator shows current status"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -62,7 +62,7 @@
       "Step 9: Resize viewport to mobile width",
       "Step 10: Verify proof strip remains readable on mobile"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -81,7 +81,7 @@
       "Step 11: Click on first project card",
       "Step 12: Verify navigation to individual project page (/projects/[slug])"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -99,7 +99,7 @@
       "Step 10: Verify skills are sorted logically within categories",
       "Step 11: Switch to dark mode and verify skills display correctly"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -116,7 +116,7 @@
       "Step 9: Verify navigation to /contact or contact action",
       "Step 10: Navigate back and verify footer social links are present"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -137,7 +137,7 @@
       "Step 13: Click on 'Projects' link",
       "Step 14: Verify 'Projects' is now highlighted and 'About' is not"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -426,7 +426,7 @@
       "Step 11: Verify theme preference persists after refresh",
       "Step 12: Verify no flash of wrong theme on page load"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -479,7 +479,7 @@
       "Step 9: Verify 404 page displays for invalid project",
       "Step 10: Verify navigation still works from 404 page"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
