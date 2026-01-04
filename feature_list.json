@@ -342,7 +342,7 @@
       "Step 11: Verify 'Last Updated' timestamp is visible",
       "Step 12: Verify timestamp shows a reasonable recent date"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

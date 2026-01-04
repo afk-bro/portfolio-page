@@ -71,17 +71,13 @@ export default function ResumePage() {
               Resume Preview
             </h2>
           </div>
-          <div className="p-8">
-            {/* This would ideally be an embedded PDF viewer or the resume content */}
-            <div className="text-center py-12">
-              <FileText className="w-16 h-16 text-neutral-400 mx-auto mb-4" />
-              <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-                Add your resume PDF to <code className="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">/public/resume/resume.pdf</code>
-              </p>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                Alternatively, you can embed your resume content directly on this page.
-              </p>
-            </div>
+          <div className="p-0">
+            {/* Embedded PDF viewer */}
+            <iframe
+              src="/resume/resume.pdf"
+              className="w-full h-[800px] border-0"
+              title="Resume PDF Preview"
+            />
           </div>
         </div>
 
