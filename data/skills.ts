@@ -55,7 +55,7 @@ export function getFeaturedSkills(): Skill[] {
 }
 
 export function getSkillCategories(): Skill['category'][] {
-  return [...new Set(skills.map((s) => s.category))]
+  return Array.from(new Set(skills.map((s) => s.category)))
 }
 
 export function getGroupedSkills(): Record<Skill['category'], Skill[]> {
