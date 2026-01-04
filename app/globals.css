@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 248 250 252;
+    --foreground: 15 23 42;
+    --primary: 13 148 136;
+    --primary-foreground: 255 255 255;
+  }
+
+  .dark {
+    --background: 15 23 42;
+    --foreground: 248 250 252;
+    --primary: 20 184 166;
+    --primary-foreground: 255 255 255;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+    @apply dark:bg-neutral-900 dark:text-neutral-50;
+  }
+
+  /* Focus styles for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-500;
+  }
+
+  /* Skip to content link */
+  .skip-to-content {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50;
+    @apply focus:bg-primary-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-md;
+  }
+}
+
+@layer components {
+  /* Container utility */
+  .container-content {
+    @apply max-w-content mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section spacing */
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-white dark:bg-neutral-800 rounded-lg shadow-sm;
+    @apply border border-neutral-200 dark:border-neutral-700;
+    @apply transition-shadow duration-150;
+  }
+
+  .card:hover {
+    @apply shadow-md;
+  }
+
+  /* Badge styles */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200;
+  }
+
+  .badge-success {
+    @apply bg-success-50 text-success-600 dark:bg-success-500/20 dark:text-success-500;
+  }
+
+  .badge-warning {
+    @apply bg-warning-50 text-warning-600 dark:bg-warning-500/20 dark:text-warning-500;
+  }
+
+  .badge-neutral {
+    @apply bg-neutral-100 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300;
+  }
+}
+
+@layer utilities {
+  /* Text balance for headings */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Prose styling for case studies */
+  .prose-content {
+    @apply text-neutral-700 dark:text-neutral-300;
+    @apply leading-relaxed;
+  }
+
+  .prose-content h2 {
+    @apply text-h2 text-neutral-900 dark:text-neutral-50 mt-12 mb-4;
+  }
+
+  .prose-content h3 {
+    @apply text-h3 text-neutral-900 dark:text-neutral-50 mt-8 mb-3;
+  }
+
+  .prose-content p {
+    @apply mb-4;
+  }
+
+  .prose-content ul {
+    @apply list-disc list-inside mb-4 space-y-2;
+  }
+
+  .prose-content ol {
+    @apply list-decimal list-inside mb-4 space-y-2;
+  }
+
+  .prose-content code {
+    @apply bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .prose-content pre {
+    @apply bg-neutral-900 dark:bg-neutral-950 text-neutral-100 p-4 rounded-lg overflow-x-auto mb-4;
+  }
+
+  .prose-content pre code {
+    @apply bg-transparent p-0;
+  }
+}

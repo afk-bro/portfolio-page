@@ -1,0 +1,86 @@
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { Navigation } from '@/components/sections/Navigation'
+import { Footer } from '@/components/sections/Footer'
+import { ThemeProvider } from '@/components/ThemeProvider'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
+
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  title: {
+    default: 'Portfolio | Full-Stack Developer',
+    template: '%s | Portfolio',
+  },
+  description:
+    'Full-stack developer specializing in building exceptional digital experiences. Explore my projects, skills, and professional journey.',
+  keywords: ['developer', 'portfolio', 'full-stack', 'react', 'next.js', 'typescript'],
+  authors: [{ name: 'Developer' }],
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Developer Portfolio',
+    title: 'Portfolio | Full-Stack Developer',
+    description:
+      'Full-stack developer specializing in building exceptional digital experiences.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Portfolio | Full-Stack Developer',
+    description:
+      'Full-stack developer specializing in building exceptional digital experiences.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const theme = localStorage.getItem('theme');
+                if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-screen flex flex-col">
+        <ThemeProvider>
+          <a href="#main-content" className="skip-to-content">
+            Skip to content
+          </a>
+          <Navigation />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
