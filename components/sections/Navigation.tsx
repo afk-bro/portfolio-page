@@ -17,7 +17,7 @@ const navLinks = [
 
 export function Navigation() {
   const pathname = usePathname()
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const navRef = useRef<HTMLElement>(null)
 
