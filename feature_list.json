@@ -496,7 +496,7 @@
       "Step 9: Verify sitemap includes individual project pages",
       "Step 10: Verify all URLs use correct domain"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -509,7 +509,7 @@
       "Step 5: Verify no important pages are disallowed",
       "Step 6: Verify _next or build artifacts are handled appropriately"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -1356,7 +1356,7 @@
       "Step 10: Click 'Previous Project' twice",
       "Step 11: Verify navigation back to second and then first project"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -1507,7 +1507,7 @@
       "Step 6: Verify duration information is displayed consistently",
       "Step 7: Verify duration appears in same location across projects"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -1521,7 +1521,7 @@
       "Step 6: If team project, verify role or contribution is mentioned",
       "Step 7: Verify attribution is consistent across all projects"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1688,7 +1688,7 @@
       "Step 8: Navigate to a shorter case study",
       "Step 9: Verify reading time is proportionally shorter"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
