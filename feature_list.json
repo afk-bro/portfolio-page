@@ -213,7 +213,7 @@
       "Step 9: Click on 'AI/ML' domain filter if available",
       "Step 10: Verify AI/ML projects are displayed"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -230,7 +230,7 @@
       "Step 9: Clear filter",
       "Step 10: Click on 'personal' or 'learning' filter if available"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -247,7 +247,7 @@
       "Step 9: Clear filter",
       "Step 10: Click on 'archived' filter if available"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
