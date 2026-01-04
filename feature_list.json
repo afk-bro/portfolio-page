@@ -158,7 +158,7 @@
       "Step 13: Click outside menu or press escape",
       "Step 14: Verify menu closes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
