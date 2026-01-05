@@ -1,4 +1,7 @@
+'use client'
+
 import { Code2, GitBranch, TestTube, Zap } from 'lucide-react'
+import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 
 const proofPoints = [
   {
@@ -32,9 +35,11 @@ export function ProofStrip() {
     <section className="py-12 bg-neutral-100 dark:bg-neutral-800/50 border-y border-neutral-200 dark:border-neutral-700">
       <div className="container-content">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          {proofPoints.map((point) => (
-            <div
+          {proofPoints.map((point, index) => (
+            <AnimateOnScroll
               key={point.label}
+              variant="fade-up"
+              delay={index * 100}
               className="flex flex-col items-center text-center"
             >
               <point.icon className="w-8 h-8 text-primary-600 dark:text-primary-400 mb-2" />
@@ -44,7 +49,7 @@ export function ProofStrip() {
               <div className="text-sm text-neutral-600 dark:text-neutral-400">
                 {point.label}
               </div>
-            </div>
+            </AnimateOnScroll>
           ))}
         </div>
       </div>

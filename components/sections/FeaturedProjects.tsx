@@ -1,8 +1,11 @@
+'use client'
+
 import Link from 'next/link'
 import { ArrowRight, ExternalLink, Github } from 'lucide-react'
 import { getFeaturedProjects } from '@/data/projects'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
+import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 
 export function FeaturedProjects() {
   const projects = getFeaturedProjects().slice(0, 3)
@@ -11,20 +14,23 @@ export function FeaturedProjects() {
     <section className="section">
       <div className="container-content">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <AnimateOnScroll variant="fade-up" className="text-center mb-12">
           <h2 className="text-h2 text-neutral-900 dark:text-neutral-50 mb-4">
             Featured Projects
           </h2>
           <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
             A selection of projects showcasing my technical skills and problem-solving approach.
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <article
+          {projects.map((project, index) => (
+            <AnimateOnScroll
               key={project.id}
+              variant="fade-up"
+              delay={index * 100}
+              as="article"
               className="card p-6 flex flex-col hover:shadow-lg transition-shadow"
             >
               {/* Status Badge */}
@@ -112,7 +118,7 @@ export function FeaturedProjects() {
                   </a>
                 )}
               </div>
-            </article>
+            </AnimateOnScroll>
           ))}
         </div>
 
