@@ -1672,7 +1672,7 @@
       "Step 7: Check Network tab for connection timing improvements",
       "Step 8: Verify no unnecessary preconnects to unused domains"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
