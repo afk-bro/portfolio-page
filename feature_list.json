@@ -791,7 +791,7 @@
       "Step 8: Use security header checker tool to validate",
       "Step 9: Verify no security warnings in report"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -810,7 +810,7 @@
       "Step 11: Submit form multiple times rapidly",
       "Step 12: Verify rate limiting kicks in after several submissions"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
