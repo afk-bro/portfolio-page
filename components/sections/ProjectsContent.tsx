@@ -360,7 +360,7 @@ export function ProjectsContent() {
               No projects found with the selected filter.
             </p>
             <button
-              onClick={clearFilter}
+              onClick={() => clearFilter()}
               className="text-primary-600 dark:text-primary-400 hover:underline"
             >
               Clear filters
