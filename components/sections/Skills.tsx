@@ -2,6 +2,7 @@
 
 import { getGroupedSkills, categoryNames, proficiencyConfig } from '@/data/skills'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
+import { Tooltip } from '@/components/ui/Tooltip'
 
 export function Skills() {
   const groupedSkills = getGroupedSkills()
@@ -48,22 +49,38 @@ export function Skills() {
                     <li key={skill.name} className="flex items-center gap-3">
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                            {skill.name}
-                          </span>
+                          <Tooltip
+                            content={`${proficiencyConfig[skill.proficiency].label} - ${skill.years} ${skill.years === 1 ? 'year' : 'years'} experience`}
+                            position="top"
+                          >
+                            <span
+                              className="text-sm font-medium text-neutral-700 dark:text-neutral-300 cursor-help"
+                              tabIndex={0}
+                            >
+                              {skill.name}
+                            </span>
+                          </Tooltip>
                           <span className="text-xs text-neutral-500 dark:text-neutral-400">
                             {skill.years}y
                           </span>
                         </div>
                         {/* Proficiency Bar */}
-                        <div className="h-1.5 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <Tooltip
+                          content={proficiencyConfig[skill.proficiency].label}
+                          position="bottom"
+                        >
                           <div
-                            className={`h-full ${proficiencyConfig[skill.proficiency].color} rounded-full`}
-                            style={{
-                              width: `${(proficiencyConfig[skill.proficiency].level / 4) * 100}%`,
-                            }}
-                          />
-                        </div>
+                            className="h-1.5 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden cursor-help"
+                            tabIndex={0}
+                          >
+                            <div
+                              className={`h-full ${proficiencyConfig[skill.proficiency].color} rounded-full`}
+                              style={{
+                                width: `${(proficiencyConfig[skill.proficiency].level / 4) * 100}%`,
+                              }}
+                            />
+                          </div>
+                        </Tooltip>
                       </div>
                     </li>
                   ))}
