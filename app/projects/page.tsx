@@ -4,6 +4,9 @@ import { ProjectsContent } from '@/components/sections/ProjectsContent'
 export const metadata: Metadata = {
   title: 'Projects',
   description: 'Explore my portfolio of web development projects, including full-stack applications, open-source contributions, and personal experiments.',
+  alternates: {
+    canonical: '/projects',
+  },
 }
 
 export default function ProjectsPage() {
