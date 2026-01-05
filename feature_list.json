@@ -896,7 +896,7 @@
       "Step 10: Verify 'in-progress' status uses amber/yellow",
       "Step 11: Switch to dark mode and verify colors adapt"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -931,7 +931,7 @@
       "Step 10: Verify transition is smooth",
       "Step 11: Switch to dark mode and verify cards look good"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1188,7 +1188,7 @@
       "Step 9: Navigate to /contact",
       "Step 10: Verify form doesn't stretch uncomfortably wide"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1205,7 +1205,7 @@
       "Step 9: Verify no sections feel cramped together",
       "Step 10: Verify page feels professional and breathable"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
