@@ -1,10 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Mail, Github, Linkedin, Clock, Send, CheckCircle } from 'lucide-react'
 import { siteMetadata } from '@/data/metadata'
 import { Button } from '@/components/ui/Button'
 import { useToast } from '@/components/ui/Toast'
+
+// Rate limiting configuration
+const RATE_LIMIT_WINDOW = 60000 // 1 minute
+const MAX_SUBMISSIONS = 3 // Max 3 submissions per minute
 
 const contactMethods = [
   {
@@ -40,6 +44,8 @@ export default function ContactPage() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isRateLimited, setIsRateLimited] = useState(false)
+  const submissionTimestamps = useRef<number[]>([])
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
@@ -62,6 +68,16 @@ export default function ContactPage() {
     return Object.keys(newErrors).length === 0
   }
 
+  // Check rate limiting
+  const checkRateLimit = (): boolean => {
+    const now = Date.now()
+    // Filter out timestamps older than the rate limit window
+    submissionTimestamps.current = submissionTimestamps.current.filter(
+      (timestamp) => now - timestamp < RATE_LIMIT_WINDOW
+    )
+    return submissionTimestamps.current.length >= MAX_SUBMISSIONS
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -70,14 +86,25 @@ export default function ContactPage() {
       return
     }
 
+    // Rate limiting check
+    if (checkRateLimit()) {
+      setIsRateLimited(true)
+      addToast('Too many submissions. Please wait a minute before trying again.', 'error', 5000)
+      return
+    }
+
     if (!validateForm()) {
       return
     }
 
     setIsSubmitting(true)
+    setIsRateLimited(false)
 
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    // Record the submission timestamp for rate limiting
+    submissionTimestamps.current.push(Date.now())
 
     // In a real app, you would send this to an API endpoint
     console.log('Form submitted:', formData)
