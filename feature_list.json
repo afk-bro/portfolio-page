@@ -913,7 +913,7 @@
       "Step 9: Tab to focus button",
       "Step 10: Verify focus state is visible and distinct from hover"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1052,7 +1052,7 @@
       "Step 9: Verify all text maintains 4.5:1 contrast in dark mode",
       "Step 10: Check button text contrast on colored backgrounds"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1069,7 +1069,7 @@
       "Step 9: Verify card hover effect transitions smoothly",
       "Step 10: Verify no jarring or slow transitions"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1154,7 +1154,7 @@
       "Step 9: Fill valid data and submit",
       "Step 10: Verify success state styling if applicable"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
