@@ -1408,7 +1408,7 @@
       "Step 9: Verify filters are pre-applied on page load",
       "Step 10: Verify filtered results match original"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
