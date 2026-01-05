@@ -71,11 +71,15 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col">
         <ThemeProvider>
-          <a href="#main-content" className="skip-to-content">
+          <a
+            href="#main-content"
+            id="skip-link"
+            className="skip-link"
+          >
             Skip to content
           </a>
           <Navigation />
-          <main id="main-content" className="flex-1">
+          <main id="main-content" className="flex-1" tabIndex={-1}>
             {children}
           </main>
           <Footer />

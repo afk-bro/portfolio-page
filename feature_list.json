@@ -601,7 +601,7 @@
       "Step 8: Navigate to /projects and repeat test",
       "Step 9: Verify skip link works consistently across pages"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -620,7 +620,7 @@
       "Step 11: Submit form using Enter key",
       "Step 12: Verify form submission works via keyboard"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -638,7 +638,7 @@
       "Step 10: Verify form fields show focus indicators",
       "Step 11: Switch to dark mode and verify focus indicators still visible"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
