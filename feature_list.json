@@ -1442,7 +1442,7 @@
       "Step 9: Set NEXT_PUBLIC_SITE_URL",
       "Step 10: Verify site URL appears in metadata correctly"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -1573,7 +1573,7 @@
       "Step 10: Interact with forms and filters",
       "Step 11: Verify no runtime errors appear"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
