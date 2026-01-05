@@ -1657,7 +1657,7 @@
       "Step 8: Test /projects with and without trailing slash",
       "Step 9: Verify same consistent behavior"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
