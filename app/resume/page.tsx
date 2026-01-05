@@ -47,8 +47,8 @@ export default function ResumePage() {
           </div>
         </div>
 
-        {/* Download Options */}
-        <div className="card p-8 mb-12">
+        {/* Download Options - hidden in print */}
+        <div className="card p-8 mb-12 no-print">
           <h2 className="text-h3 text-neutral-900 dark:text-neutral-50 mb-6 text-center">
             Download Resume
           </h2>
@@ -67,8 +67,8 @@ export default function ResumePage() {
           </p>
         </div>
 
-        {/* Resume Preview / Embedded Content */}
-        <div className="card overflow-hidden">
+        {/* Resume Preview / Embedded Content - hidden in print (user should print the PDF directly) */}
+        <div className="card overflow-hidden no-print">
           <div className="bg-neutral-100 dark:bg-neutral-800 px-6 py-4 border-b border-neutral-200 dark:border-neutral-700">
             <h2 className="text-h4 text-neutral-900 dark:text-neutral-50">
               Resume Preview
@@ -84,8 +84,8 @@ export default function ResumePage() {
           </div>
         </div>
 
-        {/* ATS-Friendly Note */}
-        <div className="mt-8 p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg">
+        {/* ATS-Friendly Note - hidden in print */}
+        <div className="mt-8 p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg no-print">
           <p className="text-sm text-primary-800 dark:text-primary-200">
             <strong>Note for recruiters:</strong> The PDF version of my resume is
             ATS-friendly and contains all the same information in a machine-readable format.
