@@ -1493,7 +1493,7 @@
       "Step 9: Test anchor for 'Architecture' section",
       "Step 10: Verify anchors work for all major sections"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
