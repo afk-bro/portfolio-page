@@ -844,7 +844,7 @@
       "Step 9: Verify custom fonts load smoothly",
       "Step 10: Verify minimal Flash of Unstyled Text (FOUT)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
