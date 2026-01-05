@@ -462,7 +462,7 @@
       "Step 11: Verify code was copied correctly",
       "Step 12: Verify code maintains proper formatting"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -657,7 +657,7 @@
       "Step 11: Inspect any screenshots or diagrams",
       "Step 12: Verify architecture diagrams have descriptive alt text"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -693,7 +693,7 @@
       "Step 10: Run audit on a project detail page",
       "Step 11: Verify Performance score is 90 or higher"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -712,7 +712,7 @@
       "Step 11: Run audit on a project detail page",
       "Step 12: Verify Accessibility score is 100"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -729,7 +729,7 @@
       "Step 9: Verify SEO score is 100 for project pages",
       "Step 10: Verify all pages have unique titles and descriptions"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -827,7 +827,7 @@
       "Step 9: Resize viewport and verify responsive images",
       "Step 10: Verify no layout shift when images load (CLS)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -1171,7 +1171,7 @@
       "Step 9: Verify border-radius matches design system",
       "Step 10: Switch to dark mode and verify code block adapts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1641,7 +1641,7 @@
       "Step 9: Verify image has proper border-radius styling",
       "Step 10: Switch to dark mode and verify image looks good"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
