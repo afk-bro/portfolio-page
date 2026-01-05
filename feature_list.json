@@ -1373,7 +1373,7 @@
       "Step 9: Alternatively, click close button if present",
       "Step 10: Verify toast dismisses on close click"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

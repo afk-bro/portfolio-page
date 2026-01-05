@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Mail, Github, Linkedin, Clock, Send, CheckCircle } from 'lucide-react'
 import { siteMetadata } from '@/data/metadata'
 import { Button } from '@/components/ui/Button'
+import { useToast } from '@/components/ui/Toast'
 
 const contactMethods = [
   {
@@ -29,6 +30,7 @@ const contactMethods = [
 ]
 
 export default function ContactPage() {
+  const { addToast } = useToast()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -83,6 +85,9 @@ export default function ContactPage() {
     setIsSubmitting(false)
     setIsSubmitted(true)
     setFormData({ name: '', email: '', message: '', honeypot: '' })
+
+    // Show success toast notification
+    addToast('Message sent successfully! I\'ll get back to you soon.', 'success', 5000)
   }
 
   const handleChange = (
