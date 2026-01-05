@@ -948,7 +948,7 @@
       "Step 9: Verify navigation has subtle shadow or border separator",
       "Step 10: Switch to dark mode and verify nav adapts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -965,7 +965,7 @@
       "Step 9: Verify footer is identical across pages",
       "Step 10: Switch to dark mode and verify footer adapts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1120,7 +1120,7 @@
       "Step 9: Switch to dark mode",
       "Step 10: Verify badges remain readable and styled"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
