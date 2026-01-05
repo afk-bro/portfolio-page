@@ -1271,7 +1271,7 @@
       "Step 9: Reopen modal and click outside/backdrop",
       "Step 10: Verify modal closes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
