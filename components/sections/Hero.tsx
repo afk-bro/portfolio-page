@@ -1,13 +1,16 @@
+'use client'
+
 import Link from 'next/link'
 import { ArrowRight, Download, Sparkles } from 'lucide-react'
 import { siteMetadata } from '@/data/metadata'
 import { Button } from '@/components/ui/Button'
+import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 
 export function Hero() {
   return (
     <section className="section bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-900">
       <div className="container-content">
-        <div className="max-w-3xl mx-auto text-center">
+        <AnimateOnScroll variant="fade-up" className="max-w-3xl mx-auto text-center">
           {/* Availability Badge */}
           {siteMetadata.availability === 'available' && (
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-success-50 dark:bg-success-500/10 text-success-600 dark:text-success-500 text-sm font-medium">
@@ -46,7 +49,7 @@ export function Hero() {
               </Link>
             </Button>
           </div>
-        </div>
+        </AnimateOnScroll>
       </div>
     </section>
   )

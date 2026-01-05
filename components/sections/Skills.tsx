@@ -1,4 +1,7 @@
+'use client'
+
 import { getGroupedSkills, categoryNames, proficiencyConfig } from '@/data/skills'
+import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 
 export function Skills() {
   const groupedSkills = getGroupedSkills()
@@ -6,18 +9,21 @@ export function Skills() {
   // Order of categories to display
   const categoryOrder = ['languages', 'frontend', 'backend', 'devops', 'ai-ml', 'tools'] as const
 
+  // Track valid categories for staggered animation
+  let validIndex = 0
+
   return (
     <section className="section bg-neutral-50 dark:bg-neutral-800/30">
       <div className="container-content">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <AnimateOnScroll variant="fade-up" className="text-center mb-12">
           <h2 className="text-h2 text-neutral-900 dark:text-neutral-50 mb-4">
             Skills & Technologies
           </h2>
           <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
             Technologies I work with daily and the expertise I bring to every project.
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Skills Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -25,8 +31,15 @@ export function Skills() {
             const skills = groupedSkills[category]
             if (!skills || skills.length === 0) return null
 
+            const currentIndex = validIndex++
+
             return (
-              <div key={category} className="card p-6">
+              <AnimateOnScroll
+                key={category}
+                variant="fade-up"
+                delay={currentIndex * 100}
+                className="card p-6"
+              >
                 <h3 className="text-h4 text-neutral-900 dark:text-neutral-50 mb-4">
                   {categoryNames[category]}
                 </h3>
@@ -55,7 +68,7 @@ export function Skills() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </AnimateOnScroll>
             )
           })}
         </div>

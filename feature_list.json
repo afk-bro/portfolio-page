@@ -1086,7 +1086,7 @@
       "Step 9: Scroll back up",
       "Step 10: Verify animations don't replay on scroll up"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",

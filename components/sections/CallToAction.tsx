@@ -1,13 +1,19 @@
+'use client'
+
 import Link from 'next/link'
 import { ArrowRight, Mail } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { siteMetadata } from '@/data/metadata'
+import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 
 export function CallToAction() {
   return (
     <section className="section">
       <div className="container-content">
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-8 md:p-12 text-center">
+        <AnimateOnScroll
+          variant="fade-up"
+          className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-8 md:p-12 text-center"
+        >
           <h2 className="text-h2 text-white mb-4">
             Let&apos;s Build Something Great Together
           </h2>
@@ -39,7 +45,7 @@ export function CallToAction() {
               </a>
             </Button>
           </div>
-        </div>
+        </AnimateOnScroll>
       </div>
     </section>
   )
