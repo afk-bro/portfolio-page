@@ -4,6 +4,27 @@ import './globals.css'
 import { Navigation } from '@/components/sections/Navigation'
 import { Footer } from '@/components/sections/Footer'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { siteMetadata } from '@/data/metadata'
+
+// JSON-LD structured data for Person schema
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: siteMetadata.name,
+  jobTitle: siteMetadata.role,
+  description: siteMetadata.bio,
+  url: siteMetadata.siteUrl,
+  email: `mailto:${siteMetadata.email}`,
+  sameAs: [
+    siteMetadata.social.github,
+    siteMetadata.social.linkedin,
+    ...(siteMetadata.social.twitter ? [siteMetadata.social.twitter] : []),
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: siteMetadata.location,
+  },
+}
 
 const inter = Inter({
   subsets: ['latin'],
@@ -56,6 +77,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
