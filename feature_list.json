@@ -1220,7 +1220,7 @@
       "Step 7: Verify page is at top position",
       "Step 8: Verify button disappears or becomes inactive at top"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
