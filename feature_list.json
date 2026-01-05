@@ -1137,7 +1137,7 @@
       "Step 9: Verify project cards show skeleton states",
       "Step 10: Verify no layout shift when content loads"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1555,7 +1555,7 @@
       "Step 9: Verify another chunk loads if needed",
       "Step 10: Verify no unnecessary re-downloads of cached chunks"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

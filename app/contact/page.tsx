@@ -44,7 +44,6 @@ export default function ContactPage() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isRateLimited, setIsRateLimited] = useState(false)
   const submissionTimestamps = useRef<number[]>([])
 
   const validateForm = () => {
@@ -88,7 +87,6 @@ export default function ContactPage() {
 
     // Rate limiting check
     if (checkRateLimit()) {
-      setIsRateLimited(true)
       addToast('Too many submissions. Please wait a minute before trying again.', 'error', 5000)
       return
     }
@@ -98,7 +96,6 @@ export default function ContactPage() {
     }
 
     setIsSubmitting(true)
-    setIsRateLimited(false)
 
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000))
