@@ -1476,7 +1476,7 @@
       "Step 9: Verify tooltip doesn't flicker on mouse movement",
       "Step 10: Tab to element and verify tooltip shows on focus"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
