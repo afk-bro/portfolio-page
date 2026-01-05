@@ -443,7 +443,7 @@
       "Step 9: Manually toggle to dark mode",
       "Step 10: Verify manual selection overrides system preference"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -775,7 +775,7 @@
       "Step 9: Intentionally break data and verify validation fails",
       "Step 10: Fix data and verify validation passes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -861,7 +861,7 @@
       "Step 9: Verify hero doesn't feel cramped or too sparse",
       "Step 10: Verify hero looks balanced on desktop viewport"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -878,7 +878,7 @@
       "Step 9: Verify font family is consistent throughout",
       "Step 10: Verify code uses monospace font"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1103,7 +1103,7 @@
       "Step 9: Verify page is fully functional without animations",
       "Step 10: Verify content is not missing due to animation removal"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1459,7 +1459,7 @@
       "Step 9: Verify no JavaScript errors in console",
       "Step 10: Verify theme and other state is preserved"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1538,7 +1538,7 @@
       "Step 9: Switch to dark mode",
       "Step 10: Verify icons adapt color appropriately"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -1607,7 +1607,7 @@
       "Step 9: Check success states have text confirmation",
       "Step 10: Verify a colorblind user could understand all states"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
