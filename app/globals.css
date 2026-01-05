@@ -180,3 +180,92 @@
     @apply bg-transparent p-0;
   }
 }
+
+/* Print styles for resume page */
+@media print {
+  /* Hide navigation and footer */
+  nav,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset background and text colors for print */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  /* Ensure dark mode doesn't affect print */
+  .dark body,
+  .dark * {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Make content full width */
+  .container-content {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Section spacing for print */
+  .section {
+    padding: 1rem 0 !important;
+  }
+
+  /* Remove shadows and borders for cleaner print */
+  .card,
+  .shadow-sm,
+  .shadow-md,
+  .shadow-lg {
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+  }
+
+  /* Ensure links show their URLs */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Don't show URL for internal links */
+  a[href^="/"]::after,
+  a[href^="#"]::after {
+    content: none;
+  }
+
+  /* Page break control */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  /* Avoid breaking inside cards */
+  .card,
+  article {
+    page-break-inside: avoid;
+  }
+
+  /* Primary color badges should be visible in print */
+  .badge-primary,
+  .badge-success,
+  .badge-warning {
+    background: #f3f4f6 !important;
+    color: #374151 !important;
+    border: 1px solid #d1d5db !important;
+  }
+
+  /* Ensure iframe (PDF viewer) is hidden in print */
+  iframe {
+    display: none !important;
+  }
+
+  /* Resume specific print styles */
+  .resume-content {
+    display: block !important;
+  }
+}

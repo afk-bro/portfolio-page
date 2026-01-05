@@ -1425,7 +1425,7 @@
       "Step 9: Verify links are visible or URLs are shown",
       "Step 10: Cancel print and verify normal view returns"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
