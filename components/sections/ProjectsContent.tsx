@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { ExternalLink, Github, X } from 'lucide-react'
 import { projects, getAllTechnologies, type Project } from '@/data/projects'
@@ -14,6 +15,14 @@ interface FilterState {
   type: string | null
   status: string | null
 }
+
+// URL parameter keys for filters
+const FILTER_PARAMS = {
+  technology: 'tech',
+  domain: 'domain',
+  type: 'type',
+  status: 'status',
+} as const
 
 // Filter options
 const domainOptions = [
@@ -39,14 +48,49 @@ const statusOptions = [
 
 export function ProjectsContent() {
   const technologies = getAllTechnologies()
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
+
+  // Initialize filter state from URL parameters
+  const getInitialFilters = useCallback((): FilterState => {
+    return {
+      technology: searchParams.get(FILTER_PARAMS.technology),
+      domain: searchParams.get(FILTER_PARAMS.domain),
+      type: searchParams.get(FILTER_PARAMS.type),
+      status: searchParams.get(FILTER_PARAMS.status),
+    }
+  }, [searchParams])
 
   // Multi-criteria filter state - each filter type is independent
-  const [filters, setFilters] = useState<FilterState>({
-    technology: null,
-    domain: null,
-    type: null,
-    status: null,
-  })
+  const [filters, setFilters] = useState<FilterState>(getInitialFilters)
+
+  // Sync filters from URL when searchParams change (e.g., browser back/forward)
+  useEffect(() => {
+    setFilters(getInitialFilters())
+  }, [getInitialFilters])
+
+  // Update URL when filters change
+  const updateURL = useCallback((newFilters: FilterState) => {
+    const params = new URLSearchParams()
+
+    if (newFilters.technology) {
+      params.set(FILTER_PARAMS.technology, newFilters.technology)
+    }
+    if (newFilters.domain) {
+      params.set(FILTER_PARAMS.domain, newFilters.domain)
+    }
+    if (newFilters.type) {
+      params.set(FILTER_PARAMS.type, newFilters.type)
+    }
+    if (newFilters.status) {
+      params.set(FILTER_PARAMS.status, newFilters.status)
+    }
+
+    const queryString = params.toString()
+    const newURL = queryString ? `${pathname}?${queryString}` : pathname
+    router.push(newURL, { scroll: false })
+  }, [pathname, router])
 
   // Check if any filters are active
   const hasActiveFilters = Object.values(filters).some(v => v !== null)
@@ -77,53 +121,66 @@ export function ProjectsContent() {
   }, [filters])
 
   const handleTechFilter = (tech: string) => {
-    setFilters(prev => ({
-      ...prev,
-      technology: prev.technology === tech ? null : tech
-    }))
+    const newFilters = {
+      ...filters,
+      technology: filters.technology === tech ? null : tech
+    }
+    setFilters(newFilters)
+    updateURL(newFilters)
   }
 
   const handleDomainFilter = (domain: string) => {
-    setFilters(prev => ({
-      ...prev,
-      domain: prev.domain === domain ? null : domain
-    }))
+    const newFilters = {
+      ...filters,
+      domain: filters.domain === domain ? null : domain
+    }
+    setFilters(newFilters)
+    updateURL(newFilters)
   }
 
   const handleTypeFilter = (type: string) => {
-    setFilters(prev => ({
-      ...prev,
-      type: prev.type === type ? null : type
-    }))
+    const newFilters = {
+      ...filters,
+      type: filters.type === type ? null : type
+    }
+    setFilters(newFilters)
+    updateURL(newFilters)
   }
 
   const handleStatusFilter = (status: string) => {
-    setFilters(prev => ({
-      ...prev,
-      status: prev.status === status ? null : status
-    }))
+    const newFilters = {
+      ...filters,
+      status: filters.status === status ? null : status
+    }
+    setFilters(newFilters)
+    updateURL(newFilters)
   }
 
   const handleAllFilter = () => {
-    setFilters({
+    const newFilters = {
       technology: null,
       domain: null,
       type: null,
       status: null,
-    })
+    }
+    setFilters(newFilters)
+    updateURL(newFilters)
   }
 
   const clearFilter = (filterKey?: keyof FilterState) => {
+    let newFilters: FilterState
     if (filterKey) {
-      setFilters(prev => ({ ...prev, [filterKey]: null }))
+      newFilters = { ...filters, [filterKey]: null }
     } else {
-      setFilters({
+      newFilters = {
         technology: null,
         domain: null,
         type: null,
         status: null,
-      })
+      }
     }
+    setFilters(newFilters)
+    updateURL(newFilters)
   }
 
   return (

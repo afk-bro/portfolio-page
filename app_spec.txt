@@ -1,0 +1,1028 @@
+<project_specification>
+  <project_name>Personal Portfolio Website - Professional Showcase Platform</project_name>
+
+  <overview>
+    A production-ready personal portfolio website designed to clearly communicate professional
+    identity, technical capability, and project experience to hiring managers and recruiters.
+    The site emphasizes clarity, credibility, and signal over novelty, presenting selected work
+    through concise case studies backed by concrete implementation details and quality signals
+    (testing, CI, architecture decisions).
+
+    The architecture is intentionally simple, fast to iterate, and deployment-friendly, enabling
+    rapid customization per job application (role-specific positioning, highlighted skills,
+    tailored project ordering) without structural changes. The MVP is a statically optimized
+    Next.js application deployed on Vercel with optional server components for metadata and
+    analytics.
+
+    The portfolio is not a blog or CMS-first product; it is a focused professional artifact whose
+    primary success metric is conversion to interviews.
+  </overview>
+
+  <strategic_positioning>
+    <target_audiences>
+      <primary>Technical hiring managers evaluating engineering candidates</primary>
+      <secondary>Recruiters screening for technical fit and communication ability</secondary>
+      <tertiary>Potential collaborators and open-source community members</tertiary>
+    </target_audiences>
+
+    <differentiation_strategy>
+      - Lead with outcomes and impact, not just technologies used
+      - Show decision-making process and tradeoff reasoning
+      - Demonstrate code quality through live GitHub links and test coverage badges
+      - Avoid "template portfolio" aesthetic with genuine personality and voice
+      - Present depth on 3-5 projects rather than surface coverage of 15+
+    </differentiation_strategy>
+
+    <value_propositions>
+      <for_hiring_managers>
+        - Quickly assess technical depth without scheduling a call
+        - See real architecture decisions and their rationale
+        - Evaluate communication clarity through case study writing
+        - Verify claims via linked repositories and live demos
+      </for_hiring_managers>
+      <for_recruiters>
+        - Clear role targeting (e.g., "Senior Full-Stack Engineer")
+        - Scannable skills matrix with proficiency indicators
+        - Downloadable resume in multiple formats
+        - Easy contact pathway with response time expectation
+      </for_recruiters>
+    </value_propositions>
+
+    <anti_patterns_to_avoid>
+      - Generic "passionate developer" language without specifics
+      - Walls of technology logos without context
+      - Projects without problem statements or outcomes
+      - Missing or broken live demo links
+      - Over-designed sites that prioritize aesthetics over information
+      - Outdated content or "coming soon" placeholders
+    </anti_patterns_to_avoid>
+  </strategic_positioning>
+
+  <technology_stack>
+    <runtime>
+      <language>TypeScript (ES2022+)</language>
+      <framework>Next.js (App Router)</framework>
+      <rendering>Static generation (SSG) with selective server components</rendering>
+      <package_manager>pnpm (preferred) or npm</package_manager>
+    </runtime>
+
+    <core_libraries>
+      <ui>React 19</ui>
+      <styling>Tailwind CSS</styling>
+      <validation>zod (schema validation for forms and config)</validation>
+      <icons>lucide-react</icons>
+      <markdown_optional>MDX (for project case studies)</markdown_optional>
+      <testing_optional>Playwright (smoke and regression tests)</testing_optional>
+      <linting>eslint, prettier, TypeScript strict mode</linting>
+    </core_libraries>
+
+    <deployment>
+      <hosting>Vercel (Edge + Node runtimes as needed)</hosting>
+      <build>Next.js build pipeline with static optimization</build>
+      <domains>Custom domain supported (optional)</domains>
+      <ci_cd>GitHub Actions (lint, typecheck, build)</ci_cd>
+    </deployment>
+
+    <observability_optional>
+      <analytics>Plausible or PostHog (privacy-friendly)</analytics>
+      <error_tracking>Sentry (optional)</error_tracking>
+      <performance>Vercel Analytics / Lighthouse</performance>
+    </observability_optional>
+  </technology_stack>
+
+  <prerequisites>
+    <environment_setup>
+      - Node.js 18+
+      - pnpm or npm installed
+      - GitHub account connected to Vercel
+      - Basic familiarity with React and Tailwind
+    </environment_setup>
+
+    <required_environment_variables>
+      - NEXT_PUBLIC_SITE_URL: Canonical site URL
+      - NEXT_PUBLIC_ANALYTICS_KEY: Analytics key (optional)
+      - CONTACT_EMAIL: Public contact email (optional)
+    </required_environment_variables>
+  </prerequisites>
+
+  <core_features>
+    <homepage>
+      - Clear hero section with name, role, and value proposition
+      - Primary CTAs: View Projects, Download Resume
+      - Proof strip with concrete signals (tests, CI, architecture, scale)
+      - Featured projects (2–3) with concise summaries
+      - Skills grouped by domain (backend, frontend, devops, AI)
+      - Call-to-action footer with contact links
+      <enhanced_elements>
+        - Animated typing effect for role variations (optional, subtle)
+        - Social proof section with GitHub stats or contribution graph
+        - "Currently building" teaser for active projects
+        - Availability indicator (e.g., "Open to opportunities")
+        - Quick links to most relevant case study per target role
+      </enhanced_elements>
+    </homepage>
+
+    <projects>
+      - Projects index page with filterable grid
+      - Individual project case study pages
+      - Standardized case study structure:
+        - Problem
+        - Constraints
+        - Solution
+        - Architecture
+        - Key Features
+        - Tradeoffs
+        - What I'd Do Next
+      - Support for WIP and prototype labeling
+      <enhanced_elements>
+        - Technology stack badges per project
+        - Live demo links with status indicators
+        - GitHub repository links with star/fork counts
+        - Time investment indicator (weekend project vs. multi-month)
+        - Team vs. solo attribution
+        - "View Code" snippets for key implementations
+        - Before/after comparisons for refactoring projects
+        - Performance metrics where applicable (load times, test coverage)
+        - Video walkthroughs for complex projects (optional)
+      </enhanced_elements>
+      <filter_categories>
+        - By technology (React, Python, Go, etc.)
+        - By domain (web, backend, AI/ML, devops)
+        - By type (professional, open-source, learning)
+        - By status (complete, in-progress, archived)
+      </filter_categories>
+    </projects>
+
+    <resume>
+      - Dedicated resume route
+      - Embedded PDF viewer or direct download
+      - Versioned resume support (optional)
+      <enhanced_elements>
+        - Multiple format downloads (PDF, DOCX, plain text)
+        - Role-specific resume variants (e.g., frontend-focused, backend-focused)
+        - Print-optimized stylesheet
+        - QR code linking back to portfolio
+        - Last updated timestamp
+        - ATS-friendly version option
+      </enhanced_elements>
+    </resume>
+
+    <about>
+      - Professional narrative and background
+      - Career transition context
+      - Working style and values
+      - Roles actively being sought
+      <enhanced_elements>
+        - Timeline visualization of career journey
+        - "How I work" section with collaboration preferences
+        - Learning philosophy and growth areas
+        - Side interests that inform professional work
+        - Testimonials or recommendations (optional)
+        - Professional headshot with consistent branding
+        - Location and remote work preferences
+      </enhanced_elements>
+    </about>
+
+    <contact>
+      - Email contact
+      - GitHub and LinkedIn links
+      - Lightweight contact form (optional)
+      <enhanced_elements>
+        - Response time expectation ("typically respond within 48 hours")
+        - Preferred contact method indicator
+        - Calendar booking link for coffee chats (Calendly/Cal.com)
+        - PGP key for security-conscious contacts (optional)
+        - RSS feed for updates (optional)
+        - Contact form with spam protection (honeypot + rate limiting)
+      </enhanced_elements>
+    </contact>
+  </core_features>
+
+  <interactive_features>
+    <code_demonstrations>
+      - Embedded code snippets with syntax highlighting
+      - Interactive code playgrounds for simple demos (optional)
+      - Copy-to-clipboard functionality
+      - Line number references for explanations
+    </code_demonstrations>
+
+    <project_exploration>
+      - Keyboard navigation shortcuts (j/k for project browsing)
+      - Quick preview modals before full page navigation
+      - Related projects suggestions at case study end
+      - "Back to top" and section navigation aids
+    </project_exploration>
+
+    <personalization>
+      - Theme toggle (light/dark/system)
+      - Reduced motion preference respect
+      - Font size adjustment (optional)
+      - Remember preferences via localStorage
+    </personalization>
+  </interactive_features>
+
+  <configuration_management>
+    <content_configuration>
+      - Central data files for projects, skills, and metadata
+      - Strong typing enforced for all content objects
+      - Easy per-job customization via content overrides
+      <data_schemas>
+        - Project: id, title, slug, summary, technologies, links, status, featured, order
+        - Skill: name, category, proficiency, years, icon, featured
+        - Experience: company, role, dates, highlights, technologies
+        - Metadata: name, title, bio, social links, availability
+      </data_schemas>
+      <customization_patterns>
+        - Environment-based content overrides (PORTFOLIO_VARIANT=frontend)
+        - URL query parameters for A/B testing different presentations
+        - Branch-based deployments for role-specific versions
+        - Feature flags for experimental sections
+      </customization_patterns>
+    </content_configuration>
+
+    <seo_configuration>
+      - Page-level metadata (title, description)
+      - OpenGraph and Twitter cards
+      - Sitemap and robots.txt generation
+      <enhanced_seo>
+        - Structured data (JSON-LD) for Person schema
+        - Canonical URLs to prevent duplicate content
+        - Dynamic OG images per project (via @vercel/og)
+        - Meta descriptions optimized for search snippets
+        - Hreflang tags if multilingual (future)
+      </enhanced_seo>
+    </seo_configuration>
+
+    <url_strategy>
+      - Clean, semantic URLs (/projects/trading-bot vs. /projects/123)
+      - Consistent trailing slash behavior
+      - Redirect handling for renamed projects
+      - 404 page with helpful navigation
+    </url_strategy>
+  </configuration_management>
+
+  <content_strategy>
+    <writing_principles>
+      - Lead with impact and outcomes
+      - Use concrete numbers when possible ("reduced load time by 40%")
+      - Write for scanning: headers, bullets, bold key points
+      - Avoid jargon without explanation
+      - Show don't tell: link to code, demos, metrics
+    </writing_principles>
+
+    <case_study_template>
+      <section name="overview">
+        - One-paragraph executive summary
+        - Key technologies and timeline
+        - Links to live demo and source code
+      </section>
+      <section name="problem">
+        - Business or user problem being solved
+        - Why this problem matters
+        - Constraints and requirements
+      </section>
+      <section name="solution">
+        - High-level approach
+        - Architecture diagram or system overview
+        - Key technical decisions with rationale
+      </section>
+      <section name="implementation">
+        - Notable code patterns or techniques
+        - Challenges encountered and solutions
+        - Third-party integrations
+      </section>
+      <section name="results">
+        - Measurable outcomes
+        - User feedback or adoption metrics
+        - Performance benchmarks
+      </section>
+      <section name="reflection">
+        - What worked well
+        - What I'd do differently
+        - Future improvements planned
+      </section>
+    </case_study_template>
+
+    <content_maintenance>
+      - Quarterly review of project accuracy
+      - Update technologies as skills evolve
+      - Archive outdated projects gracefully
+      - Keep resume in sync with portfolio
+    </content_maintenance>
+  </content_strategy>
+
+  <ui_layout>
+    <navigation>
+      - Sticky top navigation
+      - Sections: Home, Projects, About, Resume, Contact
+      - Mobile-first responsive behavior
+    </navigation>
+
+    <layout_principles>
+      - Max-width constrained content
+      - Generous whitespace
+      - Clear visual hierarchy
+      - Accessibility-first semantics
+    </layout_principles>
+  </ui_layout>
+
+  <design_system>
+    <theme>
+      - Neutral base with subtle accent color
+      - Light mode by default, dark mode optional
+      - Calm, professional aesthetic
+      <color_palette>
+        - Primary: Professional blue or teal (trust, competence)
+        - Neutral: Slate grays for text and backgrounds
+        - Accent: Warm highlight for CTAs and interactive elements
+        - Semantic: Green for success, amber for WIP, red for deprecated
+      </color_palette>
+    </theme>
+
+    <typography>
+      - Sans-serif system or modern web font
+      - Clear heading scale
+      - Readable body copy
+      <font_stack>
+        - Headings: Inter, system-ui, sans-serif
+        - Body: Inter, system-ui, sans-serif
+        - Code: JetBrains Mono, Fira Code, monospace
+      </font_stack>
+      <scale>
+        - H1: 2.5rem / 3rem line-height (page titles)
+        - H2: 2rem / 2.5rem line-height (section headers)
+        - H3: 1.5rem / 2rem line-height (subsections)
+        - Body: 1rem / 1.75rem line-height (paragraphs)
+        - Small: 0.875rem / 1.25rem line-height (captions, meta)
+      </scale>
+    </typography>
+
+    <components>
+      - Buttons with consistent variants
+      - Project cards
+      - Section headers
+      - Callout badges for quality signals
+      <component_library>
+        - Button: primary, secondary, ghost, link variants
+        - Card: project card, skill card, experience card
+        - Badge: technology, status, featured indicators
+        - Input: text, textarea, select with validation states
+        - Modal: lightbox for images, confirmation dialogs
+        - Tooltip: contextual help and abbreviation expansions
+        - Skeleton: loading states for dynamic content
+        - Toast: feedback notifications for form submissions
+      </component_library>
+    </components>
+
+    <motion>
+      - Subtle entrance animations (fade-up on scroll)
+      - Hover state transitions (150ms ease)
+      - Page transitions via View Transitions API (optional)
+      - Respect prefers-reduced-motion
+    </motion>
+  </design_system>
+
+  <accessibility>
+    <wcag_compliance>
+      - Target WCAG 2.1 AA compliance minimum
+      - Aim for AAA where practical (color contrast, text sizing)
+    </wcag_compliance>
+
+    <keyboard_navigation>
+      - All interactive elements focusable
+      - Visible focus indicators
+      - Skip-to-content link
+      - Logical tab order
+      - Escape key closes modals
+    </keyboard_navigation>
+
+    <screen_reader_support>
+      - Semantic HTML structure (header, main, nav, footer)
+      - ARIA labels for icon-only buttons
+      - Alt text for all images
+      - Form labels and error announcements
+      - Live regions for dynamic updates
+    </screen_reader_support>
+
+    <visual_accessibility>
+      - Minimum 4.5:1 contrast for normal text
+      - Minimum 3:1 contrast for large text and UI elements
+      - Color not sole indicator of meaning
+      - Resizable text up to 200% without loss of content
+    </visual_accessibility>
+
+    <testing>
+      - Automated testing with axe-core
+      - Manual testing with VoiceOver/NVDA
+      - Keyboard-only navigation testing
+    </testing>
+  </accessibility>
+
+  <performance>
+    <targets>
+      - Lighthouse score 90+ (mobile and desktop)
+      - First Contentful Paint < 1.5s
+      - Fully static pages where possible
+      <core_web_vitals>
+        - LCP (Largest Contentful Paint): < 2.5s
+        - FID (First Input Delay): < 100ms
+        - CLS (Cumulative Layout Shift): < 0.1
+        - INP (Interaction to Next Paint): < 200ms
+      </core_web_vitals>
+    </targets>
+
+    <optimizations>
+      - Image optimization via next/image
+      - Font optimization
+      - Code-splitting by route
+      <additional_optimizations>
+        - Preload critical fonts and hero images
+        - Lazy load below-fold images
+        - Minimize JavaScript bundle size
+        - Use CSS containment where appropriate
+        - Implement resource hints (preconnect, prefetch)
+        - Compress and minify all assets
+        - Enable HTTP/2 push for critical resources
+        - Use CDN for static assets
+      </additional_optimizations>
+    </optimizations>
+
+    <monitoring>
+      - Real User Monitoring (RUM) via Vercel Analytics
+      - Synthetic monitoring via Lighthouse CI
+      - Bundle size tracking in CI pipeline
+      - Performance budgets with alerts
+    </monitoring>
+  </performance>
+
+  <testing_strategy>
+    <unit_testing>
+      - Component tests for reusable UI elements
+      - Utility function tests
+      - Content validation tests (schema compliance)
+      <tools>Jest, React Testing Library</tools>
+    </unit_testing>
+
+    <integration_testing>
+      - Page rendering tests
+      - Navigation flow tests
+      - Form submission tests
+      <tools>Playwright or Cypress</tools>
+    </integration_testing>
+
+    <visual_regression>
+      - Screenshot comparison for key pages
+      - Responsive breakpoint testing
+      - Dark mode appearance verification
+      <tools>Playwright screenshots, Percy (optional)</tools>
+    </visual_regression>
+
+    <accessibility_testing>
+      - Automated a11y checks in CI
+      - Manual screen reader testing checklist
+      <tools>axe-core, pa11y</tools>
+    </accessibility_testing>
+
+    <link_validation>
+      - Check all internal links resolve
+      - Verify external links are live
+      - Validate resume download links
+      <tools>Custom script or linkinator</tools>
+    </link_validation>
+
+    <ci_pipeline>
+      - Lint and typecheck on every PR
+      - Run test suite on every PR
+      - Build verification before merge
+      - Lighthouse CI for performance regression
+      - Deploy preview for visual review
+    </ci_pipeline>
+  </testing_strategy>
+
+  <analytics_strategy>
+    <privacy_first>
+      - No cookies or personal data collection
+      - GDPR/CCPA compliant by design
+      - No third-party tracking scripts
+    </privacy_first>
+
+    <metrics_to_track>
+      <engagement>
+        - Page views and unique visitors
+        - Time on page per section
+        - Scroll depth on case studies
+        - Project card click-through rates
+      </engagement>
+      <conversion>
+        - Resume download count
+        - Contact form submissions
+        - External link clicks (GitHub, LinkedIn)
+        - Referral sources (direct, search, social)
+      </conversion>
+      <technical>
+        - Device and browser distribution
+        - Geographic distribution
+        - Performance metrics (real user)
+      </technical>
+    </metrics_to_track>
+
+    <tooling>
+      - Plausible Analytics (recommended) or PostHog
+      - Vercel Analytics for Web Vitals
+      - Custom event tracking for key actions
+    </tooling>
+
+    <reporting>
+      - Weekly dashboard review during active job search
+      - A/B test results for positioning variants
+      - Conversion funnel analysis
+    </reporting>
+  </analytics_strategy>
+
+  <security_and_privacy>
+    <security_headers>
+      - Content-Security-Policy
+      - X-Frame-Options: DENY
+      - X-Content-Type-Options: nosniff
+      - Referrer-Policy: strict-origin-when-cross-origin
+      - Permissions-Policy: restrictive defaults
+    </security_headers>
+
+    <form_security>
+      - Honeypot fields for spam prevention
+      - Rate limiting on contact form
+      - Input sanitization
+      - CSRF protection if using server actions
+    </form_security>
+
+    <privacy>
+      - Minimal data collection
+      - No email tracking pixels
+      - Clear privacy statement
+      - No selling or sharing visitor data
+    </privacy>
+
+    <supply_chain>
+      - Regular dependency updates
+      - npm audit in CI
+      - Lock file committed and verified
+    </supply_chain>
+  </security_and_privacy>
+
+  <implementation_steps>
+    <step number="1">
+      <title>Project Scaffold and Deployment</title>
+      <tasks>
+        - Initialize Next.js project with TypeScript
+        - Configure Tailwind CSS
+        - Set up GitHub repository
+        - Deploy initial build to Vercel
+      </tasks>
+      <detailed_tasks>
+        - Run `npx create-next-app@latest --typescript --tailwind --app`
+        - Configure ESLint and Prettier with strict rules
+        - Set up path aliases (@/components, @/lib, @/data)
+        - Create initial folder structure (app/, components/, lib/, data/, public/)
+        - Configure Vercel project and connect GitHub
+        - Set up environment variables in Vercel
+        - Verify deployment pipeline works end-to-end
+        - Enable Vercel Analytics and Speed Insights
+      </detailed_tasks>
+      <deliverables>
+        - Working deployment at preview URL
+        - CI pipeline running lint and typecheck
+        - Basic "Hello World" page live
+      </deliverables>
+    </step>
+
+    <step number="2">
+      <title>Core Pages and Navigation</title>
+      <tasks>
+        - Implement base layout and navigation
+        - Create Home, Projects, About, Resume pages
+        - Add responsive styling
+      </tasks>
+      <detailed_tasks>
+        - Create RootLayout with metadata defaults
+        - Build Navigation component with mobile menu
+        - Implement Footer component with social links
+        - Create page shells for all routes
+        - Set up responsive breakpoints (sm, md, lg, xl)
+        - Implement skip-to-content accessibility link
+        - Add loading states and error boundaries
+        - Create 404 and error pages
+      </detailed_tasks>
+      <deliverables>
+        - All routes navigable
+        - Mobile and desktop layouts functional
+        - Basic content placeholders in place
+      </deliverables>
+    </step>
+
+    <step number="3">
+      <title>Content Architecture and Data Layer</title>
+      <tasks>
+        - Define TypeScript interfaces for all content
+        - Create Zod schemas for validation
+        - Set up content data files
+      </tasks>
+      <detailed_tasks>
+        - Define Project, Skill, Experience, Metadata interfaces
+        - Create Zod schemas with runtime validation
+        - Build data files (projects.ts, skills.ts, metadata.ts)
+        - Implement content utility functions
+        - Add type-safe getters for all content
+        - Create content validation script for CI
+        - Document content schema for future updates
+      </detailed_tasks>
+      <deliverables>
+        - Fully typed content layer
+        - Validation passing in CI
+        - Sample content for all types
+      </deliverables>
+    </step>
+
+    <step number="4">
+      <title>Component Library</title>
+      <tasks>
+        - Build reusable UI components
+        - Implement design system tokens
+        - Create component documentation
+      </tasks>
+      <detailed_tasks>
+        - Create Button component with variants
+        - Build Card components (ProjectCard, SkillCard)
+        - Implement Badge component for technologies
+        - Create Section and Container layout components
+        - Build Hero component for homepage
+        - Implement ProofStrip for quality signals
+        - Create ContactForm with validation
+        - Build Modal/Dialog for lightboxes
+        - Add Toast notifications
+        - Implement Skeleton loading states
+      </detailed_tasks>
+      <deliverables>
+        - Component library with consistent API
+        - Tailwind design tokens configured
+        - Components documented with usage examples
+      </deliverables>
+    </step>
+
+    <step number="5">
+      <title>Project Case Studies</title>
+      <tasks>
+        - Define project content schema
+        - Build project index and dynamic routes
+        - Write initial case studies
+      </tasks>
+      <detailed_tasks>
+        - Create /projects index page with grid
+        - Implement project filtering by technology/type
+        - Build /projects/[slug] dynamic route
+        - Create CaseStudy page template
+        - Implement MDX support for rich content
+        - Add code syntax highlighting
+        - Build related projects component
+        - Create project navigation (prev/next)
+        - Write 3-5 initial case studies
+        - Add architecture diagrams and screenshots
+      </detailed_tasks>
+      <deliverables>
+        - Project index with filtering
+        - Polished case study template
+        - At least 3 complete case studies
+      </deliverables>
+    </step>
+
+    <step number="6">
+      <title>Homepage and Landing Experience</title>
+      <tasks>
+        - Build compelling hero section
+        - Implement featured projects grid
+        - Create skills showcase
+      </tasks>
+      <detailed_tasks>
+        - Design and implement Hero with value proposition
+        - Add primary CTAs (View Projects, Download Resume)
+        - Build ProofStrip with quality signals
+        - Create FeaturedProjects section
+        - Implement SkillsGrid grouped by domain
+        - Add availability indicator
+        - Create compelling footer CTA
+        - Optimize above-fold performance
+      </detailed_tasks>
+      <deliverables>
+        - Homepage that converts in under 60 seconds
+        - Clear value proposition visible immediately
+        - Smooth scroll to sections
+      </deliverables>
+    </step>
+
+    <step number="7">
+      <title>Resume and About Pages</title>
+      <tasks>
+        - Build resume download experience
+        - Create compelling About narrative
+      </tasks>
+      <detailed_tasks>
+        - Implement PDF embed/viewer
+        - Add download buttons for multiple formats
+        - Create versioned resume support
+        - Build About page with professional narrative
+        - Add timeline visualization (optional)
+        - Include "How I Work" section
+        - Add testimonials section (optional)
+        - Implement professional headshot
+      </detailed_tasks>
+      <deliverables>
+        - Resume downloadable in multiple formats
+        - About page tells compelling story
+      </deliverables>
+    </step>
+
+    <step number="8">
+      <title>Polish and Optimization</title>
+      <tasks>
+        - SEO metadata
+        - Accessibility pass
+        - Performance optimization
+        - Analytics integration
+      </tasks>
+      <detailed_tasks>
+        - Add page-level metadata for all routes
+        - Implement OpenGraph and Twitter cards
+        - Generate sitemap.xml and robots.txt
+        - Add JSON-LD structured data
+        - Run full accessibility audit
+        - Fix all WCAG AA issues
+        - Optimize images and fonts
+        - Implement lazy loading
+        - Add performance monitoring
+        - Integrate Plausible/PostHog analytics
+        - Set up custom event tracking
+        - Configure security headers
+      </detailed_tasks>
+      <deliverables>
+        - Lighthouse 90+ on all pages
+        - Zero accessibility violations
+        - Analytics tracking key events
+      </deliverables>
+    </step>
+
+    <step number="9">
+      <title>Testing and Quality Assurance</title>
+      <tasks>
+        - Write automated tests
+        - Set up visual regression testing
+        - Perform cross-browser testing
+      </tasks>
+      <detailed_tasks>
+        - Write component unit tests
+        - Create E2E tests for critical paths
+        - Set up visual regression baseline
+        - Test across major browsers
+        - Verify mobile experience on real devices
+        - Run link validation
+        - Performance testing under load
+        - Security review and penetration testing
+      </detailed_tasks>
+      <deliverables>
+        - Test coverage for critical paths
+        - Visual regression baseline
+        - Cross-browser compatibility verified
+      </deliverables>
+    </step>
+
+    <step number="10">
+      <title>Launch and Iteration</title>
+      <tasks>
+        - Connect custom domain
+        - Announce and share
+        - Monitor and iterate
+      </tasks>
+      <detailed_tasks>
+        - Configure custom domain in Vercel
+        - Set up SSL and redirects
+        - Create social sharing assets
+        - Announce on LinkedIn and relevant communities
+        - Monitor analytics for first week
+        - Gather feedback from peers
+        - Iterate based on data and feedback
+        - Document learnings for future updates
+      </detailed_tasks>
+      <deliverables>
+        - Live at custom domain
+        - Shared with network
+        - Feedback loop established
+      </deliverables>
+    </step>
+  </implementation_steps>
+
+  <success_criteria>
+    <outcomes>
+      - Portfolio clearly communicates role and strengths
+      - Projects demonstrate depth, not just breadth
+      - Site loads fast and works on all devices
+      - Recruiters can understand value in under 60 seconds
+    </outcomes>
+
+    <quality>
+      - Clean code structure
+      - Type safety across content and components
+      - No broken links or placeholder content
+    </quality>
+
+    <quantitative_metrics>
+      <performance>
+        - Lighthouse Performance: 90+
+        - Lighthouse Accessibility: 100
+        - Lighthouse Best Practices: 100
+        - Lighthouse SEO: 100
+        - Core Web Vitals: All green
+      </performance>
+      <engagement>
+        - Average session duration: > 2 minutes
+        - Pages per session: > 2.5
+        - Bounce rate: < 50%
+        - Resume download rate: > 15% of visitors
+      </engagement>
+      <conversion>
+        - Contact form submissions: Track monthly
+        - Interview conversion rate: Track per application
+        - Referral traffic from portfolio links: Track monthly
+      </conversion>
+    </quantitative_metrics>
+
+    <qualitative_criteria>
+      <user_feedback>
+        - Peer reviews confirm professionalism
+        - Hiring managers report easy navigation
+        - Case studies demonstrate clear thinking
+        - No confusion about role or expertise
+      </user_feedback>
+      <technical_quality>
+        - Codebase could be shown in interviews
+        - Architecture decisions are defensible
+        - No shortcuts that would embarrass
+        - Tests provide confidence in changes
+      </technical_quality>
+    </qualitative_criteria>
+  </success_criteria>
+
+  <future_enhancements>
+    <phase_2>
+      <title>Enhanced Interactivity</title>
+      <features>
+        - Blog/TIL section for ongoing technical writing
+        - Interactive code demos embedded in case studies
+        - Dynamic OG images with project screenshots
+        - Search functionality across all content
+        - Reading time estimates for case studies
+      </features>
+    </phase_2>
+
+    <phase_3>
+      <title>Advanced Features</title>
+      <features>
+        - Internationalization (i18n) for multiple languages
+        - Newsletter signup integration
+        - Speaking engagements and talks section
+        - Open source contributions showcase
+        - GitHub activity integration
+        - Live coding environment integration (StackBlitz/CodeSandbox)
+      </features>
+    </phase_3>
+
+    <phase_4>
+      <title>Automation and Scale</title>
+      <features>
+        - CMS integration for non-technical content updates
+        - Automated resume generation from structured data
+        - AI-powered content suggestions
+        - Automated project import from GitHub
+        - Social proof widgets (testimonials, endorsements)
+        - A/B testing framework for conversion optimization
+      </features>
+    </phase_4>
+
+    <experimental>
+      <title>Exploration Zone</title>
+      <features>
+        - Voice navigation for accessibility
+        - AR business card integration
+        - Terminal/CLI easter egg experience
+        - AI chatbot for portfolio Q&A
+        - WebGL/Three.js hero visualization
+      </features>
+    </experimental>
+  </future_enhancements>
+
+  <risk_mitigation>
+    <technical_risks>
+      <risk name="Scope creep">
+        <impact>High</impact>
+        <mitigation>
+          - Strict MVP definition
+          - Phase features clearly
+          - Resist "cool but unnecessary" additions
+          - Time-box exploration
+        </mitigation>
+      </risk>
+      <risk name="Performance degradation">
+        <impact>Medium</impact>
+        <mitigation>
+          - Lighthouse CI with performance budgets
+          - Bundle size monitoring
+          - Regular performance audits
+          - Static generation by default
+        </mitigation>
+      </risk>
+      <risk name="Content staleness">
+        <impact>Medium</impact>
+        <mitigation>
+          - Quarterly content review calendar
+          - Automated broken link checking
+          - "Last updated" timestamps visible
+          - Easy update workflow
+        </mitigation>
+      </risk>
+    </technical_risks>
+
+    <content_risks>
+      <risk name="Unclear positioning">
+        <impact>High</impact>
+        <mitigation>
+          - Get feedback before launch
+          - A/B test different value propositions
+          - Iterate based on interview feedback
+          - Clear target role stated prominently
+        </mitigation>
+      </risk>
+      <risk name="Weak case studies">
+        <impact>High</impact>
+        <mitigation>
+          - Follow case study template strictly
+          - Include concrete metrics
+          - Get peer review on drafts
+          - Quality over quantity
+        </mitigation>
+      </risk>
+    </content_risks>
+
+    <operational_risks>
+      <risk name="Domain/hosting issues">
+        <impact>Low</impact>
+        <mitigation>
+          - Use reliable hosting (Vercel)
+          - Keep domain registration current
+          - Monitor uptime
+          - Have backup deployment ready
+        </mitigation>
+      </risk>
+      <risk name="Security vulnerabilities">
+        <impact>Medium</impact>
+        <mitigation>
+          - Regular dependency updates
+          - Security headers configured
+          - Minimal attack surface (static site)
+          - No sensitive data stored
+        </mitigation>
+      </risk>
+    </operational_risks>
+  </risk_mitigation>
+
+  <appendix>
+    <reference_portfolios>
+      - Study well-executed developer portfolios for inspiration
+      - Analyze what makes case studies compelling
+      - Note effective use of whitespace and typography
+      - Observe how successful developers position themselves
+    </reference_portfolios>
+
+    <resources>
+      <documentation>
+        - Next.js App Router documentation
+        - Tailwind CSS documentation
+        - Vercel deployment guides
+        - WCAG 2.1 guidelines
+      </documentation>
+      <tools>
+        - Figma/design tools for mockups
+        - Lighthouse for performance auditing
+        - axe DevTools for accessibility
+        - WebPageTest for deep performance analysis
+      </tools>
+    </resources>
+
+    <glossary>
+      - SSG: Static Site Generation
+      - CLS: Cumulative Layout Shift
+      - LCP: Largest Contentful Paint
+      - FID: First Input Delay
+      - INP: Interaction to Next Paint
+      - OG: OpenGraph (social sharing metadata)
+      - WCAG: Web Content Accessibility Guidelines
+      - ATS: Applicant Tracking System
+    </glossary>
+  </appendix>
+</project_specification>
