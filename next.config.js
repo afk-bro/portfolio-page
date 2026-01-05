@@ -3,6 +3,9 @@ const nextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
 
+  // Normalize URLs to non-trailing slash version (prevents duplicate content)
+  trailingSlash: false,
+
   // Image optimization configuration
   images: {
     formats: ['image/avif', 'image/webp'],
