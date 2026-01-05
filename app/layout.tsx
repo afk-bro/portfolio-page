@@ -6,6 +6,7 @@ import { Footer } from '@/components/sections/Footer'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { BackToTop } from '@/components/ui/BackToTop'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { ToastProvider } from '@/components/ui/Toast'
 import { siteMetadata } from '@/data/metadata'
 
 // JSON-LD structured data for Person schema
@@ -107,21 +108,23 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col">
         <ThemeProvider>
-          <a
-            href="#main-content"
-            id="skip-link"
-            className="skip-link"
-          >
-            Skip to content
-          </a>
-          <Navigation />
-          <main id="main-content" className="flex-1" tabIndex={-1}>
-            <ErrorBoundary>
-              {children}
-            </ErrorBoundary>
-          </main>
-          <Footer />
-          <BackToTop />
+          <ToastProvider>
+            <a
+              href="#main-content"
+              id="skip-link"
+              className="skip-link"
+            >
+              Skip to content
+            </a>
+            <Navigation />
+            <main id="main-content" className="flex-1" tabIndex={-1}>
+              <ErrorBoundary>
+                {children}
+              </ErrorBoundary>
+            </main>
+            <Footer />
+            <BackToTop />
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>
