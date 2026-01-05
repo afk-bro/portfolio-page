@@ -4,6 +4,7 @@ import './globals.css'
 import { Navigation } from '@/components/sections/Navigation'
 import { Footer } from '@/components/sections/Footer'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { BackToTop } from '@/components/ui/BackToTop'
 import { siteMetadata } from '@/data/metadata'
 
 // JSON-LD structured data for Person schema
@@ -108,6 +109,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <BackToTop />
         </ThemeProvider>
       </body>
     </html>
