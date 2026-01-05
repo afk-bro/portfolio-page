@@ -5,6 +5,7 @@ import { Navigation } from '@/components/sections/Navigation'
 import { Footer } from '@/components/sections/Footer'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { BackToTop } from '@/components/ui/BackToTop'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { siteMetadata } from '@/data/metadata'
 
 // JSON-LD structured data for Person schema
@@ -115,7 +116,9 @@ export default function RootLayout({
           </a>
           <Navigation />
           <main id="main-content" className="flex-1" tabIndex={-1}>
-            {children}
+            <ErrorBoundary>
+              {children}
+            </ErrorBoundary>
           </main>
           <Footer />
           <BackToTop />
