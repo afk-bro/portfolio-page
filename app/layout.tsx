@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     'Full-stack developer specializing in building exceptional digital experiences. Explore my projects, skills, and professional journey.',
   keywords: ['developer', 'portfolio', 'full-stack', 'react', 'next.js', 'typescript'],
   authors: [{ name: 'Developer' }],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',

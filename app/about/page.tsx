@@ -5,6 +5,9 @@ import { siteMetadata } from '@/data/metadata'
 export const metadata: Metadata = {
   title: 'About',
   description: 'Learn more about my background, experience, and what drives me as a developer.',
+  alternates: {
+    canonical: '/about',
+  },
 }
 
 const timeline = [

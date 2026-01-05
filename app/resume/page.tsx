@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/Button'
 export const metadata: Metadata = {
   title: 'Resume',
   description: 'Download my resume and learn more about my professional experience and qualifications.',
+  alternates: {
+    canonical: '/resume',
+  },
 }
 
 const resumeFormats = [
