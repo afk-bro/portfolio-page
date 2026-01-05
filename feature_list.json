@@ -1624,7 +1624,7 @@
       "Step 9: Verify project count matches original total",
       "Step 10: Verify URL query parameters are cleared"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
