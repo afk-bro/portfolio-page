@@ -675,7 +675,7 @@
       "Step 10: Verify 'url' property matches site URL",
       "Step 11: Copy JSON-LD and validate at schema.org validator"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -744,7 +744,7 @@
       "Step 7: Make intentional type error and verify it's caught",
       "Step 8: Fix error and verify clean typecheck"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
@@ -1304,7 +1304,7 @@
       "Step 8: Fix one error and verify update is announced",
       "Step 9: Submit valid form and verify success is announced"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
