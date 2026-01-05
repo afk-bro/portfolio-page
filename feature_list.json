@@ -983,7 +983,7 @@
       "Step 10: Navigate to /contact",
       "Step 11: Verify form fields are full width and usable"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1000,7 +1000,7 @@
       "Step 9: Navigate to /about",
       "Step 10: Verify content layout is appropriate for tablet"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1321,7 +1321,7 @@
       "Step 9: Switch to dark mode",
       "Step 10: Verify status colors remain distinguishable"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",
