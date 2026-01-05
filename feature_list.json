@@ -1017,7 +1017,7 @@
       "Step 9: Navigate to /about",
       "Step 10: Verify text paragraphs have readable line length"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
@@ -1035,7 +1035,7 @@
       "Step 10: Verify dark mode is consistent across site",
       "Step 11: Verify no jarring color combinations"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "style",
