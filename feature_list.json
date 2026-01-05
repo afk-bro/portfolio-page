@@ -1391,7 +1391,7 @@
       "Step 10: Add domain filter",
       "Step 11: Verify three-way filtering works correctly"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "functional",

@@ -7,7 +7,13 @@ import { projects, getAllTechnologies, type Project } from '@/data/projects'
 import { Badge } from '@/components/ui/Badge'
 import { cn } from '@/lib/utils'
 
-type FilterType = 'all' | 'technology' | 'domain' | 'type' | 'status'
+// Multi-criteria filter state
+interface FilterState {
+  technology: string | null
+  domain: string | null
+  type: string | null
+  status: string | null
+}
 
 // Filter options
 const domainOptions = [
@@ -33,80 +39,91 @@ const statusOptions = [
 
 export function ProjectsContent() {
   const technologies = getAllTechnologies()
-  const [activeFilter, setActiveFilter] = useState<string | null>(null)
-  const [filterType, setFilterType] = useState<FilterType>('all')
 
-  // Filter projects based on active filter
+  // Multi-criteria filter state - each filter type is independent
+  const [filters, setFilters] = useState<FilterState>({
+    technology: null,
+    domain: null,
+    type: null,
+    status: null,
+  })
+
+  // Check if any filters are active
+  const hasActiveFilters = Object.values(filters).some(v => v !== null)
+
+  // Get list of active filters for display
+  const activeFiltersList = Object.entries(filters)
+    .filter(([, value]) => value !== null)
+    .map(([key, value]) => ({ key, value: value as string }))
+
+  // Filter projects based on ALL active filters (AND logic)
   const filteredProjects = useMemo(() => {
-    if (!activeFilter || filterType === 'all') {
-      return projects
-    }
-
-    switch (filterType) {
-      case 'technology':
-        return projects.filter((p) =>
-          p.technologies.map((t) => t.toLowerCase()).includes(activeFilter.toLowerCase())
-        )
-      case 'domain':
-        return projects.filter((p) => p.domain === activeFilter)
-      case 'type':
-        return projects.filter((p) => p.type === activeFilter)
-      case 'status':
-        return projects.filter((p) => p.status === activeFilter)
-      default:
-        return projects
-    }
-  }, [activeFilter, filterType])
+    return projects.filter((project) => {
+      // Check each filter - project must match ALL active filters
+      if (filters.technology && !project.technologies.map(t => t.toLowerCase()).includes(filters.technology.toLowerCase())) {
+        return false
+      }
+      if (filters.domain && project.domain !== filters.domain) {
+        return false
+      }
+      if (filters.type && project.type !== filters.type) {
+        return false
+      }
+      if (filters.status && project.status !== filters.status) {
+        return false
+      }
+      return true
+    })
+  }, [filters])
 
   const handleTechFilter = (tech: string) => {
-    if (activeFilter === tech && filterType === 'technology') {
-      // Clear filter if clicking same tech
-      setActiveFilter(null)
-      setFilterType('all')
-    } else {
-      setActiveFilter(tech)
-      setFilterType('technology')
-    }
+    setFilters(prev => ({
+      ...prev,
+      technology: prev.technology === tech ? null : tech
+    }))
   }
 
   const handleDomainFilter = (domain: string) => {
-    if (activeFilter === domain && filterType === 'domain') {
-      setActiveFilter(null)
-      setFilterType('all')
-    } else {
-      setActiveFilter(domain)
-      setFilterType('domain')
-    }
+    setFilters(prev => ({
+      ...prev,
+      domain: prev.domain === domain ? null : domain
+    }))
   }
 
   const handleTypeFilter = (type: string) => {
-    if (activeFilter === type && filterType === 'type') {
-      setActiveFilter(null)
-      setFilterType('all')
-    } else {
-      setActiveFilter(type)
-      setFilterType('type')
-    }
+    setFilters(prev => ({
+      ...prev,
+      type: prev.type === type ? null : type
+    }))
   }
 
   const handleStatusFilter = (status: string) => {
-    if (activeFilter === status && filterType === 'status') {
-      setActiveFilter(null)
-      setFilterType('all')
-    } else {
-      setActiveFilter(status)
-      setFilterType('status')
-    }
+    setFilters(prev => ({
+      ...prev,
+      status: prev.status === status ? null : status
+    }))
   }
 
   const handleAllFilter = () => {
-    setActiveFilter(null)
-    setFilterType('all')
+    setFilters({
+      technology: null,
+      domain: null,
+      type: null,
+      status: null,
+    })
   }
 
-  const clearFilter = () => {
-    setActiveFilter(null)
-    setFilterType('all')
+  const clearFilter = (filterKey?: keyof FilterState) => {
+    if (filterKey) {
+      setFilters(prev => ({ ...prev, [filterKey]: null }))
+    } else {
+      setFilters({
+        technology: null,
+        domain: null,
+        type: null,
+        status: null,
+      })
+    }
   }
 
   return (
@@ -131,11 +148,11 @@ export function ProjectsContent() {
               onClick={handleAllFilter}
               className={cn(
                 'inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors',
-                filterType === 'all'
+                !hasActiveFilters
                   ? 'bg-primary-500 text-white'
                   : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
               )}
-              aria-pressed={filterType === 'all'}
+              aria-pressed={!hasActiveFilters}
             >
               All Projects ({projects.length})
             </button>
@@ -155,11 +172,11 @@ export function ProjectsContent() {
                     onClick={() => handleDomainFilter(option.value)}
                     className={cn(
                       'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors',
-                      activeFilter === option.value && filterType === 'domain'
+                      filters.domain === option.value
                         ? 'bg-primary-500 text-white'
                         : 'bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600'
                     )}
-                    aria-pressed={activeFilter === option.value && filterType === 'domain'}
+                    aria-pressed={filters.domain === option.value}
                   >
                     {option.label}
                   </button>
@@ -179,11 +196,11 @@ export function ProjectsContent() {
                     onClick={() => handleTypeFilter(option.value)}
                     className={cn(
                       'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors',
-                      activeFilter === option.value && filterType === 'type'
+                      filters.type === option.value
                         ? 'bg-primary-500 text-white'
                         : 'bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600'
                     )}
-                    aria-pressed={activeFilter === option.value && filterType === 'type'}
+                    aria-pressed={filters.type === option.value}
                   >
                     {option.label}
                   </button>
@@ -203,11 +220,11 @@ export function ProjectsContent() {
                     onClick={() => handleStatusFilter(option.value)}
                     className={cn(
                       'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors',
-                      activeFilter === option.value && filterType === 'status'
+                      filters.status === option.value
                         ? 'bg-primary-500 text-white'
                         : 'bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600'
                     )}
-                    aria-pressed={activeFilter === option.value && filterType === 'status'}
+                    aria-pressed={filters.status === option.value}
                   >
                     {option.label}
                   </button>
@@ -228,11 +245,11 @@ export function ProjectsContent() {
                   onClick={() => handleTechFilter(tech)}
                   className={cn(
                     'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors',
-                    activeFilter === tech && filterType === 'technology'
+                    filters.technology === tech
                       ? 'bg-primary-500 text-white'
                       : 'bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600'
                   )}
-                  aria-pressed={activeFilter === tech && filterType === 'technology'}
+                  aria-pressed={filters.technology === tech}
                 >
                   {tech}
                 </button>
@@ -242,20 +259,32 @@ export function ProjectsContent() {
         </div>
 
         {/* Active Filter Indicator */}
-        {activeFilter && (
+        {hasActiveFilters && (
           <div className="mb-6 flex justify-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 dark:bg-primary-900/20 rounded-lg text-sm">
+            <div className="inline-flex items-center flex-wrap gap-2 px-4 py-2 bg-primary-50 dark:bg-primary-900/20 rounded-lg text-sm">
               <span className="text-neutral-600 dark:text-neutral-400">
-                Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''} with
+                Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''} with:
               </span>
-              <Badge variant="primary">{activeFilter}</Badge>
-              <button
-                onClick={clearFilter}
-                className="ml-2 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
-                aria-label="Clear filter"
-              >
-                <X className="w-4 h-4" />
-              </button>
+              {activeFiltersList.map(({ key, value }) => (
+                <span key={key} className="inline-flex items-center gap-1">
+                  <Badge variant="primary">{value}</Badge>
+                  <button
+                    onClick={() => clearFilter(key as keyof FilterState)}
+                    className="text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
+                    aria-label={`Clear ${key} filter`}
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              ))}
+              {activeFiltersList.length > 1 && (
+                <button
+                  onClick={() => clearFilter()}
+                  className="ml-2 text-sm text-primary-600 dark:text-primary-400 hover:underline"
+                >
+                  Clear all
+                </button>
+              )}
             </div>
           </div>
         )}
