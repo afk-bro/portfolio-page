@@ -46,7 +46,7 @@ export function FeaturedProjects() {
                 variant="fade-up"
                 delay={index * 100}
                 as="article"
-                className="card p-6 flex flex-col relative"
+                className="card p-7 flex flex-col relative"
               >
                 {/* Status indicator - top right, metadata styling */}
                 <div className="absolute top-4 right-4 flex items-center gap-1.5">
