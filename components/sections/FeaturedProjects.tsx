@@ -97,7 +97,7 @@ export function FeaturedProjects() {
                 </div>
 
                 {/* Links */}
-                <div className="flex items-center gap-4 pt-4 border-t border-ocean-300/20 dark:border-muted-300/15">
+                <div className="flex items-center gap-4 pt-4 border-t border-ocean-300/15 dark:border-white/10 transition-colors duration-150">
                   <Link
                     href={`/projects/${project.slug}`}
                     className="text-sm font-medium text-bronze-700 dark:text-bronze-400 hover:underline inline-flex items-center gap-1 transition-colors duration-180"
