@@ -19,11 +19,6 @@ export function FeaturedProjects() {
 
   return (
     <section className="section relative">
-      {/* Bottom fade into next section */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-ocean-50 dark:to-dark-surface"
-      />
       <div className="container-content relative">
         {/* Section Header */}
         <AnimateOnScroll variant="fade-up" className="text-center mb-12">

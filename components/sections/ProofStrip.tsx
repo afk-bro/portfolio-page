@@ -33,16 +33,6 @@ const proofPoints = [
 export function ProofStrip() {
   return (
     <section className="relative py-20 bg-transparent">
-      {/* Top fade from previous section */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-sand-50 dark:from-dark-base to-transparent"
-      />
-      {/* Bottom fade into next section */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-b from-transparent to-sand-50 dark:to-dark-base"
-      />
       <div className="container-content relative">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {proofPoints.map((point, index) => (

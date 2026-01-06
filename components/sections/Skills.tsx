@@ -26,16 +26,6 @@ export function Skills() {
 
   return (
     <section className="section relative bg-transparent">
-      {/* Top fade */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-sand-50 dark:from-dark-base to-transparent"
-      />
-      {/* Bottom fade */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-sand-50 dark:to-dark-base"
-      />
       <div className="container-content relative">
         {/* Section Header */}
         <AnimateOnScroll variant="fade-up" className="text-center mb-12">
