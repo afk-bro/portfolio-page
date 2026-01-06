@@ -498,6 +498,19 @@
   .prose-content pre code {
     @apply bg-transparent p-0;
   }
+
+  /* Text hierarchy for dark mode - three tiers */
+  .text-primary-content {
+    @apply text-ocean-900 dark:text-sand-100;
+  }
+
+  .text-secondary-content {
+    @apply text-ocean-500 dark:text-sand-100/70;
+  }
+
+  .text-tertiary-content {
+    @apply text-ocean-400 dark:text-sand-100/50;
+  }
 }
 
 /* Print styles for resume page */
