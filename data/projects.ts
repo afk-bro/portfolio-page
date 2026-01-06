@@ -21,6 +21,7 @@ export const projectSchema = z.object({
   team: z.enum(['solo', 'team']).optional(),
   teamSize: z.number().optional(),
   image: z.string().optional(),
+  highlights: z.array(z.string()).optional(),
   caseStudy: z
     .object({
       problem: z.string(),
@@ -57,6 +58,7 @@ export const projects: Project[] = [
     duration: '3 months',
     team: 'solo',
     image: '/images/projects/ecommerce.png',
+    highlights: ['Real-time sync', 'Type-safe API', 'E2E tested'],
     caseStudy: {
       problem: 'Small businesses needed an affordable, customizable e-commerce solution that could handle real-time inventory across multiple sales channels.',
       constraints: 'Must be cost-effective, handle 1000+ concurrent users, and integrate with existing inventory systems.',
@@ -90,6 +92,7 @@ export const projects: Project[] = [
     },
     duration: '2 months',
     team: 'solo',
+    highlights: ['LLM integration', 'GitHub API', 'Async processing'],
     caseStudy: {
       problem: 'Code reviews are time-consuming and can miss subtle issues. Teams needed automated first-pass reviews to catch common problems.',
       solution: 'Built a GitHub App that analyzes PRs using GPT-4, providing inline comments with explanations and suggested fixes.',
@@ -119,6 +122,7 @@ export const projects: Project[] = [
     duration: '4 months',
     team: 'team',
     teamSize: 3,
+    highlights: ['GraphQL', 'K8s native', 'Real-time metrics'],
     caseStudy: {
       problem: 'Engineers had to check multiple tools to understand deployment status and infrastructure health.',
       solution: 'Built a unified dashboard with Go backend and React frontend that aggregates data from multiple sources via GraphQL.',

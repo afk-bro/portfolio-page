@@ -3,9 +3,8 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { ExternalLink, Github, X } from 'lucide-react'
+import { ExternalLink, Github, ChevronDown } from 'lucide-react'
 import { projects, getAllTechnologies, type Project } from '@/data/projects'
-import { Badge } from '@/components/ui/Badge'
 import { cn } from '@/lib/utils'
 
 // Multi-criteria filter state
@@ -46,11 +45,19 @@ const statusOptions = [
   { value: 'archived', label: 'Archived' },
 ]
 
+// Status indicator config - using accent palette
+const statusConfig = {
+  complete: { label: 'Complete', color: 'bg-primary-500' },
+  'in-progress': { label: 'In Progress', color: 'bg-primary-300' },
+  archived: { label: 'Archived', color: 'bg-neutral-400' },
+}
+
 export function ProjectsContent() {
   const technologies = getAllTechnologies()
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
+  const [filtersOpen, setFiltersOpen] = useState(false)
 
   // Initialize filter state from URL parameters
   const getInitialFilters = useCallback((): FilterState => {
@@ -95,15 +102,12 @@ export function ProjectsContent() {
   // Check if any filters are active
   const hasActiveFilters = Object.values(filters).some(v => v !== null)
 
-  // Get list of active filters for display
-  const activeFiltersList = Object.entries(filters)
-    .filter(([, value]) => value !== null)
-    .map(([key, value]) => ({ key, value: value as string }))
+  // Count active filters
+  const activeFilterCount = Object.values(filters).filter(v => v !== null).length
 
   // Filter projects based on ALL active filters (AND logic)
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
-      // Check each filter - project must match ALL active filters
       if (filters.technology && !project.technologies.map(t => t.toLowerCase()).includes(filters.technology.toLowerCase())) {
         return false
       }
@@ -120,64 +124,21 @@ export function ProjectsContent() {
     })
   }, [filters])
 
-  const handleTechFilter = (tech: string) => {
+  const handleFilter = (key: keyof FilterState, value: string) => {
     const newFilters = {
       ...filters,
-      technology: filters.technology === tech ? null : tech
+      [key]: filters[key] === value ? null : value
     }
     setFilters(newFilters)
     updateURL(newFilters)
   }
 
-  const handleDomainFilter = (domain: string) => {
-    const newFilters = {
-      ...filters,
-      domain: filters.domain === domain ? null : domain
-    }
-    setFilters(newFilters)
-    updateURL(newFilters)
-  }
-
-  const handleTypeFilter = (type: string) => {
-    const newFilters = {
-      ...filters,
-      type: filters.type === type ? null : type
-    }
-    setFilters(newFilters)
-    updateURL(newFilters)
-  }
-
-  const handleStatusFilter = (status: string) => {
-    const newFilters = {
-      ...filters,
-      status: filters.status === status ? null : status
-    }
-    setFilters(newFilters)
-    updateURL(newFilters)
-  }
-
-  const handleAllFilter = () => {
+  const clearFilters = () => {
     const newFilters = {
       technology: null,
       domain: null,
       type: null,
       status: null,
-    }
-    setFilters(newFilters)
-    updateURL(newFilters)
-  }
-
-  const clearFilter = (filterKey?: keyof FilterState) => {
-    let newFilters: FilterState
-    if (filterKey) {
-      newFilters = { ...filters, [filterKey]: null }
-    } else {
-      newFilters = {
-        technology: null,
-        domain: null,
-        type: null,
-        status: null,
-      }
     }
     setFilters(newFilters)
     updateURL(newFilters)
@@ -192,159 +153,138 @@ export function ProjectsContent() {
             Projects
           </h1>
           <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            A collection of projects showcasing my skills in web development,
-            from professional work to open-source contributions and personal experiments.
+            Selected production-grade systems highlighting architecture decisions, testing strategy, and real-world engineering tradeoffs.
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="mb-8 space-y-4">
-          {/* All Button */}
-          <div className="flex justify-center">
+        {/* Collapsible Filter Panel */}
+        <div className="mb-8">
+          <div className="flex items-center justify-center gap-4">
             <button
-              onClick={handleAllFilter}
+              onClick={() => setFiltersOpen(!filtersOpen)}
               className={cn(
-                'inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors',
-                !hasActiveFilters
+                'inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                filtersOpen
                   ? 'bg-primary-500 text-white'
                   : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
               )}
-              aria-pressed={!hasActiveFilters}
             >
-              All Projects ({projects.length})
+              Refine projects
+              {activeFilterCount > 0 && (
+                <span className="inline-flex items-center justify-center w-5 h-5 text-xs rounded-full bg-white/20">
+                  {activeFilterCount}
+                </span>
+              )}
+              <ChevronDown className={cn('w-4 h-4 transition-transform', filtersOpen && 'rotate-180')} />
             </button>
+            {hasActiveFilters && (
+              <button
+                onClick={clearFilters}
+                className="text-sm text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
+              >
+                Clear all
+              </button>
+            )}
           </div>
 
-          {/* Filter Groups */}
-          <div className="grid md:grid-cols-3 gap-4">
-            {/* Domain Filter */}
-            <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
-              <h3 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-3">
-                Domain
-              </h3>
-              <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by domain">
-                {domainOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => handleDomainFilter(option.value)}
-                    className={cn(
-                      'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors',
-                      filters.domain === option.value
-                        ? 'bg-primary-500 text-white'
-                        : 'bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600'
-                    )}
-                    aria-pressed={filters.domain === option.value}
-                  >
-                    {option.label}
-                  </button>
-                ))}
+          {/* Filter Panel Content */}
+          {filtersOpen && (
+            <div className="mt-4 p-6 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Domain Filter */}
+                <div>
+                  <h3 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-3">
+                    Domain
+                  </h3>
+                  <div className="space-y-2">
+                    {domainOptions.map((option) => (
+                      <label key={option.value} className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.domain === option.value}
+                          onChange={() => handleFilter('domain', option.value)}
+                          className="rounded border-neutral-300 text-primary-500 focus:ring-primary-500"
+                        />
+                        <span className="text-sm text-neutral-700 dark:text-neutral-300">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Type Filter */}
+                <div>
+                  <h3 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-3">
+                    Type
+                  </h3>
+                  <div className="space-y-2">
+                    {typeOptions.map((option) => (
+                      <label key={option.value} className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.type === option.value}
+                          onChange={() => handleFilter('type', option.value)}
+                          className="rounded border-neutral-300 text-primary-500 focus:ring-primary-500"
+                        />
+                        <span className="text-sm text-neutral-700 dark:text-neutral-300">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Status Filter */}
+                <div>
+                  <h3 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-3">
+                    Status
+                  </h3>
+                  <div className="space-y-2">
+                    {statusOptions.map((option) => (
+                      <label key={option.value} className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={filters.status === option.value}
+                          onChange={() => handleFilter('status', option.value)}
+                          className="rounded border-neutral-300 text-primary-500 focus:ring-primary-500"
+                        />
+                        <span className="text-sm text-neutral-700 dark:text-neutral-300">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Technology Filter */}
+                <div>
+                  <h3 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-3">
+                    Technology
+                  </h3>
+                  <div className="flex flex-wrap gap-2 max-h-32 overflow-y-auto">
+                    {technologies.map((tech) => (
+                      <button
+                        key={tech}
+                        onClick={() => handleFilter('technology', tech)}
+                        className={cn(
+                          'px-2 py-1 text-xs rounded transition-colors',
+                          filters.technology === tech
+                            ? 'bg-primary-500 text-white'
+                            : 'bg-white dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600'
+                        )}
+                      >
+                        {tech}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-
-            {/* Type Filter */}
-            <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
-              <h3 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-3">
-                Type
-              </h3>
-              <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by type">
-                {typeOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => handleTypeFilter(option.value)}
-                    className={cn(
-                      'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors',
-                      filters.type === option.value
-                        ? 'bg-primary-500 text-white'
-                        : 'bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600'
-                    )}
-                    aria-pressed={filters.type === option.value}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Status Filter */}
-            <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
-              <h3 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-3">
-                Status
-              </h3>
-              <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by status">
-                {statusOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => handleStatusFilter(option.value)}
-                    className={cn(
-                      'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors',
-                      filters.status === option.value
-                        ? 'bg-primary-500 text-white'
-                        : 'bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600'
-                    )}
-                    aria-pressed={filters.status === option.value}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Technology Filter */}
-          <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
-            <h3 className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-3">
-              Technology
-            </h3>
-            <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by technology">
-              {technologies.map((tech) => (
-                <button
-                  key={tech}
-                  onClick={() => handleTechFilter(tech)}
-                  className={cn(
-                    'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors',
-                    filters.technology === tech
-                      ? 'bg-primary-500 text-white'
-                      : 'bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600'
-                  )}
-                  aria-pressed={filters.technology === tech}
-                >
-                  {tech}
-                </button>
-              ))}
-            </div>
-          </div>
+          )}
         </div>
 
-        {/* Active Filter Indicator */}
-        {hasActiveFilters && (
-          <div className="mb-6 flex justify-center">
-            <div className="inline-flex items-center flex-wrap gap-2 px-4 py-2 bg-primary-50 dark:bg-primary-900/20 rounded-lg text-sm">
-              <span className="text-neutral-600 dark:text-neutral-400">
-                Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''} with:
-              </span>
-              {activeFiltersList.map(({ key, value }) => (
-                <span key={key} className="inline-flex items-center gap-1">
-                  <Badge variant="primary">{value}</Badge>
-                  <button
-                    onClick={() => clearFilter(key as keyof FilterState)}
-                    className="text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
-                    aria-label={`Clear ${key} filter`}
-                  >
-                    <X className="w-3 h-3" />
-                  </button>
-                </span>
-              ))}
-              {activeFiltersList.length > 1 && (
-                <button
-                  onClick={() => clearFilter()}
-                  className="ml-2 text-sm text-primary-600 dark:text-primary-400 hover:underline"
-                >
-                  Clear all
-                </button>
-              )}
-            </div>
-          </div>
-        )}
+        {/* Results count */}
+        <div className="mb-6 text-center">
+          <span className="text-sm text-neutral-500 dark:text-neutral-400">
+            {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
+            {hasActiveFilters && ' matching filters'}
+          </span>
+        </div>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -357,10 +297,10 @@ export function ProjectsContent() {
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
             <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-              No projects found with the selected filter.
+              No projects found with the selected filters.
             </p>
             <button
-              onClick={() => clearFilter()}
+              onClick={clearFilters}
               className="text-primary-600 dark:text-primary-400 hover:underline"
             >
               Clear filters
@@ -373,34 +313,18 @@ export function ProjectsContent() {
 }
 
 function ProjectCard({ project }: { project: Project }) {
+  const status = statusConfig[project.status]
+
   return (
-    <article
-      className="card p-6 flex flex-col hover:shadow-lg transition-shadow"
-    >
-      {/* Status and Type Badges */}
-      <div className="flex items-center gap-2 mb-4">
-        <Badge
-          variant={
-            project.status === 'complete'
-              ? 'success'
-              : project.status === 'in-progress'
-                ? 'warning'
-                : 'default'
-          }
-        >
-          {project.status === 'complete'
-            ? 'Complete'
-            : project.status === 'in-progress'
-              ? 'In Progress'
-              : 'Archived'}
-        </Badge>
-        <Badge variant="default">
-          {project.type}
-        </Badge>
+    <article className="card p-6 flex flex-col hover:shadow-lg transition-shadow relative">
+      {/* Status indicator - top right, metadata styling */}
+      <div className="absolute top-4 right-4 flex items-center gap-1.5">
+        <span className={cn('w-1.5 h-1.5 rounded-full', status.color)} />
+        <span className="text-[10px] text-neutral-400 dark:text-neutral-500">{status.label}</span>
       </div>
 
       {/* Title */}
-      <h2 className="text-h4 text-neutral-900 dark:text-neutral-50 mb-2">
+      <h2 className="text-h4 text-neutral-900 dark:text-neutral-50 mb-2 pr-20">
         <Link
           href={`/projects/${project.slug}`}
           className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
@@ -409,37 +333,30 @@ function ProjectCard({ project }: { project: Project }) {
         </Link>
       </h2>
 
-      {/* Summary */}
+      {/* Summary - why it matters */}
       <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 flex-1">
         {project.summary}
       </p>
 
-      {/* Meta */}
-      {(project.duration || project.team) && (
-        <div className="flex items-center gap-4 text-xs text-neutral-500 dark:text-neutral-400 mb-4">
-          {project.duration && <span>{project.duration}</span>}
-          {project.team && (
-            <span>
-              {project.team === 'solo'
-                ? 'Solo project'
-                : `Team of ${project.teamSize || 'multiple'}`}
-            </span>
-          )}
-        </div>
+      {/* Highlights - one line of emphasis */}
+      {project.highlights && project.highlights.length > 0 && (
+        <p className="text-xs text-primary-600 dark:text-primary-400 font-medium mb-4">
+          {project.highlights.join(' · ')}
+        </p>
       )}
 
-      {/* Technologies */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {project.technologies.slice(0, 4).map((tech) => (
-          <Badge key={tech} variant="primary" size="sm">
-            {tech}
-          </Badge>
-        ))}
-        {project.technologies.length > 4 && (
-          <Badge variant="default" size="sm">
-            +{project.technologies.length - 4}
-          </Badge>
+      {/* Soft metadata - text, not pills */}
+      <div className="text-xs text-neutral-500 dark:text-neutral-400 space-y-1 mb-4">
+        {project.team && (
+          <p>
+            {project.team === 'solo' ? 'Solo' : `Team of ${project.teamSize || 'multiple'}`}
+            {project.duration && ` · ${project.duration}`}
+          </p>
         )}
+        {/* Tech stack as inline text */}
+        <p className="text-neutral-400 dark:text-neutral-500">
+          {project.technologies.join(' · ')}
+        </p>
       </div>
 
       {/* Links */}
@@ -448,17 +365,17 @@ function ProjectCard({ project }: { project: Project }) {
           href={`/projects/${project.slug}`}
           className="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline"
         >
-          View Case Study
+          Case Study → Architecture & Tradeoffs
         </Link>
         {project.links.github && (
           <a
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
+            className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300"
             aria-label={`View ${project.title} on GitHub`}
           >
-            <Github className="w-5 h-5" />
+            <Github className="w-4 h-4" />
           </a>
         )}
         {project.links.demo && (
@@ -466,10 +383,10 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.links.demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
+            className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300"
             aria-label={`View ${project.title} live demo`}
           >
-            <ExternalLink className="w-5 h-5" />
+            <ExternalLink className="w-4 h-4" />
           </a>
         )}
       </div>

@@ -15,14 +15,14 @@ export default async function Image() {
       <div
         style={{
           fontSize: 64,
-          background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+          background: 'linear-gradient(135deg, #054672 0%, #0f4e79 100%)',
           width: '100%',
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          color: 'white',
+          color: '#f4d390',
           padding: '40px 80px',
         }}
       >
@@ -31,7 +31,7 @@ export default async function Image() {
             fontSize: 72,
             fontWeight: 'bold',
             marginBottom: 20,
-            background: 'linear-gradient(90deg, #22d3ee 0%, #2dd4bf 100%)',
+            background: 'linear-gradient(90deg, #e79b47 0%, #cd7931 100%)',
             backgroundClip: 'text',
             color: 'transparent',
           }}
@@ -41,7 +41,7 @@ export default async function Image() {
         <div
           style={{
             fontSize: 36,
-            color: '#94a3b8',
+            color: '#68748a',
             textAlign: 'center',
           }}
         >

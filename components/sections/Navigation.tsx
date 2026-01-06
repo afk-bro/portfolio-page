@@ -15,20 +15,92 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ]
 
+/**
+ * NavLink - Cream text on ocean gradient
+ * Orange underline for active + hover animation
+ */
+function NavLink({ href, label, isActive }: { href: string; label: string; isActive: boolean }) {
+  return (
+    <Link
+      href={href}
+      aria-current={isActive ? 'page' : undefined}
+      className={cn(
+        // Base: larger, bolder, better spacing
+        'relative px-1 py-1',
+        'text-[15px] font-semibold tracking-wide',
+        'transition-colors duration-180 ease-smooth',
+        // Cream text - high contrast on blue
+        isActive
+          ? 'text-sand-50'
+          : 'text-sand-100/90 hover:text-sand-50',
+        // Dark mode
+        'dark:text-sand-500/90 dark:hover:text-sand-500',
+        // Underline via pseudo-element
+        'after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:rounded-full',
+        'after:transition-all after:duration-180 after:ease-smooth',
+        isActive
+          ? 'after:w-full after:bg-bronze-500' // Active: full orange underline
+          : 'after:w-0 after:bg-bronze-500 hover:after:w-full', // Hover: animate in
+        // Optional subtle glow on hover
+        'hover:drop-shadow-[0_0_8px_rgba(237,174,95,0.35)]'
+      )}
+    >
+      {label}
+    </Link>
+  )
+}
+
+/**
+ * ThemeToggle - Utility toggle, de-emphasized
+ * Sits on gradient - muted appearance
+ */
+function ThemeToggle({ resolvedTheme, onToggle }: { resolvedTheme: string | undefined; onToggle: () => void }) {
+  return (
+    <button
+      onClick={onToggle}
+      className={cn(
+        'p-2 rounded-md',
+        // More visible on gradient
+        'text-sand-100/80 dark:text-sand-500/80',
+        'hover:text-sand-50 dark:hover:text-sand-500',
+        'hover:bg-white/10 dark:hover:bg-white/5',
+        'transition-all duration-180 ease-smooth',
+        // Focus ring
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze-400/60 focus-visible:ring-offset-1 focus-visible:ring-offset-ocean-500'
+      )}
+      aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
+    >
+      {resolvedTheme === 'dark' ? (
+        <Sun className="w-5 h-5" />
+      ) : (
+        <Moon className="w-5 h-5" />
+      )}
+    </button>
+  )
+}
+
 export function Navigation() {
   const pathname = usePathname()
   const { setTheme, resolvedTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const navRef = useRef<HTMLElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
+
+  // Track scroll state for glassy effect
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll() // Check initial state
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   // Close mobile menu on Escape key press and return focus
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && mobileMenuOpen) {
         setMobileMenuOpen(false)
-        // Return focus to menu button
         menuButtonRef.current?.focus()
       }
     }
@@ -40,7 +112,6 @@ export function Navigation() {
   // Move focus to first menu item when menu opens
   useEffect(() => {
     if (mobileMenuOpen && mobileMenuRef.current) {
-      // Focus the first link in the menu
       const firstLink = mobileMenuRef.current.querySelector('a')
       if (firstLink) {
         firstLink.focus()
@@ -65,13 +136,11 @@ export function Navigation() {
       const lastElement = focusableElements[focusableElements.length - 1]
 
       if (e.shiftKey) {
-        // Shift+Tab: if on first element, wrap to last
         if (document.activeElement === firstElement) {
           e.preventDefault()
           lastElement.focus()
         }
       } else {
-        // Tab: if on last element, wrap to first
         if (document.activeElement === lastElement) {
           e.preventDefault()
           firstElement.focus()
@@ -96,82 +165,87 @@ export function Navigation() {
   }, [mobileMenuOpen])
 
   const toggleTheme = () => {
-    if (resolvedTheme === 'dark') {
-      setTheme('light')
-    } else {
-      setTheme('dark')
-    }
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
-      <nav ref={navRef} className="container-content" aria-label="Main navigation">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+    <header
+      className={cn(
+        'sticky top-0 z-50',
+        'h-14 md:h-16 w-full',
+        'backdrop-blur-xl',
+        'border-b transition-all duration-300',
+        // Glassy effect with scroll state
+        scrolled
+          ? 'bg-ocean-500/85 dark:bg-dark-surface/75 border-ocean-400/30 dark:border-white/10 shadow-lg shadow-ocean-900/10 dark:shadow-black/30'
+          : 'bg-ocean-500/70 dark:bg-dark-surface/50 border-transparent'
+      )}
+    >
+      {/* Subtle top highlight for glass effect */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"
+      />
+      {/* Right-edge bronze accent hint */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-bronze-500/15 to-transparent dark:from-bronze-500/10"
+      />
+      <nav ref={navRef} className="relative mx-auto flex h-full max-w-content items-center justify-between px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+        <div className="flex items-center justify-between w-full">
+          {/* Logo - Anchors the left side of the gradient */}
           <Link
             href="/"
-            className="text-xl font-bold text-neutral-900 dark:text-neutral-50 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+            className={cn(
+              'text-lg font-bold tracking-tight',
+              // Cream text on ocean gradient
+              'text-sand-50 dark:text-sand-500',
+              'hover:text-white dark:hover:text-bronze-400',
+              'transition-colors duration-180'
+            )}
           >
             Portfolio
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation - Better spacing */}
+          <div className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => (
-              <Link
+              <NavLink
                 key={link.href}
                 href={link.href}
-                className={cn(
-                  'text-sm font-medium transition-colors',
-                  pathname === link.href
-                    ? 'text-primary-600 dark:text-primary-400'
-                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50'
-                )}
-              >
-                {link.label}
-              </Link>
+                label={link.label}
+                isActive={pathname === link.href}
+              />
             ))}
 
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-              aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
-            >
-              {resolvedTheme === 'dark' ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </button>
+            {/* Theme Toggle - with extra separation */}
+            <div className="ml-2">
+              <ThemeToggle resolvedTheme={resolvedTheme} onToggle={toggleTheme} />
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-              aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
-            >
-              {resolvedTheme === 'dark' ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </button>
+            <ThemeToggle resolvedTheme={resolvedTheme} onToggle={toggleTheme} />
 
             <button
               ref={menuButtonRef}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+              className={cn(
+                'p-2 rounded-lg',
+                // On gradient
+                'text-sand-100/80 dark:text-sand-500/80',
+                'hover:text-sand-50 dark:hover:text-sand-500',
+                'transition-colors'
+              )}
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
             >
               {mobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-5 h-5" />
               )}
             </button>
           </div>
@@ -185,22 +259,24 @@ export function Navigation() {
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
-            className="md:hidden py-4 border-t border-neutral-200 dark:border-neutral-800"
+            className={cn(
+              'md:hidden py-3',
+              // Solid background for dropdown - ocean blue
+              'bg-ocean-500 dark:bg-ocean-800',
+              'border-t border-ocean-400/50 dark:border-ocean-700/50'
+            )}
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1 px-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => {
-                    setMobileMenuOpen(false)
-                    // Navigation will happen, no need to return focus
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                   className={cn(
-                    'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                    'px-3 py-2 rounded-md text-sm font-medium transition-colors',
                     pathname === link.href
-                      ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400'
-                      : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
+                      ? 'bg-bronze-600/20 text-bronze-400 border-l-2 border-bronze-600'
+                      : 'text-sand-100/90 hover:text-sand-50 dark:text-sand-500/90 dark:hover:text-sand-500'
                   )}
                 >
                   {link.label}

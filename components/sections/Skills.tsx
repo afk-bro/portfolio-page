@@ -14,15 +14,28 @@ export function Skills() {
   let validIndex = 0
 
   return (
-    <section className="section bg-neutral-50 dark:bg-neutral-800/30">
-      <div className="container-content">
+    <section className="section relative bg-sand-300/30 dark:bg-dark-surface">
+      {/* Top fade */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-sand-50 dark:from-dark-base to-transparent"
+      />
+      {/* Bottom fade */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-sand-50 dark:to-dark-base"
+      />
+      <div className="container-content relative">
         {/* Section Header */}
         <AnimateOnScroll variant="fade-up" className="text-center mb-12">
-          <h2 className="text-h2 text-neutral-900 dark:text-neutral-50 mb-4">
+          <h2 className="text-h2 text-ocean-800 dark:text-sand-500 mb-4">
             Skills & Technologies
           </h2>
-          <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+          <p className="text-body text-ocean-300 dark:text-sand-500/75 max-w-2xl mx-auto mb-4">
             Technologies I work with daily and the expertise I bring to every project.
+          </p>
+          <p className="text-sm text-muted-400 dark:text-sand-500/60 italic max-w-xl mx-auto">
+            I prioritize correctness, maintainability, and developer experience over novelty.
           </p>
         </AnimateOnScroll>
 
@@ -41,7 +54,7 @@ export function Skills() {
                 delay={currentIndex * 100}
                 className="card p-6"
               >
-                <h3 className="text-h4 text-neutral-900 dark:text-neutral-50 mb-4">
+                <h3 className="text-h4 text-ocean-800 dark:text-sand-500 mb-4">
                   {categoryNames[category]}
                 </h3>
                 <ul className="space-y-3">
@@ -54,13 +67,13 @@ export function Skills() {
                             position="top"
                           >
                             <span
-                              className="text-sm font-medium text-neutral-700 dark:text-neutral-300 cursor-help"
+                              className="text-sm font-medium text-ocean-600 dark:text-sand-500/90 cursor-help"
                               tabIndex={0}
                             >
                               {skill.name}
                             </span>
                           </Tooltip>
-                          <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                          <span className="text-xs text-muted-400 dark:text-sand-500/60">
                             {skill.years}y
                           </span>
                         </div>
@@ -70,7 +83,7 @@ export function Skills() {
                           position="bottom"
                         >
                           <div
-                            className="h-1.5 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden cursor-help"
+                            className="h-1.5 bg-ocean-100 dark:bg-ocean-800 rounded-full overflow-hidden cursor-help"
                             tabIndex={0}
                           >
                             <div

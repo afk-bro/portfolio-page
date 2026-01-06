@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { Mail, Github, Linkedin, Clock, Send, CheckCircle } from 'lucide-react'
+import { Mail, Github, Clock, ArrowRight, CheckCircle } from 'lucide-react'
 import { siteMetadata } from '@/data/metadata'
 import { Button } from '@/components/ui/Button'
 import { useToast } from '@/components/ui/Toast'
@@ -14,21 +14,16 @@ const contactMethods = [
   {
     icon: Mail,
     label: 'Email',
+    description: 'Direct contact',
     value: siteMetadata.email,
     href: `mailto:${siteMetadata.email}`,
   },
   {
     icon: Github,
     label: 'GitHub',
+    description: 'Code & projects',
     value: 'View Profile',
     href: siteMetadata.social.github,
-    external: true,
-  },
-  {
-    icon: Linkedin,
-    label: 'LinkedIn',
-    value: 'Connect',
-    href: siteMetadata.social.linkedin,
     external: true,
   },
 ]
@@ -49,9 +44,7 @@ export default function ContactPage() {
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required'
-    }
+    // Name is optional - no validation needed
 
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required'
@@ -131,10 +124,10 @@ export default function ContactPage() {
       <div className="container-content max-w-4xl">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-h1 text-neutral-900 dark:text-neutral-50 mb-4">
+          <h1 className="text-h1 text-ocean-800 dark:text-sand-500 mb-4">
             Get In Touch
           </h1>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400">
+          <p className="text-lg text-ocean-300 dark:text-sand-500/75">
             Have a question or want to work together? I&apos;d love to hear from you.
           </p>
         </div>
@@ -142,7 +135,7 @@ export default function ContactPage() {
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Methods */}
           <div>
-            <h2 className="text-h3 text-neutral-900 dark:text-neutral-50 mb-6">
+            <h2 className="text-h3 text-ocean-800 dark:text-sand-500 mb-6">
               Contact Information
             </h2>
 
@@ -153,31 +146,33 @@ export default function ContactPage() {
                   href={method.href}
                   target={method.external ? '_blank' : undefined}
                   rel={method.external ? 'noopener noreferrer' : undefined}
-                  className="flex items-center gap-4 p-4 rounded-lg bg-neutral-50 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+                  className="flex items-center gap-4 p-4 rounded-card bg-sand-50 dark:bg-white/5 hover:bg-ocean-50 dark:hover:bg-white/10 transition-colors duration-180 ease-smooth border border-ocean-100 dark:border-white/10"
                 >
-                  <method.icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                  <div>
-                    <div className="font-medium text-neutral-900 dark:text-neutral-50">
+                  <method.icon className="w-6 h-6 text-bronze-700 dark:text-bronze-400" />
+                  <div className="flex-1">
+                    <div className="font-medium text-ocean-800 dark:text-sand-500">
                       {method.label}
                     </div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-400">
-                      {method.value}
+                    <div className="text-sm text-ocean-400 dark:text-sand-500/70">
+                      {method.description}
                     </div>
                   </div>
+                  <span className="text-sm text-muted-400 dark:text-sand-500/60">
+                    {method.value}
+                  </span>
                 </a>
               ))}
             </div>
 
             {/* Response Time */}
-            <div className="flex items-start gap-3 p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg">
-              <Clock className="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5" />
+            <div className="flex items-start gap-3 p-4 bg-bronze-50 dark:bg-bronze-900/20 rounded-card border border-bronze-200/50 dark:border-bronze-700/30">
+              <Clock className="w-5 h-5 text-bronze-700 dark:text-bronze-400 mt-0.5" />
               <div>
-                <div className="font-medium text-primary-900 dark:text-primary-100">
+                <div className="font-medium text-bronze-900 dark:text-bronze-300">
                   Response Time
                 </div>
-                <p className="text-sm text-primary-700 dark:text-primary-300">
-                  I typically respond within 24-48 hours. For urgent matters,
-                  please reach out via LinkedIn.
+                <p className="text-sm text-bronze-700 dark:text-bronze-400/80">
+                  I typically respond within 24-48 hours.
                 </p>
               </div>
             </div>
@@ -185,17 +180,20 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <div>
-            <h2 className="text-h3 text-neutral-900 dark:text-neutral-50 mb-6">
+            <h2 className="text-h3 text-ocean-800 dark:text-sand-500 mb-2">
               Send a Message
             </h2>
+            <p className="text-sm text-muted-400 dark:text-sand-500/70 mb-6">
+              Feel free to reach out about roles, collaborations, or questions about my work.
+            </p>
 
             {isSubmitted ? (
               <div className="card p-8 text-center">
                 <CheckCircle className="w-12 h-12 text-success-500 mx-auto mb-4" />
-                <h3 className="text-h4 text-neutral-900 dark:text-neutral-50 mb-2">
+                <h3 className="text-h4 text-ocean-800 dark:text-sand-500 mb-2">
                   Message Sent!
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+                <p className="text-ocean-400 dark:text-sand-500/75 mb-4">
                   Thank you for reaching out. I&apos;ll get back to you soon.
                 </p>
                 <Button onClick={() => setIsSubmitted(false)} variant="outline">
@@ -216,13 +214,13 @@ export default function ContactPage() {
                   aria-hidden="true"
                 />
 
-                {/* Name */}
+                {/* Name (optional) */}
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
+                    className="block text-sm font-medium text-ocean-700 dark:text-sand-500/90 mb-2"
                   >
-                    Name
+                    Name <span className="text-muted-400 font-normal">(optional)</span>
                   </label>
                   <input
                     type="text"
@@ -230,29 +228,16 @@ export default function ContactPage() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 rounded-lg border bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 ${
-                      errors.name
-                        ? 'border-error-500'
-                        : 'border-neutral-300 dark:border-neutral-600'
-                    }`}
-                    aria-describedby={errors.name ? 'name-error' : undefined}
+                    placeholder="Your name"
+                    className="w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-bronze-400 focus:border-bronze-400 border-ocean-300/30 dark:border-white/10 transition-colors duration-180"
                   />
-                  {errors.name && (
-                    <p
-                      id="name-error"
-                      className="mt-1 text-sm text-error-500"
-                      role="alert"
-                    >
-                      {errors.name}
-                    </p>
-                  )}
                 </div>
 
                 {/* Email */}
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
+                    className="block text-sm font-medium text-ocean-700 dark:text-sand-500/90 mb-2"
                   >
                     Email
                   </label>
@@ -262,10 +247,11 @@ export default function ContactPage() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 rounded-lg border bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 ${
+                    placeholder="you@example.com"
+                    className={`w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-bronze-400 focus:border-bronze-400 transition-colors duration-180 ${
                       errors.email
                         ? 'border-error-500'
-                        : 'border-neutral-300 dark:border-neutral-600'
+                        : 'border-ocean-300/30 dark:border-white/10'
                     }`}
                     aria-describedby={errors.email ? 'email-error' : undefined}
                   />
@@ -284,7 +270,7 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
+                    className="block text-sm font-medium text-ocean-700 dark:text-sand-500/90 mb-2"
                   >
                     Message
                   </label>
@@ -294,10 +280,11 @@ export default function ContactPage() {
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 rounded-lg border bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none ${
+                    placeholder="Tell me a bit about what you'd like to discuss..."
+                    className={`w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-bronze-400 focus:border-bronze-400 resize-none transition-colors duration-180 ${
                       errors.message
                         ? 'border-error-500'
-                        : 'border-neutral-300 dark:border-neutral-600'
+                        : 'border-ocean-300/30 dark:border-white/10'
                     }`}
                     aria-describedby={
                       errors.message ? 'message-error' : undefined
@@ -325,8 +312,8 @@ export default function ContactPage() {
                     'Sending...'
                   ) : (
                     <>
-                      <Send className="w-4 h-4 mr-2" />
                       Send Message
+                      <ArrowRight className="w-4 h-4 ml-2" />
                     </>
                   )}
                 </Button>

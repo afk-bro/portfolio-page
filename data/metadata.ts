@@ -23,8 +23,8 @@ export type SiteMetadata = z.infer<typeof siteMetadataSchema>
 export const siteMetadata: SiteMetadata = {
   name: 'Your Name',
   title: 'Full-Stack Developer',
-  role: 'Senior Full-Stack Engineer',
-  bio: 'I build exceptional digital experiences with modern web technologies. Passionate about creating performant, accessible, and user-friendly applications.',
+  role: 'Senior Full-Stack Engineer focused on scalable systems, testing, and automation',
+  bio: 'I build production-grade systems with strong guarantees. Schema-first data modeling, test-driven development, and automation-first workflows.',
   email: 'hello@example.com',
   location: 'San Francisco, CA',
   availability: 'available',
