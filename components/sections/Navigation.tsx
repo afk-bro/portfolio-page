@@ -38,7 +38,7 @@ function NavLink({
         "text-[15px] font-semibold tracking-wide",
         "transition-colors duration-180 ease-smooth",
         // Cream text - high contrast on blue
-        isActive ? "text-sand-50" : "text-sand-100/90 hover:text-sand-50",
+        isActive ? "text-sand-50" : "text-sand-100/95 hover:text-sand-50",
         // Dark mode
         "dark:text-sand-500/90 dark:hover:text-sand-500",
         // Underline via pseudo-element
@@ -73,7 +73,7 @@ function ThemeToggle({
       className={cn(
         "p-2 rounded-md",
         // More visible on gradient
-        "text-sand-100/80 dark:text-sand-500/80",
+        "text-sand-100/90 dark:text-sand-500/90",
         "hover:text-sand-50 dark:hover:text-sand-500",
         "hover:bg-white/10 dark:hover:bg-white/5",
         "transition-all duration-180 ease-smooth",
@@ -190,7 +190,7 @@ export function Navigation() {
       className={cn(
         "sticky top-0 z-50",
         "h-14 md:h-16 w-full",
-        "backdrop-blur-xl",
+        "backdrop-blur-lg",
         "border-b transition-all duration-300",
         // Glassy effect with scroll state
         scrolled
