@@ -28,7 +28,7 @@ export function HowIBuild() {
   return (
     <section
       id="how-i-build"
-      className="section bg-neutral-50 dark:bg-neutral-800/30"
+      className="section bg-transparent"
     >
       <div className="container-content">
         <AnimateOnScroll variant="fade-up" className="text-center mb-12">

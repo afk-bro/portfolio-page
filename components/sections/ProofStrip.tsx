@@ -32,7 +32,7 @@ const proofPoints = [
 
 export function ProofStrip() {
   return (
-    <section className="relative py-16 bg-ocean-50 dark:bg-dark-surface">
+    <section className="relative py-20 bg-transparent">
       {/* Top fade from previous section */}
       <div
         aria-hidden="true"
