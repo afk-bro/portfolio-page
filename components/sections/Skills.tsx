@@ -42,11 +42,11 @@ export function Skills() {
           <h2 className="text-h2 text-ocean-800 dark:text-sand-500 mb-4">
             Skills & Technologies
           </h2>
-          <p className="text-body text-ocean-300 dark:text-sand-500/75 max-w-2xl mx-auto mb-4">
+          <p className="text-body text-ocean-400 dark:text-sand-100/70 max-w-2xl mx-auto mb-4">
             Technologies I work with daily and the expertise I bring to every
             project.
           </p>
-          <p className="text-sm text-muted-400 dark:text-sand-500/60 italic max-w-xl mx-auto">
+          <p className="text-sm text-muted-400 dark:text-sand-100/50 italic max-w-xl mx-auto">
             I prioritize correctness, maintainability, and developer experience
             over novelty.
           </p>
@@ -80,13 +80,13 @@ export function Skills() {
                             position="top"
                           >
                             <span
-                              className="text-sm font-medium text-ocean-600 dark:text-sand-500/90 cursor-help"
+                              className="text-sm font-medium text-ocean-600 dark:text-sand-100/90 cursor-help"
                               tabIndex={0}
                             >
                               {skill.name}
                             </span>
                           </Tooltip>
-                          <span className="text-xs text-muted-400 dark:text-sand-500/60">
+                          <span className="text-xs text-muted-400 dark:text-sand-100/50">
                             {skill.years}y
                           </span>
                         </div>
