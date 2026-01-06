@@ -71,23 +71,23 @@ export function getGroupedSkills(): Record<Skill['category'], Skill[]> {
   )
 }
 
-// Category display names
+// Category display names - grouped by outcomes
 export const categoryNames: Record<Skill['category'], string> = {
-  frontend: 'Frontend',
-  backend: 'Backend',
-  devops: 'DevOps',
+  frontend: 'Frontend Systems',
+  backend: 'Backend & Data',
+  devops: 'Automation & Infrastructure',
   'ai-ml': 'AI & ML',
-  tools: 'Tools',
-  languages: 'Languages',
+  tools: 'Developer Tooling',
+  languages: 'Core Languages',
 }
 
-// Proficiency display config
+// Proficiency display config - using ocean → bronze gradient for expertise levels
 export const proficiencyConfig: Record<
   Skill['proficiency'],
   { label: string; level: number; color: string }
 > = {
-  beginner: { label: 'Beginner', level: 1, color: 'bg-neutral-300' },
-  intermediate: { label: 'Intermediate', level: 2, color: 'bg-primary-300' },
-  advanced: { label: 'Advanced', level: 3, color: 'bg-primary-500' },
-  expert: { label: 'Expert', level: 4, color: 'bg-primary-700' },
+  beginner: { label: 'Beginner', level: 1, color: 'bg-ocean-300' },
+  intermediate: { label: 'Intermediate', level: 2, color: 'bg-ocean-500' },
+  advanced: { label: 'Advanced', level: 3, color: 'bg-bronze-600' },
+  expert: { label: 'Expert', level: 4, color: 'bg-bronze-700' },
 }

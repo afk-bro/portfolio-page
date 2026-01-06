@@ -32,8 +32,18 @@ const proofPoints = [
 
 export function ProofStrip() {
   return (
-    <section className="py-12 bg-neutral-100 dark:bg-neutral-800/50 border-y border-neutral-200 dark:border-neutral-700">
-      <div className="container-content">
+    <section className="relative py-16 bg-ocean-50 dark:bg-dark-surface">
+      {/* Top fade from previous section */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-sand-50 dark:from-dark-base to-transparent"
+      />
+      {/* Bottom fade into next section */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-b from-transparent to-sand-50 dark:to-dark-base"
+      />
+      <div className="container-content relative">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {proofPoints.map((point, index) => (
             <AnimateOnScroll
@@ -42,11 +52,11 @@ export function ProofStrip() {
               delay={index * 100}
               className="flex flex-col items-center text-center"
             >
-              <point.icon className="w-8 h-8 text-primary-600 dark:text-primary-400 mb-2" />
-              <div className="text-lg font-bold text-neutral-900 dark:text-neutral-50">
+              <point.icon className="w-8 h-8 text-bronze-700 dark:text-bronze-400 mb-2" />
+              <div className="text-lg font-bold text-ocean-800 dark:text-sand-500">
                 {point.value}
               </div>
-              <div className="text-sm text-neutral-600 dark:text-neutral-400">
+              <div className="text-sm text-ocean-400 dark:text-sand-500/70">
                 {point.label}
               </div>
             </AnimateOnScroll>

@@ -4,122 +4,126 @@ import Link from 'next/link'
 import { ArrowRight, ExternalLink, Github } from 'lucide-react'
 import { getFeaturedProjects } from '@/data/projects'
 import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
+import { cn } from '@/lib/utils'
+
+// Status indicator config - using design system colors
+const statusConfig = {
+  complete: { label: 'Complete', color: 'bg-bronze-700' },
+  'in-progress': { label: 'In Progress', color: 'bg-bronze-400' },
+  archived: { label: 'Archived', color: 'bg-muted-300' },
+}
 
 export function FeaturedProjects() {
   const projects = getFeaturedProjects().slice(0, 3)
 
   return (
-    <section className="section">
-      <div className="container-content">
+    <section className="section relative">
+      {/* Bottom fade into next section */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-ocean-50 dark:to-dark-surface"
+      />
+      <div className="container-content relative">
         {/* Section Header */}
         <AnimateOnScroll variant="fade-up" className="text-center mb-12">
-          <h2 className="text-h2 text-neutral-900 dark:text-neutral-50 mb-4">
+          <h2 className="text-h2 text-ocean-800 dark:text-sand-500 mb-4">
             Featured Projects
           </h2>
-          <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            A selection of projects showcasing my technical skills and problem-solving approach.
+          <p className="text-body text-ocean-300 dark:text-sand-500/75 max-w-2xl mx-auto">
+            Selected projects demonstrating production architecture, testing strategy, and system design.
           </p>
         </AnimateOnScroll>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <AnimateOnScroll
-              key={project.id}
-              variant="fade-up"
-              delay={index * 100}
-              as="article"
-              className="card p-6 flex flex-col hover:shadow-lg transition-shadow"
-            >
-              {/* Status Badge */}
-              <div className="flex items-center gap-2 mb-4">
-                <Badge
-                  variant={
-                    project.status === 'complete'
-                      ? 'success'
-                      : project.status === 'in-progress'
-                        ? 'warning'
-                        : 'default'
-                  }
-                >
-                  {project.status === 'complete'
-                    ? 'Complete'
-                    : project.status === 'in-progress'
-                      ? 'In Progress'
-                      : 'Archived'}
-                </Badge>
-                {project.team === 'solo' ? (
-                  <Badge variant="default">Solo</Badge>
-                ) : (
-                  <Badge variant="default">Team</Badge>
-                )}
-              </div>
+          {projects.map((project, index) => {
+            const status = statusConfig[project.status]
+            return (
+              <AnimateOnScroll
+                key={project.id}
+                variant="fade-up"
+                delay={index * 100}
+                as="article"
+                className="card p-6 flex flex-col relative"
+              >
+                {/* Status indicator - top right, metadata styling */}
+                <div className="absolute top-4 right-4 flex items-center gap-1.5">
+                  <span className={cn('w-1.5 h-1.5 rounded-full', status.color)} />
+                  <span className="text-[10px] text-muted-400 dark:text-sand-500/60">{status.label}</span>
+                </div>
 
-              {/* Title */}
-              <h3 className="text-h4 text-neutral-900 dark:text-neutral-50 mb-2">
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                >
-                  {project.title}
-                </Link>
-              </h3>
-
-              {/* Summary */}
-              <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 flex-1">
-                {project.summary}
-              </p>
-
-              {/* Technologies */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.slice(0, 4).map((tech) => (
-                  <Badge key={tech} variant="primary" size="sm">
-                    {tech}
-                  </Badge>
-                ))}
-                {project.technologies.length > 4 && (
-                  <Badge variant="default" size="sm">
-                    +{project.technologies.length - 4}
-                  </Badge>
-                )}
-              </div>
-
-              {/* Links */}
-              <div className="flex items-center gap-3 pt-4 border-t border-neutral-200 dark:border-neutral-700">
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline inline-flex items-center gap-1"
-                >
-                  View Details
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                {project.links.github && (
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
-                    aria-label={`View ${project.title} on GitHub`}
+                {/* Title */}
+                <h3 className="text-h4 text-ocean-800 dark:text-sand-500 mb-2 pr-20">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="hover:text-bronze-700 dark:hover:text-bronze-400 transition-colors duration-180 ease-smooth"
                   >
-                    <Github className="w-5 h-5" />
-                  </a>
+                    {project.title}
+                  </Link>
+                </h3>
+
+                {/* Summary */}
+                <p className="text-sm text-ocean-300 dark:text-sand-500/75 mb-4 flex-1">
+                  {project.summary}
+                </p>
+
+                {/* Highlights - one line of emphasis */}
+                {project.highlights && project.highlights.length > 0 && (
+                  <p className="text-xs text-bronze-700 dark:text-bronze-400 font-medium mb-4">
+                    {project.highlights.join(' · ')}
+                  </p>
                 )}
-                {project.links.demo && (
-                  <a
-                    href={project.links.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
-                    aria-label={`View ${project.title} live demo`}
+
+                {/* Soft metadata - text, not pills */}
+                <div className="text-xs text-ocean-400 dark:text-sand-500/60 space-y-1 mb-4">
+                  {project.team && (
+                    <p>
+                      {project.team === 'solo' ? 'Solo' : `Team of ${project.teamSize || 'multiple'}`}
+                      {project.duration && ` · ${project.duration}`}
+                    </p>
+                  )}
+                  {/* Tech stack as inline text */}
+                  <p className="text-muted-400 dark:text-sand-500/50">
+                    {project.technologies.join(' · ')}
+                  </p>
+                </div>
+
+                {/* Links */}
+                <div className="flex items-center gap-4 pt-4 border-t border-ocean-300/20 dark:border-muted-300/15">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="text-sm font-medium text-bronze-700 dark:text-bronze-400 hover:underline inline-flex items-center gap-1 transition-colors duration-180"
                   >
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                )}
-              </div>
-            </AnimateOnScroll>
-          ))}
+                    Case Study
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  {project.links.github && (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-400 hover:text-ocean-500 dark:hover:text-sand-500 transition-colors duration-180"
+                      aria-label={`View ${project.title} on GitHub`}
+                    >
+                      <Github className="w-4 h-4" />
+                    </a>
+                  )}
+                  {project.links.demo && (
+                    <a
+                      href={project.links.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-400 hover:text-ocean-500 dark:hover:text-sand-500 transition-colors duration-180"
+                      aria-label={`View ${project.title} live demo`}
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
+              </AnimateOnScroll>
+            )
+          })}
         </div>
 
         {/* View All Link */}
