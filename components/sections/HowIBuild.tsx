@@ -26,10 +26,7 @@ const principles = [
 
 export function HowIBuild() {
   return (
-    <section
-      id="how-i-build"
-      className="section bg-transparent"
-    >
+    <section id="how-i-build" className="section bg-transparent">
       <div className="container-content">
         <AnimateOnScroll variant="fade-up" className="text-center mb-12">
           <h2 className="text-h2 text-neutral-900 dark:text-neutral-50 mb-4">
