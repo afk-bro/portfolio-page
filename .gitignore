@@ -48,4 +48,6 @@ analyze.js
 
 # Claude Code
 .claude/
+.claude_settings.json
+claude-progress*.txt
 notes/
