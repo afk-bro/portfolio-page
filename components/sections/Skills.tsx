@@ -65,7 +65,7 @@ export function Skills() {
                 key={category}
                 variant="fade-up"
                 delay={currentIndex * 100}
-                className="card p-6"
+                className="card p-7"
               >
                 <h3 className="text-h4 text-ocean-800 dark:text-sand-500 mb-4">
                   {categoryNames[category]}
