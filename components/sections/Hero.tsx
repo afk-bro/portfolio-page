@@ -42,7 +42,7 @@ export function Hero() {
           </p>
 
           {/* Bio / Value Proposition - Plumbeous for light, Sand at reduced opacity for dark */}
-          <p className="text-body text-ocean-300 dark:text-sand-500/75 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-body text-ocean-400 dark:text-sand-100/70 mb-8 max-w-2xl mx-auto leading-relaxed">
             {siteMetadata.bio}
           </p>
 
