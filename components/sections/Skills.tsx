@@ -25,7 +25,7 @@ export function Skills() {
   let validIndex = 0;
 
   return (
-    <section className="section relative bg-sand-300/30 dark:bg-dark-surface">
+    <section className="section relative bg-transparent">
       {/* Top fade */}
       <div
         aria-hidden="true"
