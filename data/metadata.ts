@@ -29,7 +29,7 @@ export const siteMetadata: SiteMetadata = {
   location: "San Francisco, CA",
   availability: "available",
   social: {
-    github: "https://github.com/yourusername",
+    github: "https://github.com/afk-bro",
     linkedin: "https://linkedin.com/in/yourusername",
     twitter: "https://twitter.com/yourusername",
   },
