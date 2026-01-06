@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 // This component is for testing error boundary functionality only
 // It throws an error when triggered via button click or ?error=true query param
 export function TestErrorComponent() {
-  const searchParams = useSearchParams()
-  const [shouldThrow, setShouldThrow] = useState(false)
+  const searchParams = useSearchParams();
+  const [shouldThrow, setShouldThrow] = useState(false);
 
   // Throw immediately if error param is in URL
-  const errorParam = searchParams.get('error')
-  if (errorParam === 'true') {
-    throw new Error('This is a test error triggered by URL parameter')
+  const errorParam = searchParams.get("error");
+  if (errorParam === "true") {
+    throw new Error("This is a test error triggered by URL parameter");
   }
 
   if (shouldThrow) {
-    throw new Error('This is a test error to verify ErrorBoundary')
+    throw new Error("This is a test error to verify ErrorBoundary");
   }
 
   return (
@@ -26,5 +26,5 @@ export function TestErrorComponent() {
     >
       Trigger Test Error
     </button>
-  )
+  );
 }

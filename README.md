@@ -33,27 +33,32 @@ This portfolio emphasizes clarity, credibility, and signal over novelty. It pres
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd portfolio_page
    ```
 
 2. Run the setup script:
+
    ```bash
    ./init.sh
    ```
 
    Or manually install dependencies:
+
    ```bash
    pnpm install
    ```
 
 3. Create environment file:
+
    ```bash
    cp .env.example .env.local
    ```
 
 4. Start the development server:
+
    ```bash
    pnpm dev
    ```
@@ -89,12 +94,12 @@ portfolio_page/
 
 ## Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Build for production |
-| `pnpm start` | Start production server |
-| `pnpm lint` | Run ESLint |
+| Command          | Description                  |
+| ---------------- | ---------------------------- |
+| `pnpm dev`       | Start development server     |
+| `pnpm build`     | Build for production         |
+| `pnpm start`     | Start production server      |
+| `pnpm lint`      | Run ESLint                   |
 | `pnpm typecheck` | Run TypeScript type checking |
 
 ## Features
@@ -130,11 +135,11 @@ All data is validated using Zod schemas for type safety.
 
 ### Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL | Yes |
-| `NEXT_PUBLIC_ANALYTICS_KEY` | Analytics key | No |
-| `CONTACT_EMAIL` | Public contact email | No |
+| Variable                    | Description          | Required |
+| --------------------------- | -------------------- | -------- |
+| `NEXT_PUBLIC_SITE_URL`      | Canonical site URL   | Yes      |
+| `NEXT_PUBLIC_ANALYTICS_KEY` | Analytics key        | No       |
+| `CONTACT_EMAIL`             | Public contact email | No       |
 
 ### Theming
 

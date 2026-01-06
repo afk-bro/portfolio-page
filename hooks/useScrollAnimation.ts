@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from "react";
 
 interface UseScrollAnimationOptions {
-  threshold?: number
-  rootMargin?: string
-  triggerOnce?: boolean
+  threshold?: number;
+  rootMargin?: string;
+  triggerOnce?: boolean;
 }
 
 /**
@@ -17,62 +17,62 @@ interface UseScrollAnimationOptions {
  */
 export function useScrollAnimation({
   threshold = 0.1,
-  rootMargin = '0px 0px -50px 0px',
+  rootMargin = "0px 0px -50px 0px",
   triggerOnce = true,
 }: UseScrollAnimationOptions = {}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
     // Check for reduced motion preference
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setPrefersReducedMotion(mediaQuery.matches)
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
 
     const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches)
-    }
+      setPrefersReducedMotion(e.matches);
+    };
 
-    mediaQuery.addEventListener('change', handleChange)
+    mediaQuery.addEventListener("change", handleChange);
 
     return () => {
-      mediaQuery.removeEventListener('change', handleChange)
-    }
-  }, [])
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, []);
 
   useEffect(() => {
     // If user prefers reduced motion, show content immediately
     if (prefersReducedMotion) {
-      setIsVisible(true)
-      return
+      setIsVisible(true);
+      return;
     }
 
-    const element = ref.current
-    if (!element) return
+    const element = ref.current;
+    if (!element) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
           if (triggerOnce) {
-            observer.unobserve(element)
+            observer.unobserve(element);
           }
         } else if (!triggerOnce) {
-          setIsVisible(false)
+          setIsVisible(false);
         }
       },
       {
         threshold,
         rootMargin,
-      }
-    )
+      },
+    );
 
-    observer.observe(element)
+    observer.observe(element);
 
     return () => {
-      observer.unobserve(element)
-    }
-  }, [threshold, rootMargin, triggerOnce, prefersReducedMotion])
+      observer.unobserve(element);
+    };
+  }, [threshold, rootMargin, triggerOnce, prefersReducedMotion]);
 
-  return { ref, isVisible, prefersReducedMotion }
+  return { ref, isVisible, prefersReducedMotion };
 }

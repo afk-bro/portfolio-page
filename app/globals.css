@@ -6,16 +6,16 @@
   :root {
     /* Light mode - Near-white bg, Ocean blue text, Bronze accent */
     --background: 248 251 253; /* sand-50 #f8fbfd */
-    --foreground: 5 70 114;    /* ocean-900 #054672 */
-    --primary: 205 121 49;     /* bronze-700 #cd7931 */
+    --foreground: 5 70 114; /* ocean-900 #054672 */
+    --primary: 205 121 49; /* bronze-700 #cd7931 */
     --primary-foreground: 5 70 114;
   }
 
   .dark {
     /* Dark mode - Deep ocean bg, Warm sand text, Bronze accent */
-    --background: 5 70 114;    /* ocean-900 #054672 */
+    --background: 5 70 114; /* ocean-900 #054672 */
     --foreground: 244 211 144; /* sand-500 #f4d390 */
-    --primary: 231 155 71;     /* bronze-500 #e79b47 */
+    --primary: 231 155 71; /* bronze-500 #e79b47 */
     --primary-foreground: 5 70 114;
   }
 
@@ -121,7 +121,7 @@
 
   /* Card top highlight line for depth */
   .card::before {
-    content: '';
+    content: "";
     @apply absolute top-0 left-0 right-0 h-[1px];
     background: linear-gradient(
       to right,
@@ -192,7 +192,7 @@
   }
 
   .navbar-gradient::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -205,10 +205,10 @@
 
   /* Noise overlay for navbar */
   .navbar-gradient::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background: url('/noise.svg');
+    background: url("/noise.svg");
     opacity: 0.015;
     mix-blend-mode: overlay;
     pointer-events: none;
@@ -245,7 +245,7 @@
 
   /* Subtle blue atmosphere wash */
   .hero-bg::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     background: radial-gradient(
@@ -258,7 +258,7 @@
 
   /* Dark mode: near-black navy with subtle amber warmth */
   .dark .hero-bg {
-    background: #050B14;
+    background: #050b14;
   }
 
   /* Softer vignette to prevent banding artifacts */
@@ -277,12 +277,7 @@
     @apply relative overflow-hidden;
     @apply px-6 py-3 rounded-button font-medium;
     @apply transition-all duration-180 ease-smooth;
-    background: linear-gradient(
-      180deg,
-      #d48f4e 0%,
-      #cd7931 15%,
-      #cd7931 100%
-    );
+    background: linear-gradient(180deg, #d48f4e 0%, #cd7931 15%, #cd7931 100%);
     color: #0d4d79;
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.25),
@@ -310,7 +305,7 @@
 
   /* Glass sheen on hover */
   .btn-primary-cta::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
@@ -337,12 +332,8 @@
   }
 
   .dark .btn-primary-cta {
-    background: linear-gradient(
-      180deg,
-      #cd7931 0%,
-      #bf611b 100%
-    );
-    color: #050B14;
+    background: linear-gradient(180deg, #cd7931 0%, #bf611b 100%);
+    color: #050b14;
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.2),
       inset 0 -2px 0 rgba(0, 0, 0, 0.15),
@@ -423,7 +414,7 @@
   }
 
   .dark .footer-bg {
-    background: #0A1626;
+    background: #0a1626;
   }
 
   /* ===========================================
@@ -434,10 +425,10 @@
   }
 
   .noise-overlay::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background: url('/noise.svg');
+    background: url("/noise.svg");
     opacity: 0.015;
     mix-blend-mode: overlay;
     pointer-events: none;
@@ -568,7 +559,9 @@
   }
 
   /* Page break control */
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     page-break-after: avoid;
   }
 

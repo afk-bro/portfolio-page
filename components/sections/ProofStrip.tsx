@@ -1,34 +1,34 @@
-'use client'
+"use client";
 
-import { Code2, GitBranch, TestTube, Zap } from 'lucide-react'
-import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
+import { Code2, GitBranch, TestTube, Zap } from "lucide-react";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 
 const proofPoints = [
   {
     icon: TestTube,
-    label: 'Test Coverage',
-    value: '95%+',
-    description: 'Comprehensive test suites',
+    label: "Test Coverage",
+    value: "95%+",
+    description: "Comprehensive test suites",
   },
   {
     icon: GitBranch,
-    label: 'CI/CD',
-    value: 'Automated',
-    description: 'Continuous integration',
+    label: "CI/CD",
+    value: "Automated",
+    description: "Continuous integration",
   },
   {
     icon: Code2,
-    label: 'TypeScript',
-    value: 'Strict Mode',
-    description: 'Full type safety',
+    label: "TypeScript",
+    value: "Strict Mode",
+    description: "Full type safety",
   },
   {
     icon: Zap,
-    label: 'Performance',
-    value: '90+ Lighthouse',
-    description: 'Optimized for speed',
+    label: "Performance",
+    value: "90+ Lighthouse",
+    description: "Optimized for speed",
   },
-]
+];
 
 export function ProofStrip() {
   return (
@@ -64,5 +64,5 @@ export function ProofStrip() {
         </div>
       </div>
     </section>
-  )
+  );
 }

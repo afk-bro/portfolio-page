@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { Home, ArrowLeft } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
+import Link from "next/link";
+import { Home, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
@@ -16,7 +16,8 @@ export default function NotFound() {
           Page Not Found
         </h1>
         <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-8 max-w-md mx-auto">
-          Sorry, the page you&apos;re looking for doesn&apos;t exist or has been moved.
+          Sorry, the page you&apos;re looking for doesn&apos;t exist or has been
+          moved.
         </p>
 
         {/* Navigation Options */}
@@ -69,5 +70,5 @@ export default function NotFound() {
         </div>
       </div>
     </div>
-  )
+  );
 }

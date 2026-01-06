@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { ArrowRight, ExternalLink, Github } from 'lucide-react'
-import { getFeaturedProjects } from '@/data/projects'
-import { Button } from '@/components/ui/Button'
-import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
-import { cn } from '@/lib/utils'
+import Link from "next/link";
+import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import { getFeaturedProjects } from "@/data/projects";
+import { Button } from "@/components/ui/Button";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
+import { cn } from "@/lib/utils";
 
 // Status indicator config - using design system colors
 const statusConfig = {
-  complete: { label: 'Complete', color: 'bg-bronze-700' },
-  'in-progress': { label: 'In Progress', color: 'bg-bronze-400' },
-  archived: { label: 'Archived', color: 'bg-muted-300' },
-}
+  complete: { label: "Complete", color: "bg-bronze-700" },
+  "in-progress": { label: "In Progress", color: "bg-bronze-400" },
+  archived: { label: "Archived", color: "bg-muted-300" },
+};
 
 export function FeaturedProjects() {
-  const projects = getFeaturedProjects().slice(0, 3)
+  const projects = getFeaturedProjects().slice(0, 3);
 
   return (
     <section className="section relative">
@@ -31,14 +31,15 @@ export function FeaturedProjects() {
             Featured Projects
           </h2>
           <p className="text-body text-ocean-300 dark:text-sand-500/75 max-w-2xl mx-auto">
-            Selected projects demonstrating production architecture, testing strategy, and system design.
+            Selected projects demonstrating production architecture, testing
+            strategy, and system design.
           </p>
         </AnimateOnScroll>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => {
-            const status = statusConfig[project.status]
+            const status = statusConfig[project.status];
             return (
               <AnimateOnScroll
                 key={project.id}
@@ -49,8 +50,12 @@ export function FeaturedProjects() {
               >
                 {/* Status indicator - top right, metadata styling */}
                 <div className="absolute top-4 right-4 flex items-center gap-1.5">
-                  <span className={cn('w-1.5 h-1.5 rounded-full', status.color)} />
-                  <span className="text-[10px] text-muted-400 dark:text-sand-500/60">{status.label}</span>
+                  <span
+                    className={cn("w-1.5 h-1.5 rounded-full", status.color)}
+                  />
+                  <span className="text-[10px] text-muted-400 dark:text-sand-500/60">
+                    {status.label}
+                  </span>
                 </div>
 
                 {/* Title */}
@@ -71,7 +76,7 @@ export function FeaturedProjects() {
                 {/* Highlights - one line of emphasis */}
                 {project.highlights && project.highlights.length > 0 && (
                   <p className="text-xs text-bronze-700 dark:text-bronze-400 font-medium mb-4">
-                    {project.highlights.join(' · ')}
+                    {project.highlights.join(" · ")}
                   </p>
                 )}
 
@@ -79,13 +84,15 @@ export function FeaturedProjects() {
                 <div className="text-xs text-ocean-400 dark:text-sand-500/60 space-y-1 mb-4">
                   {project.team && (
                     <p>
-                      {project.team === 'solo' ? 'Solo' : `Team of ${project.teamSize || 'multiple'}`}
+                      {project.team === "solo"
+                        ? "Solo"
+                        : `Team of ${project.teamSize || "multiple"}`}
                       {project.duration && ` · ${project.duration}`}
                     </p>
                   )}
                   {/* Tech stack as inline text */}
                   <p className="text-muted-400 dark:text-sand-500/50">
-                    {project.technologies.join(' · ')}
+                    {project.technologies.join(" · ")}
                   </p>
                 </div>
 
@@ -122,7 +129,7 @@ export function FeaturedProjects() {
                   )}
                 </div>
               </AnimateOnScroll>
-            )
+            );
           })}
         </div>
 
@@ -137,5 +144,5 @@ export function FeaturedProjects() {
         </div>
       </div>
     </section>
-  )
+  );
 }

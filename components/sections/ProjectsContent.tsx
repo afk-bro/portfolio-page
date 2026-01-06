@@ -1,63 +1,63 @@
-'use client'
+"use client";
 
-import { useState, useMemo, useEffect, useCallback } from 'react'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
-import Link from 'next/link'
-import { ExternalLink, Github, ChevronDown } from 'lucide-react'
-import { projects, getAllTechnologies, type Project } from '@/data/projects'
-import { cn } from '@/lib/utils'
+import { useState, useMemo, useEffect, useCallback } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
+import { ExternalLink, Github, ChevronDown } from "lucide-react";
+import { projects, getAllTechnologies, type Project } from "@/data/projects";
+import { cn } from "@/lib/utils";
 
 // Multi-criteria filter state
 interface FilterState {
-  technology: string | null
-  domain: string | null
-  type: string | null
-  status: string | null
+  technology: string | null;
+  domain: string | null;
+  type: string | null;
+  status: string | null;
 }
 
 // URL parameter keys for filters
 const FILTER_PARAMS = {
-  technology: 'tech',
-  domain: 'domain',
-  type: 'type',
-  status: 'status',
-} as const
+  technology: "tech",
+  domain: "domain",
+  type: "type",
+  status: "status",
+} as const;
 
 // Filter options
 const domainOptions = [
-  { value: 'web', label: 'Web' },
-  { value: 'backend', label: 'Backend' },
-  { value: 'ai-ml', label: 'AI/ML' },
-  { value: 'devops', label: 'DevOps' },
-  { value: 'mobile', label: 'Mobile' },
-]
+  { value: "web", label: "Web" },
+  { value: "backend", label: "Backend" },
+  { value: "ai-ml", label: "AI/ML" },
+  { value: "devops", label: "DevOps" },
+  { value: "mobile", label: "Mobile" },
+];
 
 const typeOptions = [
-  { value: 'professional', label: 'Professional' },
-  { value: 'open-source', label: 'Open Source' },
-  { value: 'personal', label: 'Personal' },
-  { value: 'learning', label: 'Learning' },
-]
+  { value: "professional", label: "Professional" },
+  { value: "open-source", label: "Open Source" },
+  { value: "personal", label: "Personal" },
+  { value: "learning", label: "Learning" },
+];
 
 const statusOptions = [
-  { value: 'complete', label: 'Complete' },
-  { value: 'in-progress', label: 'In Progress' },
-  { value: 'archived', label: 'Archived' },
-]
+  { value: "complete", label: "Complete" },
+  { value: "in-progress", label: "In Progress" },
+  { value: "archived", label: "Archived" },
+];
 
 // Status indicator config - using accent palette
 const statusConfig = {
-  complete: { label: 'Complete', color: 'bg-primary-500' },
-  'in-progress': { label: 'In Progress', color: 'bg-primary-300' },
-  archived: { label: 'Archived', color: 'bg-neutral-400' },
-}
+  complete: { label: "Complete", color: "bg-primary-500" },
+  "in-progress": { label: "In Progress", color: "bg-primary-300" },
+  archived: { label: "Archived", color: "bg-neutral-400" },
+};
 
 export function ProjectsContent() {
-  const technologies = getAllTechnologies()
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
-  const [filtersOpen, setFiltersOpen] = useState(false)
+  const technologies = getAllTechnologies();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Initialize filter state from URL parameters
   const getInitialFilters = useCallback((): FilterState => {
@@ -66,72 +66,82 @@ export function ProjectsContent() {
       domain: searchParams.get(FILTER_PARAMS.domain),
       type: searchParams.get(FILTER_PARAMS.type),
       status: searchParams.get(FILTER_PARAMS.status),
-    }
-  }, [searchParams])
+    };
+  }, [searchParams]);
 
   // Multi-criteria filter state - each filter type is independent
-  const [filters, setFilters] = useState<FilterState>(getInitialFilters)
+  const [filters, setFilters] = useState<FilterState>(getInitialFilters);
 
   // Sync filters from URL when searchParams change (e.g., browser back/forward)
   useEffect(() => {
-    setFilters(getInitialFilters())
-  }, [getInitialFilters])
+    setFilters(getInitialFilters());
+  }, [getInitialFilters]);
 
   // Update URL when filters change
-  const updateURL = useCallback((newFilters: FilterState) => {
-    const params = new URLSearchParams()
+  const updateURL = useCallback(
+    (newFilters: FilterState) => {
+      const params = new URLSearchParams();
 
-    if (newFilters.technology) {
-      params.set(FILTER_PARAMS.technology, newFilters.technology)
-    }
-    if (newFilters.domain) {
-      params.set(FILTER_PARAMS.domain, newFilters.domain)
-    }
-    if (newFilters.type) {
-      params.set(FILTER_PARAMS.type, newFilters.type)
-    }
-    if (newFilters.status) {
-      params.set(FILTER_PARAMS.status, newFilters.status)
-    }
+      if (newFilters.technology) {
+        params.set(FILTER_PARAMS.technology, newFilters.technology);
+      }
+      if (newFilters.domain) {
+        params.set(FILTER_PARAMS.domain, newFilters.domain);
+      }
+      if (newFilters.type) {
+        params.set(FILTER_PARAMS.type, newFilters.type);
+      }
+      if (newFilters.status) {
+        params.set(FILTER_PARAMS.status, newFilters.status);
+      }
 
-    const queryString = params.toString()
-    const newURL = queryString ? `${pathname}?${queryString}` : pathname
-    router.push(newURL, { scroll: false })
-  }, [pathname, router])
+      const queryString = params.toString();
+      const newURL = queryString ? `${pathname}?${queryString}` : pathname;
+      router.push(newURL, { scroll: false });
+    },
+    [pathname, router],
+  );
 
   // Check if any filters are active
-  const hasActiveFilters = Object.values(filters).some(v => v !== null)
+  const hasActiveFilters = Object.values(filters).some((v) => v !== null);
 
   // Count active filters
-  const activeFilterCount = Object.values(filters).filter(v => v !== null).length
+  const activeFilterCount = Object.values(filters).filter(
+    (v) => v !== null,
+  ).length;
 
   // Filter projects based on ALL active filters (AND logic)
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
-      if (filters.technology && !project.technologies.map(t => t.toLowerCase()).includes(filters.technology.toLowerCase())) {
-        return false
+      if (
+        filters.technology &&
+        !project.technologies
+          .map((t) => t.toLowerCase())
+          .includes(filters.technology.toLowerCase())
+      ) {
+        return false;
       }
       if (filters.domain && project.domain !== filters.domain) {
-        return false
+        return false;
       }
       if (filters.type && project.type !== filters.type) {
-        return false
+        return false;
       }
       if (filters.status && project.status !== filters.status) {
-        return false
+        return false;
       }
-      return true
-    })
-  }, [filters])
+      return true;
+    });
+  }, [filters]);
 
   const handleFilter = (key: keyof FilterState, value: string) => {
     const newFilters = {
       ...filters,
-      [key]: filters[key] === value ? null : value
-    }
-    setFilters(newFilters)
-    updateURL(newFilters)
-  }
+      [key]: filters[key] === value ? null : value,
+    };
+    setFilters(newFilters);
+    updateURL(newFilters);
+  };
 
   const clearFilters = () => {
     const newFilters = {
@@ -139,10 +149,10 @@ export function ProjectsContent() {
       domain: null,
       type: null,
       status: null,
-    }
-    setFilters(newFilters)
-    updateURL(newFilters)
-  }
+    };
+    setFilters(newFilters);
+    updateURL(newFilters);
+  };
 
   return (
     <div className="section">
@@ -153,7 +163,8 @@ export function ProjectsContent() {
             Projects
           </h1>
           <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            Selected production-grade systems highlighting architecture decisions, testing strategy, and real-world engineering tradeoffs.
+            Selected production-grade systems highlighting architecture
+            decisions, testing strategy, and real-world engineering tradeoffs.
           </p>
         </div>
 
@@ -163,10 +174,10 @@ export function ProjectsContent() {
             <button
               onClick={() => setFiltersOpen(!filtersOpen)}
               className={cn(
-                'inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                "inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors",
                 filtersOpen
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
+                  ? "bg-primary-500 text-white"
+                  : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700",
               )}
             >
               Refine projects
@@ -175,7 +186,12 @@ export function ProjectsContent() {
                   {activeFilterCount}
                 </span>
               )}
-              <ChevronDown className={cn('w-4 h-4 transition-transform', filtersOpen && 'rotate-180')} />
+              <ChevronDown
+                className={cn(
+                  "w-4 h-4 transition-transform",
+                  filtersOpen && "rotate-180",
+                )}
+              />
             </button>
             {hasActiveFilters && (
               <button
@@ -198,14 +214,19 @@ export function ProjectsContent() {
                   </h3>
                   <div className="space-y-2">
                     {domainOptions.map((option) => (
-                      <label key={option.value} className="flex items-center gap-2 cursor-pointer">
+                      <label
+                        key={option.value}
+                        className="flex items-center gap-2 cursor-pointer"
+                      >
                         <input
                           type="checkbox"
                           checked={filters.domain === option.value}
-                          onChange={() => handleFilter('domain', option.value)}
+                          onChange={() => handleFilter("domain", option.value)}
                           className="rounded border-neutral-300 text-primary-500 focus:ring-primary-500"
                         />
-                        <span className="text-sm text-neutral-700 dark:text-neutral-300">{option.label}</span>
+                        <span className="text-sm text-neutral-700 dark:text-neutral-300">
+                          {option.label}
+                        </span>
                       </label>
                     ))}
                   </div>
@@ -218,14 +239,19 @@ export function ProjectsContent() {
                   </h3>
                   <div className="space-y-2">
                     {typeOptions.map((option) => (
-                      <label key={option.value} className="flex items-center gap-2 cursor-pointer">
+                      <label
+                        key={option.value}
+                        className="flex items-center gap-2 cursor-pointer"
+                      >
                         <input
                           type="checkbox"
                           checked={filters.type === option.value}
-                          onChange={() => handleFilter('type', option.value)}
+                          onChange={() => handleFilter("type", option.value)}
                           className="rounded border-neutral-300 text-primary-500 focus:ring-primary-500"
                         />
-                        <span className="text-sm text-neutral-700 dark:text-neutral-300">{option.label}</span>
+                        <span className="text-sm text-neutral-700 dark:text-neutral-300">
+                          {option.label}
+                        </span>
                       </label>
                     ))}
                   </div>
@@ -238,14 +264,19 @@ export function ProjectsContent() {
                   </h3>
                   <div className="space-y-2">
                     {statusOptions.map((option) => (
-                      <label key={option.value} className="flex items-center gap-2 cursor-pointer">
+                      <label
+                        key={option.value}
+                        className="flex items-center gap-2 cursor-pointer"
+                      >
                         <input
                           type="checkbox"
                           checked={filters.status === option.value}
-                          onChange={() => handleFilter('status', option.value)}
+                          onChange={() => handleFilter("status", option.value)}
                           className="rounded border-neutral-300 text-primary-500 focus:ring-primary-500"
                         />
-                        <span className="text-sm text-neutral-700 dark:text-neutral-300">{option.label}</span>
+                        <span className="text-sm text-neutral-700 dark:text-neutral-300">
+                          {option.label}
+                        </span>
                       </label>
                     ))}
                   </div>
@@ -260,12 +291,12 @@ export function ProjectsContent() {
                     {technologies.map((tech) => (
                       <button
                         key={tech}
-                        onClick={() => handleFilter('technology', tech)}
+                        onClick={() => handleFilter("technology", tech)}
                         className={cn(
-                          'px-2 py-1 text-xs rounded transition-colors',
+                          "px-2 py-1 text-xs rounded transition-colors",
                           filters.technology === tech
-                            ? 'bg-primary-500 text-white'
-                            : 'bg-white dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600'
+                            ? "bg-primary-500 text-white"
+                            : "bg-white dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-600",
                         )}
                       >
                         {tech}
@@ -281,8 +312,9 @@ export function ProjectsContent() {
         {/* Results count */}
         <div className="mb-6 text-center">
           <span className="text-sm text-neutral-500 dark:text-neutral-400">
-            {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
-            {hasActiveFilters && ' matching filters'}
+            {filteredProjects.length} project
+            {filteredProjects.length !== 1 ? "s" : ""}
+            {hasActiveFilters && " matching filters"}
           </span>
         </div>
 
@@ -309,18 +341,20 @@ export function ProjectsContent() {
         )}
       </div>
     </div>
-  )
+  );
 }
 
 function ProjectCard({ project }: { project: Project }) {
-  const status = statusConfig[project.status]
+  const status = statusConfig[project.status];
 
   return (
     <article className="card p-6 flex flex-col hover:shadow-lg transition-shadow relative">
       {/* Status indicator - top right, metadata styling */}
       <div className="absolute top-4 right-4 flex items-center gap-1.5">
-        <span className={cn('w-1.5 h-1.5 rounded-full', status.color)} />
-        <span className="text-[10px] text-neutral-400 dark:text-neutral-500">{status.label}</span>
+        <span className={cn("w-1.5 h-1.5 rounded-full", status.color)} />
+        <span className="text-[10px] text-neutral-400 dark:text-neutral-500">
+          {status.label}
+        </span>
       </div>
 
       {/* Title */}
@@ -341,7 +375,7 @@ function ProjectCard({ project }: { project: Project }) {
       {/* Highlights - one line of emphasis */}
       {project.highlights && project.highlights.length > 0 && (
         <p className="text-xs text-primary-600 dark:text-primary-400 font-medium mb-4">
-          {project.highlights.join(' · ')}
+          {project.highlights.join(" · ")}
         </p>
       )}
 
@@ -349,13 +383,15 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="text-xs text-neutral-500 dark:text-neutral-400 space-y-1 mb-4">
         {project.team && (
           <p>
-            {project.team === 'solo' ? 'Solo' : `Team of ${project.teamSize || 'multiple'}`}
+            {project.team === "solo"
+              ? "Solo"
+              : `Team of ${project.teamSize || "multiple"}`}
             {project.duration && ` · ${project.duration}`}
           </p>
         )}
         {/* Tech stack as inline text */}
         <p className="text-neutral-400 dark:text-neutral-500">
-          {project.technologies.join(' · ')}
+          {project.technologies.join(" · ")}
         </p>
       </div>
 
@@ -391,5 +427,5 @@ function ProjectCard({ project }: { project: Project }) {
         )}
       </div>
     </article>
-  )
+  );
 }

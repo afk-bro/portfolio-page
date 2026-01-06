@@ -1,17 +1,28 @@
-'use client'
+"use client";
 
-import { getGroupedSkills, categoryNames, proficiencyConfig } from '@/data/skills'
-import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
-import { Tooltip } from '@/components/ui/Tooltip'
+import {
+  getGroupedSkills,
+  categoryNames,
+  proficiencyConfig,
+} from "@/data/skills";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
+import { Tooltip } from "@/components/ui/Tooltip";
 
 export function Skills() {
-  const groupedSkills = getGroupedSkills()
+  const groupedSkills = getGroupedSkills();
 
   // Order of categories to display
-  const categoryOrder = ['languages', 'frontend', 'backend', 'devops', 'ai-ml', 'tools'] as const
+  const categoryOrder = [
+    "languages",
+    "frontend",
+    "backend",
+    "devops",
+    "ai-ml",
+    "tools",
+  ] as const;
 
   // Track valid categories for staggered animation
-  let validIndex = 0
+  let validIndex = 0;
 
   return (
     <section className="section relative bg-sand-300/30 dark:bg-dark-surface">
@@ -32,20 +43,22 @@ export function Skills() {
             Skills & Technologies
           </h2>
           <p className="text-body text-ocean-300 dark:text-sand-500/75 max-w-2xl mx-auto mb-4">
-            Technologies I work with daily and the expertise I bring to every project.
+            Technologies I work with daily and the expertise I bring to every
+            project.
           </p>
           <p className="text-sm text-muted-400 dark:text-sand-500/60 italic max-w-xl mx-auto">
-            I prioritize correctness, maintainability, and developer experience over novelty.
+            I prioritize correctness, maintainability, and developer experience
+            over novelty.
           </p>
         </AnimateOnScroll>
 
         {/* Skills Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categoryOrder.map((category) => {
-            const skills = groupedSkills[category]
-            if (!skills || skills.length === 0) return null
+            const skills = groupedSkills[category];
+            if (!skills || skills.length === 0) return null;
 
-            const currentIndex = validIndex++
+            const currentIndex = validIndex++;
 
             return (
               <AnimateOnScroll
@@ -63,7 +76,7 @@ export function Skills() {
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-1">
                           <Tooltip
-                            content={`${proficiencyConfig[skill.proficiency].label} - ${skill.years} ${skill.years === 1 ? 'year' : 'years'} experience`}
+                            content={`${proficiencyConfig[skill.proficiency].label} - ${skill.years} ${skill.years === 1 ? "year" : "years"} experience`}
                             position="top"
                           >
                             <span
@@ -99,10 +112,10 @@ export function Skills() {
                   ))}
                 </ul>
               </AnimateOnScroll>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }
