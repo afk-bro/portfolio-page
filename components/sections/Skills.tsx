@@ -53,7 +53,7 @@ export function Skills() {
         </AnimateOnScroll>
 
         {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {categoryOrder.map((category) => {
             const skills = groupedSkills[category];
             if (!skills || skills.length === 0) return null;
