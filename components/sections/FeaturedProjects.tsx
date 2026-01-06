@@ -30,7 +30,7 @@ export function FeaturedProjects() {
           <h2 className="text-h2 text-ocean-800 dark:text-sand-500 mb-4">
             Featured Projects
           </h2>
-          <p className="text-body text-ocean-300 dark:text-sand-500/75 max-w-2xl mx-auto">
+          <p className="text-body text-ocean-400 dark:text-sand-100/70 max-w-2xl mx-auto">
             Selected projects demonstrating production architecture, testing
             strategy, and system design.
           </p>
@@ -69,7 +69,7 @@ export function FeaturedProjects() {
                 </h3>
 
                 {/* Summary */}
-                <p className="text-sm text-ocean-300 dark:text-sand-500/75 mb-4 flex-1">
+                <p className="text-sm text-ocean-400 dark:text-sand-100/70 mb-4 flex-1">
                   {project.summary}
                 </p>
 
@@ -81,7 +81,7 @@ export function FeaturedProjects() {
                 )}
 
                 {/* Soft metadata - text, not pills */}
-                <div className="text-xs text-ocean-400 dark:text-sand-500/60 space-y-1 mb-4">
+                <div className="text-xs text-ocean-400 dark:text-sand-100/50 space-y-1 mb-4">
                   {project.team && (
                     <p>
                       {project.team === "solo"
@@ -91,7 +91,7 @@ export function FeaturedProjects() {
                     </p>
                   )}
                   {/* Tech stack as inline text */}
-                  <p className="text-muted-400 dark:text-sand-500/50">
+                  <p className="text-muted-400 dark:text-sand-100/50">
                     {project.technologies.join(" · ")}
                   </p>
                 </div>
