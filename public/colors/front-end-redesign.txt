@@ -1,0 +1,353 @@
+<front_end_redesign>
+  <goal>
+    Remake the site visual identity using the extracted “Ocean + Bronze + Sand + Twilight” palette.
+    The site should feel custom, crafted, and premium—not template-like. Blue dominates structure;
+    bronze/amber signals action; sand is a supporting neutral; twilight (slate/mauve) provides depth.
+  </goal>
+
+  <palette source="colorpickerfromimage.com-colors.txt">
+    <ocean>
+      <deep>Sea Paint #0d4d79</deep>
+      <mid>Grand Bleu #145680</mid>
+      <mid2>Mississippi River #2e6287</mid2>
+      <soft>Crashing Waves #486d8a</soft>
+      <twilight>Plumbeous #597489</twilight>
+      <twilight2>Plumbeous #68748a</twilight2>
+    </ocean>
+
+    <bronze>
+      <deep>Dwarven Bronze #bf611b</deep>
+      <mid>Cajeta #c86c23</mid>
+      <primary>Polished Bronze #cd7931</primary>
+      <soft>Golden Nugget #d48f4e</soft>
+      <glow>Shiny Trumpet #edae5f</glow>
+      <highlight>Golden Opportunity #f0bf73</highlight>
+      <extras>Sienna #a7551b, Bloodhound #b45b19</extras>
+    </bronze>
+
+    <sand>
+      <light>Instant Noodles #f4d390</light>
+      <light2>Instant Noodles #f2d494</light2>
+      <cream>Macaroni #f3cd86</cream>
+      <surface>Sparkling Champagne #ead09d</surface>
+      <surface2>Sparkling Champagne #eed39b</surface2>
+      <muted>Fortune Cookie #e1c89d</muted>
+      <shadow>Kombucha #d8a570</shadow>
+      <extras>Link to the Past #d7b288, Cozy Wool #d6b798, Soba #d3b79f/#d1b29e, Frappé #cea999, Hickory #b9a493</extras>
+    </sand>
+
+    <neutral>
+      <mutedText>Mighty Mauve #95818a</mutedText>
+      <mutedBorder>Mutabilis #bd968f</mutedBorder>
+      <gray>Gull #8b8b8d</gray>
+    </neutral>
+  </palette>
+
+  <tokens>
+    <radii>
+      <card>16px</card>
+      <button>12px</button>
+      <pill>999px</pill>
+    </radii>
+
+    <shadows>
+      <light>
+        <card>0 10px 30px rgba(46, 98, 135, 0.12)</card>
+        <lift>0 14px 40px rgba(46, 98, 135, 0.18)</lift>
+      </light>
+      <dark>
+        <card>0 10px 30px rgba(0, 0, 0, 0.35)</card>
+        <lift>0 14px 44px rgba(0, 0, 0, 0.45)</lift>
+      </dark>
+      <ctaGlow>0 0 0 1px rgba(237, 174, 95, 0.35), 0 12px 26px rgba(191, 97, 27, 0.28)</ctaGlow>
+    </shadows>
+
+    <borders>
+      <hairline>1px</hairline>
+      <softOpacityLight>0.25–0.40</softOpacityLight>
+      <softOpacityDark>0.18–0.28</softOpacityDark>
+    </borders>
+
+    <texture>
+      <noise>
+        <file>/noise.svg</file>
+        <lightOpacity>0.012–0.018</lightOpacity>
+        <darkOpacity>0.020–0.030</darkOpacity>
+        <blendMode>overlay</blendMode>
+      </noise>
+    </texture>
+
+    <motion>
+      <easing>cubic-bezier(0.22, 1, 0.36, 1)</easing>
+      <hoverDuration>160–220ms</hoverDuration>
+      <pressDuration>90–120ms</pressDuration>
+      <reduceMotion>Respect prefers-reduced-motion (no shimmer; no long scroll lock)</reduceMotion>
+    </motion>
+  </tokens>
+
+  <layout>
+    <background_zones>
+      <light_mode>
+        <pageBase>Near-white (do NOT use sand as full-page background)</pageBase>
+        <heroAtmosphere>Very faint blue tint wash using Crashing Waves #486d8a at ~3–5%</heroAtmosphere>
+        <sectionAltSurface>Sparkling Champagne #ead09d only as alternating section surface (not everywhere)</sectionAltSurface>
+      </light_mode>
+
+      <dark_mode>
+        <topZone>Sea Paint #0d4d79</topZone>
+        <midZone>Grand Bleu #145680</midZone>
+        <depthOverlay>Twilight overlay Plumbeous #68748a at ~6–10% to avoid “water mode” flatness</depthOverlay>
+        <cards>Grand Bleu #145680 with subtle top highlight line</cards>
+      </dark_mode>
+    </background_zones>
+  </layout>
+
+  <styling>
+    <global_rules>
+      <rule>Blue dominates structure (nav, hero framing, section dividers, card shells)</rule>
+      <rule>Bronze/amber signals action only (CTAs, active states, key icons)</rule>
+      <rule>Sand is for surfaces and readability (chips, panels, subtle highlights) — never for whole-page wash</rule>
+      <rule>Introduce “twilight” (Plumbeous/Mauve) to add depth and avoid monotone oceans</rule>
+      <rule>Use gradients horizontally for identity (left→right), vertically for depth (top→bottom), radially for spotlight</rule>
+    </global_rules>
+
+    <navbar>
+      <light_mode>
+        <background>
+          <gradient direction="left-to-right">
+            <stop position="0%">Crashing Waves #486d8a</stop>
+            <stop position="55%">Mississippi River #2e6287</stop>
+            <stop position="100%">Sea Paint #0d4d79</stop>
+          </gradient>
+          <overlay>Subtle highlight sheen (white at 8–12%) centered, not mirrored</overlay>
+          <noise>1.2–1.8% overlay noise to remove flatness</noise>
+        </background>
+
+        <edge_definition>
+          <bottomBorder>Hairline border using Plumbeous #68748a at ~35% opacity</bottomBorder>
+          <accentHint>Optional right-edge fade using Golden Nugget #d48f4e at ~10–14% opacity</accentHint>
+        </edge_definition>
+
+        <typography>
+          <logo>Text in near-white or very light sand (Instant Noodles #f4d390 at low alpha) for contrast on blue</logo>
+          <linksDefault>Near-white (high legibility) with slight opacity reduction (85–92%)</linksDefault>
+          <linksHover>Increase opacity + subtle underline in dusty/twilight blue (Plumbeous #597489)</linksHover>
+          <activeState>Underline ONLY in Polished Bronze #cd7931 (decisions, not browsing)</activeState>
+        </typography>
+
+        <interaction>
+          <hover>No layout shift; underline animates via transform/opacity</hover>
+          <focusRing>Shiny Trumpet #edae5f at 45% + 1px inner ring</focusRing>
+          <themeToggle>Utility styling (muted), no glow</themeToggle>
+        </interaction>
+      </light_mode>
+
+      <dark_mode>
+        <background>
+          <gradient direction="left-to-right">
+            <stop position="0%">Sea Paint #0d4d79</stop>
+            <stop position="55%">Grand Bleu #145680</stop>
+            <stop position="100%">Mississippi River #2e6287</stop>
+          </gradient>
+          <glass>Frosted overlay (white 4–7%) + subtle blur if desired</glass>
+          <noise>2.0–3.0% overlay noise</noise>
+        </background>
+
+        <edge_definition>
+          <bottomBorder>Hairline border using Gull #8b8b8d at ~18–22% opacity</bottomBorder>
+          <accentHint>Very subtle bronze edge glow using Golden Nugget #d48f4e at ~12%</accentHint>
+        </edge_definition>
+
+        <typography>
+          <linksDefault>Sand light (Instant Noodles #f4d390) at 85–92%</linksDefault>
+          <linksHover>Golden Opportunity #f0bf73 (small, refined)</linksHover>
+          <activeState>Underline Polished Bronze #cd7931 (same logic as light)</activeState>
+        </typography>
+      </dark_mode>
+    </navbar>
+
+    <components>
+      <Hero>
+        <background>
+          <light_mode>
+            <base>Near-white page base</base>
+            <spotlight>Radial wash behind name using Mississippi River #2e6287 at 6–10%</spotlight>
+            <divider>Section break line using Plumbeous #68748a at ~20–30%</divider>
+          </light_mode>
+
+          <dark_mode>
+            <base>Sea Paint #0d4d79</base>
+            <depthGradient>Top→mid shift: Sea Paint #0d4d79 → Grand Bleu #145680</depthGradient>
+            <spotlight>Radial behind name: Mississippi River #2e6287 at ~12–18%</spotlight>
+          </dark_mode>
+        </background>
+
+        <typography>
+          <name>
+            <light_mode>Sea Paint #0d4d79 (strong, high contrast)</light_mode>
+            <dark_mode>Instant Noodles #f4d390</dark_mode>
+          </name>
+          <subtitle>
+            <light_mode>Mississippi River #2e6287</light_mode>
+            <dark_mode>Golden Opportunity #f0bf73 (or Instant Noodles #f4d390 at lower opacity)</dark_mode>
+          </subtitle>
+          <body>
+            <light_mode>Plumbeous #68748a (readable, not dull)</light_mode>
+            <dark_mode>Instant Noodles #f4d390 at ~70–80%</dark_mode>
+          </body>
+        </typography>
+      </Hero>
+
+      <HeroButton>
+        <variants>
+          <primary name="View Projects">
+            <light_mode>
+              <baseFill>Polished Bronze #cd7931</baseFill>
+              <gradient>Top highlight: Golden Nugget #d48f4e (10–18% band) → base</gradient>
+              <text>Sea Paint #0d4d79 or near-black (high contrast, modern)</text>
+              <shadow>CTA glow: include warm + cool shadow mix (bronze glow + subtle blue drop)</shadow>
+              <border>1px inner border: Shiny Trumpet #edae5f at ~35%</border>
+              <3d>Use “keycap” effect: top inset highlight + bottom inset shadow</3d>
+              <glassy>Sheen layer on hover (diagonal shimmer), not constant</glassy>
+            </light_mode>
+
+            <dark_mode>
+              <baseFill>Polished Bronze #cd7931</baseFill>
+              <gradient>Dwarven Bronze #bf611b (bottom) → Polished Bronze #cd7931 (top)</gradient>
+              <text>Instant Noodles #f4d390 (or near-black if brighter fill)</text>
+              <glow>Outer glow: Shiny Trumpet #edae5f (soft) + Dwarven Bronze #bf611b (depth)</glow>
+            </dark_mode>
+
+            <states>
+              <hover>Lift 1–2px + increase sheen + slightly brighten highlight band</hover>
+              <active>Press down 1px + reduce shadow + tighten glow</active>
+              <focus>Visible ring using Shiny Trumpet #edae5f</focus>
+              <disabled>Desaturate + reduce contrast; keep shape</disabled>
+            </states>
+          </primary>
+
+          <secondary name="How I Build Software">
+            <light_mode>
+              <baseFill>White</baseFill>
+              <border>Mississippi River #2e6287 at 35–45%</border>
+              <text>Sea Paint #0d4d79</text>
+              <hover>Background tint: Crashing Waves #486d8a at ~8%</hover>
+              <focus>Ring: Shiny Trumpet #edae5f</focus>
+            </light_mode>
+
+            <dark_mode>
+              <baseFill>Grand Bleu #145680</baseFill>
+              <border>Plumbeous #68748a at 25%</border>
+              <text>Instant Noodles #f4d390</text>
+              <hover>Border shift to Golden Nugget #d48f4e at ~30%</hover>
+            </dark_mode>
+          </secondary>
+        </variants>
+
+        <iconography>
+          <arrow>Keep arrow inline (same baseline). No line breaks. Small nudge right on hover.</arrow>
+        </iconography>
+      </HeroButton>
+
+      <Cards>
+        <FeaturedProjectsCard>
+          <light_mode>
+            <surface>White</surface>
+            <border>Plumbeous #68748a at ~20–28%</border>
+            <shadow>Blue-tinted shadow for “custom” feel</shadow>
+            <title>Sea Paint #0d4d79</title>
+            <body>Plumbeous #68748a</body>
+            <topHighlightLine>Golden Nugget #d48f4e at ~18–25% opacity</topHighlightLine>
+          </light_mode>
+
+          <dark_mode>
+            <surface>Grand Bleu #145680</surface>
+            <border>Gull #8b8b8d at ~18–22%</border>
+            <title>Instant Noodles #f4d390</title>
+            <body>Instant Noodles #f4d390 at ~75%</body>
+            <topHighlightLine>Polished Bronze #cd7931 at ~18%</topHighlightLine>
+          </dark_mode>
+        </FeaturedProjectsCard>
+      </Cards>
+
+      <Pills_and_Badges>
+        <rule>Reserve pills for interactivity only (filters, active toggles). Avoid “pill storms.”</rule>
+        <light_mode>
+          <defaultSurface>Sparkling Champagne #ead09d</defaultSurface>
+          <text>Sea Paint #0d4d79</text>
+          <activeFill>Polished Bronze #cd7931</activeFill>
+        </light_mode>
+        <dark_mode>
+          <defaultSurface>Sea Paint #0d4d79 (slightly lighter than bg)</defaultSurface>
+          <text>Instant Noodles #f4d390</text>
+          <activeFill>Polished Bronze #cd7931</activeFill>
+        </dark_mode>
+      </Pills_and_Badges>
+
+      <Forms>
+        <inputs>
+          <light_mode>
+            <surface>White</surface>
+            <border>Plumbeous #68748a at ~25–35%</border>
+            <focusRing>Shiny Trumpet #edae5f</focusRing>
+          </light_mode>
+          <dark_mode>
+            <surface>Grand Bleu #145680</surface>
+            <border>Plumbeous #68748a at ~22%</border>
+            <focusRing>Golden Opportunity #f0bf73</focusRing>
+          </dark_mode>
+        </inputs>
+      </Forms>
+
+      <Dividers_and_Section_Breaks>
+        <light_mode>
+          <dividerLine>Plumbeous #68748a at ~18–24%</dividerLine>
+          <altSection>Use Sparkling Champagne #ead09d sparingly</altSection>
+        </light_mode>
+        <dark_mode>
+          <dividerLine>Gull #8b8b8d at ~14–18%</dividerLine>
+          <altSectionOverlay>Plumbeous #68748a at ~6–10% overlay</altSectionOverlay>
+        </dark_mode>
+      </Dividers_and_Section_Breaks>
+
+      <Footer>
+        <light_mode>
+          <background>Mississippi River #2e6287 at ~6–10% tint (not beige)</background>
+          <text>Sea Paint #0d4d79 at ~70%</text>
+        </light_mode>
+        <dark_mode>
+          <background>Sea Paint #0d4d79</background>
+          <text>Instant Noodles #f4d390 at ~70%</text>
+        </dark_mode>
+      </Footer>
+    </components>
+
+    <motion_notes>
+      <rule>Animations should never “glitch.” Prefer transform/opacity over layout changes.</rule>
+      <rule>Hover shimmer: short, single pass (not looping), uses easing token.</rule>
+      <rule>Buttons: lift on hover, compress on active. Keep durations consistent site-wide.</rule>
+      <rule>Reduce motion: provide static fallback (no spin/shimmer).</rule>
+    </motion_notes>
+
+    <accessibility>
+      <contrast>
+        <light_mode>Ensure text on sand surfaces meets WCAG AA; prefer deep ocean for text.</light_mode>
+        <dark_mode>Sand text on ocean backgrounds; avoid low-contrast twilight text for body.</dark_mode>
+      </contrast>
+      <focus>
+        <rule>Always-visible focus ring on keyboard navigation using Shiny Trumpet #edae5f (light) or Golden Opportunity #f0bf73 (dark)</rule>
+      </focus>
+    </accessibility>
+  </styling>
+
+  <implementation_todos>
+    <todo>Unify tokens in Tailwind + CSS variables (ocean/bronze/sand/twilight)</todo>
+    <todo>Apply navbar gradients + noise overlays (light/dark)</todo>
+    <todo>Rebuild Hero background as layered gradients (depth + spotlight)</todo>
+    <todo>Finalize HeroButton as 3D keycap + glass sheen (consistent hover/press)</todo>
+    <todo>Update card surfaces/borders/shadows to introduce depth (top highlight line)</todo>
+    <todo>Audit page backgrounds: remove full-page sand wash, use blue atmosphere instead</todo>
+    <todo>Reduce “pill density” across Projects page; keep only interactive pills</todo>
+    <todo>Run a contrast pass on text + buttons in both modes</todo>
+  </implementation_todos>
+</front_end_redesign>

@@ -1,55 +1,63 @@
-import { Metadata } from 'next'
-import { MapPin, Briefcase, Heart, Code } from 'lucide-react'
-import { siteMetadata } from '@/data/metadata'
+import { Metadata } from "next";
+import { MapPin, Briefcase, Heart, Code } from "lucide-react";
+import { siteMetadata } from "@/data/metadata";
 
 export const metadata: Metadata = {
-  title: 'About',
-  description: 'Learn more about my background, experience, and what drives me as a developer.',
+  title: "About",
+  description:
+    "Learn more about my background, experience, and what drives me as a developer.",
   alternates: {
-    canonical: '/about',
+    canonical: "/about",
   },
-}
+};
 
 const timeline = [
   {
-    year: '2024',
-    title: 'Senior Full-Stack Developer',
-    description: 'Leading development of complex web applications and mentoring junior developers.',
+    year: "2024",
+    title: "Senior Full-Stack Developer",
+    description:
+      "Leading development of complex web applications and mentoring junior developers.",
   },
   {
-    year: '2022',
-    title: 'Full-Stack Developer',
-    description: 'Built and maintained multiple production applications using React, Node.js, and cloud services.',
+    year: "2022",
+    title: "Full-Stack Developer",
+    description:
+      "Built and maintained multiple production applications using React, Node.js, and cloud services.",
   },
   {
-    year: '2020',
-    title: 'Frontend Developer',
-    description: 'Focused on creating responsive, accessible web interfaces with modern JavaScript frameworks.',
+    year: "2020",
+    title: "Frontend Developer",
+    description:
+      "Focused on creating responsive, accessible web interfaces with modern JavaScript frameworks.",
   },
   {
-    year: '2018',
-    title: 'Started Coding Journey',
-    description: 'Discovered my passion for programming and began learning web development fundamentals.',
+    year: "2018",
+    title: "Started Coding Journey",
+    description:
+      "Discovered my passion for programming and began learning web development fundamentals.",
   },
-]
+];
 
 const howIWork = [
   {
     icon: Code,
-    title: 'Code Quality',
-    description: 'I write clean, maintainable code with comprehensive tests. Type safety and documentation are non-negotiable.',
+    title: "Code Quality",
+    description:
+      "I write clean, maintainable code with comprehensive tests. Type safety and documentation are non-negotiable.",
   },
   {
     icon: Heart,
-    title: 'User-Centric',
-    description: 'Every technical decision starts with the user experience. Performance and accessibility are priorities.',
+    title: "User-Centric",
+    description:
+      "Every technical decision starts with the user experience. Performance and accessibility are priorities.",
   },
   {
     icon: Briefcase,
-    title: 'Collaboration',
-    description: 'I thrive in team environments, value clear communication, and believe in continuous learning.',
+    title: "Collaboration",
+    description:
+      "I thrive in team environments, value clear communication, and believe in continuous learning.",
   },
-]
+];
 
 export default function AboutPage() {
   return (
@@ -86,15 +94,16 @@ export default function AboutPage() {
               </div>
               <div className="prose-content">
                 <p>
-                  I&apos;m a passionate developer who loves turning complex problems into
-                  elegant solutions. With a strong foundation in both frontend and backend
-                  technologies, I build applications that are not only functional but also
-                  delightful to use.
+                  I&apos;m a passionate developer who loves turning complex
+                  problems into elegant solutions. With a strong foundation in
+                  both frontend and backend technologies, I build applications
+                  that are not only functional but also delightful to use.
                 </p>
                 <p>
-                  My journey in tech started with curiosity about how things work. Today,
-                  that curiosity drives me to continuously learn and stay updated with the
-                  latest technologies and best practices.
+                  My journey in tech started with curiosity about how things
+                  work. Today, that curiosity drives me to continuously learn
+                  and stay updated with the latest technologies and best
+                  practices.
                 </p>
               </div>
             </div>
@@ -157,8 +166,8 @@ export default function AboutPage() {
           </h2>
           <div className="prose-content">
             <p>
-              I&apos;m interested in full-stack development roles where I can make a
-              meaningful impact. I thrive in environments that value:
+              I&apos;m interested in full-stack development roles where I can
+              make a meaningful impact. I thrive in environments that value:
             </p>
             <ul>
               <li>Technical excellence and continuous improvement</li>
@@ -167,12 +176,12 @@ export default function AboutPage() {
               <li>Learning opportunities and professional growth</li>
             </ul>
             <p>
-              Open to both remote and hybrid positions. Let&apos;s talk if you think
-              we&apos;d be a good fit!
+              Open to both remote and hybrid positions. Let&apos;s talk if you
+              think we&apos;d be a good fit!
             </p>
           </div>
         </section>
       </div>
     </div>
-  )
+  );
 }

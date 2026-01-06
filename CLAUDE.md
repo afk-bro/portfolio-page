@@ -18,6 +18,7 @@ pnpm format:check # Check formatting without writing
 ### Data-Driven Content with Zod Validation
 
 All content lives in `/data` with runtime Zod schema validation:
+
 - `projects.ts` - Project case studies with helper functions (`getProjectBySlug()`, `getFeaturedProjects()`, `getProjectsByTechnology()`)
 - `skills.ts` - Skills with categorization (`getGroupedSkills()`, `getFeaturedSkills()`)
 - `metadata.ts` - Site-wide configuration

@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { useToast } from '@/components/ui/Toast'
-import { Button } from '@/components/ui/Button'
+import { useToast } from "@/components/ui/Toast";
+import { Button } from "@/components/ui/Button";
 
 export default function TestToastPage() {
-  const { addToast } = useToast()
+  const { addToast } = useToast();
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -14,24 +14,32 @@ export default function TestToastPage() {
         </h1>
         <div className="flex flex-wrap gap-4 justify-center">
           <Button
-            onClick={() => addToast('Success! This is a success message.', 'success', 5000)}
+            onClick={() =>
+              addToast("Success! This is a success message.", "success", 5000)
+            }
           >
             Show Success Toast
           </Button>
           <Button
-            onClick={() => addToast('Error! Something went wrong.', 'error', 5000)}
+            onClick={() =>
+              addToast("Error! Something went wrong.", "error", 5000)
+            }
             variant="outline"
           >
             Show Error Toast
           </Button>
           <Button
-            onClick={() => addToast('Info: Here is some information.', 'info', 5000)}
+            onClick={() =>
+              addToast("Info: Here is some information.", "info", 5000)
+            }
             variant="outline"
           >
             Show Info Toast
           </Button>
           <Button
-            onClick={() => addToast('Warning! Please be careful.', 'warning', 5000)}
+            onClick={() =>
+              addToast("Warning! Please be careful.", "warning", 5000)
+            }
             variant="outline"
           >
             Show Warning Toast
@@ -39,5 +47,5 @@ export default function TestToastPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

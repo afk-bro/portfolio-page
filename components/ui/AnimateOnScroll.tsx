@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import { ReactNode } from 'react'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
-import { cn } from '@/lib/utils'
+import { ReactNode } from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { cn } from "@/lib/utils";
 
-type AnimationVariant = 'fade-up' | 'fade-in' | 'fade-left' | 'fade-right'
+type AnimationVariant = "fade-up" | "fade-in" | "fade-left" | "fade-right";
 
 interface AnimateOnScrollProps {
-  children: ReactNode
-  variant?: AnimationVariant
-  delay?: number
-  duration?: number
-  className?: string
-  as?: keyof JSX.IntrinsicElements
-  threshold?: number
+  children: ReactNode;
+  variant?: AnimationVariant;
+  delay?: number;
+  duration?: number;
+  className?: string;
+  as?: keyof JSX.IntrinsicElements;
+  threshold?: number;
 }
 
 /**
@@ -22,17 +22,17 @@ interface AnimateOnScrollProps {
  */
 export function AnimateOnScroll({
   children,
-  variant = 'fade-up',
+  variant = "fade-up",
   delay = 0,
   duration = 500,
   className,
-  as: Component = 'div',
+  as: Component = "div",
   threshold = 0.1,
 }: AnimateOnScrollProps) {
   const { ref, isVisible, prefersReducedMotion } = useScrollAnimation({
     threshold,
     triggerOnce: true,
-  })
+  });
 
   // Get initial and final styles based on animation variant
   const getAnimationStyles = () => {
@@ -40,28 +40,32 @@ export function AnimateOnScroll({
     if (prefersReducedMotion) {
       return {
         opacity: 1,
-        transform: 'none',
-        transition: 'none',
-      }
+        transform: "none",
+        transition: "none",
+      };
     }
 
-    const baseTransition = `opacity ${duration}ms ease-out, transform ${duration}ms ease-out`
-    const delayedTransition = delay > 0 ? `${baseTransition} ${delay}ms` : baseTransition
+    const baseTransition = `opacity ${duration}ms ease-out, transform ${duration}ms ease-out`;
+    const delayedTransition =
+      delay > 0 ? `${baseTransition} ${delay}ms` : baseTransition;
 
-    const variants: Record<AnimationVariant, { initial: React.CSSProperties; visible: React.CSSProperties }> = {
-      'fade-up': {
+    const variants: Record<
+      AnimationVariant,
+      { initial: React.CSSProperties; visible: React.CSSProperties }
+    > = {
+      "fade-up": {
         initial: {
           opacity: 0,
-          transform: 'translateY(24px)',
+          transform: "translateY(24px)",
           transition: delayedTransition,
         },
         visible: {
           opacity: 1,
-          transform: 'translateY(0)',
+          transform: "translateY(0)",
           transition: delayedTransition,
         },
       },
-      'fade-in': {
+      "fade-in": {
         initial: {
           opacity: 0,
           transition: delayedTransition,
@@ -71,37 +75,37 @@ export function AnimateOnScroll({
           transition: delayedTransition,
         },
       },
-      'fade-left': {
+      "fade-left": {
         initial: {
           opacity: 0,
-          transform: 'translateX(24px)',
+          transform: "translateX(24px)",
           transition: delayedTransition,
         },
         visible: {
           opacity: 1,
-          transform: 'translateX(0)',
+          transform: "translateX(0)",
           transition: delayedTransition,
         },
       },
-      'fade-right': {
+      "fade-right": {
         initial: {
           opacity: 0,
-          transform: 'translateX(-24px)',
+          transform: "translateX(-24px)",
           transition: delayedTransition,
         },
         visible: {
           opacity: 1,
-          transform: 'translateX(0)',
+          transform: "translateX(0)",
           transition: delayedTransition,
         },
       },
-    }
+    };
 
-    return isVisible ? variants[variant].visible : variants[variant].initial
-  }
+    return isVisible ? variants[variant].visible : variants[variant].initial;
+  };
 
   // Use a type assertion for the dynamic component
-  const ElementComponent = Component as React.ElementType
+  const ElementComponent = Component as React.ElementType;
 
   return (
     <ElementComponent
@@ -111,5 +115,5 @@ export function AnimateOnScroll({
     >
       {children}
     </ElementComponent>
-  )
+  );
 }

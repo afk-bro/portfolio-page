@@ -1,29 +1,35 @@
-'use client'
+"use client";
 
-import { Database, TestTube, Cog } from 'lucide-react'
-import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
+import { Database, TestTube, Cog } from "lucide-react";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 
 const principles = [
   {
     icon: Database,
-    title: 'Schema-first data modeling',
-    description: 'Zod schemas define the contract. Types flow from validation. UI reflects the model.',
+    title: "Schema-first data modeling",
+    description:
+      "Zod schemas define the contract. Types flow from validation. UI reflects the model.",
   },
   {
     icon: TestTube,
-    title: 'Testing as a feature, not a phase',
-    description: 'E2E coverage from day one. Tests document behavior and prevent regression.',
+    title: "Testing as a feature, not a phase",
+    description:
+      "E2E coverage from day one. Tests document behavior and prevent regression.",
   },
   {
     icon: Cog,
-    title: 'Automation-first workflows',
-    description: 'CI pipelines, code generation, and tooling that eliminates manual toil.',
+    title: "Automation-first workflows",
+    description:
+      "CI pipelines, code generation, and tooling that eliminates manual toil.",
   },
-]
+];
 
 export function HowIBuild() {
   return (
-    <section id="how-i-build" className="section bg-neutral-50 dark:bg-neutral-800/30">
+    <section
+      id="how-i-build"
+      className="section bg-neutral-50 dark:bg-neutral-800/30"
+    >
       <div className="container-content">
         <AnimateOnScroll variant="fade-up" className="text-center mb-12">
           <h2 className="text-h2 text-neutral-900 dark:text-neutral-50 mb-4">
@@ -53,5 +59,5 @@ export function HowIBuild() {
         </div>
       </div>
     </section>
-  )
+  );
 }

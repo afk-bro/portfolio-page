@@ -1,6 +1,6 @@
-import { Suspense } from 'react'
-import { TestErrorComponent } from '@/components/TestErrorComponent'
-import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { Suspense } from "react";
+import { TestErrorComponent } from "@/components/TestErrorComponent";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export default function TestErrorPage() {
   return (
@@ -10,8 +10,8 @@ export default function TestErrorPage() {
           Error Boundary Test Page
         </h1>
         <p className="text-gray-600 dark:text-gray-400 mb-6">
-          Click the button below to trigger an error and test the error boundary.
-          Or add ?error=true to the URL.
+          Click the button below to trigger an error and test the error
+          boundary. Or add ?error=true to the URL.
         </p>
         <ErrorBoundary>
           <Suspense fallback={<div>Loading...</div>}>
@@ -20,5 +20,5 @@ export default function TestErrorPage() {
         </ErrorBoundary>
       </div>
     </div>
-  )
+  );
 }

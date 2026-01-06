@@ -1,40 +1,40 @@
-'use client'
+"use client";
 
-import React, { Component, ErrorInfo, ReactNode } from 'react'
+import React, { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
-  children: ReactNode
-  fallback?: ReactNode
+  children: ReactNode;
+  fallback?: ReactNode;
 }
 
 interface State {
-  hasError: boolean
-  error: Error | null
+  hasError: boolean;
+  error: Error | null;
 }
 
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
-    super(props)
-    this.state = { hasError: false, error: null }
+    super(props);
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error }
+    return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     // Log error to console in development
-    console.error('ErrorBoundary caught an error:', error, errorInfo)
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
   }
 
   handleReset = (): void => {
-    this.setState({ hasError: false, error: null })
-  }
+    this.setState({ hasError: false, error: null });
+  };
 
   render(): ReactNode {
     if (this.state.hasError) {
       if (this.props.fallback) {
-        return this.props.fallback
+        return this.props.fallback;
       }
 
       return (
@@ -64,7 +64,8 @@ export class ErrorBoundary extends Component<Props, State> {
               Something went wrong
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              We encountered an unexpected error. Please try refreshing the page or navigate to a different section.
+              We encountered an unexpected error. Please try refreshing the page
+              or navigate to a different section.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
@@ -82,9 +83,9 @@ export class ErrorBoundary extends Component<Props, State> {
             </div>
           </div>
         </div>
-      )
+      );
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }

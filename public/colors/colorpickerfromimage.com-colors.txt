@@ -1,0 +1,42 @@
+Sienna: #a7551b
+Bloodhound: #b45b19
+Dwarven Bronze: #bf611b
+Cajeta: #c86c23
+Polished Bronze: #cd7931
+Golden Nugget: #d48f4e
+Kombucha: #d8a570
+Link to the Past: #d7b288
+Cozy Wool: #d6b798
+Soba: #d3b79f
+Soba: #d1b29e
+Frappé: #cea999
+Mutabilis: #bd968f
+Mighty Mauve: #95818a
+Plumbeous: #68748a
+Crashing Waves: #486d8a
+Mississippi River: #336588
+Oceanic Motion: #205a82
+Sea Paint: #0f4e79
+Mermaid Blues: #054672
+Otterly Brown: #844518
+Otterly Brown: #884a1b
+Mochaccino: #94531d
+Mai Tai: #ab601c
+Cajeta: #c87321
+Caramelize: #dc8631
+Pumpkin Pie: #e79b47
+Shiny Trumpet: #edae5f
+Golden Opportunity: #f0bf73
+Macaroni: #f3cd86
+Instant Noodles: #f4d390
+Instant Noodles: #f2d494
+Sparkling Champagne: #eed39b
+Sparkling Champagne: #ead09d
+Fortune Cookie: #e1c89d
+Cozy Wool: #d3ba99
+Hickory: #b9a493
+Gull: #8b8b8d
+Plumbeous: #597489
+Mississippi River: #2e6287
+Grand Bleu: #145680
+Sea Paint: #0d4d79

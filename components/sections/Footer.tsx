@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { Github, Linkedin, Mail } from 'lucide-react'
-import { siteMetadata } from '@/data/metadata'
+import Link from "next/link";
+import { Github, Linkedin, Mail } from "lucide-react";
+import { siteMetadata } from "@/data/metadata";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700">
@@ -53,5 +53,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

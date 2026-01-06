@@ -1,17 +1,18 @@
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Get in touch with me. Send a message or connect via email, GitHub, or LinkedIn.',
+  title: "Contact",
+  description:
+    "Get in touch with me. Send a message or connect via email, GitHub, or LinkedIn.",
   alternates: {
-    canonical: '/contact',
+    canonical: "/contact",
   },
-}
+};
 
 export default function ContactLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return children
+  return children;
 }

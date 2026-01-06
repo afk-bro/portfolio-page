@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { ArrowRight, Mail } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
-import { siteMetadata } from '@/data/metadata'
-import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
+import Link from "next/link";
+import { ArrowRight, Mail } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { siteMetadata } from "@/data/metadata";
+import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 
 export function CallToAction() {
   return (
@@ -48,5 +48,5 @@ export function CallToAction() {
         </AnimateOnScroll>
       </div>
     </section>
-  )
+  );
 }

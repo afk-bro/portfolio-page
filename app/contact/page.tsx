@@ -1,123 +1,131 @@
-'use client'
+"use client";
 
-import { useState, useRef } from 'react'
-import { Mail, Github, Clock, ArrowRight, CheckCircle } from 'lucide-react'
-import { siteMetadata } from '@/data/metadata'
-import { Button } from '@/components/ui/Button'
-import { useToast } from '@/components/ui/Toast'
+import { useState, useRef } from "react";
+import { Mail, Github, Clock, ArrowRight, CheckCircle } from "lucide-react";
+import { siteMetadata } from "@/data/metadata";
+import { Button } from "@/components/ui/Button";
+import { useToast } from "@/components/ui/Toast";
 
 // Rate limiting configuration
-const RATE_LIMIT_WINDOW = 60000 // 1 minute
-const MAX_SUBMISSIONS = 3 // Max 3 submissions per minute
+const RATE_LIMIT_WINDOW = 60000; // 1 minute
+const MAX_SUBMISSIONS = 3; // Max 3 submissions per minute
 
 const contactMethods = [
   {
     icon: Mail,
-    label: 'Email',
-    description: 'Direct contact',
+    label: "Email",
+    description: "Direct contact",
     value: siteMetadata.email,
     href: `mailto:${siteMetadata.email}`,
   },
   {
     icon: Github,
-    label: 'GitHub',
-    description: 'Code & projects',
-    value: 'View Profile',
+    label: "GitHub",
+    description: "Code & projects",
+    value: "View Profile",
     href: siteMetadata.social.github,
     external: true,
   },
-]
+];
 
 export default function ContactPage() {
-  const { addToast } = useToast()
+  const { addToast } = useToast();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-    honeypot: '', // Spam protection
-  })
-  const [errors, setErrors] = useState<Record<string, string>>({})
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const submissionTimestamps = useRef<number[]>([])
+    name: "",
+    email: "",
+    message: "",
+    honeypot: "", // Spam protection
+  });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const submissionTimestamps = useRef<number[]>([]);
 
   const validateForm = () => {
-    const newErrors: Record<string, string> = {}
+    const newErrors: Record<string, string> = {};
 
     // Name is optional - no validation needed
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required'
+      newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address'
+      newErrors.email = "Please enter a valid email address";
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required'
+      newErrors.message = "Message is required";
     }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   // Check rate limiting
   const checkRateLimit = (): boolean => {
-    const now = Date.now()
+    const now = Date.now();
     // Filter out timestamps older than the rate limit window
     submissionTimestamps.current = submissionTimestamps.current.filter(
-      (timestamp) => now - timestamp < RATE_LIMIT_WINDOW
-    )
-    return submissionTimestamps.current.length >= MAX_SUBMISSIONS
-  }
+      (timestamp) => now - timestamp < RATE_LIMIT_WINDOW,
+    );
+    return submissionTimestamps.current.length >= MAX_SUBMISSIONS;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // Honeypot check - if filled, it's likely a bot
     if (formData.honeypot) {
-      return
+      return;
     }
 
     // Rate limiting check
     if (checkRateLimit()) {
-      addToast('Too many submissions. Please wait a minute before trying again.', 'error', 5000)
-      return
+      addToast(
+        "Too many submissions. Please wait a minute before trying again.",
+        "error",
+        5000,
+      );
+      return;
     }
 
     if (!validateForm()) {
-      return
+      return;
     }
 
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Record the submission timestamp for rate limiting
-    submissionTimestamps.current.push(Date.now())
+    submissionTimestamps.current.push(Date.now());
 
     // In a real app, you would send this to an API endpoint
-    console.log('Form submitted:', formData)
+    console.log("Form submitted:", formData);
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setFormData({ name: '', email: '', message: '', honeypot: '' })
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    setFormData({ name: "", email: "", message: "", honeypot: "" });
 
     // Show success toast notification
-    addToast('Message sent successfully! I\'ll get back to you soon.', 'success', 5000)
-  }
+    addToast(
+      "Message sent successfully! I'll get back to you soon.",
+      "success",
+      5000,
+    );
+  };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
 
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: '' }))
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-  }
+  };
 
   return (
     <div className="section">
@@ -128,7 +136,8 @@ export default function ContactPage() {
             Get In Touch
           </h1>
           <p className="text-lg text-ocean-300 dark:text-sand-500/75">
-            Have a question or want to work together? I&apos;d love to hear from you.
+            Have a question or want to work together? I&apos;d love to hear from
+            you.
           </p>
         </div>
 
@@ -144,8 +153,8 @@ export default function ContactPage() {
                 <a
                   key={method.label}
                   href={method.href}
-                  target={method.external ? '_blank' : undefined}
-                  rel={method.external ? 'noopener noreferrer' : undefined}
+                  target={method.external ? "_blank" : undefined}
+                  rel={method.external ? "noopener noreferrer" : undefined}
                   className="flex items-center gap-4 p-4 rounded-card bg-sand-50 dark:bg-white/5 hover:bg-ocean-50 dark:hover:bg-white/10 transition-colors duration-180 ease-smooth border border-ocean-100 dark:border-white/10"
                 >
                   <method.icon className="w-6 h-6 text-bronze-700 dark:text-bronze-400" />
@@ -184,7 +193,8 @@ export default function ContactPage() {
               Send a Message
             </h2>
             <p className="text-sm text-muted-400 dark:text-sand-500/70 mb-6">
-              Feel free to reach out about roles, collaborations, or questions about my work.
+              Feel free to reach out about roles, collaborations, or questions
+              about my work.
             </p>
 
             {isSubmitted ? (
@@ -220,7 +230,10 @@ export default function ContactPage() {
                     htmlFor="name"
                     className="block text-sm font-medium text-ocean-700 dark:text-sand-500/90 mb-2"
                   >
-                    Name <span className="text-muted-400 font-normal">(optional)</span>
+                    Name{" "}
+                    <span className="text-muted-400 font-normal">
+                      (optional)
+                    </span>
                   </label>
                   <input
                     type="text"
@@ -250,10 +263,10 @@ export default function ContactPage() {
                     placeholder="you@example.com"
                     className={`w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-bronze-400 focus:border-bronze-400 transition-colors duration-180 ${
                       errors.email
-                        ? 'border-error-500'
-                        : 'border-ocean-300/30 dark:border-white/10'
+                        ? "border-error-500"
+                        : "border-ocean-300/30 dark:border-white/10"
                     }`}
-                    aria-describedby={errors.email ? 'email-error' : undefined}
+                    aria-describedby={errors.email ? "email-error" : undefined}
                   />
                   {errors.email && (
                     <p
@@ -283,11 +296,11 @@ export default function ContactPage() {
                     placeholder="Tell me a bit about what you'd like to discuss..."
                     className={`w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-bronze-400 focus:border-bronze-400 resize-none transition-colors duration-180 ${
                       errors.message
-                        ? 'border-error-500'
-                        : 'border-ocean-300/30 dark:border-white/10'
+                        ? "border-error-500"
+                        : "border-ocean-300/30 dark:border-white/10"
                     }`}
                     aria-describedby={
-                      errors.message ? 'message-error' : undefined
+                      errors.message ? "message-error" : undefined
                     }
                   />
                   {errors.message && (
@@ -309,7 +322,7 @@ export default function ContactPage() {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
-                    'Sending...'
+                    "Sending..."
                   ) : (
                     <>
                       Send Message
@@ -323,5 +336,5 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

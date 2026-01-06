@@ -1,46 +1,61 @@
-import { Metadata } from 'next'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { ArrowLeft, ArrowRight, ExternalLink, Github, Clock, Users } from 'lucide-react'
-import { projects, getProjectBySlug } from '@/data/projects'
-import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
-import { calculateReadingTime } from '@/lib/utils'
+import { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ExternalLink,
+  Github,
+  Clock,
+  Users,
+} from "lucide-react";
+import { projects, getProjectBySlug } from "@/data/projects";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { calculateReadingTime } from "@/lib/utils";
 
 // Get related projects based on shared technologies or domain
-function getRelatedProjects(currentProject: ReturnType<typeof getProjectBySlug>, limit: number = 2) {
-  if (!currentProject) return []
-  const otherProjects = projects.filter((p) => p.slug !== currentProject.slug)
+function getRelatedProjects(
+  currentProject: ReturnType<typeof getProjectBySlug>,
+  limit: number = 2,
+) {
+  if (!currentProject) return [];
+  const otherProjects = projects.filter((p) => p.slug !== currentProject.slug);
   const scored = otherProjects.map((project) => {
-    let score = 0
-    if (project.domain === currentProject.domain) score += 5
+    let score = 0;
+    if (project.domain === currentProject.domain) score += 5;
     const sharedTechs = project.technologies.filter((tech) =>
-      currentProject.technologies.map((t) => t.toLowerCase()).includes(tech.toLowerCase())
-    )
-    score += sharedTechs.length * 2
-    if (project.type === currentProject.type) score += 1
-    return { project, score, sharedTechs }
-  })
-  return scored.filter((item) => item.score > 0).sort((a, b) => b.score - a.score).slice(0, limit)
+      currentProject.technologies
+        .map((t) => t.toLowerCase())
+        .includes(tech.toLowerCase()),
+    );
+    score += sharedTechs.length * 2;
+    if (project.type === currentProject.type) score += 1;
+    return { project, score, sharedTechs };
+  });
+  return scored
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
 }
 
 interface ProjectPageProps {
-  params: { slug: string }
+  params: { slug: string };
 }
 
 export function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
-  }))
+  }));
 }
 
 export function generateMetadata({ params }: ProjectPageProps): Metadata {
-  const project = getProjectBySlug(params.slug)
+  const project = getProjectBySlug(params.slug);
 
   if (!project) {
     return {
-      title: 'Project Not Found',
-    }
+      title: "Project Not Found",
+    };
   }
 
   return {
@@ -52,32 +67,34 @@ export function generateMetadata({ params }: ProjectPageProps): Metadata {
     openGraph: {
       title: project.title,
       description: project.summary,
-      type: 'article',
+      type: "article",
     },
-  }
+  };
 }
 
 export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = getProjectBySlug(params.slug)
+  const project = getProjectBySlug(params.slug);
 
   if (!project) {
-    notFound()
+    notFound();
   }
 
   // Calculate reading time from case study content
   const caseStudyText = project.caseStudy
-    ? Object.values(project.caseStudy).filter(v => typeof v === 'string').join(' ')
-    : project.description
-  const readingTime = calculateReadingTime(caseStudyText)
+    ? Object.values(project.caseStudy)
+        .filter((v) => typeof v === "string")
+        .join(" ")
+    : project.description;
+  const readingTime = calculateReadingTime(caseStudyText);
 
   // Get previous and next projects for navigation
-  const currentIndex = projects.findIndex((p) => p.slug === params.slug)
-  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null
+  const currentIndex = projects.findIndex((p) => p.slug === params.slug);
+  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
   const nextProject =
-    currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null
+    currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
 
   // Get related projects
-  const relatedProjects = getRelatedProjects(project, 2)
+  const relatedProjects = getRelatedProjects(project, 2);
 
   return (
     <article className="section">
@@ -97,18 +114,18 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           <div className="flex items-center gap-2 mb-4">
             <Badge
               variant={
-                project.status === 'complete'
-                  ? 'success'
-                  : project.status === 'in-progress'
-                    ? 'warning'
-                    : 'default'
+                project.status === "complete"
+                  ? "success"
+                  : project.status === "in-progress"
+                    ? "warning"
+                    : "default"
               }
             >
-              {project.status === 'complete'
-                ? 'Complete'
-                : project.status === 'in-progress'
-                  ? 'In Progress'
-                  : 'Archived'}
+              {project.status === "complete"
+                ? "Complete"
+                : project.status === "in-progress"
+                  ? "In Progress"
+                  : "Archived"}
             </Badge>
             <Badge variant="default">{project.domain}</Badge>
           </div>
@@ -129,16 +146,14 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               <Clock className="w-4 h-4" />
               <span>{readingTime} min read</span>
             </div>
-            {project.duration && (
-              <span>Duration: {project.duration}</span>
-            )}
+            {project.duration && <span>Duration: {project.duration}</span>}
             {project.team && (
               <div className="flex items-center gap-1">
                 <Users className="w-4 h-4" />
                 <span>
-                  {project.team === 'solo'
-                    ? 'Solo project'
-                    : `Team of ${project.teamSize || 'multiple'}`}
+                  {project.team === "solo"
+                    ? "Solo project"
+                    : `Team of ${project.teamSize || "multiple"}`}
                 </span>
               </div>
             )}
@@ -247,60 +262,65 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
         {/* Related Projects */}
         {relatedProjects.length > 0 && (
-          <section id="related-projects" className="mt-16 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+          <section
+            id="related-projects"
+            className="mt-16 pt-8 border-t border-neutral-200 dark:border-neutral-700"
+          >
             <h2 className="text-h3 text-neutral-900 dark:text-neutral-50 mb-6">
               Related Projects
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {relatedProjects.map(({ project: relatedProject, sharedTechs }) => (
-                <Link
-                  key={relatedProject.id}
-                  href={`/projects/${relatedProject.slug}`}
-                  className="card p-6 hover:shadow-lg transition-shadow group"
-                >
-                  <div className="flex items-center gap-2 mb-3">
-                    <Badge
-                      variant={
-                        relatedProject.status === 'complete'
-                          ? 'success'
-                          : relatedProject.status === 'in-progress'
-                            ? 'warning'
-                            : 'default'
-                      }
-                      size="sm"
-                    >
-                      {relatedProject.status === 'complete'
-                        ? 'Complete'
-                        : relatedProject.status === 'in-progress'
-                          ? 'In Progress'
-                          : 'Archived'}
-                    </Badge>
-                    <Badge variant="default" size="sm">
-                      {relatedProject.domain}
-                    </Badge>
-                  </div>
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                    {relatedProject.title}
-                  </h3>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 line-clamp-2">
-                    {relatedProject.summary}
-                  </p>
-                  {sharedTechs.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                      {sharedTechs.slice(0, 3).map((tech) => (
-                        <Badge key={tech} variant="primary" size="sm">
-                          {tech}
-                        </Badge>
-                      ))}
-                      {sharedTechs.length > 3 && (
-                        <Badge variant="default" size="sm">
-                          +{sharedTechs.length - 3}
-                        </Badge>
-                      )}
+              {relatedProjects.map(
+                ({ project: relatedProject, sharedTechs }) => (
+                  <Link
+                    key={relatedProject.id}
+                    href={`/projects/${relatedProject.slug}`}
+                    className="card p-6 hover:shadow-lg transition-shadow group"
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <Badge
+                        variant={
+                          relatedProject.status === "complete"
+                            ? "success"
+                            : relatedProject.status === "in-progress"
+                              ? "warning"
+                              : "default"
+                        }
+                        size="sm"
+                      >
+                        {relatedProject.status === "complete"
+                          ? "Complete"
+                          : relatedProject.status === "in-progress"
+                            ? "In Progress"
+                            : "Archived"}
+                      </Badge>
+                      <Badge variant="default" size="sm">
+                        {relatedProject.domain}
+                      </Badge>
                     </div>
-                  )}
-                </Link>
-              ))}
+                    <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                      {relatedProject.title}
+                    </h3>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 line-clamp-2">
+                      {relatedProject.summary}
+                    </p>
+                    {sharedTechs.length > 0 && (
+                      <div className="flex flex-wrap gap-1">
+                        {sharedTechs.slice(0, 3).map((tech) => (
+                          <Badge key={tech} variant="primary" size="sm">
+                            {tech}
+                          </Badge>
+                        ))}
+                        {sharedTechs.length > 3 && (
+                          <Badge variant="default" size="sm">
+                            +{sharedTechs.length - 3}
+                          </Badge>
+                        )}
+                      </div>
+                    )}
+                  </Link>
+                ),
+              )}
             </div>
           </section>
         )}
@@ -339,5 +359,5 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         </nav>
       </div>
     </article>
-  )
+  );
 }
