@@ -102,31 +102,31 @@
   }
 
   /* ===========================================
-   * CARD STYLES - Enhanced with design tokens
+   * CARD STYLES - Quieter, content-focused
    * =========================================== */
   .card {
     @apply bg-sand-100 rounded-card;
     @apply shadow-card-light;
-    @apply border border-ocean-300/20;
+    @apply border border-ocean-300/15;
     @apply transition-all duration-220 ease-smooth;
     @apply relative overflow-hidden;
   }
 
-  /* Dark mode: deep navy surface with subtle border */
+  /* Dark mode: deeper, quieter surface */
   .dark .card {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   }
 
-  /* Card top highlight line for depth */
+  /* Card top highlight line - more subtle */
   .card::before {
     content: "";
     @apply absolute top-0 left-0 right-0 h-[1px];
     background: linear-gradient(
       to right,
       transparent,
-      rgba(212, 143, 78, 0.22),
+      rgba(212, 143, 78, 0.15),
       transparent
     );
   }
@@ -135,7 +135,7 @@
     background: linear-gradient(
       to right,
       transparent,
-      rgba(245, 158, 11, 0.15),
+      rgba(245, 158, 11, 0.08),
       transparent
     );
   }
@@ -143,11 +143,13 @@
   .card:hover {
     @apply shadow-lift-light;
     transform: translateY(-2px);
+    border-color: rgba(46, 98, 135, 0.25);
   }
 
   .dark .card:hover {
-    box-shadow: 0 14px 44px rgba(0, 0, 0, 0.5);
-    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.12);
   }
 
   /* ===========================================
