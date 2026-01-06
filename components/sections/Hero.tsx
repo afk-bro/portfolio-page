@@ -15,11 +15,6 @@ export function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[480px] w-[480px] rounded-full bg-bronze-500/[0.04] blur-3xl dark:bg-amber-500/[0.06]"
       />
-      {/* Bottom fade into next section */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-sand-50 dark:to-dark-base"
-      />
       <div className="container-content relative">
         <AnimateOnScroll
           variant="fade-up"
