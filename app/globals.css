@@ -278,7 +278,7 @@
   .btn-primary-cta {
     @apply relative overflow-hidden;
     @apply px-6 py-3 rounded-button font-medium;
-    @apply transition-all duration-180 ease-smooth;
+    @apply transition-all duration-150 ease-smooth;
     background: linear-gradient(180deg, #d48f4e 0%, #cd7931 15%, #cd7931 100%);
     color: #0d4d79;
     box-shadow:
@@ -289,7 +289,7 @@
   }
 
   .btn-primary-cta:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.3),
       inset 0 -2px 0 rgba(0, 0, 0, 0.1),
@@ -356,7 +356,7 @@
    * =========================================== */
   .btn-secondary {
     @apply relative px-6 py-3 rounded-button font-medium;
-    @apply transition-all duration-180 ease-smooth;
+    @apply transition-all duration-150 ease-smooth;
     @apply bg-white text-ocean-800;
     @apply border border-ocean-500/35;
   }
