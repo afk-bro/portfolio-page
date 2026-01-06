@@ -37,7 +37,7 @@ export function HowIBuild() {
           </h2>
         </AnimateOnScroll>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-10 max-w-4xl mx-auto">
           {principles.map((principle, index) => (
             <AnimateOnScroll
               key={principle.title}
