@@ -213,6 +213,10 @@ const config: Config = {
         "keycap-inset":
           "inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.15)",
         "keycap-pressed": "inset 0 2px 4px rgba(0, 0, 0, 0.2)",
+        // Gold and cyan glow shadows (Contrast & Drama)
+        "gold-glow": "0 0 30px rgba(245, 166, 35, 0.4)",
+        "gold-glow-intense": "0 0 40px rgba(245, 166, 35, 0.5), 0 0 80px rgba(245, 166, 35, 0.2)",
+        "cyan-glow": "0 0 25px rgba(6, 182, 212, 0.35)",
       },
 
       // ===========================================
