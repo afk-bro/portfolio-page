@@ -10,7 +10,7 @@ interface HeroNameProps {
 }
 
 /**
- * HeroName - Animated hero name with GSAP spin cascade
+ * HeroName - Animated hero name with blur-to-sharp reveal
  *
  * Trigger strategy (Option A):
  * - Viewport detection: name must be 50%+ visible
@@ -18,9 +18,10 @@ interface HeroNameProps {
  * - Minimum 700ms on-screen runtime (won't cancel early)
  * - Play once per session
  *
- * "Start instantly" trick:
- * - First 2 letters spin within 150ms
- * - Catches the eye even in fast scroll
+ * Blur-to-sharp effect:
+ * - Letters start blurred, scaled up, and above position
+ * - They animate to sharp, normal scale, and final position
+ * - Dual glow (gold + cyan) appears during animation
  */
 export function HeroName({ name, className }: HeroNameProps) {
   const containerRef = useRef<HTMLSpanElement>(null);
@@ -59,39 +60,31 @@ export function HeroName({ name, className }: HeroNameProps) {
   );
 
   /**
-   * Compute visuals from single progress value
-   * Uses bronze (#e79b47 Pumpkin Pie) for glow highlight
+   * Compute blur-to-sharp visuals from progress
+   * Uses dual gold/cyan for dramatic effect
    */
-  const computeVisuals = (progress: number, totalRotation: number) => {
-    const rotation = progress * totalRotation;
+  const computeBlurVisuals = (progress: number) => {
+    // Blur: starts at 12px, resolves to 0
+    const blur = 12 * (1 - progress);
 
-    // Bell curve glow: peaks ~0.4, fades by 0.85
+    // Scale: starts at 1.1, settles to 1
+    const scale = 1 + 0.1 * (1 - progress);
+
+    // Y position: drops from -40 to 0
+    const y = -40 * (1 - progress);
+
+    // Glow peaks at 0.5 progress, fades by end
     let glowIntensity = 0;
-    if (progress < 0.85) {
-      const bellProgress = progress / 0.85;
-      glowIntensity = Math.sin(bellProgress * Math.PI) * 0.7;
+    if (progress < 0.8) {
+      glowIntensity = Math.sin((progress / 0.8) * Math.PI) * 0.6;
     }
 
-    // Edge-on boost (only during active spin)
-    const normalizedAngle = rotation % 360;
-    const edgeOnness = Math.abs(Math.sin((normalizedAngle * Math.PI) / 180));
-    const edgeOnBoost = progress < 0.75 ? edgeOnness * 0.3 : 0;
-    const finalGlow = Math.min(glowIntensity + edgeOnBoost, 0.8);
-
-    // Color follows glow curve
-    let colorMix = 0;
-    if (progress < 0.85) {
-      const colorProgress = progress / 0.85;
-      colorMix = Math.sin(colorProgress * Math.PI) * 0.6;
-    }
-
-    const glowSize = 8 + finalGlow * 20;
-
-    return { rotation, glowIntensity: finalGlow, glowSize, colorMix };
+    return { blur, scale, y, glowIntensity };
   };
 
-  // Bronze color for glow: #e79b47 (Pumpkin Pie) = rgb(231, 155, 71)
-  const BRONZE_GLOW = "231, 155, 71";
+  // Dual accent glow colors
+  const GOLD_GLOW = "245, 166, 35"; // gold-500
+  const CYAN_GLOW = "6, 182, 212"; // cyan-500
 
   // VIEWPORT DETECTION: Track when name is 50%+ visible
   useEffect(() => {
@@ -130,9 +123,9 @@ export function HeroName({ name, className }: HeroNameProps) {
     });
   }, [prefersReducedMotion]);
 
-  // SPIN CASCADE
-  const triggerSpinCascade = useCallback(() => {
-    if (hasPlayedRef.current) return; // Once per session
+  // BLUR-TO-SHARP REVEAL
+  const triggerBlurReveal = useCallback(() => {
+    if (hasPlayedRef.current) return;
     hasPlayedRef.current = true;
     spinStartTimeRef.current = Date.now();
     setIsSpinning(true);
@@ -146,30 +139,25 @@ export function HeroName({ name, className }: HeroNameProps) {
       }
     });
 
-    const totalLetters = nonSpaceLetters.length;
     const tl = gsap.timeline({
       onComplete: () => setIsSpinning(false),
     });
     timelineRef.current = tl;
 
-    nonSpaceLetters.forEach((letter, i) => {
-      // "START INSTANTLY" TRICK:
-      // First 2 letters: 0ms and 80ms (visible within 150ms)
-      // Rest: normal stagger
-      let staggerDelay: number;
-      if (i === 0) {
-        staggerDelay = 0; // Immediate
-      } else if (i === 1) {
-        staggerDelay = 0.08; // 80ms - both spinning by 150ms
-      } else if (i < 4) {
-        staggerDelay = 0.08 + (i - 1) * 0.12; // Letters 2-3: tight
-      } else {
-        staggerDelay = 0.44 + (i - 4) * 0.15; // Rest: normal spacing
-      }
+    // Set initial state for all letters
+    nonSpaceLetters.forEach((letter) => {
+      gsap.set(letter, {
+        filter: "blur(12px)",
+        opacity: 0,
+        scale: 1.1,
+        y: -40,
+      });
+    });
 
-      const turns = i === 0 ? 3 : 2;
-      const totalRotation = 360 * turns;
-      const duration = i === 0 ? 1.5 : 1.2;
+    // Animate each letter with stagger
+    nonSpaceLetters.forEach((letter, i) => {
+      const staggerDelay = i * 0.05; // 50ms stagger
+      const duration = 0.6;
 
       const proxy = { progress: 0 };
 
@@ -178,38 +166,36 @@ export function HeroName({ name, className }: HeroNameProps) {
         {
           progress: 1,
           duration: duration,
-          ease: "power2.out",
+          ease: "power3.out",
           onUpdate: () => {
-            const { rotation, glowIntensity, glowSize, colorMix } =
-              computeVisuals(proxy.progress, totalRotation);
+            const { blur, scale, y, glowIntensity } = computeBlurVisuals(
+              proxy.progress,
+            );
 
             gsap.set(letter, {
-              rotateY: rotation,
+              filter: `blur(${blur}px)`,
+              opacity: proxy.progress,
+              scale: scale,
+              y: y,
               textShadow:
                 glowIntensity > 0.05
-                  ? `0 0 ${glowSize}px rgba(${BRONZE_GLOW}, ${glowIntensity})`
+                  ? `0 4px 30px rgba(${GOLD_GLOW}, ${glowIntensity * 0.5}), 0 0 60px rgba(${CYAN_GLOW}, ${glowIntensity * 0.25})`
                   : "none",
-              color: colorMix > 0.05 ? `rgba(${BRONZE_GLOW}, ${colorMix})` : "",
             });
           },
           onComplete: () => {
             gsap.set(letter, {
-              rotateY: 0,
-              textShadow: "none",
-              color: "",
+              filter: "blur(0px)",
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              textShadow: `0 4px 30px rgba(${GOLD_GLOW}, 0.3), 0 0 60px rgba(${CYAN_GLOW}, 0.15)`,
             });
           },
         },
         staggerDelay,
       );
     });
-
-    // Settle buffer
-    const lastStagger =
-      totalLetters < 4
-        ? 0.08 + (totalLetters - 2) * 0.12
-        : 0.44 + (totalLetters - 5) * 0.15;
-    tl.to({}, { duration: 0.1 }, lastStagger + 1.2);
   }, [characters]);
 
   // SCROLL HANDLING: Trigger only when visible
@@ -233,20 +219,20 @@ export function HeroName({ name, className }: HeroNameProps) {
         !hasPlayedRef.current &&
         currentY > 10
       ) {
-        triggerSpinCascade();
+        triggerBlurReveal();
       }
     };
 
     const handleWheel = (e: WheelEvent) => {
       // Trigger on wheel if visible and scrolling down
       if (e.deltaY > 3 && isVisible && !hasPlayedRef.current) {
-        triggerSpinCascade();
+        triggerBlurReveal();
       }
     };
 
     const handleTouchMove = () => {
       if (isVisible && !hasPlayedRef.current && window.scrollY > 10) {
-        triggerSpinCascade();
+        triggerBlurReveal();
       }
     };
 
@@ -259,7 +245,7 @@ export function HeroName({ name, className }: HeroNameProps) {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchmove", handleTouchMove);
     };
-  }, [introComplete, isVisible, triggerSpinCascade, prefersReducedMotion]);
+  }, [introComplete, isVisible, triggerBlurReveal, prefersReducedMotion]);
 
   // MINIMUM RUNTIME: Don't allow early cancel
   // Timeline will complete naturally - no early termination
