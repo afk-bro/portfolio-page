@@ -386,6 +386,69 @@
   }
 
   /* ===========================================
+   * SUBMIT BUTTON - Peak intensity (contact form)
+   * =========================================== */
+  .btn-submit-peak {
+    @apply relative overflow-hidden;
+    @apply px-6 py-3 rounded-button font-semibold;
+    @apply transition-all duration-200 ease-smooth;
+    background: linear-gradient(180deg, #FFBE2E 0%, #F5A623 50%, #D4890A 100%);
+    background-size: 200% 200%;
+    animation: shimmerBg 3s ease-in-out infinite;
+    color: #0C1219;
+    box-shadow:
+      0 0 40px rgba(245, 166, 35, 0.5),
+      0 0 80px rgba(245, 166, 35, 0.2);
+  }
+
+  .btn-submit-peak:hover {
+    transform: scale(1.03);
+    animation-duration: 2s;
+    box-shadow:
+      0 0 50px rgba(245, 166, 35, 0.6),
+      0 0 100px rgba(245, 166, 35, 0.25);
+  }
+
+  /* Light sweep effect */
+  .btn-submit-peak::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.25) 50%,
+      transparent 80%
+    );
+    background-size: 200% 100%;
+    animation: lightSweep 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .btn-submit-peak:hover::before {
+    animation-duration: 2s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-submit-peak {
+      animation: none;
+    }
+    .btn-submit-peak::before {
+      animation: none;
+    }
+  }
+
+  .btn-submit-peak:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    animation: none;
+  }
+
+  .btn-submit-peak:disabled::before {
+    animation: none;
+  }
+
+  /* ===========================================
    * SECTION DIVIDER - Cyan accent
    * =========================================== */
   .section-divider {
@@ -458,6 +521,25 @@
     to {
       transform: translateX(0);
       opacity: 1;
+    }
+  }
+
+  /* Peak intensity button animations */
+  @keyframes shimmerBg {
+    0%, 100% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+  }
+
+  @keyframes lightSweep {
+    0%, 100% {
+      background-position: -100% 0;
+    }
+    50% {
+      background-position: 200% 0;
     }
   }
 
