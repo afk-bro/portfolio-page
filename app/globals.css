@@ -38,9 +38,9 @@
   }
 
   body {
-    /* Light: near-white bg, ocean text | Dark: near-black navy bg, sand text */
+    /* Light: near-white bg, ocean text | Dark: true black bg, bright text */
     @apply bg-sand-50 text-ocean-900 antialiased;
-    @apply dark:bg-dark-base dark:text-sand-500;
+    @apply dark:bg-dark-void dark:text-[#F5F5F5];
   }
 
   /* Global noise overlay to break gradient banding on dark backgrounds */
