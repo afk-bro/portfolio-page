@@ -267,7 +267,7 @@ export function HeroName({ name, className }: HeroNameProps) {
   }
 
   return (
-    <div ref={nameWrapperRef}>
+    <div ref={nameWrapperRef} className="relative">
       <h1
         className={cn(
           "text-[clamp(3rem,12vw,10rem)] font-bold leading-[1.1]",
@@ -299,6 +299,14 @@ export function HeroName({ name, className }: HeroNameProps) {
         </span>
         <span className="sr-only">{name}</span>
       </h1>
+      {/* Animated gradient underline */}
+      <div
+        className="absolute left-1/2 -translate-x-1/2 h-1 rounded-full bg-gradient-to-r from-gold-500 to-cyan-500 animate-underline-sweep"
+        style={{
+          animationDelay: "0.4s",
+          animationFillMode: "both",
+        }}
+      />
     </div>
   );
 }
