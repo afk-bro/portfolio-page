@@ -269,7 +269,9 @@ export function HeroName({ name, className }: HeroNameProps) {
     return (
       <h1
         className={cn(
-          "text-h1 md:text-display text-ocean-800 dark:text-sand-500 mb-4 text-balance",
+          "text-[clamp(3rem,12vw,10rem)] font-bold leading-[1.1]",
+          "text-ocean-800 dark:text-[#F5F5F5]",
+          "mb-4 text-balance",
           className,
         )}
       >
@@ -282,7 +284,9 @@ export function HeroName({ name, className }: HeroNameProps) {
     <div ref={nameWrapperRef}>
       <h1
         className={cn(
-          "text-h1 md:text-display text-ocean-800 dark:text-sand-500 mb-4",
+          "text-[clamp(3rem,12vw,10rem)] font-bold leading-[1.1]",
+          "text-ocean-800 dark:text-[#F5F5F5]",
+          "mb-4",
           className,
         )}
         style={{ perspective: "1000px" }}
