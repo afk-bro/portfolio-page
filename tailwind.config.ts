@@ -227,6 +227,11 @@ const config: Config = {
         "fade-in": "fadeIn 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
         shimmer: "shimmer 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
         lift: "lift 0.18s cubic-bezier(0.22, 1, 0.36, 1)",
+        "shimmer-bg": "shimmerBg 3s ease-in-out infinite",
+        "light-sweep": "lightSweep 4s ease-in-out infinite",
+        "gradient-drift": "gradientDrift 8s ease-in-out infinite alternate",
+        "glow-pulse": "glowPulse 2s ease-in-out infinite",
+        "underline-sweep": "underlineSweep 0.4s ease-out forwards",
       },
       keyframes: {
         fadeUp: {
@@ -244,6 +249,26 @@ const config: Config = {
         lift: {
           "0%": { transform: "translateY(0)" },
           "100%": { transform: "translateY(-2px)" },
+        },
+        shimmerBg: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        lightSweep: {
+          "0%": { backgroundPosition: "200% 0" },
+          "100%": { backgroundPosition: "-200% 0" },
+        },
+        gradientDrift: {
+          "0%": { transform: "translateX(-10px)" },
+          "100%": { transform: "translateX(10px)" },
+        },
+        glowPulse: {
+          "0%, 100%": { opacity: "0.8" },
+          "50%": { opacity: "1" },
+        },
+        underlineSweep: {
+          from: { width: "0%" },
+          to: { width: "100%" },
         },
       },
       transitionDuration: {
