@@ -242,7 +242,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your name"
-                    className="w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-bronze-400 focus:border-bronze-400 border-ocean-300/30 dark:border-white/10 transition-colors duration-180"
+                    className="w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 focus:shadow-[0_0_20px_rgba(6,182,212,0.2)] border-ocean-300/30 dark:border-white/10 transition-all duration-180"
                   />
                 </div>
 
@@ -261,7 +261,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="you@example.com"
-                    className={`w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-bronze-400 focus:border-bronze-400 transition-colors duration-180 ${
+                    className={`w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 focus:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all duration-180 ${
                       errors.email
                         ? "border-error-500"
                         : "border-ocean-300/30 dark:border-white/10"
@@ -294,7 +294,7 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Tell me a bit about what you'd like to discuss..."
-                    className={`w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-bronze-400 focus:border-bronze-400 resize-none transition-colors duration-180 ${
+                    className={`w-full px-4 py-2 rounded-button border bg-white dark:bg-white/5 text-ocean-800 dark:text-sand-500 placeholder:text-muted-400 dark:placeholder:text-sand-500/50 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 focus:shadow-[0_0_20px_rgba(6,182,212,0.2)] resize-none transition-all duration-180 ${
                       errors.message
                         ? "border-error-500"
                         : "border-ocean-300/30 dark:border-white/10"
