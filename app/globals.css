@@ -690,3 +690,29 @@
     display: block !important;
   }
 }
+
+/* ===========================================
+ * CUSTOM SCROLLBAR
+ * =========================================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030508;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #F5A623, #06B6D4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FFBE2E, #22D3EE);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #F5A623 #030508;
+}
