@@ -382,7 +382,7 @@
   }
 
   /* ===========================================
-   * SECTION DIVIDER - Subtle separation
+   * SECTION DIVIDER - Cyan accent
    * =========================================== */
   .section-divider {
     @apply h-[1px] w-full;
@@ -398,7 +398,7 @@
     background: linear-gradient(
       to right,
       transparent,
-      rgba(255, 255, 255, 0.08),
+      rgba(6, 182, 212, 0.2),
       transparent
     );
   }
