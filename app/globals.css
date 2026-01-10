@@ -386,6 +386,18 @@
   }
 
   /* ===========================================
+   * SOCIAL LINK GLOW - Gold drop-shadow on hover
+   * =========================================== */
+  .social-link-glow {
+    filter: drop-shadow(0 0 0px transparent);
+    transition: filter 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  }
+
+  .social-link-glow:hover {
+    filter: drop-shadow(0 0 8px rgba(245, 166, 35, 0.5));
+  }
+
+  /* ===========================================
    * SUBMIT BUTTON - Peak intensity (contact form)
    * =========================================== */
   .btn-submit-peak {

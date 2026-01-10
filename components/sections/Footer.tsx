@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { siteMetadata } from "@/data/metadata";
@@ -34,16 +32,7 @@ export function Footer() {
               href={siteMetadata.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg text-[#707070] hover:text-gold-400 hover:scale-110 transition-all duration-200"
-              style={{
-                filter: "drop-shadow(0 0 0px transparent)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 8px rgba(245, 166, 35, 0.5))";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 0px transparent)";
-              }}
+              className="social-link-glow p-2 rounded-lg text-[#707070] hover:text-gold-400 hover:scale-110 transition-all duration-200"
               aria-label="GitHub profile"
             >
               <Github className="w-5 h-5" />
@@ -52,32 +41,14 @@ export function Footer() {
               href={siteMetadata.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg text-[#707070] hover:text-gold-400 hover:scale-110 transition-all duration-200"
-              style={{
-                filter: "drop-shadow(0 0 0px transparent)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 8px rgba(245, 166, 35, 0.5))";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 0px transparent)";
-              }}
+              className="social-link-glow p-2 rounded-lg text-[#707070] hover:text-gold-400 hover:scale-110 transition-all duration-200"
               aria-label="LinkedIn profile"
             >
               <Linkedin className="w-5 h-5" />
             </a>
             <a
               href={`mailto:${siteMetadata.email}`}
-              className="p-2 rounded-lg text-[#707070] hover:text-gold-400 hover:scale-110 transition-all duration-200"
-              style={{
-                filter: "drop-shadow(0 0 0px transparent)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 8px rgba(245, 166, 35, 0.5))";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 0px transparent)";
-              }}
+              className="social-link-glow p-2 rounded-lg text-[#707070] hover:text-gold-400 hover:scale-110 transition-all duration-200"
               aria-label="Send email"
             >
               <Mail className="w-5 h-5" />
