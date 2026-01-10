@@ -502,15 +502,15 @@
 
   /* Text hierarchy for dark mode - three tiers */
   .text-primary-content {
-    @apply text-ocean-900 dark:text-sand-100;
+    @apply text-ocean-900 dark:text-[#F5F5F5];
   }
 
   .text-secondary-content {
-    @apply text-ocean-500 dark:text-sand-100/70;
+    @apply text-ocean-500 dark:text-[#A0A0A0];
   }
 
   .text-tertiary-content {
-    @apply text-ocean-400 dark:text-sand-100/50;
+    @apply text-ocean-400 dark:text-[#707070];
   }
 }
 
