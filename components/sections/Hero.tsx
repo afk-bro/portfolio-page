@@ -31,8 +31,8 @@ export function Hero() {
           {/* Name - Animated */}
           <HeroName name={siteMetadata.name} />
 
-          {/* Role - Mississippi River blue for light, Golden Opportunity for dark */}
-          <p className="text-h3 md:text-h2 text-ocean-500 dark:text-bronze-300 mb-6">
+          {/* Role - Ocean for light, Cyan for dark */}
+          <p className="text-2xl md:text-3xl font-medium text-ocean-500 dark:text-cyan-400 mb-6">
             {siteMetadata.role}
           </p>
 
