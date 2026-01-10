@@ -238,14 +238,14 @@
   }
 
   /* ===========================================
-   * HERO BACKGROUND - Layered depth
+   * HERO BACKGROUND - Dramatic spotlight
    * =========================================== */
   .hero-bg {
     position: relative;
     background: #f8fbfd;
   }
 
-  /* Subtle blue atmosphere wash */
+  /* Light mode: Subtle blue atmosphere */
   .hero-bg::before {
     content: "";
     position: absolute;
@@ -258,17 +258,16 @@
     pointer-events: none;
   }
 
-  /* Dark mode: near-black navy with subtle amber warmth */
+  /* Dark mode: True black with gold spotlight */
   .dark .hero-bg {
-    background: #050b14;
+    background: #030508;
   }
 
-  /* Softer vignette to prevent banding artifacts */
   .dark .hero-bg::before {
     background: radial-gradient(
-      ellipse at center,
-      rgba(245, 158, 11, 0.05) 0%,
-      transparent 50%
+      ellipse 60% 50% at 50% 40%,
+      rgba(245, 166, 35, 0.06) 0%,
+      transparent 70%
     );
   }
 
