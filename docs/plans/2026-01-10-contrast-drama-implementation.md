@@ -15,6 +15,7 @@
 ### Task 1.1: Add New Color Tokens to Tailwind
 
 **Files:**
+
 - Modify: `tailwind.config.ts:12-145`
 
 **Step 1: Add the new dark base colors after existing dark object**
@@ -70,6 +71,7 @@ git commit -m "feat(design): add dark void, gold, and cyan color tokens"
 ### Task 1.2: Add New Shadow Utilities to Tailwind
 
 **Files:**
+
 - Modify: `tailwind.config.ts:181-197`
 
 **Step 1: Add gold and cyan glow shadows**
@@ -100,6 +102,7 @@ git commit -m "feat(design): add gold and cyan glow shadow utilities"
 ### Task 1.3: Add New Animations to Tailwind
 
 **Files:**
+
 - Modify: `tailwind.config.ts:202-225`
 
 **Step 1: Add new animation definitions**
@@ -168,6 +171,7 @@ git commit -m "feat(design): add shimmer, glow, and sweep animation keyframes"
 ### Task 1.4: Update CSS Custom Properties for Dark Mode
 
 **Files:**
+
 - Modify: `app/globals.css:1-61`
 
 **Step 1: Update dark mode CSS variables**
@@ -201,6 +205,7 @@ git commit -m "feat(design): update dark mode CSS variables for true black base"
 ### Task 1.5: Update Body Base Styles
 
 **Files:**
+
 - Modify: `app/globals.css:40-44`
 
 **Step 1: Update body dark mode class**
@@ -234,6 +239,7 @@ git commit -m "feat(design): update body to use dark-void background"
 ### Task 2.1: Update Hero Name Typography Size
 
 **Files:**
+
 - Modify: `components/ui/HeroName.tsx:271-278, 281-312`
 
 **Step 1: Update reduced motion fallback with new sizing**
@@ -290,6 +296,7 @@ git commit -m "feat(hero): increase name size to viewport-responsive clamp"
 ### Task 2.2: Replace HeroName Animation with Blur-to-Sharp
 
 **Files:**
+
 - Modify: `components/ui/HeroName.tsx:60-95, 133-213`
 
 **Step 1: Update glow colors for dual accent**
@@ -298,8 +305,8 @@ Replace BRONZE_GLOW constant (line 94):
 
 ```tsx
 // Dual accent glow colors
-const GOLD_GLOW = "245, 166, 35";   // gold-500
-const CYAN_GLOW = "6, 182, 212";    // cyan-500
+const GOLD_GLOW = "245, 166, 35"; // gold-500
+const CYAN_GLOW = "6, 182, 212"; // cyan-500
 ```
 
 **Step 2: Replace computeVisuals function**
@@ -381,16 +388,19 @@ const triggerBlurReveal = useCallback(() => {
         duration: duration,
         ease: "power3.out",
         onUpdate: () => {
-          const { blur, scale, y, glowIntensity } = computeBlurVisuals(proxy.progress);
+          const { blur, scale, y, glowIntensity } = computeBlurVisuals(
+            proxy.progress,
+          );
 
           gsap.set(letter, {
             filter: `blur(${blur}px)`,
             opacity: proxy.progress,
             scale: scale,
             y: y,
-            textShadow: glowIntensity > 0.05
-              ? `0 4px 30px rgba(${GOLD_GLOW}, ${glowIntensity * 0.5}), 0 0 60px rgba(${CYAN_GLOW}, ${glowIntensity * 0.25})`
-              : "none",
+            textShadow:
+              glowIntensity > 0.05
+                ? `0 4px 30px rgba(${GOLD_GLOW}, ${glowIntensity * 0.5}), 0 0 60px rgba(${CYAN_GLOW}, ${glowIntensity * 0.25})`
+                : "none",
           });
         },
         onComplete: () => {
@@ -430,6 +440,7 @@ git commit -m "feat(hero): replace spin animation with blur-to-sharp reveal"
 ### Task 2.3: Add Gradient Underline to Hero Name
 
 **Files:**
+
 - Modify: `components/ui/HeroName.tsx:281-313`
 
 **Step 1: Add underline element after the name span**
@@ -499,6 +510,7 @@ git commit -m "feat(hero): add animated gradient underline after name"
 ### Task 2.4: Update Hero Background for Drama
 
 **Files:**
+
 - Modify: `app/globals.css:242-274`
 
 **Step 1: Update hero-bg dark mode styles**
@@ -558,6 +570,7 @@ git commit -m "feat(hero): update background for dramatic spotlight effect"
 ### Task 2.5: Update Hero Role Text Color
 
 **Files:**
+
 - Modify: `components/sections/Hero.tsx:35-37`
 
 **Step 1: Change role to cyan accent**
@@ -565,10 +578,12 @@ git commit -m "feat(hero): update background for dramatic spotlight effect"
 Replace the role paragraph:
 
 ```tsx
-{/* Role - Ocean for light, Cyan for dark */}
+{
+  /* Role - Ocean for light, Cyan for dark */
+}
 <p className="text-2xl md:text-3xl font-medium text-ocean-500 dark:text-cyan-400 mb-6">
   {siteMetadata.role}
-</p>
+</p>;
 ```
 
 **Step 2: Run build to verify**
@@ -588,6 +603,7 @@ git commit -m "feat(hero): update role text to cyan accent in dark mode"
 ### Task 2.6: Update Hero Buttons for Dual Accent
 
 **Files:**
+
 - Modify: `app/globals.css:276-353`
 
 **Step 1: Update primary CTA for gold glow**
@@ -602,8 +618,8 @@ Replace btn-primary-cta section:
   @apply relative overflow-hidden;
   @apply px-6 py-3 rounded-button font-medium;
   @apply transition-all duration-150 ease-smooth;
-  background: linear-gradient(180deg, #FFBE2E 0%, #F5A623 50%, #D4890A 100%);
-  color: #0C1219;
+  background: linear-gradient(180deg, #ffbe2e 0%, #f5a623 50%, #d4890a 100%);
+  color: #0c1219;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 -2px 0 rgba(0, 0, 0, 0.1),
@@ -686,8 +702,8 @@ Replace btn-secondary section:
 
 .dark .btn-secondary {
   background: transparent;
-  color: #22D3EE;
-  border-color: #06B6D4;
+  color: #22d3ee;
+  border-color: #06b6d4;
 }
 
 .btn-secondary:hover {
@@ -698,7 +714,7 @@ Replace btn-secondary section:
 
 .dark .btn-secondary:hover {
   background: rgba(6, 182, 212, 0.1);
-  border-color: #22D3EE;
+  border-color: #22d3ee;
   box-shadow: 0 0 25px rgba(6, 182, 212, 0.35);
 }
 
@@ -726,6 +742,7 @@ git commit -m "feat(buttons): update CTA buttons for dual gold/cyan accent"
 ### Task 3.1: Update Card Styles for Drama
 
 **Files:**
+
 - Modify: `app/globals.css:104-154`
 
 **Step 1: Replace card styles with dramatic hover**
@@ -744,7 +761,7 @@ git commit -m "feat(buttons): update CTA buttons for dual gold/cyan accent"
 
 /* Dark mode: deep surface */
 .dark .card {
-  background: #0C1219;
+  background: #0c1219;
   border: 1px solid #1a1f28;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
@@ -779,8 +796,8 @@ git commit -m "feat(buttons): update CTA buttons for dual gold/cyan accent"
 .dark .card:hover {
   border-color: transparent;
   background:
-    linear-gradient(#0C1219, #0C1219) padding-box,
-    linear-gradient(135deg, #F5A623, #06B6D4) border-box;
+    linear-gradient(#0c1219, #0c1219) padding-box,
+    linear-gradient(135deg, #f5a623, #06b6d4) border-box;
   box-shadow:
     0 0 30px rgba(245, 166, 35, 0.15),
     0 0 30px rgba(6, 182, 212, 0.1),
@@ -805,6 +822,7 @@ git commit -m "feat(cards): add gradient border hover effect for dark mode"
 ### Task 3.2: Update Section Dividers
 
 **Files:**
+
 - Modify: `app/globals.css:386-406`
 
 **Step 1: Update section divider for cyan accent**
@@ -845,6 +863,7 @@ git commit -m "feat(sections): update dividers with cyan accent"
 ### Task 3.3: Update Text Hierarchy Classes
 
 **Files:**
+
 - Modify: `app/globals.css:504-516`
 
 **Step 1: Update text content classes for new hierarchy**
@@ -876,6 +895,7 @@ git commit -m "feat(typography): update text hierarchy for contrast"
 ### Task 3.4: Update Focus States for Accessibility
 
 **Files:**
+
 - Modify: `app/globals.css:57-61`
 
 **Step 1: Update focus-visible to use cyan**
@@ -910,6 +930,7 @@ git commit -m "feat(a11y): update focus states to cyan accent"
 ### Task 4.1: Update CallToAction Component
 
 **Files:**
+
 - Modify: `components/sections/CallToAction.tsx:9-51`
 
 **Step 1: Replace the entire component with dramatic styling**
@@ -944,11 +965,12 @@ export function CallToAction() {
 
           <div className="relative z-10">
             <h2 className="text-h2 text-[#F5F5F5] mb-4">
-              Let&apos;s Build Something <span className="text-gold-400">Great</span> Together
+              Let&apos;s Build Something{" "}
+              <span className="text-gold-400">Great</span> Together
             </h2>
             <p className="text-lg text-[#A0A0A0] mb-8 max-w-2xl mx-auto">
-              I&apos;m always open to discussing new projects, creative ideas, or
-              opportunities to be part of your vision.
+              I&apos;m always open to discussing new projects, creative ideas,
+              or opportunities to be part of your vision.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
@@ -999,6 +1021,7 @@ git commit -m "feat(cta): add dramatic gradient mesh styling"
 ### Task 4.2: Update Footer with Gradient Border
 
 **Files:**
+
 - Modify: `components/sections/Footer.tsx:1-58`
 
 **Step 1: Replace footer with dramatic styling**
@@ -1012,7 +1035,8 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-gradient-to-b from-dark-surface to-[#000000] border-t border-transparent"
+    <footer
+      className="relative bg-gradient-to-b from-dark-surface to-[#000000] border-t border-transparent"
       style={{
         borderImage: "linear-gradient(90deg, #F5A623, #06B6D4) 1",
       }}
@@ -1043,10 +1067,12 @@ export function Footer() {
                 filter: "drop-shadow(0 0 0px transparent)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 8px rgba(245, 166, 35, 0.5))";
+                e.currentTarget.style.filter =
+                  "drop-shadow(0 0 8px rgba(245, 166, 35, 0.5))";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 0px transparent)";
+                e.currentTarget.style.filter =
+                  "drop-shadow(0 0 0px transparent)";
               }}
               aria-label="GitHub profile"
             >
@@ -1061,10 +1087,12 @@ export function Footer() {
                 filter: "drop-shadow(0 0 0px transparent)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 8px rgba(245, 166, 35, 0.5))";
+                e.currentTarget.style.filter =
+                  "drop-shadow(0 0 8px rgba(245, 166, 35, 0.5))";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 0px transparent)";
+                e.currentTarget.style.filter =
+                  "drop-shadow(0 0 0px transparent)";
               }}
               aria-label="LinkedIn profile"
             >
@@ -1077,10 +1105,12 @@ export function Footer() {
                 filter: "drop-shadow(0 0 0px transparent)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 8px rgba(245, 166, 35, 0.5))";
+                e.currentTarget.style.filter =
+                  "drop-shadow(0 0 8px rgba(245, 166, 35, 0.5))";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.filter = "drop-shadow(0 0 0px transparent)";
+                e.currentTarget.style.filter =
+                  "drop-shadow(0 0 0px transparent)";
               }}
               aria-label="Send email"
             >
@@ -1111,6 +1141,7 @@ git commit -m "feat(footer): add gradient border and gold social hover"
 ### Task 4.3: Add Peak Intensity Submit Button Style
 
 **Files:**
+
 - Modify: `app/globals.css` (add after btn-secondary section)
 
 **Step 1: Add submit button peak intensity class**
@@ -1123,10 +1154,10 @@ git commit -m "feat(footer): add gradient border and gold social hover"
   @apply relative overflow-hidden;
   @apply px-6 py-3 rounded-button font-semibold;
   @apply transition-all duration-200 ease-smooth;
-  background: linear-gradient(180deg, #FFBE2E 0%, #F5A623 50%, #D4890A 100%);
+  background: linear-gradient(180deg, #ffbe2e 0%, #f5a623 50%, #d4890a 100%);
   background-size: 200% 200%;
   animation: shimmerBg 3s ease-in-out infinite;
-  color: #0C1219;
+  color: #0c1219;
   box-shadow:
     0 0 40px rgba(245, 166, 35, 0.5),
     0 0 80px rgba(245, 166, 35, 0.2);
@@ -1192,6 +1223,7 @@ git commit -m "feat(buttons): add peak intensity submit button style"
 ### Task 4.4: Update Contact Form to Use Peak Submit
 
 **Files:**
+
 - Modify: `app/contact/page.tsx:317-333`
 
 **Step 1: Update the submit button**
@@ -1199,7 +1231,9 @@ git commit -m "feat(buttons): add peak intensity submit button style"
 Replace the Button component:
 
 ```tsx
-{/* Submit Button - Peak Intensity */}
+{
+  /* Submit Button - Peak Intensity */
+}
 <button
   type="submit"
   className="w-full btn-submit-peak h-12 text-base"
@@ -1213,7 +1247,7 @@ Replace the Button component:
       <ArrowRight className="w-4 h-4" />
     </span>
   )}
-</button>
+</button>;
 ```
 
 **Step 2: Run dev and verify submit button**
@@ -1233,6 +1267,7 @@ git commit -m "feat(contact): use peak intensity submit button"
 ### Task 4.5: Update Contact Form Input Focus States
 
 **Files:**
+
 - Modify: `app/contact/page.tsx:244-247, 264-268, 297-301`
 
 **Step 1: Update input focus to use cyan glow**
@@ -1269,6 +1304,7 @@ git commit -m "feat(contact): add cyan glow to form input focus states"
 ### Task 5.1: Add Custom Scrollbar
 
 **Files:**
+
 - Modify: `app/globals.css` (add at end of @layer base)
 
 **Step 1: Add scrollbar styles before closing @layer base**
@@ -1286,18 +1322,18 @@ git commit -m "feat(contact): add cyan glow to form input focus states"
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #F5A623, #06B6D4);
+  background: linear-gradient(180deg, #f5a623, #06b6d4);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #FFBE2E, #22D3EE);
+  background: linear-gradient(180deg, #ffbe2e, #22d3ee);
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #F5A623 #030508;
+  scrollbar-color: #f5a623 #030508;
 }
 ```
 
@@ -1313,6 +1349,7 @@ git commit -m "feat(polish): add gradient custom scrollbar"
 ### Task 5.2: Add Selection Highlight
 
 **Files:**
+
 - Modify: `app/globals.css` (add in @layer base)
 
 **Step 1: Add selection styles**
@@ -1323,12 +1360,12 @@ git commit -m "feat(polish): add gradient custom scrollbar"
  * =========================================== */
 ::selection {
   background: rgba(6, 182, 212, 0.3);
-  color: #F5F5F5;
+  color: #f5f5f5;
 }
 
 ::-moz-selection {
   background: rgba(6, 182, 212, 0.3);
-  color: #F5F5F5;
+  color: #f5f5f5;
 }
 ```
 
@@ -1344,6 +1381,7 @@ git commit -m "feat(polish): add cyan selection highlight"
 ### Task 5.3: Update Noise Overlay Opacity
 
 **Files:**
+
 - Modify: `app/globals.css:46-55`
 
 **Step 1: Reduce noise overlay opacity**
@@ -1373,6 +1411,7 @@ git commit -m "feat(polish): reduce noise overlay opacity"
 ### Task 5.4: Run Full Test Suite
 
 **Files:**
+
 - None (verification only)
 
 **Step 1: Run all tests**
@@ -1395,6 +1434,7 @@ Expected: No type errors
 ### Task 5.5: Update HeroName Tests for New Animation
 
 **Files:**
+
 - Modify: `components/ui/__tests__/HeroName.test.tsx`
 
 **Step 1: Update test expectations for blur animation**
@@ -1424,6 +1464,7 @@ git commit -m "test(hero): update tests for blur-to-sharp animation"
 ### Task 5.6: Final Visual QA
 
 **Files:**
+
 - None (manual verification)
 
 **Step 1: Start dev server**

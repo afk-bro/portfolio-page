@@ -118,7 +118,7 @@
 
   /* Dark mode: deep surface */
   .dark .card {
-    background: #0C1219;
+    background: #0c1219;
     border: 1px solid #1a1f28;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   }
@@ -153,8 +153,8 @@
   .dark .card:hover {
     border-color: transparent;
     background:
-      linear-gradient(#0C1219, #0C1219) padding-box,
-      linear-gradient(135deg, #F5A623, #06B6D4) border-box;
+      linear-gradient(#0c1219, #0c1219) padding-box,
+      linear-gradient(135deg, #f5a623, #06b6d4) border-box;
     box-shadow:
       0 0 30px rgba(245, 166, 35, 0.15),
       0 0 30px rgba(6, 182, 212, 0.1),
@@ -287,8 +287,8 @@
     @apply relative overflow-hidden;
     @apply px-6 py-3 rounded-button font-medium;
     @apply transition-all duration-150 ease-smooth;
-    background: linear-gradient(180deg, #FFBE2E 0%, #F5A623 50%, #D4890A 100%);
-    color: #0C1219;
+    background: linear-gradient(180deg, #ffbe2e 0%, #f5a623 50%, #d4890a 100%);
+    color: #0c1219;
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.25),
       inset 0 -2px 0 rgba(0, 0, 0, 0.1),
@@ -365,8 +365,8 @@
 
   .dark .btn-secondary {
     background: transparent;
-    color: #22D3EE;
-    border-color: #06B6D4;
+    color: #22d3ee;
+    border-color: #06b6d4;
   }
 
   .btn-secondary:hover {
@@ -377,7 +377,7 @@
 
   .dark .btn-secondary:hover {
     background: rgba(6, 182, 212, 0.1);
-    border-color: #22D3EE;
+    border-color: #22d3ee;
     box-shadow: 0 0 25px rgba(6, 182, 212, 0.35);
   }
 
@@ -390,7 +390,10 @@
    * =========================================== */
   .social-link-glow {
     filter: drop-shadow(0 0 0px transparent);
-    transition: filter 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    transition:
+      filter 0.2s ease,
+      transform 0.2s ease,
+      color 0.2s ease;
   }
 
   .social-link-glow:hover {
@@ -404,10 +407,10 @@
     @apply relative overflow-hidden;
     @apply px-6 py-3 rounded-button font-semibold;
     @apply transition-all duration-200 ease-smooth;
-    background: linear-gradient(180deg, #FFBE2E 0%, #F5A623 50%, #D4890A 100%);
+    background: linear-gradient(180deg, #ffbe2e 0%, #f5a623 50%, #d4890a 100%);
     background-size: 200% 200%;
     animation: shimmerBg 3s ease-in-out infinite;
-    color: #0C1219;
+    color: #0c1219;
     box-shadow:
       0 0 40px rgba(245, 166, 35, 0.5),
       0 0 80px rgba(245, 166, 35, 0.2);
@@ -538,7 +541,8 @@
 
   /* Peak intensity button animations */
   @keyframes shimmerBg {
-    0%, 100% {
+    0%,
+    100% {
       background-position: 0% 0%;
     }
     50% {
@@ -547,7 +551,8 @@
   }
 
   @keyframes lightSweep {
-    0%, 100% {
+    0%,
+    100% {
       background-position: -100% 0;
     }
     50% {
@@ -715,18 +720,18 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #F5A623, #06B6D4);
+  background: linear-gradient(180deg, #f5a623, #06b6d4);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #FFBE2E, #22D3EE);
+  background: linear-gradient(180deg, #ffbe2e, #22d3ee);
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #F5A623 #030508;
+  scrollbar-color: #f5a623 #030508;
 }
 
 /* ===========================================
@@ -734,10 +739,10 @@
  * =========================================== */
 ::selection {
   background: rgba(6, 182, 212, 0.3);
-  color: #F5F5F5;
+  color: #f5f5f5;
 }
 
 ::-moz-selection {
   background: rgba(6, 182, 212, 0.3);
-  color: #F5F5F5;
+  color: #f5f5f5;
 }

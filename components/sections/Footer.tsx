@@ -6,7 +6,8 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-gradient-to-b from-dark-surface to-[#000000] border-t border-transparent"
+    <footer
+      className="relative bg-gradient-to-b from-dark-surface to-[#000000] border-t border-transparent"
       style={{
         borderImage: "linear-gradient(90deg, #F5A623, #06B6D4) 1",
       }}

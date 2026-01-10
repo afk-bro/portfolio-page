@@ -27,11 +27,12 @@ export function CallToAction() {
 
           <div className="relative z-10">
             <h2 className="text-h2 text-[#F5F5F5] mb-4">
-              Let&apos;s Build Something <span className="text-gold-400">Great</span> Together
+              Let&apos;s Build Something{" "}
+              <span className="text-gold-400">Great</span> Together
             </h2>
             <p className="text-lg text-[#A0A0A0] mb-8 max-w-2xl mx-auto">
-              I&apos;m always open to discussing new projects, creative ideas, or
-              opportunities to be part of your vision.
+              I&apos;m always open to discussing new projects, creative ideas,
+              or opportunities to be part of your vision.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button

@@ -5,6 +5,7 @@
 A comprehensive visual overhaul transforming the portfolio from restrained professional tones into a high-impact, award-worthy showcase. The design uses deep blacks as a canvas for dual warm/cool accents, aggressive kinetic typography, and progressive intensity that guides users toward conversion.
 
 **Design Principles:**
+
 - **Contrast & Drama** - Deep blacks with punchy highlights, dramatic lighting effects
 - **Dual Accent System** - Warm gold (primary actions) + electric cyan (secondary highlights)
 - **Kinetic Typography** - Oversized hero name with aggressive blur-to-sharp animations
@@ -18,29 +19,32 @@ A comprehensive visual overhaul transforming the portfolio from restrained profe
 
 Replace current dark palette with deeper, richer blacks for maximum accent contrast.
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `dark-void` | `#030508` | Primary background |
-| `dark-surface` | `#080C12` | Card/section surfaces |
+| Token           | Hex       | Usage                     |
+| --------------- | --------- | ------------------------- |
+| `dark-void`     | `#030508` | Primary background        |
+| `dark-surface`  | `#080C12` | Card/section surfaces     |
 | `dark-elevated` | `#0C1219` | Elevated elements, inputs |
 
 ### Primary Accent: Molten Gold
 
 Evolved from bronze into richer, more luminous golds.
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `gold-400` | `#FFBE2E` | Highlights, glows |
-| `gold-500` | `#F5A623` | Primary CTAs |
+| Token      | Hex       | Usage                 |
+| ---------- | --------- | --------------------- |
+| `gold-400` | `#FFBE2E` | Highlights, glows     |
+| `gold-500` | `#F5A623` | Primary CTAs          |
 | `gold-600` | `#D4890A` | Pressed/active states |
 
 **Glow Utility:**
+
 ```css
 .shadow-gold-glow {
   box-shadow: 0 0 30px rgba(245, 166, 35, 0.4);
 }
 .shadow-gold-glow-intense {
-  box-shadow: 0 0 40px rgba(245, 166, 35, 0.5), 0 0 80px rgba(245, 166, 35, 0.2);
+  box-shadow:
+    0 0 40px rgba(245, 166, 35, 0.5),
+    0 0 80px rgba(245, 166, 35, 0.2);
 }
 ```
 
@@ -48,13 +52,14 @@ Evolved from bronze into richer, more luminous golds.
 
 New accent for hovers, links, and secondary highlights.
 
-| Token | Hex | Usage |
-|-------|-----|-------|
+| Token      | Hex       | Usage                         |
+| ---------- | --------- | ----------------------------- |
 | `cyan-400` | `#22D3EE` | Bright highlights, hover text |
-| `cyan-500` | `#06B6D4` | Links, secondary actions |
-| `cyan-600` | `#0891B2` | Active states |
+| `cyan-500` | `#06B6D4` | Links, secondary actions      |
+| `cyan-600` | `#0891B2` | Active states                 |
 
 **Glow Utility:**
+
 ```css
 .shadow-cyan-glow {
   box-shadow: 0 0 25px rgba(6, 182, 212, 0.35);
@@ -63,11 +68,11 @@ New accent for hovers, links, and secondary highlights.
 
 ### Text Hierarchy
 
-| Level | Hex | Contrast Ratio | Usage |
-|-------|-----|----------------|-------|
-| Primary | `#F5F5F5` | ~18:1 | Headings, body text |
-| Secondary | `#A0A0A0` | ~9:1 | Descriptions, meta |
-| Muted | `#707070` | ~5.2:1 | Labels, captions (WCAG AA safe) |
+| Level     | Hex       | Contrast Ratio | Usage                           |
+| --------- | --------- | -------------- | ------------------------------- |
+| Primary   | `#F5F5F5` | ~18:1          | Headings, body text             |
+| Secondary | `#A0A0A0` | ~9:1           | Descriptions, meta              |
+| Muted     | `#707070` | ~5.2:1         | Labels, captions (WCAG AA safe) |
 
 ---
 
@@ -76,21 +81,27 @@ New accent for hovers, links, and secondary highlights.
 ### Name Typography
 
 **Sizing (viewport-responsive):**
+
 ```css
 .hero-name {
   font-size: clamp(5rem, 15vw, 12rem);
 }
 
 @media (max-width: 768px) {
-  .hero-name { font-size: 12vw; }
+  .hero-name {
+    font-size: 12vw;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .hero-name { font-size: 14vw; }
+  .hero-name {
+    font-size: 14vw;
+  }
 }
 ```
 
 **Persistent Glow Effect:**
+
 ```css
 .hero-name {
   text-shadow:
@@ -104,6 +115,7 @@ New accent for hovers, links, and secondary highlights.
 Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 
 **Phase 1: Blur-to-Sharp Reveal (0-600ms)**
+
 ```javascript
 // Per-letter animation
 {
@@ -128,28 +140,37 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 ```
 
 **Phase 2: Gradient Underline Sweep (starts at 400ms)**
+
 ```css
 .hero-underline {
   height: 4px;
-  background: linear-gradient(90deg, #FFBE2E, #22D3EE);
+  background: linear-gradient(90deg, #ffbe2e, #22d3ee);
   width: 0%;
   animation: underline-sweep 0.4s ease-out 0.4s forwards;
 }
 
 @keyframes underline-sweep {
-  to { width: 100%; }
+  to {
+    width: 100%;
+  }
 }
 ```
 
 **Phase 3: Glow Pulse (on completion)**
+
 ```css
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .hero-underline::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: -4px;
   background: inherit;
@@ -161,16 +182,19 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 ### Supporting Elements
 
 **Role/Title:**
+
 - Size: `text-2xl md:text-3xl`
 - Color: `cyan-400` (#22D3EE)
 - Animation: Fade-up with 200ms delay, slight blur resolve
 
 **Bio/Value Prop:**
+
 - Color: `#A0A0A0`
 - Animation: Fade-up at 400ms delay
 - Max-width: `max-w-2xl`
 
 **Entrance Timing:**
+
 ```
 0ms     - Name blur/slam begins
 300ms   - Name animation completing
@@ -188,7 +212,7 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 }
 
 .hero-bg::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
@@ -207,8 +231,8 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 
 ```css
 .btn-primary {
-  background: linear-gradient(180deg, #F5A623 0%, #D4890A 100%);
-  color: #0C1219;
+  background: linear-gradient(180deg, #f5a623 0%, #d4890a 100%);
+  color: #0c1219;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
     0 0 30px rgba(245, 166, 35, 0.4);
@@ -228,15 +252,15 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 ```css
 .btn-secondary {
   background: transparent;
-  border: 1px solid #06B6D4;
-  color: #22D3EE;
+  border: 1px solid #06b6d4;
+  color: #22d3ee;
   transition: all 0.25s ease-out;
 }
 
 .btn-secondary:hover {
   background: rgba(6, 182, 212, 0.1);
-  border-color: #22D3EE;
-  color: #67E8F9;
+  border-color: #22d3ee;
+  color: #67e8f9;
   box-shadow: 0 0 25px rgba(6, 182, 212, 0.35);
 }
 ```
@@ -245,7 +269,7 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 
 ```css
 .btn-submit {
-  background: linear-gradient(180deg, #FFBE2E 0%, #F5A623 50%, #D4890A 100%);
+  background: linear-gradient(180deg, #ffbe2e 0%, #f5a623 50%, #d4890a 100%);
   background-size: 200% 200%;
   animation: shimmer-bg 3s ease-in-out infinite;
   box-shadow:
@@ -262,13 +286,18 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 }
 
 @keyframes shimmer-bg {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Diagonal light sweep */
 .btn-submit::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -282,8 +311,12 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 }
 
 @keyframes light-sweep {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 ```
 
@@ -295,8 +328,12 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 
 ```css
 /* Alternating sections for rhythm */
-.section-primary { background: #030508; }
-.section-alternate { background: #080C12; }
+.section-primary {
+  background: #030508;
+}
+.section-alternate {
+  background: #080c12;
+}
 
 /* Section divider */
 .section-divider {
@@ -314,20 +351,20 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 
 ```css
 .section-heading {
-  color: #F5F5F5;
+  color: #f5f5f5;
 }
 
 .section-heading .accent {
-  color: #FFBE2E;
+  color: #ffbe2e;
 }
 
 .section-heading::after {
-  content: '';
+  content: "";
   display: block;
   width: 40%;
   height: 2px;
   margin-top: 0.5rem;
-  background: linear-gradient(90deg, #F5A623, transparent);
+  background: linear-gradient(90deg, #f5a623, transparent);
 }
 ```
 
@@ -335,7 +372,7 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 
 ```css
 .card {
-  background: #0C1219;
+  background: #0c1219;
   border: 1px solid #1a1f28;
   border-radius: 16px;
   transition: all 0.25s ease-out;
@@ -345,8 +382,8 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
   transform: translateY(-4px);
   border-color: transparent;
   background:
-    linear-gradient(#0C1219, #0C1219) padding-box,
-    linear-gradient(135deg, #F5A623, #06B6D4) border-box;
+    linear-gradient(#0c1219, #0c1219) padding-box,
+    linear-gradient(135deg, #f5a623, #06b6d4) border-box;
   box-shadow:
     0 0 30px rgba(245, 166, 35, 0.15),
     0 0 30px rgba(6, 182, 212, 0.1);
@@ -357,13 +394,13 @@ Replace current GSAP spin animation with aggressive blur-to-sharp reveal.
 
 ```css
 a {
-  color: #22D3EE;
+  color: #22d3ee;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 a:hover {
-  color: #67E8F9;
+  color: #67e8f9;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -377,25 +414,37 @@ a:hover {
 
 ```css
 .cta-block {
-  background: #080C12;
+  background: #080c12;
   border: 1px solid rgba(245, 166, 35, 0.15);
   position: relative;
   overflow: hidden;
 }
 
 .cta-block::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 30% 50%, rgba(245, 166, 35, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+    radial-gradient(
+      ellipse at 30% 50%,
+      rgba(245, 166, 35, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 70% 50%,
+      rgba(6, 182, 212, 0.05) 0%,
+      transparent 50%
+    );
   animation: gradient-drift 8s ease-in-out infinite alternate;
 }
 
 @keyframes gradient-drift {
-  0% { transform: translateX(-10px); }
-  100% { transform: translateX(10px); }
+  0% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
 }
 ```
 
@@ -408,7 +457,7 @@ a:hover {
 }
 
 .contact-section::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
@@ -420,14 +469,14 @@ a:hover {
 
 /* Form inputs */
 .form-input {
-  background: #0C1219;
+  background: #0c1219;
   border: 1px solid #1a1f28;
-  color: #F5F5F5;
+  color: #f5f5f5;
   transition: all 0.2s ease;
 }
 
 .form-input:focus {
-  border-color: #06B6D4;
+  border-color: #06b6d4;
   box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
   outline: none;
 }
@@ -439,18 +488,18 @@ a:hover {
 
 ```css
 .footer {
-  background: linear-gradient(180deg, #080C12 0%, #000000 100%);
+  background: linear-gradient(180deg, #080c12 0%, #000000 100%);
   border-top: 1px solid;
-  border-image: linear-gradient(90deg, #F5A623, #06B6D4) 1;
+  border-image: linear-gradient(90deg, #f5a623, #06b6d4) 1;
 }
 
 .footer-link {
-  color: #A0A0A0;
+  color: #a0a0a0;
   transition: all 0.2s ease;
 }
 
 .footer-link:hover {
-  color: #22D3EE;
+  color: #22d3ee;
   text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
 }
 
@@ -460,7 +509,7 @@ a:hover {
 }
 
 .social-icon:hover {
-  color: #FFBE2E;
+  color: #ffbe2e;
   transform: scale(1.1);
   filter: drop-shadow(0 0 8px rgba(245, 166, 35, 0.5));
 }
@@ -482,7 +531,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #F5A623, #06B6D4);
+  background: linear-gradient(180deg, #f5a623, #06b6d4);
   border-radius: 4px;
 }
 ```
@@ -492,7 +541,7 @@ a:hover {
 ```css
 ::selection {
   background: rgba(6, 182, 212, 0.3);
-  color: #F5F5F5;
+  color: #f5f5f5;
 }
 ```
 
@@ -500,7 +549,7 @@ a:hover {
 
 ```css
 :focus-visible {
-  outline: 2px solid #22D3EE;
+  outline: 2px solid #22d3ee;
   outline-offset: 2px;
 }
 ```
@@ -586,11 +635,13 @@ keyframes: {
 ## 9. Implementation Priority
 
 ### Phase 1: Foundation
+
 1. Update Tailwind config with new colors and utilities
 2. Update CSS custom properties in globals.css
 3. Apply new dark backgrounds
 
 ### Phase 2: Hero
+
 4. Resize hero name typography
 5. Replace GSAP animation with blur-to-sharp reveal
 6. Add gradient underline animation
@@ -598,18 +649,21 @@ keyframes: {
 8. Restyle hero buttons
 
 ### Phase 3: Components
+
 9. Update card component with new hover states
 10. Restyle all buttons to new system
 11. Update link colors and effects
 12. Add section dividers and header treatments
 
 ### Phase 4: Intensity Zones
+
 13. Style CTA blocks with gradient mesh
 14. Update contact section and form
 15. Restyle footer with gradient border
 16. Style social icons with gold hover
 
 ### Phase 5: Polish
+
 17. Add custom scrollbar
 18. Update selection highlight
 19. Verify focus states
