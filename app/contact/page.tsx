@@ -314,22 +314,21 @@ export default function ContactPage() {
                   )}
                 </div>
 
-                {/* Submit Button */}
-                <Button
+                {/* Submit Button - Peak Intensity */}
+                <button
                   type="submit"
-                  size="lg"
-                  className="w-full"
+                  className="w-full btn-submit-peak h-12 text-base"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
                     "Sending..."
                   ) : (
-                    <>
+                    <span className="inline-flex items-center gap-2">
                       Send Message
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </>
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
                   )}
-                </Button>
+                </button>
               </form>
             )}
           </div>
