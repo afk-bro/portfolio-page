@@ -12,11 +12,11 @@
   }
 
   .dark {
-    /* Dark mode - Deep ocean bg, Warm sand text, Bronze accent */
-    --background: 5 70 114; /* ocean-900 #054672 */
-    --foreground: 244 211 144; /* sand-500 #f4d390 */
-    --primary: 231 155 71; /* bronze-500 #e79b47 */
-    --primary-foreground: 5 70 114;
+    /* Dark mode - True black bg, bright text, gold accent */
+    --background: 3 5 8; /* dark-void #030508 */
+    --foreground: 245 245 245; /* near-white #F5F5F5 */
+    --primary: 245 166 35; /* gold-500 #F5A623 */
+    --primary-foreground: 12 18 25;
   }
 
   html {
