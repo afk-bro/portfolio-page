@@ -51,3 +51,6 @@ analyze.js
 .claude_settings.json
 claude-progress*.txt
 notes/
+
+# Git Worktrees
+.worktrees/

@@ -32,9 +32,10 @@ const config: Config = {
         // DARK MODE BASE - Near-black navy (premium)
         // ===========================================
         dark: {
-          base: "#050B14", // Page background - almost black navy
-          surface: "#0A1626", // Cards/sections - deep navy
-          elevated: "#0F1D2F", // Elevated surfaces
+          void: "#030508", // Primary background (near-true black)
+          surface: "#080C12", // Card/section surfaces
+          elevated: "#0C1219", // Elevated elements, inputs
+          base: "#050B14", // Keep for backwards compat
         },
 
         // ===========================================
@@ -52,6 +53,24 @@ const config: Config = {
           200: "#f5d4a0", // Very light
           100: "#fae8c8", // Near white warm
           50: "#fdf4e6", // Barely there
+        },
+
+        // ===========================================
+        // GOLD ACCENT - Primary CTAs (Contrast & Drama)
+        // ===========================================
+        gold: {
+          400: "#FFBE2E", // Highlights, glows
+          500: "#F5A623", // Primary CTAs
+          600: "#D4890A", // Pressed/active states
+        },
+
+        // ===========================================
+        // CYAN ACCENT - Secondary highlights (Contrast & Drama)
+        // ===========================================
+        cyan: {
+          400: "#22D3EE", // Bright highlights, hover text
+          500: "#06B6D4", // Links, secondary actions
+          600: "#0891B2", // Active states
         },
 
         // ===========================================
@@ -194,6 +213,11 @@ const config: Config = {
         "keycap-inset":
           "inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.15)",
         "keycap-pressed": "inset 0 2px 4px rgba(0, 0, 0, 0.2)",
+        // Gold and cyan glow shadows (Contrast & Drama)
+        "gold-glow": "0 0 30px rgba(245, 166, 35, 0.4)",
+        "gold-glow-intense":
+          "0 0 40px rgba(245, 166, 35, 0.5), 0 0 80px rgba(245, 166, 35, 0.2)",
+        "cyan-glow": "0 0 25px rgba(6, 182, 212, 0.35)",
       },
 
       // ===========================================
@@ -204,6 +228,11 @@ const config: Config = {
         "fade-in": "fadeIn 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
         shimmer: "shimmer 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
         lift: "lift 0.18s cubic-bezier(0.22, 1, 0.36, 1)",
+        "shimmer-bg": "shimmerBg 3s ease-in-out infinite",
+        "light-sweep": "lightSweep 4s ease-in-out infinite",
+        "gradient-drift": "gradientDrift 8s ease-in-out infinite alternate",
+        "glow-pulse": "glowPulse 2s ease-in-out infinite",
+        "underline-sweep": "underlineSweep 0.4s ease-out forwards",
       },
       keyframes: {
         fadeUp: {
@@ -221,6 +250,26 @@ const config: Config = {
         lift: {
           "0%": { transform: "translateY(0)" },
           "100%": { transform: "translateY(-2px)" },
+        },
+        shimmerBg: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        lightSweep: {
+          "0%": { backgroundPosition: "200% 0" },
+          "100%": { backgroundPosition: "-200% 0" },
+        },
+        gradientDrift: {
+          "0%": { transform: "translateX(-10px)" },
+          "100%": { transform: "translateX(10px)" },
+        },
+        glowPulse: {
+          "0%, 100%": { opacity: "0.8" },
+          "50%": { opacity: "1" },
+        },
+        underlineSweep: {
+          from: { width: "0%" },
+          to: { width: "100%" },
         },
       },
       transitionDuration: {
