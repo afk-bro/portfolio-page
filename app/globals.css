@@ -716,3 +716,16 @@
   scrollbar-width: thin;
   scrollbar-color: #F5A623 #030508;
 }
+
+/* ===========================================
+ * SELECTION HIGHLIGHT
+ * =========================================== */
+::selection {
+  background: rgba(6, 182, 212, 0.3);
+  color: #F5F5F5;
+}
+
+::-moz-selection {
+  background: rgba(6, 182, 212, 0.3);
+  color: #F5F5F5;
+}
