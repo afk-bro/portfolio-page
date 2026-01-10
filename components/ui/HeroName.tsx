@@ -255,9 +255,9 @@ export function HeroName({ name, className }: HeroNameProps) {
     return (
       <h1
         className={cn(
-          "text-[clamp(3rem,12vw,10rem)] font-bold leading-[1.1]",
+          "text-[clamp(2.5rem,10vw,10rem)] font-bold leading-[1.1] whitespace-nowrap",
           "text-ocean-800 dark:text-[#F5F5F5]",
-          "mb-4 text-balance",
+          "mb-4",
           className,
         )}
       >
@@ -270,7 +270,7 @@ export function HeroName({ name, className }: HeroNameProps) {
     <div ref={nameWrapperRef} className="relative">
       <h1
         className={cn(
-          "text-[clamp(3rem,12vw,10rem)] font-bold leading-[1.1]",
+          "text-[clamp(2.5rem,10vw,10rem)] font-bold leading-[1.1] whitespace-nowrap",
           "text-ocean-800 dark:text-[#F5F5F5]",
           "mb-4",
           className,
@@ -279,7 +279,7 @@ export function HeroName({ name, className }: HeroNameProps) {
       >
         <span
           ref={containerRef}
-          className="inline-flex flex-wrap justify-center"
+          className="inline-flex justify-center"
           style={{ transformStyle: "preserve-3d" }}
         >
           {characters.map(({ char, isSpace, index }) => (
