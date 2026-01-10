@@ -32,9 +32,10 @@ const config: Config = {
         // DARK MODE BASE - Near-black navy (premium)
         // ===========================================
         dark: {
-          base: "#050B14", // Page background - almost black navy
-          surface: "#0A1626", // Cards/sections - deep navy
-          elevated: "#0F1D2F", // Elevated surfaces
+          void: "#030508", // Primary background (near-true black)
+          surface: "#080C12", // Card/section surfaces
+          elevated: "#0C1219", // Elevated elements, inputs
+          base: "#050B14", // Keep for backwards compat
         },
 
         // ===========================================
@@ -52,6 +53,24 @@ const config: Config = {
           200: "#f5d4a0", // Very light
           100: "#fae8c8", // Near white warm
           50: "#fdf4e6", // Barely there
+        },
+
+        // ===========================================
+        // GOLD ACCENT - Primary CTAs (Contrast & Drama)
+        // ===========================================
+        gold: {
+          400: "#FFBE2E", // Highlights, glows
+          500: "#F5A623", // Primary CTAs
+          600: "#D4890A", // Pressed/active states
+        },
+
+        // ===========================================
+        // CYAN ACCENT - Secondary highlights (Contrast & Drama)
+        // ===========================================
+        cyan: {
+          400: "#22D3EE", // Bright highlights, hover text
+          500: "#06B6D4", // Links, secondary actions
+          600: "#0891B2", // Active states
         },
 
         // ===========================================
