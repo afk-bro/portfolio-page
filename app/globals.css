@@ -272,36 +272,33 @@
   }
 
   /* ===========================================
-   * CTA BUTTON - 3D Keycap with glass sheen
+   * CTA BUTTON - Gold with intense glow
    * =========================================== */
   .btn-primary-cta {
     @apply relative overflow-hidden;
     @apply px-6 py-3 rounded-button font-medium;
     @apply transition-all duration-150 ease-smooth;
-    background: linear-gradient(180deg, #d48f4e 0%, #cd7931 15%, #cd7931 100%);
-    color: #0d4d79;
+    background: linear-gradient(180deg, #FFBE2E 0%, #F5A623 50%, #D4890A 100%);
+    color: #0C1219;
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.25),
       inset 0 -2px 0 rgba(0, 0, 0, 0.1),
-      0 0 0 1px rgba(237, 174, 95, 0.35),
-      0 12px 26px rgba(191, 97, 27, 0.28);
+      0 0 30px rgba(245, 166, 35, 0.4);
   }
 
   .btn-primary-cta:hover {
-    transform: translateY(-1px);
+    transform: translateY(-1px) scale(1.02);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.3),
       inset 0 -2px 0 rgba(0, 0, 0, 0.1),
-      0 0 0 1px rgba(237, 174, 95, 0.5),
-      0 16px 32px rgba(191, 97, 27, 0.35);
+      0 0 40px rgba(245, 166, 35, 0.5);
   }
 
   .btn-primary-cta:active {
-    transform: translateY(1px);
+    transform: translateY(1px) scale(0.98);
     box-shadow:
       inset 0 2px 4px rgba(0, 0, 0, 0.2),
-      0 0 0 1px rgba(237, 174, 95, 0.35),
-      0 4px 12px rgba(191, 97, 27, 0.2);
+      0 0 20px rgba(245, 166, 35, 0.3);
   }
 
   /* Glass sheen on hover */
@@ -313,10 +310,10 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(
-      120deg,
-      transparent 0%,
+      110deg,
+      transparent 20%,
       rgba(255, 255, 255, 0.3) 50%,
-      transparent 100%
+      transparent 80%
     );
     transition: left 0.5s ease;
     pointer-events: none;
@@ -333,25 +330,22 @@
   }
 
   .dark .btn-primary-cta {
-    background: linear-gradient(180deg, #cd7931 0%, #bf611b 100%);
-    color: #050b14;
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.2),
       inset 0 -2px 0 rgba(0, 0, 0, 0.15),
-      0 0 30px rgba(245, 158, 11, 0.3),
-      0 12px 26px rgba(0, 0, 0, 0.5);
+      0 0 40px rgba(245, 166, 35, 0.5),
+      0 0 80px rgba(245, 166, 35, 0.2);
   }
 
   .dark .btn-primary-cta:hover {
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.25),
       inset 0 -2px 0 rgba(0, 0, 0, 0.15),
-      0 0 40px rgba(245, 158, 11, 0.4),
-      0 18px 36px rgba(0, 0, 0, 0.6);
+      0 0 50px rgba(245, 166, 35, 0.6);
   }
 
   /* ===========================================
-   * SECONDARY BUTTON - Refined outline
+   * SECONDARY BUTTON - Cyan outline
    * =========================================== */
   .btn-secondary {
     @apply relative px-6 py-3 rounded-button font-medium;
@@ -361,9 +355,9 @@
   }
 
   .dark .btn-secondary {
-    background: rgba(255, 255, 255, 0.05);
-    color: #f4d390;
-    border-color: rgba(255, 255, 255, 0.12);
+    background: transparent;
+    color: #22D3EE;
+    border-color: #06B6D4;
   }
 
   .btn-secondary:hover {
@@ -373,8 +367,9 @@
   }
 
   .dark .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(245, 158, 11, 0.3);
+    background: rgba(6, 182, 212, 0.1);
+    border-color: #22D3EE;
+    box-shadow: 0 0 25px rgba(6, 182, 212, 0.35);
   }
 
   .btn-secondary:active {
