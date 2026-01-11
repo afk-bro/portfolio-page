@@ -69,5 +69,44 @@ jest.mock("gsap", () => ({
     }),
     kill: jest.fn(),
     progress: jest.fn(),
+    then: jest.fn((callback) => {
+      setTimeout(callback, 0);
+      return Promise.resolve();
+    }),
   })),
+  registerPlugin: jest.fn(),
+  default: {
+    set: jest.fn(),
+    to: jest.fn((target, config) => {
+      if (config.onComplete) {
+        setTimeout(() => config.onComplete(), 0);
+      }
+      return { kill: jest.fn() };
+    }),
+    timeline: jest.fn(() => ({
+      to: jest.fn(function (target, config, position) {
+        if (config.onComplete) {
+          setTimeout(() => config.onComplete(), 0);
+        }
+        return this;
+      }),
+      kill: jest.fn(),
+      progress: jest.fn(),
+      then: jest.fn((callback) => {
+        setTimeout(callback, 0);
+        return Promise.resolve();
+      }),
+    })),
+    registerPlugin: jest.fn(),
+  },
+}));
+
+// Mock gsap/ScrollTrigger
+jest.mock("gsap/ScrollTrigger", () => ({
+  ScrollTrigger: {
+    create: jest.fn(() => ({
+      kill: jest.fn(),
+    })),
+    refresh: jest.fn(),
+  },
 }));
