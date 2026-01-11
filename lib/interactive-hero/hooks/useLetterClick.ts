@@ -119,7 +119,7 @@ export function useLetterClick({
     // Update state
     setInteractionCount(prev => prev + 1);
     setLastEffectId(effect.id);
-    setClickedLetters(prev => new Set([...prev, index]));
+    setClickedLetters(prev => new Set(Array.from(prev).concat(index)));
 
     // Wait for completion then cleanup
     return new Promise<void>(resolve => {
