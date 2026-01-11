@@ -106,6 +106,7 @@ describe("performance utilities", () => {
         rafCallbacks.push(cb);
         return ++rafId;
       });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       jest.spyOn(window, "cancelAnimationFrame").mockImplementation((_id) => {
         // Mock implementation - id parameter unused but required by type
       });
