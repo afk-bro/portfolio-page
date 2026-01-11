@@ -142,6 +142,7 @@ export function createGoldGlow(
  */
 export function createOceanElectric(
   element: HTMLElement,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _intensity: number,
 ): gsap.core.Timeline {
   const tl = gsap.timeline();
