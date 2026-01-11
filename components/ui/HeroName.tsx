@@ -3,11 +3,14 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
-import { useLetterClick, VisibilityState } from "@/lib/interactive-hero";
+import { useLetterClick, useTier3Effects, VisibilityState } from "@/lib/interactive-hero";
+
+type Tier3EffectType = 'caustics' | 'particle-trail';
 
 interface HeroNameProps {
   name: string;
   className?: string;
+  onTier3Change?: (effects: Tier3EffectType[]) => void;
 }
 
 /**
@@ -24,7 +27,7 @@ interface HeroNameProps {
  * - They animate to sharp, normal scale, and final position
  * - Dual glow (gold + cyan) appears during animation
  */
-export function HeroName({ name, className }: HeroNameProps) {
+export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
   const containerRef = useRef<HTMLSpanElement>(null);
   const nameWrapperRef = useRef<HTMLDivElement>(null);
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -53,12 +56,35 @@ export function HeroName({ name, className }: HeroNameProps) {
     }));
   }, [name]);
 
+  // Calculate total letters (excluding spaces) for Tier 3 unlock detection
+  const totalLetters = useMemo(
+    () => name.replace(/\s/g, '').length,
+    [name]
+  );
+
+  // Current visibility state
+  const visibility = isVisible ? VisibilityState.Full : VisibilityState.Frozen;
+
   // Click handler for interactive effects
-  const { handleClick } = useLetterClick({
+  const { handleClick, interactionCount, clickedLetters } = useLetterClick({
     letterRefs: { current: letterRefsArray.current },
-    visibility: isVisible ? VisibilityState.Full : VisibilityState.Frozen,
+    visibility,
     enabled: !prefersReducedMotion && introComplete,
   });
+
+  // Tier 3 Easter egg effects
+  const { activeTier3Effects } = useTier3Effects({
+    interactionCount,
+    clickedLetters,
+    totalLetters,
+    visibility,
+    enabled: !prefersReducedMotion && introComplete,
+  });
+
+  // Notify parent when Tier 3 effects change
+  useEffect(() => {
+    onTier3Change?.(activeTier3Effects);
+  }, [activeTier3Effects, onTier3Change]);
 
   // Set ref for each letter
   const setLetterRef = useCallback(
