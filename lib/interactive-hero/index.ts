@@ -80,6 +80,20 @@ export type {
   MemoizedFunction,
 } from './utils/performance';
 
+// Browser detection utilities
+export {
+  detectBrowser,
+  resetBrowserInfoCache,
+  useBrowserInfo,
+  getEventListenerOptions,
+  getScrollListenerOptions,
+  isWebGL2LikelySupported,
+} from './utils/browserDetect';
+export type {
+  BrowserName,
+  BrowserInfo,
+} from './utils/browserDetect';
+
 // Performance monitoring hook
 export {
   usePerformanceMonitor,
