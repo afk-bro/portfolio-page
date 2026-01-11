@@ -1,14 +1,16 @@
 // lib/interactive-hero/__tests__/useParallaxExit.test.ts
-import { renderHook } from '@testing-library/react';
-import { useParallaxExit } from '../hooks/useParallaxExit';
+import { renderHook } from "@testing-library/react";
+import { useParallaxExit } from "../hooks/useParallaxExit";
 
-describe('useParallaxExit', () => {
-  it('returns zero offsets when not in exit phase', () => {
-    const { result } = renderHook(() => useParallaxExit({
-      exitProgress: 0,
-      isScrollingUp: false,
-      enabled: true,
-    }));
+describe("useParallaxExit", () => {
+  it("returns zero offsets when not in exit phase", () => {
+    const { result } = renderHook(() =>
+      useParallaxExit({
+        exitProgress: 0,
+        isScrollingUp: false,
+        enabled: true,
+      }),
+    );
 
     expect(result.current.backgroundOffset).toBe(0);
     expect(result.current.overlayOffset).toBe(0);
@@ -17,12 +19,14 @@ describe('useParallaxExit', () => {
     expect(result.current.buttonsOffset).toBe(0);
   });
 
-  it('applies parallax offsets during exit', () => {
-    const { result } = renderHook(() => useParallaxExit({
-      exitProgress: 0.5, // Halfway through 200px exit
-      isScrollingUp: false,
-      enabled: true,
-    }));
+  it("applies parallax offsets during exit", () => {
+    const { result } = renderHook(() =>
+      useParallaxExit({
+        exitProgress: 0.5, // Halfway through 200px exit
+        isScrollingUp: false,
+        enabled: true,
+      }),
+    );
 
     // With power1.out easing: eased(0.5) = 1 - (1 - 0.5)^2 = 0.75
     // Eased distance = 0.75 * 200 = 150px
@@ -43,18 +47,22 @@ describe('useParallaxExit', () => {
     expect(result.current.buttonsOffset).toBeCloseTo(150, 0);
   });
 
-  it('applies easing to offsets', () => {
-    const { result: early } = renderHook(() => useParallaxExit({
-      exitProgress: 0.25,
-      isScrollingUp: false,
-      enabled: true,
-    }));
+  it("applies easing to offsets", () => {
+    const { result: early } = renderHook(() =>
+      useParallaxExit({
+        exitProgress: 0.25,
+        isScrollingUp: false,
+        enabled: true,
+      }),
+    );
 
-    const { result: late } = renderHook(() => useParallaxExit({
-      exitProgress: 0.75,
-      isScrollingUp: false,
-      enabled: true,
-    }));
+    const { result: late } = renderHook(() =>
+      useParallaxExit({
+        exitProgress: 0.75,
+        isScrollingUp: false,
+        enabled: true,
+      }),
+    );
 
     // With power1.out easing:
     // eased(0.25) = 1 - (1 - 0.25)^2 = 1 - 0.5625 = 0.4375
@@ -62,7 +70,7 @@ describe('useParallaxExit', () => {
 
     // Linear values (without easing)
     const linearEarly = 0.25 * 200 * 0.7; // = 35px
-    const linearLate = 0.75 * 200 * 0.7;  // = 105px
+    const linearLate = 0.75 * 200 * 0.7; // = 105px
 
     // Eased values should be:
     // early: 0.4375 * 200 * 0.7 = 61.25px (ahead of linear 35px)
@@ -77,31 +85,39 @@ describe('useParallaxExit', () => {
     expect(earlyLateRatio).toBeLessThan(linearRatio);
   });
 
-  it('accelerates convergence on reverse scroll (1.5x rate)', () => {
-    const { result: forward } = renderHook(() => useParallaxExit({
-      exitProgress: 0.5,
-      isScrollingUp: false,
-      enabled: true,
-    }));
+  it("accelerates convergence on reverse scroll (1.5x rate)", () => {
+    const { result: forward } = renderHook(() =>
+      useParallaxExit({
+        exitProgress: 0.5,
+        isScrollingUp: false,
+        enabled: true,
+      }),
+    );
 
-    const { result: reverse } = renderHook(() => useParallaxExit({
-      exitProgress: 0.5,
-      isScrollingUp: true,
-      enabled: true,
-    }));
+    const { result: reverse } = renderHook(() =>
+      useParallaxExit({
+        exitProgress: 0.5,
+        isScrollingUp: true,
+        enabled: true,
+      }),
+    );
 
     // On reverse scroll, offsets should be smaller (converging faster)
     // At 1.5x rate, effective progress for convergence is 0.5 * 1.5 = 0.75
     // So remaining offset should be like we're at 0.75 progress going back
-    expect(Math.abs(reverse.current.nameOffset)).toBeLessThan(Math.abs(forward.current.nameOffset));
+    expect(Math.abs(reverse.current.nameOffset)).toBeLessThan(
+      Math.abs(forward.current.nameOffset),
+    );
   });
 
-  it('returns zero offsets when disabled', () => {
-    const { result } = renderHook(() => useParallaxExit({
-      exitProgress: 0.5,
-      isScrollingUp: false,
-      enabled: false,
-    }));
+  it("returns zero offsets when disabled", () => {
+    const { result } = renderHook(() =>
+      useParallaxExit({
+        exitProgress: 0.5,
+        isScrollingUp: false,
+        enabled: false,
+      }),
+    );
 
     expect(result.current.backgroundOffset).toBe(0);
     expect(result.current.overlayOffset).toBe(0);
@@ -110,17 +126,19 @@ describe('useParallaxExit', () => {
     expect(result.current.buttonsOffset).toBe(0);
   });
 
-  it('provides CSS transform values', () => {
-    const { result } = renderHook(() => useParallaxExit({
-      exitProgress: 0.5,
-      isScrollingUp: false,
-      enabled: true,
-    }));
+  it("provides CSS transform values", () => {
+    const { result } = renderHook(() =>
+      useParallaxExit({
+        exitProgress: 0.5,
+        isScrollingUp: false,
+        enabled: true,
+      }),
+    );
 
-    expect(result.current.transforms.background).toContain('translateY');
-    expect(result.current.transforms.overlay).toContain('translateY');
-    expect(result.current.transforms.name).toContain('translateY');
-    expect(result.current.transforms.divider).toContain('translateY');
-    expect(result.current.transforms.buttons).toContain('translateY');
+    expect(result.current.transforms.background).toContain("translateY");
+    expect(result.current.transforms.overlay).toContain("translateY");
+    expect(result.current.transforms.name).toContain("translateY");
+    expect(result.current.transforms.divider).toContain("translateY");
+    expect(result.current.transforms.buttons).toContain("translateY");
   });
 });

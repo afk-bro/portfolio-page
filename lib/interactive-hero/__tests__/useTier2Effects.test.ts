@@ -1,21 +1,24 @@
 // lib/interactive-hero/__tests__/useTier2Effects.test.ts
-import { renderHook, act } from '@testing-library/react';
-import { useTier2Effects } from '../hooks/useTier2Effects';
-import { VisibilityState } from '../types';
+import { renderHook, act } from "@testing-library/react";
+import { useTier2Effects } from "../hooks/useTier2Effects";
+import { VisibilityState } from "../types";
 
 // Mock GSAP
-jest.mock('gsap', () => ({
+jest.mock("gsap", () => ({
   timeline: jest.fn(() => ({
     to: jest.fn().mockReturnThis(),
     kill: jest.fn(),
-    then: jest.fn((cb) => { cb?.(); return Promise.resolve(); }),
+    then: jest.fn((cb) => {
+      cb?.();
+      return Promise.resolve();
+    }),
   })),
 }));
 
-describe('useTier2Effects', () => {
+describe("useTier2Effects", () => {
   beforeEach(() => {
     jest.useFakeTimers();
-    jest.spyOn(performance, 'now').mockReturnValue(0);
+    jest.spyOn(performance, "now").mockReturnValue(0);
   });
 
   afterEach(() => {
@@ -23,81 +26,88 @@ describe('useTier2Effects', () => {
     jest.restoreAllMocks();
   });
 
-  it('returns canTrigger as false initially', () => {
-    const { result } = renderHook(() => useTier2Effects({
-      visibility: VisibilityState.Full,
-      interactionCount: 0,
-      timeOnPage: 0,
-      scrollIntent: false,
-      isScrollingUp: false,
-    }));
+  it("returns canTrigger as false initially", () => {
+    const { result } = renderHook(() =>
+      useTier2Effects({
+        visibility: VisibilityState.Full,
+        interactionCount: 0,
+        timeOnPage: 0,
+        scrollIntent: false,
+        isScrollingUp: false,
+      }),
+    );
 
     expect(result.current.canTrigger).toBe(false);
   });
 
-  it('allows trigger after 5 interactions and 8s time', () => {
-    const { result, rerender } = renderHook(
-      (props) => useTier2Effects(props),
-      {
-        initialProps: {
-          visibility: VisibilityState.Full,
-          interactionCount: 5,
-          timeOnPage: 8,
-          scrollIntent: false,
-          isScrollingUp: false,
-        },
-      }
+  it("allows trigger after 5 interactions and 8s time", () => {
+    const { result, rerender } = renderHook((props) => useTier2Effects(props), {
+      initialProps: {
+        visibility: VisibilityState.Full,
+        interactionCount: 5,
+        timeOnPage: 8,
+        scrollIntent: false,
+        isScrollingUp: false,
+      },
+    });
+
+    expect(result.current.canTrigger).toBe(true);
+  });
+
+  it("allows trigger with scroll intent instead of time", () => {
+    const { result } = renderHook(() =>
+      useTier2Effects({
+        visibility: VisibilityState.Full,
+        interactionCount: 5,
+        timeOnPage: 3, // Less than 8s
+        scrollIntent: true, // But has scroll intent
+        isScrollingUp: false,
+      }),
     );
 
     expect(result.current.canTrigger).toBe(true);
   });
 
-  it('allows trigger with scroll intent instead of time', () => {
-    const { result } = renderHook(() => useTier2Effects({
-      visibility: VisibilityState.Full,
-      interactionCount: 5,
-      timeOnPage: 3, // Less than 8s
-      scrollIntent: true, // But has scroll intent
-      isScrollingUp: false,
-    }));
-
-    expect(result.current.canTrigger).toBe(true);
-  });
-
-  it('blocks trigger when visibility is not Full', () => {
-    const { result } = renderHook(() => useTier2Effects({
-      visibility: VisibilityState.Reduced,
-      interactionCount: 10,
-      timeOnPage: 20,
-      scrollIntent: true,
-      isScrollingUp: false,
-    }));
+  it("blocks trigger when visibility is not Full", () => {
+    const { result } = renderHook(() =>
+      useTier2Effects({
+        visibility: VisibilityState.Reduced,
+        interactionCount: 10,
+        timeOnPage: 20,
+        scrollIntent: true,
+        isScrollingUp: false,
+      }),
+    );
 
     expect(result.current.canTrigger).toBe(false);
   });
 
-  it('blocks trigger when scrolling up', () => {
-    const { result } = renderHook(() => useTier2Effects({
-      visibility: VisibilityState.Full,
-      interactionCount: 10,
-      timeOnPage: 20,
-      scrollIntent: true,
-      isScrollingUp: true,
-    }));
+  it("blocks trigger when scrolling up", () => {
+    const { result } = renderHook(() =>
+      useTier2Effects({
+        visibility: VisibilityState.Full,
+        interactionCount: 10,
+        timeOnPage: 20,
+        scrollIntent: true,
+        isScrollingUp: true,
+      }),
+    );
 
     expect(result.current.canTrigger).toBe(false);
   });
 
-  it('triggers effect and enters cooldown', async () => {
-    jest.spyOn(performance, 'now').mockReturnValue(0);
+  it("triggers effect and enters cooldown", async () => {
+    jest.spyOn(performance, "now").mockReturnValue(0);
 
-    const { result } = renderHook(() => useTier2Effects({
-      visibility: VisibilityState.Full,
-      interactionCount: 5,
-      timeOnPage: 8,
-      scrollIntent: false,
-      isScrollingUp: false,
-    }));
+    const { result } = renderHook(() =>
+      useTier2Effects({
+        visibility: VisibilityState.Full,
+        interactionCount: 5,
+        timeOnPage: 8,
+        scrollIntent: false,
+        isScrollingUp: false,
+      }),
+    );
 
     expect(result.current.canTrigger).toBe(true);
 
@@ -109,22 +119,19 @@ describe('useTier2Effects', () => {
     expect(result.current.lastEffectId).not.toBeNull();
   });
 
-  it('respects cooldown period', async () => {
+  it("respects cooldown period", async () => {
     let mockTime = 0;
-    jest.spyOn(performance, 'now').mockImplementation(() => mockTime);
+    jest.spyOn(performance, "now").mockImplementation(() => mockTime);
 
-    const { result, rerender } = renderHook(
-      (props) => useTier2Effects(props),
-      {
-        initialProps: {
-          visibility: VisibilityState.Full,
-          interactionCount: 5,
-          timeOnPage: 8,
-          scrollIntent: false,
-          isScrollingUp: false,
-        },
-      }
-    );
+    const { result, rerender } = renderHook((props) => useTier2Effects(props), {
+      initialProps: {
+        visibility: VisibilityState.Full,
+        interactionCount: 5,
+        timeOnPage: 8,
+        scrollIntent: false,
+        isScrollingUp: false,
+      },
+    });
 
     // Trigger first effect
     await act(async () => {
@@ -148,22 +155,19 @@ describe('useTier2Effects', () => {
     expect(result.current.canTrigger).toBe(true);
   });
 
-  it('never selects same effect twice in a row', async () => {
+  it("never selects same effect twice in a row", async () => {
     let mockTime = 0;
-    jest.spyOn(performance, 'now').mockImplementation(() => mockTime);
+    jest.spyOn(performance, "now").mockImplementation(() => mockTime);
 
-    const { result, rerender } = renderHook(
-      (props) => useTier2Effects(props),
-      {
-        initialProps: {
-          visibility: VisibilityState.Full,
-          interactionCount: 5,
-          timeOnPage: 8,
-          scrollIntent: false,
-          isScrollingUp: false,
-        },
-      }
-    );
+    const { result, rerender } = renderHook((props) => useTier2Effects(props), {
+      initialProps: {
+        visibility: VisibilityState.Full,
+        interactionCount: 5,
+        timeOnPage: 8,
+        scrollIntent: false,
+        isScrollingUp: false,
+      },
+    });
 
     const effectIds: string[] = [];
 
@@ -191,46 +195,47 @@ describe('useTier2Effects', () => {
     }
   });
 
-  it('does not trigger when interaction count is below threshold', () => {
-    const { result } = renderHook(() => useTier2Effects({
-      visibility: VisibilityState.Full,
-      interactionCount: 4, // Less than 5
-      timeOnPage: 20,
-      scrollIntent: true,
-      isScrollingUp: false,
-    }));
-
-    expect(result.current.canTrigger).toBe(false);
-  });
-
-  it('does not trigger when time is below threshold and no scroll intent', () => {
-    const { result } = renderHook(() => useTier2Effects({
-      visibility: VisibilityState.Full,
-      interactionCount: 10,
-      timeOnPage: 5, // Less than 8s
-      scrollIntent: false, // No scroll intent
-      isScrollingUp: false,
-    }));
-
-    expect(result.current.canTrigger).toBe(false);
-  });
-
-  it('returns correct cooldownRemaining value', async () => {
-    let mockTime = 0;
-    jest.spyOn(performance, 'now').mockImplementation(() => mockTime);
-
-    const { result, rerender } = renderHook(
-      (props) => useTier2Effects(props),
-      {
-        initialProps: {
-          visibility: VisibilityState.Full,
-          interactionCount: 5,
-          timeOnPage: 8,
-          scrollIntent: false,
-          isScrollingUp: false,
-        },
-      }
+  it("does not trigger when interaction count is below threshold", () => {
+    const { result } = renderHook(() =>
+      useTier2Effects({
+        visibility: VisibilityState.Full,
+        interactionCount: 4, // Less than 5
+        timeOnPage: 20,
+        scrollIntent: true,
+        isScrollingUp: false,
+      }),
     );
+
+    expect(result.current.canTrigger).toBe(false);
+  });
+
+  it("does not trigger when time is below threshold and no scroll intent", () => {
+    const { result } = renderHook(() =>
+      useTier2Effects({
+        visibility: VisibilityState.Full,
+        interactionCount: 10,
+        timeOnPage: 5, // Less than 8s
+        scrollIntent: false, // No scroll intent
+        isScrollingUp: false,
+      }),
+    );
+
+    expect(result.current.canTrigger).toBe(false);
+  });
+
+  it("returns correct cooldownRemaining value", async () => {
+    let mockTime = 0;
+    jest.spyOn(performance, "now").mockImplementation(() => mockTime);
+
+    const { result, rerender } = renderHook((props) => useTier2Effects(props), {
+      initialProps: {
+        visibility: VisibilityState.Full,
+        interactionCount: 5,
+        timeOnPage: 8,
+        scrollIntent: false,
+        isScrollingUp: false,
+      },
+    });
 
     // Initially no cooldown
     expect(result.current.cooldownRemaining).toBe(0);

@@ -1,9 +1,12 @@
 // lib/interactive-hero/hooks/__tests__/usePerformanceMonitor.test.ts
 
-import { renderHook, act } from '@testing-library/react';
-import { usePerformanceMonitor, DEFAULT_THRESHOLDS } from '../usePerformanceMonitor';
+import { renderHook, act } from "@testing-library/react";
+import {
+  usePerformanceMonitor,
+  DEFAULT_THRESHOLDS,
+} from "../usePerformanceMonitor";
 
-describe('usePerformanceMonitor', () => {
+describe("usePerformanceMonitor", () => {
   let rafCallbacks: FrameRequestCallback[] = [];
   let rafId = 0;
 
@@ -12,12 +15,12 @@ describe('usePerformanceMonitor', () => {
     rafId = 0;
     jest.useFakeTimers();
 
-    jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+    jest.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
       rafCallbacks.push(cb);
       return ++rafId;
     });
 
-    jest.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {});
+    jest.spyOn(window, "cancelAnimationFrame").mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -25,8 +28,8 @@ describe('usePerformanceMonitor', () => {
     jest.restoreAllMocks();
   });
 
-  describe('when disabled', () => {
-    it('should return default metrics', () => {
+  describe("when disabled", () => {
+    it("should return default metrics", () => {
       const { result } = renderHook(() => usePerformanceMonitor(false));
 
       expect(result.current.metrics).toEqual({
@@ -37,33 +40,33 @@ describe('usePerformanceMonitor', () => {
       });
     });
 
-    it('should report performance as OK', () => {
+    it("should report performance as OK", () => {
       const { result } = renderHook(() => usePerformanceMonitor(false));
 
       expect(result.current.isPerformanceOK).toBe(true);
     });
 
-    it('should not reduce effects', () => {
+    it("should not reduce effects", () => {
       const { result } = renderHook(() => usePerformanceMonitor(false));
 
       expect(result.current.shouldReduceEffects).toBe(false);
     });
 
-    it('should not start monitoring', () => {
+    it("should not start monitoring", () => {
       renderHook(() => usePerformanceMonitor(false));
 
       expect(window.requestAnimationFrame).not.toHaveBeenCalled();
     });
   });
 
-  describe('when enabled', () => {
-    it('should start monitoring', () => {
+  describe("when enabled", () => {
+    it("should start monitoring", () => {
       renderHook(() => usePerformanceMonitor(true));
 
       expect(window.requestAnimationFrame).toHaveBeenCalled();
     });
 
-    it('should update metrics on frame', () => {
+    it("should update metrics on frame", () => {
       const { result } = renderHook(() => usePerformanceMonitor(true));
 
       // Simulate frames at 60fps
@@ -77,7 +80,7 @@ describe('usePerformanceMonitor', () => {
       expect(result.current.metrics.fps).toBeCloseTo(60, 0);
     });
 
-    it('should stop monitoring on unmount', () => {
+    it("should stop monitoring on unmount", () => {
       const { unmount } = renderHook(() => usePerformanceMonitor(true));
 
       unmount();
@@ -85,10 +88,10 @@ describe('usePerformanceMonitor', () => {
       expect(window.cancelAnimationFrame).toHaveBeenCalled();
     });
 
-    it('should stop monitoring when disabled', () => {
+    it("should stop monitoring when disabled", () => {
       const { rerender } = renderHook(
         ({ enabled }) => usePerformanceMonitor(enabled),
-        { initialProps: { enabled: true } }
+        { initialProps: { enabled: true } },
       );
 
       expect(window.requestAnimationFrame).toHaveBeenCalled();
@@ -99,8 +102,8 @@ describe('usePerformanceMonitor', () => {
     });
   });
 
-  describe('isPerformanceOK', () => {
-    it('should be true when FPS is above threshold', () => {
+  describe("isPerformanceOK", () => {
+    it("should be true when FPS is above threshold", () => {
       const { result } = renderHook(() => usePerformanceMonitor(true));
 
       // Simulate good frames (60fps)
@@ -113,9 +116,9 @@ describe('usePerformanceMonitor', () => {
       expect(result.current.isPerformanceOK).toBe(true);
     });
 
-    it('should be false when FPS drops below threshold', () => {
+    it("should be false when FPS drops below threshold", () => {
       const { result } = renderHook(() =>
-        usePerformanceMonitor(true, { lowFPSThreshold: 30 })
+        usePerformanceMonitor(true, { lowFPSThreshold: 30 }),
       );
 
       // Simulate slow frames (10fps = 100ms per frame)
@@ -130,19 +133,19 @@ describe('usePerformanceMonitor', () => {
     });
   });
 
-  describe('shouldReduceEffects', () => {
-    it('should be false initially', () => {
+  describe("shouldReduceEffects", () => {
+    it("should be false initially", () => {
       const { result } = renderHook(() => usePerformanceMonitor(true));
 
       expect(result.current.shouldReduceEffects).toBe(false);
     });
 
-    it('should be true after consistent low FPS', () => {
+    it("should be true after consistent low FPS", () => {
       const { result } = renderHook(() =>
         usePerformanceMonitor(true, {
           lowFPSThreshold: 30,
           consecutiveLowFrames: 3,
-        })
+        }),
       );
 
       // Simulate consistently slow frames
@@ -157,12 +160,12 @@ describe('usePerformanceMonitor', () => {
       expect(result.current.shouldReduceEffects).toBe(true);
     });
 
-    it('should reset when FPS recovers', () => {
+    it("should reset when FPS recovers", () => {
       const { result } = renderHook(() =>
         usePerformanceMonitor(true, {
           lowFPSThreshold: 20, // Very low threshold
           consecutiveLowFrames: 2,
-        })
+        }),
       );
 
       // Simulate slow frames (2 consecutive low FPS to trigger)
@@ -190,8 +193,8 @@ describe('usePerformanceMonitor', () => {
     });
   });
 
-  describe('trackEffectStart and trackEffectEnd', () => {
-    it('should track effects running count', () => {
+  describe("trackEffectStart and trackEffectEnd", () => {
+    it("should track effects running count", () => {
       const { result } = renderHook(() => usePerformanceMonitor(true));
 
       expect(result.current.metrics.effectsRunning).toBe(0);
@@ -215,7 +218,7 @@ describe('usePerformanceMonitor', () => {
       expect(result.current.metrics.effectsRunning).toBe(1);
     });
 
-    it('should not go below zero', () => {
+    it("should not go below zero", () => {
       const { result } = renderHook(() => usePerformanceMonitor(true));
 
       act(() => {
@@ -227,10 +230,10 @@ describe('usePerformanceMonitor', () => {
     });
   });
 
-  describe('custom thresholds', () => {
-    it('should use custom low FPS threshold', () => {
+  describe("custom thresholds", () => {
+    it("should use custom low FPS threshold", () => {
       const { result } = renderHook(() =>
-        usePerformanceMonitor(true, { lowFPSThreshold: 50 })
+        usePerformanceMonitor(true, { lowFPSThreshold: 50 }),
       );
 
       // Simulate 40fps frames (25ms per frame)
@@ -244,12 +247,12 @@ describe('usePerformanceMonitor', () => {
       expect(result.current.isPerformanceOK).toBe(false);
     });
 
-    it('should use custom consecutive frames threshold', () => {
+    it("should use custom consecutive frames threshold", () => {
       const { result } = renderHook(() =>
         usePerformanceMonitor(true, {
           lowFPSThreshold: 30,
           consecutiveLowFrames: 5,
-        })
+        }),
       );
 
       // Simulate 4 slow frames (should not trigger)
@@ -272,8 +275,8 @@ describe('usePerformanceMonitor', () => {
     });
   });
 
-  describe('DEFAULT_THRESHOLDS', () => {
-    it('should have expected default values', () => {
+  describe("DEFAULT_THRESHOLDS", () => {
+    it("should have expected default values", () => {
       expect(DEFAULT_THRESHOLDS).toEqual({
         lowFPSThreshold: 30,
         consecutiveLowFrames: 10,

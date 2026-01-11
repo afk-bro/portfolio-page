@@ -1,6 +1,6 @@
 // lib/interactive-hero/hooks/useWebGLSupport.ts
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 /**
  * Result of WebGL support detection
@@ -27,21 +27,20 @@ export interface UseWebGLSupportReturn {
  */
 export function checkWebGLSupport(): WebGLSupportResult {
   // SSR check
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return { webgl: false, webgl2: false };
   }
 
   try {
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
 
     // Check WebGL2 first (superset of WebGL1)
-    const webgl2 = !!(canvas.getContext('webgl2'));
+    const webgl2 = !!canvas.getContext("webgl2");
 
     // Check WebGL1 (also try experimental-webgl for older browsers)
-    const webgl = webgl2 || !!(
-      canvas.getContext('webgl') ||
-      canvas.getContext('experimental-webgl')
-    );
+    const webgl =
+      webgl2 ||
+      !!(canvas.getContext("webgl") || canvas.getContext("experimental-webgl"));
 
     return { webgl, webgl2 };
   } catch {

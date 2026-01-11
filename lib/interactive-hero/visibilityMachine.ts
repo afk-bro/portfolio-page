@@ -1,6 +1,6 @@
 // lib/interactive-hero/visibilityMachine.ts
-import { VisibilityState, VISIBILITY_THRESHOLDS } from './types';
-import type { VisibilityStateType } from './types';
+import { VisibilityState, VISIBILITY_THRESHOLDS } from "./types";
+import type { VisibilityStateType } from "./types";
 
 export interface VisibilityMachine {
   state: VisibilityStateType;
@@ -16,17 +16,19 @@ export function createVisibilityMachine(): VisibilityMachine {
  */
 export function updateVisibility(
   machine: VisibilityMachine,
-  ratio: number
+  ratio: number,
 ): VisibilityStateType {
-  const { fullEnter, fullExit, frozenEnter, frozenExit } = VISIBILITY_THRESHOLDS;
+  const { fullEnter, fullExit, frozenEnter, frozenExit } =
+    VISIBILITY_THRESHOLDS;
 
   switch (machine.state) {
     case VisibilityState.Full:
       // Exit Full when drops below fullExit (0.65)
       if (ratio < fullExit) {
-        machine.state = ratio < frozenEnter
-          ? VisibilityState.Frozen
-          : VisibilityState.Reduced;
+        machine.state =
+          ratio < frozenEnter
+            ? VisibilityState.Frozen
+            : VisibilityState.Reduced;
       }
       break;
 
@@ -44,9 +46,8 @@ export function updateVisibility(
     case VisibilityState.Frozen:
       // Exit Frozen when rises to frozenExit (0.50)
       if (ratio >= frozenExit) {
-        machine.state = ratio >= fullEnter
-          ? VisibilityState.Full
-          : VisibilityState.Reduced;
+        machine.state =
+          ratio >= fullEnter ? VisibilityState.Full : VisibilityState.Reduced;
       }
       break;
   }
@@ -59,8 +60,11 @@ export function updateVisibility(
  */
 export function getIntensityMultiplier(state: VisibilityStateType): number {
   switch (state) {
-    case VisibilityState.Full: return 1.0;
-    case VisibilityState.Reduced: return 0.6;
-    case VisibilityState.Frozen: return 0;
+    case VisibilityState.Full:
+      return 1.0;
+    case VisibilityState.Reduced:
+      return 0.6;
+    case VisibilityState.Frozen:
+      return 0;
   }
 }

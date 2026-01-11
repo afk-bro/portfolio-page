@@ -1,7 +1,7 @@
 // lib/interactive-hero/index.ts
 
 // Types
-export * from './types';
+export * from "./types";
 
 // Channel Locks
 export {
@@ -12,7 +12,7 @@ export {
   releaseAllLocks,
   getActiveLocks,
   type ChannelLockManager,
-} from './channelLocks';
+} from "./channelLocks";
 
 // Effect Catalog
 export {
@@ -21,7 +21,7 @@ export {
   TIER3_EFFECTS,
   selectWeightedEffect,
   getEffectById,
-} from './effectCatalog';
+} from "./effectCatalog";
 
 // Visibility Machine
 export {
@@ -29,38 +29,45 @@ export {
   updateVisibility,
   getIntensityMultiplier,
   type VisibilityMachine,
-} from './visibilityMachine';
+} from "./visibilityMachine";
 
 // Effects
-export * from './effects/tier1';
-export * from './effects/cssFallbacks';
+export * from "./effects/tier1";
+export * from "./effects/cssFallbacks";
 
 // Hooks
-export { useLetterClick } from './hooks/useLetterClick';
-export { useWebGLSupport, checkWebGLSupport, resetWebGLSupportCache } from './hooks/useWebGLSupport';
-export type { UseWebGLSupportReturn, WebGLSupportResult } from './hooks/useWebGLSupport';
-export { useHeroScroll } from './hooks/useHeroScroll';
-export { useScrollLinkedProps } from './hooks/useScrollLinkedProps';
-export { useParallaxExit } from './hooks/useParallaxExit';
-export { useTier2Effects } from './hooks/useTier2Effects';
-export { useTier3Effects } from './hooks/useTier3Effects';
+export { useLetterClick } from "./hooks/useLetterClick";
+export {
+  useWebGLSupport,
+  checkWebGLSupport,
+  resetWebGLSupportCache,
+} from "./hooks/useWebGLSupport";
+export type {
+  UseWebGLSupportReturn,
+  WebGLSupportResult,
+} from "./hooks/useWebGLSupport";
+export { useHeroScroll } from "./hooks/useHeroScroll";
+export { useScrollLinkedProps } from "./hooks/useScrollLinkedProps";
+export { useParallaxExit } from "./hooks/useParallaxExit";
+export { useTier2Effects } from "./hooks/useTier2Effects";
+export { useTier3Effects } from "./hooks/useTier3Effects";
 export {
   useLowPowerMode,
   detectLowPower,
   resetLowPowerCache,
   LOW_POWER_CONFIG,
   NORMAL_CONFIG,
-} from './hooks/useLowPowerMode';
+} from "./hooks/useLowPowerMode";
 export type {
   LowPowerConfig,
   ForceMode,
   UseLowPowerModeReturn,
-} from './hooks/useLowPowerMode';
+} from "./hooks/useLowPowerMode";
 
 // WebGL effects
-export * from './effects/webgl/ripple';
-export * from './effects/webgl/sweep';
-export * from './effects/webgl/vignette';
+export * from "./effects/webgl/ripple";
+export * from "./effects/webgl/sweep";
+export * from "./effects/webgl/vignette";
 
 // Performance utilities
 export {
@@ -69,7 +76,7 @@ export {
   measurePerformance,
   createFrameRateMonitor,
   memoizeWithTTL,
-} from './utils/performance';
+} from "./utils/performance";
 export type {
   ThrottledFunction,
   RAFDebouncedFunction,
@@ -78,7 +85,7 @@ export type {
   FrameRateMonitorOptions,
   FrameRateMonitor,
   MemoizedFunction,
-} from './utils/performance';
+} from "./utils/performance";
 
 // Browser detection utilities
 export {
@@ -88,23 +95,23 @@ export {
   getEventListenerOptions,
   getScrollListenerOptions,
   isWebGL2LikelySupported,
-} from './utils/browserDetect';
-export type {
-  BrowserName,
-  BrowserInfo,
-} from './utils/browserDetect';
+} from "./utils/browserDetect";
+export type { BrowserName, BrowserInfo } from "./utils/browserDetect";
 
 // Performance monitoring hook
 export {
   usePerformanceMonitor,
   DEFAULT_THRESHOLDS,
-} from './hooks/usePerformanceMonitor';
+} from "./hooks/usePerformanceMonitor";
 export type {
   PerformanceMetrics,
   PerformanceThresholds,
   UsePerformanceMonitorReturn,
-} from './hooks/usePerformanceMonitor';
+} from "./hooks/usePerformanceMonitor";
 
 // Panic reset hook
-export { usePanicReset } from './hooks/usePanicReset';
-export type { UsePanicResetProps, UsePanicResetReturn } from './hooks/usePanicReset';
+export { usePanicReset } from "./hooks/usePanicReset";
+export type {
+  UsePanicResetProps,
+  UsePanicResetReturn,
+} from "./hooks/usePanicReset";

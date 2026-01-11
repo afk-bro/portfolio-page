@@ -1,13 +1,13 @@
 // components/ui/__tests__/HeroWebGLOverlay.test.tsx
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { HeroWebGLOverlay, HeroWebGLOverlayRef } from '../HeroWebGLOverlay';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { HeroWebGLOverlay, HeroWebGLOverlayRef } from "../HeroWebGLOverlay";
 
 // Mock PixiJS
-jest.mock('pixi.js', () => ({
+jest.mock("pixi.js", () => ({
   Application: jest.fn().mockImplementation(() => ({
     init: jest.fn().mockResolvedValue(undefined),
-    canvas: document.createElement('canvas'),
+    canvas: document.createElement("canvas"),
     stage: { addChild: jest.fn() },
     renderer: {
       resize: jest.fn(),
@@ -47,12 +47,12 @@ jest.mock('pixi.js', () => ({
   })),
 }));
 
-describe('HeroWebGLOverlay', () => {
+describe("HeroWebGLOverlay", () => {
   beforeEach(() => {
     // Reset matchMedia to default (no reduced motion)
-    Object.defineProperty(window, 'matchMedia', {
+    Object.defineProperty(window, "matchMedia", {
       writable: true,
-      value: jest.fn().mockImplementation(query => ({
+      value: jest.fn().mockImplementation((query) => ({
         matches: false,
         media: query,
         addEventListener: jest.fn(),
@@ -61,38 +61,38 @@ describe('HeroWebGLOverlay', () => {
     });
   });
 
-  it('renders a canvas container', () => {
+  it("renders a canvas container", () => {
     render(
       <HeroWebGLOverlay
-        containerRef={{ current: document.createElement('div') }}
+        containerRef={{ current: document.createElement("div") }}
         visible={true}
         intensity={1}
-      />
+      />,
     );
 
     // Should have a container div
-    expect(screen.getByTestId('webgl-overlay')).toBeInTheDocument();
+    expect(screen.getByTestId("webgl-overlay")).toBeInTheDocument();
   });
 
-  it('is hidden when visible is false', () => {
+  it("is hidden when visible is false", () => {
     render(
       <HeroWebGLOverlay
-        containerRef={{ current: document.createElement('div') }}
+        containerRef={{ current: document.createElement("div") }}
         visible={false}
         intensity={1}
-      />
+      />,
     );
 
-    const overlay = screen.getByTestId('webgl-overlay');
-    expect(overlay).toHaveStyle({ opacity: '0' });
+    const overlay = screen.getByTestId("webgl-overlay");
+    expect(overlay).toHaveStyle({ opacity: "0" });
   });
 
-  it('respects reduced motion preference', () => {
+  it("respects reduced motion preference", () => {
     // Mock reduced motion
-    Object.defineProperty(window, 'matchMedia', {
+    Object.defineProperty(window, "matchMedia", {
       writable: true,
-      value: jest.fn().mockImplementation(query => ({
-        matches: query === '(prefers-reduced-motion: reduce)',
+      value: jest.fn().mockImplementation((query) => ({
+        matches: query === "(prefers-reduced-motion: reduce)",
         media: query,
         addEventListener: jest.fn(),
         removeEventListener: jest.fn(),
@@ -101,39 +101,39 @@ describe('HeroWebGLOverlay', () => {
 
     render(
       <HeroWebGLOverlay
-        containerRef={{ current: document.createElement('div') }}
+        containerRef={{ current: document.createElement("div") }}
         visible={true}
         intensity={1}
-      />
+      />,
     );
 
     // Should render nothing when reduced motion
-    expect(screen.queryByTestId('webgl-overlay')).toBeNull();
+    expect(screen.queryByTestId("webgl-overlay")).toBeNull();
   });
 
-  it('applies pointer-events-none', () => {
+  it("applies pointer-events-none", () => {
     render(
       <HeroWebGLOverlay
-        containerRef={{ current: document.createElement('div') }}
+        containerRef={{ current: document.createElement("div") }}
         visible={true}
         intensity={1}
-      />
+      />,
     );
 
-    const overlay = screen.getByTestId('webgl-overlay');
-    expect(overlay).toHaveClass('pointer-events-none');
+    const overlay = screen.getByTestId("webgl-overlay");
+    expect(overlay).toHaveClass("pointer-events-none");
   });
 
-  it('exposes addEffect and clearEffects methods via ref', () => {
+  it("exposes addEffect and clearEffects methods via ref", () => {
     const ref = React.createRef<HeroWebGLOverlayRef>();
 
     render(
       <HeroWebGLOverlay
         ref={ref}
-        containerRef={{ current: document.createElement('div') }}
+        containerRef={{ current: document.createElement("div") }}
         visible={true}
         intensity={1}
-      />
+      />,
     );
 
     expect(ref.current).not.toBeNull();
@@ -141,30 +141,30 @@ describe('HeroWebGLOverlay', () => {
     expect(ref.current?.clearEffects).toBeInstanceOf(Function);
   });
 
-  it('applies intensity to opacity', () => {
+  it("applies intensity to opacity", () => {
     render(
       <HeroWebGLOverlay
-        containerRef={{ current: document.createElement('div') }}
+        containerRef={{ current: document.createElement("div") }}
         visible={true}
         intensity={0.5}
-      />
+      />,
     );
 
-    const overlay = screen.getByTestId('webgl-overlay');
-    expect(overlay).toHaveStyle({ opacity: '0.5' });
+    const overlay = screen.getByTestId("webgl-overlay");
+    expect(overlay).toHaveStyle({ opacity: "0.5" });
   });
 
-  it('accepts custom className', () => {
+  it("accepts custom className", () => {
     render(
       <HeroWebGLOverlay
-        containerRef={{ current: document.createElement('div') }}
+        containerRef={{ current: document.createElement("div") }}
         visible={true}
         intensity={1}
         className="custom-class"
-      />
+      />,
     );
 
-    const overlay = screen.getByTestId('webgl-overlay');
-    expect(overlay).toHaveClass('custom-class');
+    const overlay = screen.getByTestId("webgl-overlay");
+    expect(overlay).toHaveClass("custom-class");
   });
 });

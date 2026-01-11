@@ -1,40 +1,43 @@
 // lib/interactive-hero/effects/webgl/__tests__/ripple.test.ts
-import { createRippleEffect, type RippleEffectConfig } from '../ripple';
+import { createRippleEffect, type RippleEffectConfig } from "../ripple";
 
 // Mock GSAP
-jest.mock('gsap', () => ({
+jest.mock("gsap", () => ({
   timeline: jest.fn(() => ({
     to: jest.fn().mockReturnThis(),
     set: jest.fn().mockReturnThis(),
     kill: jest.fn(),
-    then: jest.fn((cb) => { cb?.(); return Promise.resolve(); }),
+    then: jest.fn((cb) => {
+      cb?.();
+      return Promise.resolve();
+    }),
     progress: jest.fn().mockReturnThis(),
   })),
 }));
 
-describe('Ripple Displacement Effect', () => {
+describe("Ripple Displacement Effect", () => {
   const mockConfig: RippleEffectConfig = {
     origin: { x: 0.5, y: 0.5 }, // center of canvas
     intensity: 1.0,
     duration: 500,
   };
 
-  it('creates a ripple effect with correct config', () => {
+  it("creates a ripple effect with correct config", () => {
     const result = createRippleEffect(mockConfig);
 
     expect(result).toBeDefined();
-    expect(result.type).toBe('ripple');
+    expect(result.type).toBe("ripple");
     expect(result.origin).toEqual({ x: 0.5, y: 0.5 });
   });
 
-  it('returns timeline and update function', () => {
+  it("returns timeline and update function", () => {
     const result = createRippleEffect(mockConfig);
 
     expect(result.timeline).toBeDefined();
     expect(result.update).toBeInstanceOf(Function);
   });
 
-  it('calculates displacement values on update', () => {
+  it("calculates displacement values on update", () => {
     const result = createRippleEffect(mockConfig);
 
     // Initial state
@@ -53,7 +56,7 @@ describe('Ripple Displacement Effect', () => {
     expect(end.alpha).toBe(0);
   });
 
-  it('respects intensity parameter', () => {
+  it("respects intensity parameter", () => {
     const lowIntensity = createRippleEffect({ ...mockConfig, intensity: 0.5 });
     const highIntensity = createRippleEffect({ ...mockConfig, intensity: 1.0 });
 
@@ -63,7 +66,7 @@ describe('Ripple Displacement Effect', () => {
     expect(lowUpdate.strength).toBeLessThan(highUpdate.strength);
   });
 
-  it('applies power2.out easing to radius', () => {
+  it("applies power2.out easing to radius", () => {
     const result = createRippleEffect(mockConfig);
 
     // At progress 0.5, power2.out gives 0.75 (1 - (1-0.5)^2)

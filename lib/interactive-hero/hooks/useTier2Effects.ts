@@ -1,10 +1,17 @@
 // lib/interactive-hero/hooks/useTier2Effects.ts
-import { useState, useCallback, useMemo } from 'react';
-import { VisibilityState, type VisibilityStateType, TIER_UNLOCK } from '../types';
-import { TIER2_EFFECTS, selectWeightedEffect } from '../effectCatalog';
-import { createRippleEffect, type RippleEffect } from '../effects/webgl/ripple';
-import { createSweepEffect, type SweepEffect } from '../effects/webgl/sweep';
-import { createVignetteEffect, type VignetteEffect } from '../effects/webgl/vignette';
+import { useState, useCallback, useMemo } from "react";
+import {
+  VisibilityState,
+  type VisibilityStateType,
+  TIER_UNLOCK,
+} from "../types";
+import { TIER2_EFFECTS, selectWeightedEffect } from "../effectCatalog";
+import { createRippleEffect, type RippleEffect } from "../effects/webgl/ripple";
+import { createSweepEffect, type SweepEffect } from "../effects/webgl/sweep";
+import {
+  createVignetteEffect,
+  type VignetteEffect,
+} from "../effects/webgl/vignette";
 
 interface UseTier2EffectsProps {
   visibility: VisibilityStateType;
@@ -21,7 +28,10 @@ interface UseTier2EffectsReturn {
   canTrigger: boolean;
   lastEffectId: string | null;
   cooldownRemaining: number;
-  triggerEffect: (origin: { x: number; y: number }) => Promise<Tier2EffectInstance | null>;
+  triggerEffect: (origin: {
+    x: number;
+    y: number;
+  }) => Promise<Tier2EffectInstance | null>;
 }
 
 export function useTier2Effects({
@@ -53,12 +63,14 @@ export function useTier2Effects({
   const now = performance.now();
 
   // Check cooldown - computed fresh each render
-  const isInCooldown = lastTriggerTime !== null && (now - lastTriggerTime) < cooldownDuration;
+  const isInCooldown =
+    lastTriggerTime !== null && now - lastTriggerTime < cooldownDuration;
 
   // Calculate remaining cooldown - computed fresh each render
-  const cooldownRemaining = lastTriggerTime === null
-    ? 0
-    : Math.max(0, cooldownDuration - (now - lastTriggerTime));
+  const cooldownRemaining =
+    lastTriggerTime === null
+      ? 0
+      : Math.max(0, cooldownDuration - (now - lastTriggerTime));
 
   // Final canTrigger check
   const canTrigger = useMemo(() => {
@@ -77,56 +89,60 @@ export function useTier2Effects({
     return true;
   }, [visibility, isScrollingUp, meetsUnlockConditions, isInCooldown]);
 
-  const triggerEffect = useCallback(async (
-    origin: { x: number; y: number }
-  ): Promise<Tier2EffectInstance | null> => {
-    if (!canTrigger) return null;
+  const triggerEffect = useCallback(
+    async (origin: {
+      x: number;
+      y: number;
+    }): Promise<Tier2EffectInstance | null> => {
+      if (!canTrigger) return null;
 
-    // Select effect (never same as last)
-    const effect = selectWeightedEffect(TIER2_EFFECTS, lastEffectId);
-    if (!effect) return null;
+      // Select effect (never same as last)
+      const effect = selectWeightedEffect(TIER2_EFFECTS, lastEffectId);
+      if (!effect) return null;
 
-    // Set random cooldown between 8-12s
-    const { min, max } = TIER_UNLOCK.tier2Cooldown;
-    setCooldownDuration(min + Math.random() * (max - min));
+      // Set random cooldown between 8-12s
+      const { min, max } = TIER_UNLOCK.tier2Cooldown;
+      setCooldownDuration(min + Math.random() * (max - min));
 
-    // Record trigger time
-    setLastTriggerTime(performance.now());
-    setLastEffectId(effect.id);
+      // Record trigger time
+      setLastTriggerTime(performance.now());
+      setLastEffectId(effect.id);
 
-    // Create the appropriate effect instance
-    let effectInstance: Tier2EffectInstance;
+      // Create the appropriate effect instance
+      let effectInstance: Tier2EffectInstance;
 
-    switch (effect.id) {
-      case 'refraction-ripple':
-        effectInstance = createRippleEffect({
-          origin,
-          intensity: 1.0,
-          duration: effect.duration,
-        });
-        break;
-      case 'light-sweep':
-        effectInstance = createSweepEffect({
-          direction: 'left-to-right',
-          intensity: 1.0,
-          duration: effect.duration,
-          color: '#F5A623', // bronzeGlow
-        });
-        break;
-      case 'vignette-pulse':
-        effectInstance = createVignetteEffect({
-          intensity: 1.0,
-          duration: effect.duration,
-          isDarkMode,
-          color: '#0d4d79', // oceanDeep
-        });
-        break;
-      default:
-        return null;
-    }
+      switch (effect.id) {
+        case "refraction-ripple":
+          effectInstance = createRippleEffect({
+            origin,
+            intensity: 1.0,
+            duration: effect.duration,
+          });
+          break;
+        case "light-sweep":
+          effectInstance = createSweepEffect({
+            direction: "left-to-right",
+            intensity: 1.0,
+            duration: effect.duration,
+            color: "#F5A623", // bronzeGlow
+          });
+          break;
+        case "vignette-pulse":
+          effectInstance = createVignetteEffect({
+            intensity: 1.0,
+            duration: effect.duration,
+            isDarkMode,
+            color: "#0d4d79", // oceanDeep
+          });
+          break;
+        default:
+          return null;
+      }
 
-    return effectInstance;
-  }, [canTrigger, lastEffectId, isDarkMode]);
+      return effectInstance;
+    },
+    [canTrigger, lastEffectId, isDarkMode],
+  );
 
   return {
     canTrigger,

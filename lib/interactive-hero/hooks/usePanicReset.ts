@@ -1,8 +1,8 @@
 // lib/interactive-hero/hooks/usePanicReset.ts
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import gsap from 'gsap';
-import { releaseAllLocks, type ChannelLockManager } from '../channelLocks';
+import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import gsap from "gsap";
+import { releaseAllLocks, type ChannelLockManager } from "../channelLocks";
 
 export interface UsePanicResetProps {
   letterRefs: React.RefObject<HTMLElement[]>;
@@ -51,7 +51,7 @@ export function usePanicReset({
 
       // 2. Clear transforms on all letter elements
       gsap.set(letterRefs.current, {
-        clearProps: 'transform,filter,opacity',
+        clearProps: "transform,filter,opacity",
       });
     }
 
@@ -96,9 +96,9 @@ export function usePanicReset({
 
   // Register event listeners on mount
   useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('orientationchange', handleOrientationChange);
-    window.addEventListener('popstate', handlePopState);
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleOrientationChange);
+    window.addEventListener("popstate", handlePopState);
 
     return () => {
       // Cleanup debounce timeout
@@ -107,9 +107,9 @@ export function usePanicReset({
       }
 
       // Remove event listeners
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('orientationchange', handleOrientationChange);
-      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleOrientationChange);
+      window.removeEventListener("popstate", handlePopState);
     };
   }, [handleResize, handleOrientationChange, handlePopState]);
 

@@ -1,5 +1,5 @@
 // lib/interactive-hero/effects/webgl/ripple.ts
-import gsap from 'gsap';
+import gsap from "gsap";
 
 export interface RippleEffectConfig {
   origin: { x: number; y: number }; // Normalized 0-1 coordinates
@@ -14,7 +14,7 @@ export interface RippleEffectState {
 }
 
 export interface RippleEffect {
-  type: 'ripple';
+  type: "ripple";
   origin: { x: number; y: number };
   timeline: gsap.core.Timeline;
   update: (progress: number) => RippleEffectState;
@@ -43,7 +43,7 @@ export function createRippleEffect(config: RippleEffectConfig): RippleEffect {
   timeline.to(proxy, {
     progress: 1,
     duration: duration / 1000,
-    ease: 'none', // We handle easing in the update function
+    ease: "none", // We handle easing in the update function
   });
 
   const update = (progress: number): RippleEffectState => {
@@ -68,7 +68,7 @@ export function createRippleEffect(config: RippleEffectConfig): RippleEffect {
   };
 
   return {
-    type: 'ripple',
+    type: "ripple",
     origin,
     timeline,
     update,

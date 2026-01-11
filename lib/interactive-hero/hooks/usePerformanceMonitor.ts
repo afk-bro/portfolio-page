@@ -1,7 +1,10 @@
 // lib/interactive-hero/hooks/usePerformanceMonitor.ts
 
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { createFrameRateMonitor, type FrameRateMetrics } from '../utils/performance';
+import { useState, useEffect, useCallback, useRef } from "react";
+import {
+  createFrameRateMonitor,
+  type FrameRateMetrics,
+} from "../utils/performance";
 
 /**
  * Performance metrics for the hero section
@@ -99,7 +102,7 @@ const DEFAULT_METRICS: PerformanceMetrics = {
  */
 export function usePerformanceMonitor(
   enabled: boolean,
-  thresholds: PerformanceThresholds = {}
+  thresholds: PerformanceThresholds = {},
 ): UsePerformanceMonitorReturn {
   const { lowFPSThreshold, consecutiveLowFrames } = {
     ...DEFAULT_THRESHOLDS,
@@ -164,7 +167,7 @@ export function usePerformanceMonitor(
         }
       }
     },
-    [lowFPSThreshold, consecutiveLowFrames]
+    [lowFPSThreshold, consecutiveLowFrames],
   );
 
   // Start/stop monitoring based on enabled state

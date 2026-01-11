@@ -561,12 +561,14 @@ describe("HeroName - Determinism", () => {
 // =============================================================================
 // INTERACTIVE HERO TESTS
 // =============================================================================
-describe('HeroName - Interactive Effects', () => {
-  it('handles letter click and triggers effect', async () => {
+describe("HeroName - Interactive Effects", () => {
+  it("handles letter click and triggers effect", async () => {
     const { container } = render(<HeroName name="Test" />);
 
-    const letters = container.querySelectorAll('span.inline-block:not(.sr-only)');
-    const firstLetter = Array.from(letters).find(l => l.textContent === 'T');
+    const letters = container.querySelectorAll(
+      "span.inline-block:not(.sr-only)",
+    );
+    const firstLetter = Array.from(letters).find((l) => l.textContent === "T");
 
     if (firstLetter) {
       await act(async () => {
@@ -575,24 +577,26 @@ describe('HeroName - Interactive Effects', () => {
     }
 
     // Effect should have triggered (no errors)
-    expect(container.querySelector('h1')).toBeInTheDocument();
+    expect(container.querySelector("h1")).toBeInTheDocument();
   });
 
-  it('blocks clicks when reduced motion is preferred', async () => {
+  it("blocks clicks when reduced motion is preferred", async () => {
     // This is already handled by existing reduced motion tests
     // The static version has no click handlers
   });
 
-  it('provides cursor pointer on letters', () => {
+  it("provides cursor pointer on letters", () => {
     const { container } = render(<HeroName name="AB" />);
 
-    const letters = container.querySelectorAll('span.inline-block:not(.sr-only)');
+    const letters = container.querySelectorAll(
+      "span.inline-block:not(.sr-only)",
+    );
     const clickableLetters = Array.from(letters).filter(
-      l => l.textContent && l.textContent.trim().length === 1
+      (l) => l.textContent && l.textContent.trim().length === 1,
     );
 
-    clickableLetters.forEach(letter => {
-      expect(letter).toHaveClass('cursor-pointer');
+    clickableLetters.forEach((letter) => {
+      expect(letter).toHaveClass("cursor-pointer");
     });
   });
 });
@@ -617,7 +621,7 @@ describe("HeroName - Tier 3 Effects Integration", () => {
   it("calls onTier3Change callback when effects unlock", async () => {
     const onTier3Change = jest.fn();
     const { container } = render(
-      <HeroName name="AB" onTier3Change={onTier3Change} />
+      <HeroName name="AB" onTier3Change={onTier3Change} />,
     );
 
     // Wait for intro to complete
@@ -633,9 +637,11 @@ describe("HeroName - Tier 3 Effects Integration", () => {
     });
 
     // Click both letters to potentially trigger Tier 3
-    const letters = container.querySelectorAll("span.inline-block:not(.sr-only)");
+    const letters = container.querySelectorAll(
+      "span.inline-block:not(.sr-only)",
+    );
     const clickableLetters = Array.from(letters).filter(
-      (l) => l.textContent && l.textContent.trim().length === 1
+      (l) => l.textContent && l.textContent.trim().length === 1,
     );
 
     // Initial state callback should have been called with empty array
@@ -646,9 +652,11 @@ describe("HeroName - Tier 3 Effects Integration", () => {
     const { container } = render(<HeroName name="A B C" />);
 
     // 3 letters, 2 spaces
-    const letters = container.querySelectorAll("span.inline-block:not(.sr-only)");
+    const letters = container.querySelectorAll(
+      "span.inline-block:not(.sr-only)",
+    );
     const nonSpaceLetters = Array.from(letters).filter(
-      (l) => l.textContent && l.textContent.trim().length === 1
+      (l) => l.textContent && l.textContent.trim().length === 1,
     );
     expect(nonSpaceLetters.length).toBe(3);
   });
@@ -675,7 +683,7 @@ describe("HeroName - Tier 3 Effects Integration", () => {
   it("provides interaction count to Tier 3 hook from letter clicks", async () => {
     const onTier3Change = jest.fn();
     const { container } = render(
-      <HeroName name="Test" onTier3Change={onTier3Change} />
+      <HeroName name="Test" onTier3Change={onTier3Change} />,
     );
 
     await waitFor(() => {
@@ -689,7 +697,9 @@ describe("HeroName - Tier 3 Effects Integration", () => {
     });
 
     // Click a letter multiple times to increase interaction count
-    const letters = container.querySelectorAll("span.inline-block:not(.sr-only)");
+    const letters = container.querySelectorAll(
+      "span.inline-block:not(.sr-only)",
+    );
     const firstLetter = Array.from(letters).find((l) => l.textContent === "T");
 
     if (firstLetter) {

@@ -1,5 +1,5 @@
 // lib/interactive-hero/effects/webgl/vignette.ts
-import gsap from 'gsap';
+import gsap from "gsap";
 
 export interface VignetteEffectConfig {
   intensity: number; // 0-1 intensity multiplier
@@ -15,7 +15,7 @@ export interface VignetteEffectState {
 }
 
 export interface VignetteEffect {
-  type: 'vignette';
+  type: "vignette";
   timeline: gsap.core.Timeline;
   update: (progress: number) => VignetteEffectState;
   destroy: () => void;
@@ -31,7 +31,9 @@ const FADE_IN_END = 150 / 400; // 0.375
 const HOLD_END = 250 / 400; // 0.625
 // Fade out from 0.625 to 1.0
 
-export function createVignetteEffect(config: VignetteEffectConfig): VignetteEffect {
+export function createVignetteEffect(
+  config: VignetteEffectConfig,
+): VignetteEffect {
   const { intensity, duration, isDarkMode, color } = config;
 
   const peakAlpha = isDarkMode ? DARK_MODE_PEAK : LIGHT_MODE_PEAK;
@@ -42,7 +44,7 @@ export function createVignetteEffect(config: VignetteEffectConfig): VignetteEffe
   timeline.to(proxy, {
     progress: 1,
     duration: duration / 1000,
-    ease: 'none',
+    ease: "none",
   });
 
   const update = (progress: number): VignetteEffectState => {
@@ -75,7 +77,7 @@ export function createVignetteEffect(config: VignetteEffectConfig): VignetteEffe
   };
 
   return {
-    type: 'vignette',
+    type: "vignette",
     timeline,
     update,
     destroy,

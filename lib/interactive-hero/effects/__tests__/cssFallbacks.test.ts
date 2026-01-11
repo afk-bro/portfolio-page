@@ -1,14 +1,14 @@
 // lib/interactive-hero/effects/__tests__/cssFallbacks.test.ts
 
-import gsap from 'gsap';
+import gsap from "gsap";
 import {
   createCSSRippleFallback,
   createCSSSweepFallback,
   createCSSVignetteFallback,
-} from '../cssFallbacks';
+} from "../cssFallbacks";
 
 // Mock GSAP
-jest.mock('gsap', () => {
+jest.mock("gsap", () => {
   const mockTimeline = {
     to: jest.fn().mockReturnThis(),
     set: jest.fn().mockReturnThis(),
@@ -25,12 +25,12 @@ jest.mock('gsap', () => {
   };
 });
 
-describe('createCSSRippleFallback', () => {
+describe("createCSSRippleFallback", () => {
   let element: HTMLElement;
   let mockTimeline: ReturnType<typeof gsap.timeline>;
 
   beforeEach(() => {
-    element = document.createElement('div');
+    element = document.createElement("div");
     document.body.appendChild(element);
     mockTimeline = gsap.timeline() as ReturnType<typeof gsap.timeline>;
     jest.clearAllMocks();
@@ -40,13 +40,13 @@ describe('createCSSRippleFallback', () => {
     document.body.removeChild(element);
   });
 
-  it('returns a GSAP timeline', () => {
+  it("returns a GSAP timeline", () => {
     const result = createCSSRippleFallback(element, 0.5, 0.5, 1);
     expect(result).toBeDefined();
     expect(gsap.timeline).toHaveBeenCalled();
   });
 
-  it('uses origin coordinates for box-shadow position', () => {
+  it("uses origin coordinates for box-shadow position", () => {
     createCSSRippleFallback(element, 0.3, 0.7, 1);
 
     // Should set initial box-shadow and animate it
@@ -54,20 +54,20 @@ describe('createCSSRippleFallback', () => {
     expect(mockTimeline.to).toHaveBeenCalled();
   });
 
-  it('accepts origin values between 0 and 1', () => {
+  it("accepts origin values between 0 and 1", () => {
     // Should not throw for valid values
     expect(() => createCSSRippleFallback(element, 0, 0, 1)).not.toThrow();
     expect(() => createCSSRippleFallback(element, 1, 1, 1)).not.toThrow();
     expect(() => createCSSRippleFallback(element, 0.5, 0.5, 0.5)).not.toThrow();
   });
 
-  it('clamps intensity between 0 and 1', () => {
+  it("clamps intensity between 0 and 1", () => {
     // Should not throw for any intensity values (clamped internally)
     expect(() => createCSSRippleFallback(element, 0.5, 0.5, -1)).not.toThrow();
     expect(() => createCSSRippleFallback(element, 0.5, 0.5, 2)).not.toThrow();
   });
 
-  it('applies power2.out easing', () => {
+  it("applies power2.out easing", () => {
     createCSSRippleFallback(element, 0.5, 0.5, 1);
 
     // Check that the timeline was called with easing configuration
@@ -76,7 +76,7 @@ describe('createCSSRippleFallback', () => {
     expect(toCall).toBeDefined();
   });
 
-  it('animates for approximately 500ms', () => {
+  it("animates for approximately 500ms", () => {
     createCSSRippleFallback(element, 0.5, 0.5, 1);
 
     // Check that duration is around 0.5 seconds
@@ -87,7 +87,7 @@ describe('createCSSRippleFallback', () => {
     expect(config.duration).toBeCloseTo(0.5, 1);
   });
 
-  it('resets box-shadow after animation completes', () => {
+  it("resets box-shadow after animation completes", () => {
     createCSSRippleFallback(element, 0.5, 0.5, 1);
 
     // Should have a call to reset the box-shadow
@@ -95,12 +95,12 @@ describe('createCSSRippleFallback', () => {
   });
 });
 
-describe('createCSSSweepFallback', () => {
+describe("createCSSSweepFallback", () => {
   let element: HTMLElement;
   let mockTimeline: ReturnType<typeof gsap.timeline>;
 
   beforeEach(() => {
-    element = document.createElement('div');
+    element = document.createElement("div");
     document.body.appendChild(element);
     mockTimeline = gsap.timeline() as ReturnType<typeof gsap.timeline>;
     jest.clearAllMocks();
@@ -110,27 +110,27 @@ describe('createCSSSweepFallback', () => {
     document.body.removeChild(element);
   });
 
-  it('returns a GSAP timeline', () => {
+  it("returns a GSAP timeline", () => {
     const result = createCSSSweepFallback(element, 1);
     expect(result).toBeDefined();
     expect(gsap.timeline).toHaveBeenCalled();
   });
 
-  it('animates background-position from left to right', () => {
+  it("animates background-position from left to right", () => {
     createCSSSweepFallback(element, 1);
 
     // Should animate background-position
     expect(mockTimeline.to).toHaveBeenCalled();
   });
 
-  it('uses a gradient band of 20% width', () => {
+  it("uses a gradient band of 20% width", () => {
     createCSSSweepFallback(element, 1);
 
     // Check that set was called with gradient setup
     expect(mockTimeline.set).toHaveBeenCalled();
   });
 
-  it('animates for approximately 600ms', () => {
+  it("animates for approximately 600ms", () => {
     createCSSSweepFallback(element, 1);
 
     const toCall = (mockTimeline.to as jest.Mock).mock.calls[0];
@@ -139,7 +139,7 @@ describe('createCSSSweepFallback', () => {
     expect(config.duration).toBeCloseTo(0.6, 1);
   });
 
-  it('respects intensity parameter', () => {
+  it("respects intensity parameter", () => {
     createCSSSweepFallback(element, 0.5);
 
     // Should still create timeline with reduced intensity
@@ -147,12 +147,12 @@ describe('createCSSSweepFallback', () => {
     expect(mockTimeline.to).toHaveBeenCalled();
   });
 
-  it('clamps intensity between 0 and 1', () => {
+  it("clamps intensity between 0 and 1", () => {
     expect(() => createCSSSweepFallback(element, -0.5)).not.toThrow();
     expect(() => createCSSSweepFallback(element, 1.5)).not.toThrow();
   });
 
-  it('resets background after animation completes', () => {
+  it("resets background after animation completes", () => {
     createCSSSweepFallback(element, 1);
 
     // Should reset background styles after animation
@@ -160,12 +160,12 @@ describe('createCSSSweepFallback', () => {
   });
 });
 
-describe('createCSSVignetteFallback', () => {
+describe("createCSSVignetteFallback", () => {
   let element: HTMLElement;
   let mockTimeline: ReturnType<typeof gsap.timeline>;
 
   beforeEach(() => {
-    element = document.createElement('div');
+    element = document.createElement("div");
     document.body.appendChild(element);
     mockTimeline = gsap.timeline() as ReturnType<typeof gsap.timeline>;
     jest.clearAllMocks();
@@ -175,67 +175,67 @@ describe('createCSSVignetteFallback', () => {
     document.body.removeChild(element);
   });
 
-  it('returns a GSAP timeline', () => {
+  it("returns a GSAP timeline", () => {
     const result = createCSSVignetteFallback(element, false, 1);
     expect(result).toBeDefined();
     expect(gsap.timeline).toHaveBeenCalled();
   });
 
-  it('uses radial-gradient with transparent center', () => {
+  it("uses radial-gradient with transparent center", () => {
     createCSSVignetteFallback(element, false, 1);
 
     // Should set up gradient with transparent center
     expect(mockTimeline.set).toHaveBeenCalled();
   });
 
-  it('uses different peak opacity for dark mode (0.25)', () => {
+  it("uses different peak opacity for dark mode (0.25)", () => {
     createCSSVignetteFallback(element, true, 1);
 
     // Should animate with dark mode peak (0.25)
     expect(mockTimeline.to).toHaveBeenCalled();
   });
 
-  it('uses different peak opacity for light mode (0.15)', () => {
+  it("uses different peak opacity for light mode (0.15)", () => {
     createCSSVignetteFallback(element, false, 1);
 
     // Should animate with light mode peak (0.15)
     expect(mockTimeline.to).toHaveBeenCalled();
   });
 
-  it('animates opacity: 0 -> peak -> 0', () => {
+  it("animates opacity: 0 -> peak -> 0", () => {
     createCSSVignetteFallback(element, false, 1);
 
     // Should have multiple to() calls for the fade in/hold/fade out pattern
     expect(mockTimeline.to).toHaveBeenCalled();
   });
 
-  it('has total duration of approximately 400ms', () => {
+  it("has total duration of approximately 400ms", () => {
     createCSSVignetteFallback(element, false, 1);
 
     // Check animation configuration
     expect(mockTimeline.to).toHaveBeenCalled();
   });
 
-  it('respects intensity parameter', () => {
+  it("respects intensity parameter", () => {
     createCSSVignetteFallback(element, false, 0.5);
 
     expect(gsap.timeline).toHaveBeenCalled();
     expect(mockTimeline.to).toHaveBeenCalled();
   });
 
-  it('clamps intensity between 0 and 1', () => {
+  it("clamps intensity between 0 and 1", () => {
     expect(() => createCSSVignetteFallback(element, false, -0.5)).not.toThrow();
     expect(() => createCSSVignetteFallback(element, true, 1.5)).not.toThrow();
   });
 
-  it('resets opacity after animation completes', () => {
+  it("resets opacity after animation completes", () => {
     createCSSVignetteFallback(element, false, 1);
 
     // Should have final opacity reset
     expect(mockTimeline.to).toHaveBeenCalled();
   });
 
-  it('creates vignette overlay element', () => {
+  it("creates vignette overlay element", () => {
     createCSSVignetteFallback(element, false, 1);
 
     // Should set styles for the vignette effect
@@ -243,14 +243,14 @@ describe('createCSSVignetteFallback', () => {
   });
 });
 
-describe('CSS Fallback Integration', () => {
+describe("CSS Fallback Integration", () => {
   let element: HTMLElement;
 
   beforeEach(() => {
-    element = document.createElement('div');
-    element.style.width = '200px';
-    element.style.height = '200px';
-    element.style.position = 'relative';
+    element = document.createElement("div");
+    element.style.width = "200px";
+    element.style.height = "200px";
+    element.style.position = "relative";
     document.body.appendChild(element);
     jest.clearAllMocks();
   });
@@ -259,7 +259,7 @@ describe('CSS Fallback Integration', () => {
     document.body.removeChild(element);
   });
 
-  it('all fallbacks work with the same element', () => {
+  it("all fallbacks work with the same element", () => {
     const ripple = createCSSRippleFallback(element, 0.5, 0.5, 1);
     const sweep = createCSSSweepFallback(element, 1);
     const vignette = createCSSVignetteFallback(element, false, 1);
@@ -269,7 +269,7 @@ describe('CSS Fallback Integration', () => {
     expect(vignette).toBeDefined();
   });
 
-  it('fallbacks can be triggered in sequence', () => {
+  it("fallbacks can be triggered in sequence", () => {
     // Create all three and verify no conflicts
     createCSSRippleFallback(element, 0.2, 0.8, 0.7);
     createCSSSweepFallback(element, 0.5);
@@ -279,7 +279,7 @@ describe('CSS Fallback Integration', () => {
     expect(gsap.timeline).toHaveBeenCalledTimes(3);
   });
 
-  it('fallbacks handle zero intensity gracefully', () => {
+  it("fallbacks handle zero intensity gracefully", () => {
     expect(() => createCSSRippleFallback(element, 0.5, 0.5, 0)).not.toThrow();
     expect(() => createCSSSweepFallback(element, 0)).not.toThrow();
     expect(() => createCSSVignetteFallback(element, false, 0)).not.toThrow();

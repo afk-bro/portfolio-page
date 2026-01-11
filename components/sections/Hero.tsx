@@ -8,7 +8,10 @@ import { siteMetadata } from "@/data/metadata";
 import { HeroButton } from "@/components/ui/HeroButton";
 import { HeroName } from "@/components/ui/HeroName";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
-import { HeroWebGLOverlay, type HeroWebGLOverlayRef } from "@/components/ui/HeroWebGLOverlay";
+import {
+  HeroWebGLOverlay,
+  type HeroWebGLOverlayRef,
+} from "@/components/ui/HeroWebGLOverlay";
 import {
   useHeroScroll,
   useScrollLinkedProps,

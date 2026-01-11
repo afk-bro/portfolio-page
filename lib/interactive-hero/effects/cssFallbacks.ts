@@ -5,7 +5,7 @@
  * These replace Tier 2 viewport effects with pure CSS/GSAP animations
  */
 
-import gsap from 'gsap';
+import gsap from "gsap";
 
 /**
  * Clamp a value between min and max
@@ -36,7 +36,7 @@ export function createCSSRippleFallback(
   element: HTMLElement,
   originX: number,
   originY: number,
-  intensity: number
+  intensity: number,
 ): gsap.core.Timeline {
   const clampedIntensity = clamp(intensity, 0, 1);
 
@@ -66,12 +66,12 @@ export function createCSSRippleFallback(
   tl.to(element, {
     boxShadow: `inset 0 0 ${maxSpread}px ${maxSpread / 2}px rgba(6, 182, 212, 0)`,
     duration: 0.5,
-    ease: 'power2.out',
+    ease: "power2.out",
   });
 
   // Reset to original
   tl.set(element, {
-    boxShadow: originalBoxShadow || 'none',
+    boxShadow: originalBoxShadow || "none",
   });
 
   return tl;
@@ -95,7 +95,7 @@ export function createCSSRippleFallback(
  */
 export function createCSSSweepFallback(
   element: HTMLElement,
-  intensity: number
+  intensity: number,
 ): gsap.core.Timeline {
   const clampedIntensity = clamp(intensity, 0, 1);
 
@@ -119,22 +119,22 @@ export function createCSSSweepFallback(
       rgba(6, 182, 212, ${gradientOpacity}) 60%,
       transparent 100%
     )`,
-    backgroundSize: '200% 100%',
-    backgroundPosition: '-100% center',
+    backgroundSize: "200% 100%",
+    backgroundPosition: "-100% center",
   });
 
   // Animate the sweep from left to right
   tl.to(element, {
-    backgroundPosition: '200% center',
+    backgroundPosition: "200% center",
     duration: 0.6,
-    ease: 'power1.inOut',
+    ease: "power1.inOut",
   });
 
   // Reset to original
   tl.set(element, {
-    background: originalBackground || 'none',
-    backgroundPosition: originalBackgroundPosition || 'initial',
-    backgroundSize: originalBackgroundSize || 'initial',
+    background: originalBackground || "none",
+    backgroundPosition: originalBackgroundPosition || "initial",
+    backgroundSize: originalBackgroundSize || "initial",
   });
 
   return tl;
@@ -163,7 +163,7 @@ export function createCSSSweepFallback(
 export function createCSSVignetteFallback(
   element: HTMLElement,
   isDarkMode: boolean,
-  intensity: number
+  intensity: number,
 ): gsap.core.Timeline {
   const clampedIntensity = clamp(intensity, 0, 1);
 
@@ -176,7 +176,7 @@ export function createCSSVignetteFallback(
   let overlay = document.getElementById(vignetteId);
 
   if (!overlay) {
-    overlay = document.createElement('div');
+    overlay = document.createElement("div");
     overlay.id = vignetteId;
     overlay.style.cssText = `
       position: absolute;
@@ -187,14 +187,14 @@ export function createCSSVignetteFallback(
       background: radial-gradient(
         ellipse 80% 60% at center,
         transparent 30%,
-        ${isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.5)'} 100%
+        ${isDarkMode ? "rgba(0, 0, 0, 0.8)" : "rgba(0, 0, 0, 0.5)"} 100%
       );
     `;
 
     // Ensure parent has position for absolute positioning to work
     const computedPosition = getComputedStyle(element).position;
-    if (computedPosition === 'static') {
-      element.style.position = 'relative';
+    if (computedPosition === "static") {
+      element.style.position = "relative";
     }
 
     element.appendChild(overlay);
@@ -209,7 +209,7 @@ export function createCSSVignetteFallback(
   tl.to(overlay, {
     opacity: peakOpacity,
     duration: 0.15,
-    ease: 'power1.in',
+    ease: "power1.in",
   });
 
   // Hold at peak (100ms)
@@ -222,7 +222,7 @@ export function createCSSVignetteFallback(
   tl.to(overlay, {
     opacity: 0,
     duration: 0.15,
-    ease: 'power1.out',
+    ease: "power1.out",
     onComplete: () => {
       // Clean up the overlay element
       overlay?.remove();
@@ -240,11 +240,11 @@ export function createCSSVignetteFallback(
  * @returns true if CSS fallbacks should be used
  */
 export function shouldUseCSSFallbacks(): boolean {
-  if (typeof window === 'undefined') return true;
+  if (typeof window === "undefined") return true;
 
   try {
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+    const canvas = document.createElement("canvas");
+    const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
     return !gl;
   } catch {
     return true;

@@ -6,9 +6,9 @@ import {
   measurePerformance,
   createFrameRateMonitor,
   memoizeWithTTL,
-} from '../performance';
+} from "../performance";
 
-describe('performance utilities', () => {
+describe("performance utilities", () => {
   beforeEach(() => {
     jest.useFakeTimers();
   });
@@ -17,8 +17,8 @@ describe('performance utilities', () => {
     jest.useRealTimers();
   });
 
-  describe('throttle', () => {
-    it('should execute function immediately on first call', () => {
+  describe("throttle", () => {
+    it("should execute function immediately on first call", () => {
       const fn = jest.fn();
       const throttled = throttle(fn, 100);
 
@@ -27,7 +27,7 @@ describe('performance utilities', () => {
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
-    it('should not execute function again within wait period', () => {
+    it("should not execute function again within wait period", () => {
       const fn = jest.fn();
       const throttled = throttle(fn, 100);
 
@@ -38,7 +38,7 @@ describe('performance utilities', () => {
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
-    it('should execute function after wait period', () => {
+    it("should execute function after wait period", () => {
       const fn = jest.fn();
       const throttled = throttle(fn, 100);
 
@@ -51,39 +51,39 @@ describe('performance utilities', () => {
       expect(fn).toHaveBeenCalledTimes(2);
     });
 
-    it('should pass arguments to the throttled function', () => {
+    it("should pass arguments to the throttled function", () => {
       const fn = jest.fn();
       const throttled = throttle(fn, 100);
 
-      throttled('arg1', 'arg2');
+      throttled("arg1", "arg2");
 
-      expect(fn).toHaveBeenCalledWith('arg1', 'arg2');
+      expect(fn).toHaveBeenCalledWith("arg1", "arg2");
     });
 
-    it('should use the latest arguments when executing after throttle', () => {
+    it("should use the latest arguments when executing after throttle", () => {
       const fn = jest.fn();
       const throttled = throttle(fn, 100);
 
-      throttled('first');
-      throttled('second');
-      throttled('third');
+      throttled("first");
+      throttled("second");
+      throttled("third");
 
       // First call happens immediately
-      expect(fn).toHaveBeenCalledWith('first');
+      expect(fn).toHaveBeenCalledWith("first");
 
       // After wait, trailing call with latest args should execute
       jest.advanceTimersByTime(100);
 
       expect(fn).toHaveBeenCalledTimes(2);
-      expect(fn).toHaveBeenLastCalledWith('third');
+      expect(fn).toHaveBeenLastCalledWith("third");
     });
 
-    it('should be cancelable', () => {
+    it("should be cancelable", () => {
       const fn = jest.fn();
       const throttled = throttle(fn, 100);
 
-      throttled('first');
-      throttled('second');
+      throttled("first");
+      throttled("second");
 
       throttled.cancel();
 
@@ -91,22 +91,22 @@ describe('performance utilities', () => {
 
       // Only the first immediate call should have happened
       expect(fn).toHaveBeenCalledTimes(1);
-      expect(fn).toHaveBeenCalledWith('first');
+      expect(fn).toHaveBeenCalledWith("first");
     });
   });
 
-  describe('rafDebounce', () => {
+  describe("rafDebounce", () => {
     let rafCallbacks: FrameRequestCallback[] = [];
     let rafId = 0;
 
     beforeEach(() => {
       rafCallbacks = [];
       rafId = 0;
-      jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+      jest.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
         rafCallbacks.push(cb);
         return ++rafId;
       });
-      jest.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => {
+      jest.spyOn(window, "cancelAnimationFrame").mockImplementation((id) => {
         // Mock implementation
       });
     });
@@ -115,7 +115,7 @@ describe('performance utilities', () => {
       jest.restoreAllMocks();
     });
 
-    it('should schedule function on animation frame', () => {
+    it("should schedule function on animation frame", () => {
       const fn = jest.fn();
       const debounced = rafDebounce(fn);
 
@@ -130,7 +130,7 @@ describe('performance utilities', () => {
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
-    it('should cancel pending RAF when called multiple times', () => {
+    it("should cancel pending RAF when called multiple times", () => {
       const fn = jest.fn();
       const debounced = rafDebounce(fn);
 
@@ -141,31 +141,31 @@ describe('performance utilities', () => {
       expect(window.cancelAnimationFrame).toHaveBeenCalledTimes(2);
     });
 
-    it('should pass arguments to the debounced function', () => {
+    it("should pass arguments to the debounced function", () => {
       const fn = jest.fn();
       const debounced = rafDebounce(fn);
 
-      debounced('arg1', 'arg2');
+      debounced("arg1", "arg2");
       rafCallbacks[0](16.67);
 
-      expect(fn).toHaveBeenCalledWith('arg1', 'arg2');
+      expect(fn).toHaveBeenCalledWith("arg1", "arg2");
     });
 
-    it('should use latest arguments when called multiple times', () => {
+    it("should use latest arguments when called multiple times", () => {
       const fn = jest.fn();
       const debounced = rafDebounce(fn);
 
-      debounced('first');
-      debounced('second');
-      debounced('third');
+      debounced("first");
+      debounced("second");
+      debounced("third");
 
       // Only the last RAF callback will have the latest arguments
       rafCallbacks[rafCallbacks.length - 1](16.67);
 
-      expect(fn).toHaveBeenCalledWith('third');
+      expect(fn).toHaveBeenCalledWith("third");
     });
 
-    it('should be cancelable', () => {
+    it("should be cancelable", () => {
       const fn = jest.fn();
       const debounced = rafDebounce(fn);
 
@@ -182,7 +182,7 @@ describe('performance utilities', () => {
     });
   });
 
-  describe('measurePerformance', () => {
+  describe("measurePerformance", () => {
     let originalPerformance: typeof performance;
 
     beforeEach(() => {
@@ -200,55 +200,55 @@ describe('performance utilities', () => {
       global.performance = originalPerformance;
     });
 
-    it('should return the function result', () => {
-      const result = measurePerformance('test', () => 42);
+    it("should return the function result", () => {
+      const result = measurePerformance("test", () => 42);
 
       expect(result.result).toBe(42);
     });
 
-    it('should measure execution time', () => {
-      const result = measurePerformance('test', () => {
+    it("should measure execution time", () => {
+      const result = measurePerformance("test", () => {
         // Function executes
-        return 'done';
+        return "done";
       });
 
       expect(result.duration).toBeGreaterThan(0);
     });
 
-    it('should include the name in the measurement', () => {
-      const result = measurePerformance('myFunction', () => null);
+    it("should include the name in the measurement", () => {
+      const result = measurePerformance("myFunction", () => null);
 
-      expect(result.name).toBe('myFunction');
+      expect(result.name).toBe("myFunction");
     });
 
-    it('should handle throwing functions', () => {
+    it("should handle throwing functions", () => {
       expect(() => {
-        measurePerformance('throwing', () => {
-          throw new Error('test error');
+        measurePerformance("throwing", () => {
+          throw new Error("test error");
         });
-      }).toThrow('test error');
+      }).toThrow("test error");
     });
   });
 
-  describe('createFrameRateMonitor', () => {
+  describe("createFrameRateMonitor", () => {
     let rafCallbacks: FrameRequestCallback[] = [];
     let rafId = 0;
 
     beforeEach(() => {
       rafCallbacks = [];
       rafId = 0;
-      jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+      jest.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
         rafCallbacks.push(cb);
         return ++rafId;
       });
-      jest.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {});
+      jest.spyOn(window, "cancelAnimationFrame").mockImplementation(() => {});
     });
 
     afterEach(() => {
       jest.restoreAllMocks();
     });
 
-    it('should start monitoring when created', () => {
+    it("should start monitoring when created", () => {
       const monitor = createFrameRateMonitor();
 
       expect(window.requestAnimationFrame).toHaveBeenCalled();
@@ -256,7 +256,7 @@ describe('performance utilities', () => {
       monitor.stop();
     });
 
-    it('should calculate FPS based on frame intervals', () => {
+    it("should calculate FPS based on frame intervals", () => {
       const onUpdate = jest.fn();
       const monitor = createFrameRateMonitor({ onUpdate, sampleSize: 3 });
 
@@ -272,7 +272,7 @@ describe('performance utilities', () => {
       expect(onUpdate).toHaveBeenCalled();
     });
 
-    it('should detect dropped frames', () => {
+    it("should detect dropped frames", () => {
       const onUpdate = jest.fn();
       const monitor = createFrameRateMonitor({ onUpdate, sampleSize: 3 });
 
@@ -287,22 +287,25 @@ describe('performance utilities', () => {
 
       // Find a call where dropped frames were detected
       const callWithDropped = onUpdate.mock.calls.find(
-        (call) => call[0].droppedFrames > 0
+        (call) => call[0].droppedFrames > 0,
       );
       expect(callWithDropped).toBeDefined();
       expect(callWithDropped[0].droppedFrames).toBeGreaterThan(0);
     });
 
-    it('should stop monitoring when stop is called', () => {
+    it("should stop monitoring when stop is called", () => {
       const monitor = createFrameRateMonitor();
-      const initialCalls = (window.cancelAnimationFrame as jest.Mock).mock.calls.length;
+      const initialCalls = (window.cancelAnimationFrame as jest.Mock).mock.calls
+        .length;
 
       monitor.stop();
 
-      expect((window.cancelAnimationFrame as jest.Mock).mock.calls.length).toBeGreaterThan(initialCalls);
+      expect(
+        (window.cancelAnimationFrame as jest.Mock).mock.calls.length,
+      ).toBeGreaterThan(initialCalls);
     });
 
-    it('should return current metrics via getMetrics', () => {
+    it("should return current metrics via getMetrics", () => {
       const monitor = createFrameRateMonitor({ sampleSize: 2 });
 
       // Simulate some frames
@@ -312,16 +315,16 @@ describe('performance utilities', () => {
 
       const metrics = monitor.getMetrics();
 
-      expect(metrics).toHaveProperty('fps');
-      expect(metrics).toHaveProperty('frameTime');
-      expect(metrics).toHaveProperty('droppedFrames');
+      expect(metrics).toHaveProperty("fps");
+      expect(metrics).toHaveProperty("frameTime");
+      expect(metrics).toHaveProperty("droppedFrames");
 
       monitor.stop();
     });
   });
 
-  describe('memoizeWithTTL', () => {
-    it('should cache function results', () => {
+  describe("memoizeWithTTL", () => {
+    it("should cache function results", () => {
       const fn = jest.fn((x: number) => x * 2);
       const memoized = memoizeWithTTL(fn, 1000);
 
@@ -331,7 +334,7 @@ describe('performance utilities', () => {
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
-    it('should cache different arguments separately', () => {
+    it("should cache different arguments separately", () => {
       const fn = jest.fn((x: number) => x * 2);
       const memoized = memoizeWithTTL(fn, 1000);
 
@@ -342,7 +345,7 @@ describe('performance utilities', () => {
       expect(fn).toHaveBeenCalledTimes(2);
     });
 
-    it('should invalidate cache after TTL', () => {
+    it("should invalidate cache after TTL", () => {
       const fn = jest.fn((x: number) => x * 2);
       const memoized = memoizeWithTTL(fn, 100);
 
@@ -355,17 +358,17 @@ describe('performance utilities', () => {
       expect(fn).toHaveBeenCalledTimes(2);
     });
 
-    it('should support custom key functions', () => {
+    it("should support custom key functions", () => {
       const fn = jest.fn((obj: { id: number; name: string }) => obj.id);
       const memoized = memoizeWithTTL(fn, 1000, (obj) => obj.id.toString());
 
-      expect(memoized({ id: 1, name: 'a' })).toBe(1);
-      expect(memoized({ id: 1, name: 'b' })).toBe(1); // Different name but same id
+      expect(memoized({ id: 1, name: "a" })).toBe(1);
+      expect(memoized({ id: 1, name: "b" })).toBe(1); // Different name but same id
 
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
-    it('should be clearable', () => {
+    it("should be clearable", () => {
       const fn = jest.fn((x: number) => x * 2);
       const memoized = memoizeWithTTL(fn, 1000);
 

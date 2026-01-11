@@ -2,39 +2,41 @@
 
 // Visibility states with hysteresis thresholds
 export const VisibilityState = {
-  Full: 'full',      // Enter >=0.70, exit <0.65
-  Reduced: 'reduced', // Enter 0.50-0.69, exit to Full >=0.70 or Frozen <0.45
-  Frozen: 'frozen',   // Enter <0.45, exit >=0.50
+  Full: "full", // Enter >=0.70, exit <0.65
+  Reduced: "reduced", // Enter 0.50-0.69, exit to Full >=0.70 or Frozen <0.45
+  Frozen: "frozen", // Enter <0.45, exit >=0.50
 } as const;
-export type VisibilityStateType = typeof VisibilityState[keyof typeof VisibilityState];
+export type VisibilityStateType =
+  (typeof VisibilityState)[keyof typeof VisibilityState];
 
 // Channel lock types
 export const ChannelLockType = {
-  Hard: 'hard',              // Exclusive, blocks all
-  Soft: 'soft',              // Can overlap with other soft
-  TransformSoft: 'transform-soft', // Transform-exclusive only
+  Hard: "hard", // Exclusive, blocks all
+  Soft: "soft", // Can overlap with other soft
+  TransformSoft: "transform-soft", // Transform-exclusive only
 } as const;
-export type ChannelLockTypeValue = typeof ChannelLockType[keyof typeof ChannelLockType];
+export type ChannelLockTypeValue =
+  (typeof ChannelLockType)[keyof typeof ChannelLockType];
 
 // Effect tiers
 export const EffectTier = {
-  Local: 1,      // Letter-local effects
-  Viewport: 2,   // Viewport-wide effects
+  Local: 1, // Letter-local effects
+  Viewport: 2, // Viewport-wide effects
   Persistent: 3, // Session-persistent rewards
 } as const;
-export type EffectTierValue = typeof EffectTier[keyof typeof EffectTier];
+export type EffectTierValue = (typeof EffectTier)[keyof typeof EffectTier];
 
 // Channel identifiers
 export type ChannelId =
-  | 'letters:hard'
-  | 'letters:transform-soft'
-  | 'letters:soft'
-  | 'heroLighting:hard'
-  | 'heroLighting:soft'
-  | 'viewportCamera:hard'
-  | 'viewportCamera:soft'
-  | 'webglOverlay:hard'
-  | 'webglOverlay:soft';
+  | "letters:hard"
+  | "letters:transform-soft"
+  | "letters:soft"
+  | "heroLighting:hard"
+  | "heroLighting:soft"
+  | "viewportCamera:hard"
+  | "viewportCamera:soft"
+  | "webglOverlay:hard"
+  | "webglOverlay:soft";
 
 // Channel lock state
 export interface ChannelLock {
@@ -51,13 +53,13 @@ export interface Effect {
   tier: EffectTierValue;
   channels: ChannelId[];
   duration: number; // ms
-  weight: number;   // 0-100, percentage weight for selection
-  easing: string;   // GSAP easing
+  weight: number; // 0-100, percentage weight for selection
+  easing: string; // GSAP easing
 }
 
 // WebGL effect payload
 export interface WebGLEffect {
-  type: 'ripple' | 'sweep' | 'vignette';
+  type: "ripple" | "sweep" | "vignette";
   position: { uv: [number, number]; px: [number, number] };
   intensity: number;
   startTime: number;
@@ -80,11 +82,11 @@ export interface HeroState {
 
 // Visibility thresholds (exported for testing)
 export const VISIBILITY_THRESHOLDS = {
-  fullEnter: 0.70,
+  fullEnter: 0.7,
   fullExit: 0.65,
-  reducedEnter: 0.50,
+  reducedEnter: 0.5,
   frozenEnter: 0.45,
-  frozenExit: 0.50,
+  frozenExit: 0.5,
 } as const;
 
 // Tier unlock requirements
