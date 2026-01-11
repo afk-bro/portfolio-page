@@ -32,7 +32,7 @@ export function Hero() {
           <HeroName name={siteMetadata.name} />
 
           {/* Role - Ocean for light, Cyan for dark */}
-          <p className="text-2xl md:text-3xl font-medium text-ocean-500 dark:text-cyan-400 mb-6">
+          <p className="text-xl md:text-2xl font-normal text-ocean-400 dark:text-cyan-400/80 mb-6">
             {siteMetadata.role}
           </p>
 
