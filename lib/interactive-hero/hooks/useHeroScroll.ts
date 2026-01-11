@@ -2,11 +2,15 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { throttle } from '../utils/performance';
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+// Throttle interval for scroll and resize handlers (~60fps)
+const THROTTLE_MS = 16;
 
 interface UseHeroScrollProps {
   containerRef: React.RefObject<HTMLElement>;
@@ -103,11 +107,11 @@ export function useHeroScroll({
     };
   }, [enabled, detectScrollIntent]);
 
-  // Scroll event handler for direction tracking
+  // Scroll event handler for direction tracking (throttled for performance)
   useEffect(() => {
     if (!enabled) return;
 
-    const handleScroll = () => {
+    const handleScrollRaw = () => {
       const currentY = window.scrollY;
 
       // Detect scroll intent
@@ -120,8 +124,14 @@ export function useHeroScroll({
       lastScrollYRef.current = currentY;
     };
 
+    // Throttle to ~60fps for smooth performance
+    const handleScroll = throttle(handleScrollRaw, THROTTLE_MS);
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      handleScroll.cancel();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [enabled, detectScrollIntent]);
 
   // ScrollTrigger setup for pinning
@@ -152,16 +162,30 @@ export function useHeroScroll({
     };
   }, [enabled, containerRef]);
 
-  // Refresh ScrollTrigger on resize
+  // Refresh ScrollTrigger on resize (debounced to avoid excessive refreshes)
   useEffect(() => {
     if (!enabled) return;
 
+    // Debounce resize to 150ms to avoid excessive ScrollTrigger refreshes
+    const RESIZE_DEBOUNCE_MS = 150;
+    let resizeTimeout: ReturnType<typeof setTimeout> | null = null;
+
     const handleResize = () => {
-      ScrollTrigger.refresh();
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+      resizeTimeout = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, RESIZE_DEBOUNCE_MS);
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+      window.removeEventListener('resize', handleResize);
+    };
   }, [enabled]);
 
   return {
