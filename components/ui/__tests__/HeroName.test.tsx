@@ -126,7 +126,7 @@ describe("HeroName - Motion Preferences", () => {
     // Should render simple h1 without the wrapper div
     const h1 = container.querySelector("h1");
     expect(h1).toBeInTheDocument();
-    expect(h1).toHaveClass("text-balance"); // Static version has text-balance
+    expect(h1).toHaveClass("whitespace-nowrap"); // Static version prevents wrapping
 
     // Should NOT have the perspective wrapper for 3D
     expect(h1).not.toHaveStyle({ perspective: "1000px" });
