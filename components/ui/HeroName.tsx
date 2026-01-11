@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
+import { useLetterClick, VisibilityState } from "@/lib/interactive-hero";
 
 interface HeroNameProps {
   name: string;
@@ -27,6 +28,7 @@ export function HeroName({ name, className }: HeroNameProps) {
   const containerRef = useRef<HTMLSpanElement>(null);
   const nameWrapperRef = useRef<HTMLDivElement>(null);
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const letterRefsArray = useRef<HTMLSpanElement[]>([]);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   const [introComplete, setIntroComplete] = useState(false);
@@ -51,10 +53,20 @@ export function HeroName({ name, className }: HeroNameProps) {
     }));
   }, [name]);
 
+  // Click handler for interactive effects
+  const { handleClick } = useLetterClick({
+    letterRefs: { current: letterRefsArray.current },
+    visibility: isVisible ? VisibilityState.Full : VisibilityState.Frozen,
+    enabled: !prefersReducedMotion && introComplete,
+  });
+
   // Set ref for each letter
   const setLetterRef = useCallback(
     (index: number) => (el: HTMLSpanElement | null) => {
       letterRefs.current[index] = el;
+      if (el) {
+        letterRefsArray.current[index] = el;
+      }
     },
     [],
   );
@@ -285,12 +297,24 @@ export function HeroName({ name, className }: HeroNameProps) {
             <span
               key={index}
               ref={setLetterRef(index)}
-              className={cn("inline-block", isSpace ? "w-[0.3em]" : "")}
+              className={cn(
+                "inline-block",
+                isSpace ? "w-[0.3em]" : "cursor-pointer select-none",
+              )}
               style={{
                 transformStyle: "preserve-3d",
                 backfaceVisibility: "hidden",
               }}
               aria-hidden={isSpace ? "true" : undefined}
+              onClick={isSpace ? undefined : () => handleClick(index)}
+              role={isSpace ? undefined : "button"}
+              tabIndex={isSpace ? undefined : 0}
+              onKeyDown={isSpace ? undefined : (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleClick(index);
+                }
+              }}
             >
               {isSpace ? "\u00A0" : char}
             </span>
