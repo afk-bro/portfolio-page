@@ -36,3 +36,12 @@ export * from './effects/tier1';
 
 // Hooks
 export { useLetterClick } from './hooks/useLetterClick';
+export { useHeroScroll } from './hooks/useHeroScroll';
+export { useScrollLinkedProps } from './hooks/useScrollLinkedProps';
+export { useParallaxExit } from './hooks/useParallaxExit';
+export { useTier2Effects } from './hooks/useTier2Effects';
+
+// WebGL effects
+export * from './effects/webgl/ripple';
+export * from './effects/webgl/sweep';
+export * from './effects/webgl/vignette';
