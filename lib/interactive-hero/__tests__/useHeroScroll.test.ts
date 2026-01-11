@@ -74,6 +74,8 @@ describe('useHeroScroll', () => {
   });
 
   it('tracks scroll direction', () => {
+    jest.useFakeTimers();
+
     const { result } = renderHook(() => useHeroScroll({
       containerRef: mockContainerRef,
       enabled: true,
@@ -83,6 +85,8 @@ describe('useHeroScroll', () => {
     act(() => {
       Object.defineProperty(window, 'scrollY', { value: 100, writable: true });
       window.dispatchEvent(new Event('scroll'));
+      // Advance time past throttle delay (16ms)
+      jest.advanceTimersByTime(20);
     });
 
     expect(result.current.isScrollingUp).toBe(false);
@@ -91,9 +95,13 @@ describe('useHeroScroll', () => {
     act(() => {
       Object.defineProperty(window, 'scrollY', { value: 50, writable: true });
       window.dispatchEvent(new Event('scroll'));
+      // Advance time past throttle delay
+      jest.advanceTimersByTime(20);
     });
 
     expect(result.current.isScrollingUp).toBe(true);
+
+    jest.useRealTimers();
   });
 
   it('does not setup ScrollTrigger when disabled', () => {

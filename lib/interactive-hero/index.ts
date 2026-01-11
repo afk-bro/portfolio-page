@@ -61,3 +61,36 @@ export type {
 export * from './effects/webgl/ripple';
 export * from './effects/webgl/sweep';
 export * from './effects/webgl/vignette';
+
+// Performance utilities
+export {
+  throttle,
+  rafDebounce,
+  measurePerformance,
+  createFrameRateMonitor,
+  memoizeWithTTL,
+} from './utils/performance';
+export type {
+  ThrottledFunction,
+  RAFDebouncedFunction,
+  PerformanceMeasurement,
+  FrameRateMetrics,
+  FrameRateMonitorOptions,
+  FrameRateMonitor,
+  MemoizedFunction,
+} from './utils/performance';
+
+// Performance monitoring hook
+export {
+  usePerformanceMonitor,
+  DEFAULT_THRESHOLDS,
+} from './hooks/usePerformanceMonitor';
+export type {
+  PerformanceMetrics,
+  PerformanceThresholds,
+  UsePerformanceMonitorReturn,
+} from './hooks/usePerformanceMonitor';
+
+// Panic reset hook
+export { usePanicReset } from './hooks/usePanicReset';
+export type { UsePanicResetProps, UsePanicResetReturn } from './hooks/usePanicReset';
