@@ -273,11 +273,17 @@
   }
 
   .dark .hero-bg::before {
-    background: radial-gradient(
-      ellipse 60% 50% at 50% 40%,
-      rgba(245, 166, 35, 0.06) 0%,
-      transparent 70%
-    );
+    background:
+      radial-gradient(
+        ellipse 40% 30% at 50% 35%,
+        rgba(245, 166, 35, 0.08) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 50% 40%,
+        rgba(245, 166, 35, 0.06) 0%,
+        transparent 70%
+      );
   }
 
   /* Hero bottom fade connector - connects hero to metrics section */
