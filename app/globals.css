@@ -254,16 +254,18 @@
     background: #f8fbfd;
   }
 
-  /* Light mode: Subtle blue atmosphere */
+  /* Light mode: Subtle blue atmosphere with top vignette */
   .hero-bg::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-      ellipse 80% 60% at 50% 30%,
-      rgba(72, 109, 138, 0.06) 0%,
-      transparent 70%
-    );
+    background:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 0%, transparent 60px),
+      radial-gradient(
+        ellipse 80% 60% at 50% 30%,
+        rgba(72, 109, 138, 0.06) 0%,
+        transparent 70%
+      );
     pointer-events: none;
   }
 
@@ -274,6 +276,7 @@
 
   .dark .hero-bg::before {
     background:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 0%, transparent 80px),
       radial-gradient(
         ellipse 40% 30% at 50% 35%,
         rgba(245, 166, 35, 0.08) 0%,
