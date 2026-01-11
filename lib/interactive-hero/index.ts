@@ -30,3 +30,9 @@ export {
   getIntensityMultiplier,
   type VisibilityMachine,
 } from './visibilityMachine';
+
+// Effects
+export * from './effects/tier1';
+
+// Hooks
+export { useLetterClick } from './hooks/useLetterClick';
