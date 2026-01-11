@@ -640,9 +640,12 @@ describe("HeroName - Tier 3 Effects Integration", () => {
     const letters = container.querySelectorAll(
       "span.inline-block:not(.sr-only)",
     );
-    const clickableLetters = Array.from(letters).filter(
+    const _clickableLetters = Array.from(letters).filter(
       (l) => l.textContent && l.textContent.trim().length === 1,
     );
+
+    // Verify clickable letters exist (used for Tier 3 tracking)
+    expect(_clickableLetters.length).toBeGreaterThan(0);
 
     // Initial state callback should have been called with empty array
     expect(onTier3Change).toHaveBeenCalled();

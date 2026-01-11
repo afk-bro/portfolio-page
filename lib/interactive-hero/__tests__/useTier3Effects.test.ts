@@ -1,5 +1,5 @@
 // lib/interactive-hero/__tests__/useTier3Effects.test.ts
-import { renderHook, act } from "@testing-library/react";
+import { renderHook } from "@testing-library/react";
 import { useTier3Effects } from "../hooks/useTier3Effects";
 import { VisibilityState, TIER_UNLOCK } from "../types";
 

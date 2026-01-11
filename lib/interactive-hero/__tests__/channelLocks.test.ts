@@ -8,7 +8,6 @@ import {
   getActiveLocks,
 } from "../channelLocks";
 import { ChannelLockType } from "../types";
-import type { ChannelId, ChannelLock } from "../types";
 
 describe("Channel Lock System", () => {
   let manager: ReturnType<typeof createChannelLockManager>;
