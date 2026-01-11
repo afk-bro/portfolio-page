@@ -40,6 +40,7 @@ export { useHeroScroll } from './hooks/useHeroScroll';
 export { useScrollLinkedProps } from './hooks/useScrollLinkedProps';
 export { useParallaxExit } from './hooks/useParallaxExit';
 export { useTier2Effects } from './hooks/useTier2Effects';
+export { useTier3Effects } from './hooks/useTier3Effects';
 
 // WebGL effects
 export * from './effects/webgl/ripple';
