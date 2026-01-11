@@ -41,7 +41,7 @@ describe("useTier2Effects", () => {
   });
 
   it("allows trigger after 5 interactions and 8s time", () => {
-    const { result, rerender } = renderHook((props) => useTier2Effects(props), {
+    const { result } = renderHook((props) => useTier2Effects(props), {
       initialProps: {
         visibility: VisibilityState.Full,
         interactionCount: 5,

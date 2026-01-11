@@ -106,8 +106,8 @@ describe("performance utilities", () => {
         rafCallbacks.push(cb);
         return ++rafId;
       });
-      jest.spyOn(window, "cancelAnimationFrame").mockImplementation((id) => {
-        // Mock implementation
+      jest.spyOn(window, "cancelAnimationFrame").mockImplementation((_id) => {
+        // Mock implementation - id parameter unused but required by type
       });
     });
 

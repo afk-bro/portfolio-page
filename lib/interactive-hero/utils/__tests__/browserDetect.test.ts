@@ -21,9 +21,9 @@ const createMatchMediaMock = (matches: boolean) => {
 };
 
 describe("browserDetect", () => {
-  // Store original values
-  const originalNavigator = global.navigator;
-  const originalWindow = global.window;
+  // Store original values (used in SSR test restoration)
+  const _originalNavigator = global.navigator;
+  void _originalNavigator; // Reference to avoid unused warning
 
   beforeEach(() => {
     resetBrowserInfoCache();
@@ -392,8 +392,8 @@ describe("useBrowserInfo hook", () => {
     });
 
     // Dynamic import to get fresh module
-    const module = await import("../browserDetect");
-    useBrowserInfo = module.useBrowserInfo;
+    const browserModule = await import("../browserDetect");
+    useBrowserInfo = browserModule.useBrowserInfo;
   });
 
   afterEach(() => {

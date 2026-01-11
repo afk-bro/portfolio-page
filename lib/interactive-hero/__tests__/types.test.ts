@@ -4,8 +4,6 @@ import {
   ChannelLockType,
   EffectTier,
   type HeroState,
-  type ChannelLock,
-  type Effect,
 } from "../types";
 
 describe("Interactive Hero Types", () => {

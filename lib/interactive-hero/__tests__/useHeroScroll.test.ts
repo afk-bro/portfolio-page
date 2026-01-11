@@ -113,6 +113,7 @@ describe("useHeroScroll", () => {
   });
 
   it("does not setup ScrollTrigger when disabled", () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { ScrollTrigger } = require("gsap/ScrollTrigger");
 
     renderHook(() =>
@@ -126,6 +127,7 @@ describe("useHeroScroll", () => {
   });
 
   it("cleans up on unmount", () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { ScrollTrigger } = require("gsap/ScrollTrigger");
     const mockKill = jest.fn();
     ScrollTrigger.create.mockReturnValue({

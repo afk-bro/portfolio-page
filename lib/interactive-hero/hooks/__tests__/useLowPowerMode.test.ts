@@ -33,6 +33,7 @@ function mockNavigator(options: {
     });
   } else {
     // Remove the property to simulate browsers that don't support it
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (navigator as any).deviceMemory;
   }
 
@@ -43,6 +44,7 @@ function mockNavigator(options: {
       configurable: true,
     });
   } else {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (navigator as any).hardwareConcurrency;
   }
 }
@@ -55,6 +57,7 @@ function restoreNavigator() {
       originalDeviceMemory,
     );
   } else {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (navigator as any).deviceMemory;
   }
 
@@ -65,6 +68,7 @@ function restoreNavigator() {
       originalHardwareConcurrency,
     );
   } else {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (navigator as any).hardwareConcurrency;
   }
 }

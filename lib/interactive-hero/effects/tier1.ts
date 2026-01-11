@@ -142,7 +142,7 @@ export function createGoldGlow(
  */
 export function createOceanElectric(
   element: HTMLElement,
-  intensity: number,
+  _intensity: number,
 ): gsap.core.Timeline {
   const tl = gsap.timeline();
 
