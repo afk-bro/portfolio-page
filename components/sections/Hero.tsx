@@ -9,7 +9,7 @@ import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 
 export function Hero() {
   return (
-    <section className="section hero-bg relative overflow-hidden">
+    <section className="section hero-bg relative overflow-hidden pt-16 pb-20 md:pt-24 md:pb-32">
       {/* Localized amber glow behind hero content (blur method - no banding) */}
       <div
         aria-hidden="true"
@@ -22,7 +22,7 @@ export function Hero() {
         >
           {/* Availability Badge - refined styling */}
           {siteMetadata.availability === "available" && (
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-pill bg-success-50 dark:bg-success-500/15 text-success-600 dark:text-success-500 text-sm font-medium border border-success-500/20 dark:border-success-500/25">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-4 rounded-pill bg-success-50 dark:bg-success-500/15 text-success-600 dark:text-success-500 text-sm font-medium border border-success-500/20 dark:border-success-500/25">
               <Sparkles className="w-4 h-4" />
               <span>Open to opportunities</span>
             </div>
@@ -37,7 +37,7 @@ export function Hero() {
           </p>
 
           {/* Bio / Value Proposition - Plumbeous for light, Sand at reduced opacity for dark */}
-          <p className="text-body text-ocean-400 dark:text-sand-100/70 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-body text-ocean-400 dark:text-sand-100/70 mb-10 max-w-2xl mx-auto leading-relaxed">
             {siteMetadata.bio}
           </p>
 
