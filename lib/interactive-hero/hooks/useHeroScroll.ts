@@ -1,11 +1,11 @@
 // lib/interactive-hero/hooks/useHeroScroll.ts
-import { useEffect, useState, useRef, useCallback } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { throttle } from '../utils/performance';
+import { useEffect, useState, useRef, useCallback } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { throttle } from "../utils/performance";
 
 // Register ScrollTrigger plugin
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -77,8 +77,8 @@ export function useHeroScroll({
       }
     };
 
-    window.addEventListener('wheel', handleWheel, { passive: true });
-    return () => window.removeEventListener('wheel', handleWheel);
+    window.addEventListener("wheel", handleWheel, { passive: true });
+    return () => window.removeEventListener("wheel", handleWheel);
   }, [enabled, detectScrollIntent]);
 
   // Touch event handler
@@ -98,12 +98,12 @@ export function useHeroScroll({
       }
     };
 
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     return () => {
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
     };
   }, [enabled, detectScrollIntent]);
 
@@ -127,10 +127,10 @@ export function useHeroScroll({
     // Throttle to ~60fps for smooth performance
     const handleScroll = throttle(handleScrollRaw, THROTTLE_MS);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       handleScroll.cancel();
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [enabled, detectScrollIntent]);
 
@@ -141,8 +141,8 @@ export function useHeroScroll({
     // Create ScrollTrigger for pin behavior
     scrollTriggerRef.current = ScrollTrigger.create({
       trigger: containerRef.current,
-      start: 'top top',
-      end: '+=100%',
+      start: "top top",
+      end: "+=100%",
       pin: true,
       pinSpacing: true,
       onUpdate: (self) => {
@@ -179,12 +179,12 @@ export function useHeroScroll({
       }, RESIZE_DEBOUNCE_MS);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
       if (resizeTimeout) {
         clearTimeout(resizeTimeout);
       }
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, [enabled]);
 

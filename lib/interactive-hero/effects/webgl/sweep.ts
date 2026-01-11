@@ -1,7 +1,7 @@
 // lib/interactive-hero/effects/webgl/sweep.ts
-import gsap from 'gsap';
+import gsap from "gsap";
 
-export type SweepDirection = 'left-to-right' | 'right-to-left';
+export type SweepDirection = "left-to-right" | "right-to-left";
 
 export interface SweepEffectConfig {
   direction: SweepDirection;
@@ -18,7 +18,7 @@ export interface SweepEffectState {
 }
 
 export interface SweepEffect {
-  type: 'sweep';
+  type: "sweep";
   direction: SweepDirection;
   timeline: gsap.core.Timeline;
   update: (progress: number) => SweepEffectState;
@@ -37,7 +37,7 @@ export function createSweepEffect(config: SweepEffectConfig): SweepEffect {
   timeline.to(proxy, {
     progress: 1,
     duration: duration / 1000,
-    ease: 'power1.inOut',
+    ease: "power1.inOut",
   });
 
   const update = (progress: number): SweepEffectState => {
@@ -48,7 +48,7 @@ export function createSweepEffect(config: SweepEffectConfig): SweepEffect {
     const totalTravel = 1 + SWEEP_WIDTH * 2;
 
     let position: number;
-    if (direction === 'left-to-right') {
+    if (direction === "left-to-right") {
       position = -SWEEP_WIDTH + totalTravel * progress;
     } else {
       position = 1 + SWEEP_WIDTH - totalTravel * progress;
@@ -71,7 +71,7 @@ export function createSweepEffect(config: SweepEffectConfig): SweepEffect {
   };
 
   return {
-    type: 'sweep',
+    type: "sweep",
     direction,
     timeline,
     update,

@@ -33,7 +33,7 @@ export interface ThrottledFunction<T extends (...args: unknown[]) => void> {
  */
 export function throttle<T extends (...args: unknown[]) => void>(
   fn: T,
-  wait: number
+  wait: number,
 ): ThrottledFunction<T> {
   let lastTime = 0;
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -103,7 +103,7 @@ export interface RAFDebouncedFunction<T extends (...args: unknown[]) => void> {
  * ```
  */
 export function rafDebounce<T extends (...args: unknown[]) => void>(
-  fn: T
+  fn: T,
 ): RAFDebouncedFunction<T> {
   let rafId: number | null = null;
   let lastArgs: Parameters<T> | null = null;
@@ -162,7 +162,7 @@ export interface PerformanceMeasurement<T> {
  */
 export function measurePerformance<T>(
   name: string,
-  fn: () => T
+  fn: () => T,
 ): PerformanceMeasurement<T> {
   const start = performance.now();
   const result = fn();
@@ -226,7 +226,7 @@ export interface FrameRateMonitor {
  * ```
  */
 export function createFrameRateMonitor(
-  options: FrameRateMonitorOptions = {}
+  options: FrameRateMonitorOptions = {},
 ): FrameRateMonitor {
   const { sampleSize = 60, onUpdate } = options;
 
@@ -317,7 +317,7 @@ export interface MemoizedFunction<T extends (...args: unknown[]) => unknown> {
 export function memoizeWithTTL<T extends (...args: unknown[]) => unknown>(
   fn: T,
   ttl: number,
-  keyFn?: (...args: Parameters<T>) => string
+  keyFn?: (...args: Parameters<T>) => string,
 ): MemoizedFunction<T> {
   const cache = new Map<string, { value: ReturnType<T>; expires: number }>();
 

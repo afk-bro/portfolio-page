@@ -3,9 +3,13 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
-import { useLetterClick, useTier3Effects, VisibilityState } from "@/lib/interactive-hero";
+import {
+  useLetterClick,
+  useTier3Effects,
+  VisibilityState,
+} from "@/lib/interactive-hero";
 
-type Tier3EffectType = 'caustics' | 'particle-trail';
+type Tier3EffectType = "caustics" | "particle-trail";
 
 interface HeroNameProps {
   name: string;
@@ -57,10 +61,7 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
   }, [name]);
 
   // Calculate total letters (excluding spaces) for Tier 3 unlock detection
-  const totalLetters = useMemo(
-    () => name.replace(/\s/g, '').length,
-    [name]
-  );
+  const totalLetters = useMemo(() => name.replace(/\s/g, "").length, [name]);
 
   // Current visibility state
   const visibility = isVisible ? VisibilityState.Full : VisibilityState.Frozen;
@@ -335,12 +336,16 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
               onClick={isSpace ? undefined : () => handleClick(index)}
               role={isSpace ? undefined : "button"}
               tabIndex={isSpace ? undefined : 0}
-              onKeyDown={isSpace ? undefined : (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  handleClick(index);
-                }
-              }}
+              onKeyDown={
+                isSpace
+                  ? undefined
+                  : (e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleClick(index);
+                      }
+                    }
+              }
             >
               {isSpace ? "\u00A0" : char}
             </span>

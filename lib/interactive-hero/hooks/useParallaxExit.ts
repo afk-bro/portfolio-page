@@ -1,5 +1,5 @@
 // lib/interactive-hero/hooks/useParallaxExit.ts
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 interface UseParallaxExitProps {
   exitProgress: number; // 0-1, progress through the exit phase
@@ -58,11 +58,11 @@ export function useParallaxExit({
         dividerOffset: 0,
         buttonsOffset: 0,
         transforms: {
-          background: 'translateY(0px)',
-          overlay: 'translateY(0px)',
-          name: 'translateY(0px)',
-          divider: 'translateY(0px)',
-          buttons: 'translateY(0px)',
+          background: "translateY(0px)",
+          overlay: "translateY(0px)",
+          name: "translateY(0px)",
+          divider: "translateY(0px)",
+          buttons: "translateY(0px)",
         },
       };
     }

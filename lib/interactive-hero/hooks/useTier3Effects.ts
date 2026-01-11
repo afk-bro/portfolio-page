@@ -1,6 +1,10 @@
 // lib/interactive-hero/hooks/useTier3Effects.ts
-import { useState, useMemo, useEffect } from 'react';
-import { VisibilityState, type VisibilityStateType, TIER_UNLOCK } from '../types';
+import { useState, useMemo, useEffect } from "react";
+import {
+  VisibilityState,
+  type VisibilityStateType,
+  TIER_UNLOCK,
+} from "../types";
 
 interface UseTier3EffectsProps {
   interactionCount: number;
@@ -10,7 +14,7 @@ interface UseTier3EffectsProps {
   enabled: boolean;
 }
 
-type Tier3EffectType = 'caustics' | 'particle-trail';
+type Tier3EffectType = "caustics" | "particle-trail";
 
 interface UseTier3EffectsReturn {
   causticsUnlocked: boolean;
@@ -32,14 +36,21 @@ export function useTier3Effects({
 
   // Check caustics unlock condition (10+ interactions)
   useEffect(() => {
-    if (!causticsUnlocked && interactionCount >= TIER_UNLOCK.tier3Interactions) {
+    if (
+      !causticsUnlocked &&
+      interactionCount >= TIER_UNLOCK.tier3Interactions
+    ) {
       setCausticsUnlocked(true);
     }
   }, [interactionCount, causticsUnlocked]);
 
   // Check particle trail unlock condition (all letters clicked)
   useEffect(() => {
-    if (!particleTrailUnlocked && totalLetters > 0 && clickedLetters.size >= totalLetters) {
+    if (
+      !particleTrailUnlocked &&
+      totalLetters > 0 &&
+      clickedLetters.size >= totalLetters
+    ) {
       setParticleTrailUnlocked(true);
     }
   }, [clickedLetters.size, totalLetters, particleTrailUnlocked]);
@@ -54,11 +65,11 @@ export function useTier3Effects({
     const effects: Tier3EffectType[] = [];
 
     if (causticsUnlocked) {
-      effects.push('caustics');
+      effects.push("caustics");
     }
 
     if (particleTrailUnlocked) {
-      effects.push('particle-trail');
+      effects.push("particle-trail");
     }
 
     return effects;

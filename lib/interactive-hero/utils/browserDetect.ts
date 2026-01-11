@@ -1,11 +1,18 @@
 // lib/interactive-hero/utils/browserDetect.ts
 
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 /**
  * Browser name types
  */
-export type BrowserName = 'chrome' | 'firefox' | 'safari' | 'edge' | 'opera' | 'ie' | 'unknown';
+export type BrowserName =
+  | "chrome"
+  | "firefox"
+  | "safari"
+  | "edge"
+  | "opera"
+  | "ie"
+  | "unknown";
 
 /**
  * Browser information interface
@@ -33,7 +40,7 @@ export interface BrowserInfo {
  * Default browser info for SSR or unknown environments
  */
 const DEFAULT_BROWSER_INFO: BrowserInfo = {
-  name: 'unknown',
+  name: "unknown",
   version: 0,
   isMobile: false,
   isTouch: false,
@@ -49,46 +56,49 @@ let cachedBrowserInfo: BrowserInfo | null = null;
 /**
  * Parse browser name and version from user agent string
  */
-function parseBrowserFromUA(ua: string): { name: BrowserName; version: number } {
+function parseBrowserFromUA(ua: string): {
+  name: BrowserName;
+  version: number;
+} {
   // Order matters: check more specific patterns first
 
   // Edge (Chromium-based)
   const edgeMatch = ua.match(/Edg\/(\d+)/);
   if (edgeMatch) {
-    return { name: 'edge', version: parseInt(edgeMatch[1], 10) };
+    return { name: "edge", version: parseInt(edgeMatch[1], 10) };
   }
 
   // Opera
   const operaMatch = ua.match(/OPR\/(\d+)/);
   if (operaMatch) {
-    return { name: 'opera', version: parseInt(operaMatch[1], 10) };
+    return { name: "opera", version: parseInt(operaMatch[1], 10) };
   }
 
   // Internet Explorer
   const ieMatch = ua.match(/(?:MSIE |rv:)(\d+)/);
-  if (ieMatch && (ua.includes('Trident') || ua.includes('MSIE'))) {
-    return { name: 'ie', version: parseInt(ieMatch[1], 10) };
+  if (ieMatch && (ua.includes("Trident") || ua.includes("MSIE"))) {
+    return { name: "ie", version: parseInt(ieMatch[1], 10) };
   }
 
   // Firefox
   const firefoxMatch = ua.match(/Firefox\/(\d+)/);
   if (firefoxMatch) {
-    return { name: 'firefox', version: parseInt(firefoxMatch[1], 10) };
+    return { name: "firefox", version: parseInt(firefoxMatch[1], 10) };
   }
 
   // Safari (must check before Chrome since Chrome's UA contains Safari)
   const safariMatch = ua.match(/Version\/(\d+).*Safari/);
-  if (safariMatch && !ua.includes('Chrome') && !ua.includes('Chromium')) {
-    return { name: 'safari', version: parseInt(safariMatch[1], 10) };
+  if (safariMatch && !ua.includes("Chrome") && !ua.includes("Chromium")) {
+    return { name: "safari", version: parseInt(safariMatch[1], 10) };
   }
 
   // Chrome
   const chromeMatch = ua.match(/Chrome\/(\d+)/);
   if (chromeMatch) {
-    return { name: 'chrome', version: parseInt(chromeMatch[1], 10) };
+    return { name: "chrome", version: parseInt(chromeMatch[1], 10) };
   }
 
-  return { name: 'unknown', version: 0 };
+  return { name: "unknown", version: 0 };
 }
 
 /**
@@ -108,22 +118,22 @@ function detectMobile(ua: string): boolean {
     /Mobile Safari/i,
   ];
 
-  return mobilePatterns.some(pattern => pattern.test(ua));
+  return mobilePatterns.some((pattern) => pattern.test(ua));
 }
 
 /**
  * Detect if touch is supported
  */
 function detectTouch(): boolean {
-  if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+  if (typeof window === "undefined" || typeof navigator === "undefined") {
     return false;
   }
 
   return (
-    'ontouchstart' in window ||
+    "ontouchstart" in window ||
     navigator.maxTouchPoints > 0 ||
     // @ts-expect-error - msMaxTouchPoints is IE-specific
-    (navigator.msMaxTouchPoints > 0)
+    navigator.msMaxTouchPoints > 0
   );
 }
 
@@ -131,13 +141,13 @@ function detectTouch(): boolean {
  * Detect if passive event listeners are supported
  */
 function detectPassiveEvents(): boolean {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return false;
   }
 
   let supportsPassive = false;
   try {
-    const options = Object.defineProperty({}, 'passive', {
+    const options = Object.defineProperty({}, "passive", {
       get() {
         supportsPassive = true;
         return true;
@@ -146,8 +156,16 @@ function detectPassiveEvents(): boolean {
     // Test by adding and immediately removing a listener
     // Using testPassive as a non-standard event name to avoid type conflicts
     const noop = () => {};
-    window.addEventListener('testPassive' as keyof WindowEventMap, noop, options as EventListenerOptions);
-    window.removeEventListener('testPassive' as keyof WindowEventMap, noop, options as EventListenerOptions);
+    window.addEventListener(
+      "testPassive" as keyof WindowEventMap,
+      noop,
+      options as EventListenerOptions,
+    );
+    window.removeEventListener(
+      "testPassive" as keyof WindowEventMap,
+      noop,
+      options as EventListenerOptions,
+    );
   } catch {
     supportsPassive = false;
   }
@@ -159,26 +177,26 @@ function detectPassiveEvents(): boolean {
  * Detect if IntersectionObserver is supported
  */
 function detectIntersectionObserver(): boolean {
-  return typeof window !== 'undefined' && 'IntersectionObserver' in window;
+  return typeof window !== "undefined" && "IntersectionObserver" in window;
 }
 
 /**
  * Detect if ResizeObserver is supported
  */
 function detectResizeObserver(): boolean {
-  return typeof window !== 'undefined' && 'ResizeObserver' in window;
+  return typeof window !== "undefined" && "ResizeObserver" in window;
 }
 
 /**
  * Detect if user prefers reduced motion
  */
 function detectReducedMotion(): boolean {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return false;
   }
 
   try {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   } catch {
     return false;
   }
@@ -220,7 +238,7 @@ export function detectBrowser(): BrowserInfo {
   }
 
   // SSR check
-  if (typeof navigator === 'undefined') {
+  if (typeof navigator === "undefined") {
     return DEFAULT_BROWSER_INFO;
   }
 
@@ -293,7 +311,7 @@ export function useBrowserInfo(): BrowserInfo {
  */
 export function getEventListenerOptions(
   browserInfo: BrowserInfo,
-  wantsPassive = true
+  wantsPassive = true,
 ): AddEventListenerOptions | boolean {
   if (browserInfo.supportsPassiveEvents) {
     return { passive: wantsPassive };
@@ -308,7 +326,7 @@ export function getEventListenerOptions(
  * @returns Optimal scroll event listener options
  */
 export function getScrollListenerOptions(
-  browserInfo: BrowserInfo
+  browserInfo: BrowserInfo,
 ): AddEventListenerOptions | boolean {
   return getEventListenerOptions(browserInfo, true);
 }
@@ -322,7 +340,7 @@ export function getScrollListenerOptions(
  */
 export function isWebGL2LikelySupported(browserInfo: BrowserInfo): boolean {
   // IE doesn't support WebGL2
-  if (browserInfo.name === 'ie') {
+  if (browserInfo.name === "ie") {
     return false;
   }
 

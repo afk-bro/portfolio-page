@@ -1,6 +1,6 @@
 // lib/interactive-hero/channelLocks.ts
-import { ChannelLockType } from './types';
-import type { ChannelId, ChannelLock, ChannelLockTypeValue } from './types';
+import { ChannelLockType } from "./types";
+import type { ChannelId, ChannelLock, ChannelLockTypeValue } from "./types";
 
 export interface ChannelLockManager {
   locks: ChannelLock[];
@@ -12,12 +12,12 @@ export function createChannelLockManager(): ChannelLockManager {
 
 function getChannelBase(channel: ChannelId): string {
   // Extract base channel (e.g., 'letters' from 'letters:soft')
-  return channel.split(':')[0];
+  return channel.split(":")[0];
 }
 
 function cleanExpiredLocks(manager: ChannelLockManager): void {
   const now = performance.now();
-  manager.locks = manager.locks.filter(lock => lock.expiresAt > now);
+  manager.locks = manager.locks.filter((lock) => lock.expiresAt > now);
 }
 
 export function getActiveLocks(manager: ChannelLockManager): ChannelLock[] {
@@ -28,14 +28,14 @@ export function getActiveLocks(manager: ChannelLockManager): ChannelLock[] {
 export function canAcquireLock(
   manager: ChannelLockManager,
   channel: ChannelId,
-  type: ChannelLockTypeValue
+  type: ChannelLockTypeValue,
 ): boolean {
   cleanExpiredLocks(manager);
   const channelBase = getChannelBase(channel);
 
   // Find locks on the same channel base
   const conflictingLocks = manager.locks.filter(
-    lock => getChannelBase(lock.channel) === channelBase
+    (lock) => getChannelBase(lock.channel) === channelBase,
   );
 
   if (conflictingLocks.length === 0) return true;
@@ -49,8 +49,10 @@ export function canAcquireLock(
     if (lock.type === ChannelLockType.Hard) return false;
 
     // Transform-soft blocks other transform-soft
-    if (type === ChannelLockType.TransformSoft &&
-        lock.type === ChannelLockType.TransformSoft) {
+    if (
+      type === ChannelLockType.TransformSoft &&
+      lock.type === ChannelLockType.TransformSoft
+    ) {
       return false;
     }
   }
@@ -64,7 +66,7 @@ export function acquireLock(
   channel: ChannelId,
   type: ChannelLockTypeValue,
   effectId: string,
-  duration: number
+  duration: number,
 ): ChannelLock | null {
   if (!canAcquireLock(manager, channel, type)) {
     return null;
@@ -81,8 +83,11 @@ export function acquireLock(
   return lock;
 }
 
-export function releaseLock(manager: ChannelLockManager, effectId: string): void {
-  manager.locks = manager.locks.filter(lock => lock.effectId !== effectId);
+export function releaseLock(
+  manager: ChannelLockManager,
+  effectId: string,
+): void {
+  manager.locks = manager.locks.filter((lock) => lock.effectId !== effectId);
 }
 
 export function releaseAllLocks(manager: ChannelLockManager): void {

@@ -1,6 +1,6 @@
 // lib/interactive-hero/hooks/__tests__/useLowPowerMode.test.ts
 
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act } from "@testing-library/react";
 import {
   useLowPowerMode,
   detectLowPower,
@@ -8,16 +8,16 @@ import {
   LOW_POWER_CONFIG,
   NORMAL_CONFIG,
   type LowPowerConfig,
-} from '../useLowPowerMode';
+} from "../useLowPowerMode";
 
 // Store original navigator properties
 const originalDeviceMemory = Object.getOwnPropertyDescriptor(
   Navigator.prototype,
-  'deviceMemory'
+  "deviceMemory",
 );
 const originalHardwareConcurrency = Object.getOwnPropertyDescriptor(
   Navigator.prototype,
-  'hardwareConcurrency'
+  "hardwareConcurrency",
 );
 
 // Mock navigator properties
@@ -26,7 +26,7 @@ function mockNavigator(options: {
   hardwareConcurrency?: number;
 }) {
   if (options.deviceMemory !== undefined) {
-    Object.defineProperty(navigator, 'deviceMemory', {
+    Object.defineProperty(navigator, "deviceMemory", {
       value: options.deviceMemory,
       writable: true,
       configurable: true,
@@ -37,7 +37,7 @@ function mockNavigator(options: {
   }
 
   if (options.hardwareConcurrency !== undefined) {
-    Object.defineProperty(navigator, 'hardwareConcurrency', {
+    Object.defineProperty(navigator, "hardwareConcurrency", {
       value: options.hardwareConcurrency,
       writable: true,
       configurable: true,
@@ -49,13 +49,21 @@ function mockNavigator(options: {
 
 function restoreNavigator() {
   if (originalDeviceMemory) {
-    Object.defineProperty(Navigator.prototype, 'deviceMemory', originalDeviceMemory);
+    Object.defineProperty(
+      Navigator.prototype,
+      "deviceMemory",
+      originalDeviceMemory,
+    );
   } else {
     delete (navigator as any).deviceMemory;
   }
 
   if (originalHardwareConcurrency) {
-    Object.defineProperty(Navigator.prototype, 'hardwareConcurrency', originalHardwareConcurrency);
+    Object.defineProperty(
+      Navigator.prototype,
+      "hardwareConcurrency",
+      originalHardwareConcurrency,
+    );
   } else {
     delete (navigator as any).hardwareConcurrency;
   }
@@ -63,10 +71,10 @@ function restoreNavigator() {
 
 // Mock matchMedia for prefers-reduced-motion
 function mockMatchMedia(matches: boolean) {
-  Object.defineProperty(window, 'matchMedia', {
+  Object.defineProperty(window, "matchMedia", {
     writable: true,
     value: jest.fn().mockImplementation((query: string) => ({
-      matches: query.includes('prefers-reduced-motion') ? matches : false,
+      matches: query.includes("prefers-reduced-motion") ? matches : false,
       media: query,
       onchange: null,
       addListener: jest.fn(),
@@ -78,7 +86,7 @@ function mockMatchMedia(matches: boolean) {
   });
 }
 
-describe('detectLowPower', () => {
+describe("detectLowPower", () => {
   beforeEach(() => {
     resetLowPowerCache();
   });
@@ -87,82 +95,82 @@ describe('detectLowPower', () => {
     restoreNavigator();
   });
 
-  it('returns false when navigator is undefined (SSR)', () => {
+  it("returns false when navigator is undefined (SSR)", () => {
     // In a browser environment, we can't truly test SSR
     // The function internally checks for typeof navigator
     const result = detectLowPower();
-    expect(typeof result).toBe('boolean');
+    expect(typeof result).toBe("boolean");
   });
 
-  it('returns true when deviceMemory < 4', () => {
+  it("returns true when deviceMemory < 4", () => {
     mockNavigator({ deviceMemory: 2, hardwareConcurrency: 8 });
     const result = detectLowPower();
     expect(result).toBe(true);
   });
 
-  it('returns true when hardwareConcurrency < 4', () => {
+  it("returns true when hardwareConcurrency < 4", () => {
     mockNavigator({ deviceMemory: 8, hardwareConcurrency: 2 });
     const result = detectLowPower();
     expect(result).toBe(true);
   });
 
-  it('returns true when both are low', () => {
+  it("returns true when both are low", () => {
     mockNavigator({ deviceMemory: 2, hardwareConcurrency: 2 });
     const result = detectLowPower();
     expect(result).toBe(true);
   });
 
-  it('returns false when both values are sufficient', () => {
+  it("returns false when both values are sufficient", () => {
     mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
     const result = detectLowPower();
     expect(result).toBe(false);
   });
 
-  it('returns false when APIs are not available', () => {
+  it("returns false when APIs are not available", () => {
     mockNavigator({}); // No values - simulates unsupported APIs
     const result = detectLowPower();
     expect(result).toBe(false);
   });
 
-  it('returns false when only deviceMemory is unavailable but cores are high', () => {
+  it("returns false when only deviceMemory is unavailable but cores are high", () => {
     mockNavigator({ hardwareConcurrency: 8 });
     const result = detectLowPower();
     expect(result).toBe(false);
   });
 
-  it('returns false when only hardwareConcurrency is unavailable but memory is high', () => {
+  it("returns false when only hardwareConcurrency is unavailable but memory is high", () => {
     mockNavigator({ deviceMemory: 8 });
     const result = detectLowPower();
     expect(result).toBe(false);
   });
 
-  it('returns true when only deviceMemory is low (hardwareConcurrency unavailable)', () => {
+  it("returns true when only deviceMemory is low (hardwareConcurrency unavailable)", () => {
     mockNavigator({ deviceMemory: 2 });
     const result = detectLowPower();
     expect(result).toBe(true);
   });
 
-  it('returns true when only hardwareConcurrency is low (deviceMemory unavailable)', () => {
+  it("returns true when only hardwareConcurrency is low (deviceMemory unavailable)", () => {
     mockNavigator({ hardwareConcurrency: 2 });
     const result = detectLowPower();
     expect(result).toBe(true);
   });
 
-  it('considers deviceMemory = 4 as not low power (boundary)', () => {
+  it("considers deviceMemory = 4 as not low power (boundary)", () => {
     mockNavigator({ deviceMemory: 4, hardwareConcurrency: 4 });
     const result = detectLowPower();
     expect(result).toBe(false);
   });
 
-  it('considers hardwareConcurrency = 4 as not low power (boundary)', () => {
+  it("considers hardwareConcurrency = 4 as not low power (boundary)", () => {
     mockNavigator({ deviceMemory: 4, hardwareConcurrency: 4 });
     const result = detectLowPower();
     expect(result).toBe(false);
   });
 });
 
-describe('LowPowerConfig values', () => {
-  it('LOW_POWER_CONFIG has correct values', () => {
+describe("LowPowerConfig values", () => {
+  it("LOW_POWER_CONFIG has correct values", () => {
     expect(LOW_POWER_CONFIG).toEqual({
       intensityMultiplier: 0.6,
       maxDPR: 1.0,
@@ -172,7 +180,7 @@ describe('LowPowerConfig values', () => {
     });
   });
 
-  it('NORMAL_CONFIG has correct values', () => {
+  it("NORMAL_CONFIG has correct values", () => {
     expect(NORMAL_CONFIG).toEqual({
       intensityMultiplier: 1.0,
       maxDPR: 2.0,
@@ -183,7 +191,7 @@ describe('LowPowerConfig values', () => {
   });
 });
 
-describe('useLowPowerMode', () => {
+describe("useLowPowerMode", () => {
   beforeEach(() => {
     resetLowPowerCache();
     mockMatchMedia(false);
@@ -193,18 +201,18 @@ describe('useLowPowerMode', () => {
     restoreNavigator();
   });
 
-  it('returns correct interface structure', () => {
+  it("returns correct interface structure", () => {
     mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
 
     const { result } = renderHook(() => useLowPowerMode());
 
-    expect(result.current).toHaveProperty('isLowPower');
-    expect(result.current).toHaveProperty('config');
-    expect(result.current).toHaveProperty('setForceMode');
-    expect(result.current).toHaveProperty('forceMode');
+    expect(result.current).toHaveProperty("isLowPower");
+    expect(result.current).toHaveProperty("config");
+    expect(result.current).toHaveProperty("setForceMode");
+    expect(result.current).toHaveProperty("forceMode");
   });
 
-  it('returns isLowPower: false for high-spec devices', () => {
+  it("returns isLowPower: false for high-spec devices", () => {
     mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
 
     const { result } = renderHook(() => useLowPowerMode());
@@ -213,7 +221,7 @@ describe('useLowPowerMode', () => {
     expect(result.current.config).toEqual(NORMAL_CONFIG);
   });
 
-  it('returns isLowPower: true for low-spec devices', () => {
+  it("returns isLowPower: true for low-spec devices", () => {
     mockNavigator({ deviceMemory: 2, hardwareConcurrency: 2 });
 
     const { result } = renderHook(() => useLowPowerMode());
@@ -222,7 +230,7 @@ describe('useLowPowerMode', () => {
     expect(result.current.config).toEqual(LOW_POWER_CONFIG);
   });
 
-  it('returns NORMAL_CONFIG when device is not low power', () => {
+  it("returns NORMAL_CONFIG when device is not low power", () => {
     mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
 
     const { result } = renderHook(() => useLowPowerMode());
@@ -234,7 +242,7 @@ describe('useLowPowerMode', () => {
     expect(result.current.config.tier3Enabled).toBe(true);
   });
 
-  it('returns LOW_POWER_CONFIG when device is low power', () => {
+  it("returns LOW_POWER_CONFIG when device is low power", () => {
     mockNavigator({ deviceMemory: 2, hardwareConcurrency: 2 });
 
     const { result } = renderHook(() => useLowPowerMode());
@@ -246,16 +254,16 @@ describe('useLowPowerMode', () => {
     expect(result.current.config.tier3Enabled).toBe(false);
   });
 
-  it('defaults forceMode to auto', () => {
+  it("defaults forceMode to auto", () => {
     mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
 
     const { result } = renderHook(() => useLowPowerMode());
 
-    expect(result.current.forceMode).toBe('auto');
+    expect(result.current.forceMode).toBe("auto");
   });
 
-  describe('setForceMode', () => {
-    it('allows forcing low power mode', () => {
+  describe("setForceMode", () => {
+    it("allows forcing low power mode", () => {
       mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
 
       const { result } = renderHook(() => useLowPowerMode());
@@ -266,15 +274,15 @@ describe('useLowPowerMode', () => {
 
       // Force low power
       act(() => {
-        result.current.setForceMode('low');
+        result.current.setForceMode("low");
       });
 
-      expect(result.current.forceMode).toBe('low');
+      expect(result.current.forceMode).toBe("low");
       expect(result.current.isLowPower).toBe(true);
       expect(result.current.config).toEqual(LOW_POWER_CONFIG);
     });
 
-    it('allows forcing high power mode', () => {
+    it("allows forcing high power mode", () => {
       mockNavigator({ deviceMemory: 2, hardwareConcurrency: 2 });
 
       const { result } = renderHook(() => useLowPowerMode());
@@ -285,38 +293,38 @@ describe('useLowPowerMode', () => {
 
       // Force high power
       act(() => {
-        result.current.setForceMode('high');
+        result.current.setForceMode("high");
       });
 
-      expect(result.current.forceMode).toBe('high');
+      expect(result.current.forceMode).toBe("high");
       expect(result.current.isLowPower).toBe(false);
       expect(result.current.config).toEqual(NORMAL_CONFIG);
     });
 
-    it('returns to auto detection when set back to auto', () => {
+    it("returns to auto detection when set back to auto", () => {
       mockNavigator({ deviceMemory: 2, hardwareConcurrency: 2 });
 
       const { result } = renderHook(() => useLowPowerMode());
 
       // Force high
       act(() => {
-        result.current.setForceMode('high');
+        result.current.setForceMode("high");
       });
 
       expect(result.current.isLowPower).toBe(false);
 
       // Back to auto
       act(() => {
-        result.current.setForceMode('auto');
+        result.current.setForceMode("auto");
       });
 
-      expect(result.current.forceMode).toBe('auto');
+      expect(result.current.forceMode).toBe("auto");
       expect(result.current.isLowPower).toBe(true); // Should return to detected value
     });
   });
 
-  describe('prefers-reduced-motion', () => {
-    it('considers prefers-reduced-motion as additional signal for low power', () => {
+  describe("prefers-reduced-motion", () => {
+    it("considers prefers-reduced-motion as additional signal for low power", () => {
       mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
       mockMatchMedia(true); // prefers-reduced-motion: reduce
 
@@ -326,7 +334,7 @@ describe('useLowPowerMode', () => {
       expect(result.current.isLowPower).toBe(true);
     });
 
-    it('does not consider reduced motion alone on high-spec device if not checking motion', () => {
+    it("does not consider reduced motion alone on high-spec device if not checking motion", () => {
       // This test depends on implementation - reduced motion may or may not
       // trigger low power mode independently. The spec says it's an "additional signal"
       mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
@@ -339,8 +347,8 @@ describe('useLowPowerMode', () => {
     });
   });
 
-  describe('caching', () => {
-    it('caches the detection result', () => {
+  describe("caching", () => {
+    it("caches the detection result", () => {
       mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
 
       const { result: result1 } = renderHook(() => useLowPowerMode());
@@ -354,7 +362,7 @@ describe('useLowPowerMode', () => {
       expect(result1.current.isLowPower).toBe(result2.current.isLowPower);
     });
 
-    it('resetLowPowerCache allows re-detection', () => {
+    it("resetLowPowerCache allows re-detection", () => {
       mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
 
       const { result: result1 } = renderHook(() => useLowPowerMode());
@@ -371,8 +379,8 @@ describe('useLowPowerMode', () => {
     });
   });
 
-  describe('config immutability', () => {
-    it('returns stable config object references', () => {
+  describe("config immutability", () => {
+    it("returns stable config object references", () => {
       mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
 
       const { result, rerender } = renderHook(() => useLowPowerMode());
@@ -386,18 +394,18 @@ describe('useLowPowerMode', () => {
     });
   });
 
-  describe('type safety', () => {
-    it('config has all required properties with correct types', () => {
+  describe("type safety", () => {
+    it("config has all required properties with correct types", () => {
       mockNavigator({ deviceMemory: 8, hardwareConcurrency: 8 });
 
       const { result } = renderHook(() => useLowPowerMode());
       const config: LowPowerConfig = result.current.config;
 
-      expect(typeof config.intensityMultiplier).toBe('number');
-      expect(typeof config.maxDPR).toBe('number');
-      expect(typeof config.targetFPS).toBe('number');
-      expect(typeof config.tier2CooldownMs).toBe('number');
-      expect(typeof config.tier3Enabled).toBe('boolean');
+      expect(typeof config.intensityMultiplier).toBe("number");
+      expect(typeof config.maxDPR).toBe("number");
+      expect(typeof config.targetFPS).toBe("number");
+      expect(typeof config.tier2CooldownMs).toBe("number");
+      expect(typeof config.tier3Enabled).toBe("boolean");
     });
   });
 });

@@ -1,6 +1,6 @@
 // lib/interactive-hero/hooks/useLowPowerMode.ts
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from "react";
 
 /**
  * Configuration for low-power mode adjustments
@@ -21,7 +21,7 @@ export interface LowPowerConfig {
 /**
  * Force mode options for manual override
  */
-export type ForceMode = 'auto' | 'low' | 'high';
+export type ForceMode = "auto" | "low" | "high";
 
 /**
  * Return type for the useLowPowerMode hook
@@ -66,10 +66,10 @@ let cachedDetectionResult: boolean | null = null;
  * Check if user prefers reduced motion
  */
 function checkReducedMotion(): boolean {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === "undefined") return false;
 
   try {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   } catch {
     return false;
   }
@@ -88,7 +88,7 @@ function checkReducedMotion(): boolean {
  */
 export function detectLowPower(): boolean {
   // SSR check
-  if (typeof navigator === 'undefined') {
+  if (typeof navigator === "undefined") {
     return false;
   }
 
@@ -99,7 +99,8 @@ export function detectLowPower(): boolean {
   }
 
   // Get device capabilities (these APIs may not be available in all browsers)
-  const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+  const memory = (navigator as Navigator & { deviceMemory?: number })
+    .deviceMemory;
   const cores = navigator.hardwareConcurrency;
 
   // Advisory detection - if API not available, we can't determine low power from it
@@ -151,7 +152,7 @@ export function resetLowPowerCache(): void {
  */
 export function useLowPowerMode(): UseLowPowerModeReturn {
   // Force mode state for manual override
-  const [forceMode, setForceMode] = useState<ForceMode>('auto');
+  const [forceMode, setForceMode] = useState<ForceMode>("auto");
 
   // Perform detection (cached)
   const detectedLowPower = useMemo(() => {
@@ -164,11 +165,11 @@ export function useLowPowerMode(): UseLowPowerModeReturn {
   // Determine effective low-power status based on force mode
   const isLowPower = useMemo(() => {
     switch (forceMode) {
-      case 'low':
+      case "low":
         return true;
-      case 'high':
+      case "high":
         return false;
-      case 'auto':
+      case "auto":
       default:
         return detectedLowPower;
     }

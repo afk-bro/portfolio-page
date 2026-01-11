@@ -1,5 +1,5 @@
 // lib/interactive-hero/hooks/useScrollLinkedProps.ts
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 interface UseScrollLinkedPropsInput {
   scrollProgress: number; // 0-1
@@ -34,16 +34,17 @@ export function useScrollLinkedProps({
         shimmerPosition: 0,
         glowIntensity: MIN_GLOW,
         cssVars: {
-          '--hero-shimmer-position': '0%',
-          '--hero-glow-intensity': String(MIN_GLOW),
-          '--hero-letter-rotation': '0deg',
+          "--hero-shimmer-position": "0%",
+          "--hero-glow-intensity": String(MIN_GLOW),
+          "--hero-letter-rotation": "0deg",
         },
       };
     }
 
     // Letter rotation: velocity-based, clamped
     const rawRotation = Math.abs(scrollVelocity) * VELOCITY_TO_ROTATION_SCALE;
-    const letterRotation = Math.min(rawRotation, MAX_ROTATION) * Math.sign(scrollVelocity);
+    const letterRotation =
+      Math.min(rawRotation, MAX_ROTATION) * Math.sign(scrollVelocity);
 
     // Shimmer position: progress-based, 0-100%
     const shimmerPosition = scrollProgress * 100;
@@ -57,9 +58,9 @@ export function useScrollLinkedProps({
       shimmerPosition,
       glowIntensity,
       cssVars: {
-        '--hero-shimmer-position': `${shimmerPosition}%`,
-        '--hero-glow-intensity': String(glowIntensity),
-        '--hero-letter-rotation': `${letterRotation}deg`,
+        "--hero-shimmer-position": `${shimmerPosition}%`,
+        "--hero-glow-intensity": String(glowIntensity),
+        "--hero-letter-rotation": `${letterRotation}deg`,
       },
     };
   }, [scrollProgress, scrollVelocity, enabled]);
