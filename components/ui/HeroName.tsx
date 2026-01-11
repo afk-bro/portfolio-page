@@ -3,10 +3,18 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
+import {
+  useLetterClick,
+  useTier3Effects,
+  VisibilityState,
+} from "@/lib/interactive-hero";
+
+type Tier3EffectType = "caustics" | "particle-trail";
 
 interface HeroNameProps {
   name: string;
   className?: string;
+  onTier3Change?: (effects: Tier3EffectType[]) => void;
 }
 
 /**
@@ -23,10 +31,11 @@ interface HeroNameProps {
  * - They animate to sharp, normal scale, and final position
  * - Dual glow (gold + cyan) appears during animation
  */
-export function HeroName({ name, className }: HeroNameProps) {
+export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
   const containerRef = useRef<HTMLSpanElement>(null);
   const nameWrapperRef = useRef<HTMLDivElement>(null);
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const letterRefsArray = useRef<HTMLSpanElement[]>([]);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   const [introComplete, setIntroComplete] = useState(false);
@@ -51,10 +60,40 @@ export function HeroName({ name, className }: HeroNameProps) {
     }));
   }, [name]);
 
+  // Calculate total letters (excluding spaces) for Tier 3 unlock detection
+  const totalLetters = useMemo(() => name.replace(/\s/g, "").length, [name]);
+
+  // Current visibility state
+  const visibility = isVisible ? VisibilityState.Full : VisibilityState.Frozen;
+
+  // Click handler for interactive effects
+  const { handleClick, interactionCount, clickedLetters } = useLetterClick({
+    letterRefs: { current: letterRefsArray.current },
+    visibility,
+    enabled: !prefersReducedMotion && introComplete,
+  });
+
+  // Tier 3 Easter egg effects
+  const { activeTier3Effects } = useTier3Effects({
+    interactionCount,
+    clickedLetters,
+    totalLetters,
+    visibility,
+    enabled: !prefersReducedMotion && introComplete,
+  });
+
+  // Notify parent when Tier 3 effects change
+  useEffect(() => {
+    onTier3Change?.(activeTier3Effects);
+  }, [activeTier3Effects, onTier3Change]);
+
   // Set ref for each letter
   const setLetterRef = useCallback(
     (index: number) => (el: HTMLSpanElement | null) => {
       letterRefs.current[index] = el;
+      if (el) {
+        letterRefsArray.current[index] = el;
+      }
     },
     [],
   );
@@ -285,12 +324,28 @@ export function HeroName({ name, className }: HeroNameProps) {
             <span
               key={index}
               ref={setLetterRef(index)}
-              className={cn("inline-block", isSpace ? "w-[0.3em]" : "")}
+              className={cn(
+                "inline-block",
+                isSpace ? "w-[0.3em]" : "cursor-pointer select-none",
+              )}
               style={{
                 transformStyle: "preserve-3d",
                 backfaceVisibility: "hidden",
               }}
               aria-hidden={isSpace ? "true" : undefined}
+              onClick={isSpace ? undefined : () => handleClick(index)}
+              role={isSpace ? undefined : "button"}
+              tabIndex={isSpace ? undefined : 0}
+              onKeyDown={
+                isSpace
+                  ? undefined
+                  : (e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleClick(index);
+                      }
+                    }
+              }
             >
               {isSpace ? "\u00A0" : char}
             </span>

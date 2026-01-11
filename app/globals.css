@@ -596,6 +596,85 @@
     }
   }
 
+  /* ===========================================
+   * HERO CSS FALLBACK ANIMATIONS
+   * For browsers without WebGL support
+   * =========================================== */
+
+  /* Sweep fallback - gradient band moving left to right */
+  @keyframes hero-sweep-fallback {
+    from {
+      background-position: -20% center;
+    }
+    to {
+      background-position: 120% center;
+    }
+  }
+
+  /* Vignette fallback - radial gradient fade in/out */
+  @keyframes hero-vignette-fallback {
+    0% {
+      opacity: 0;
+    }
+    37.5% {
+      opacity: var(--vignette-peak, 0.2);
+    }
+    62.5% {
+      opacity: var(--vignette-peak, 0.2);
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Ripple fallback - expanding box-shadow pulse */
+  @keyframes hero-ripple-fallback {
+    0% {
+      box-shadow: inset var(--ripple-offset-x, 0) var(--ripple-offset-y, 0) 0 0
+        rgba(6, 182, 212, var(--ripple-opacity, 0.15));
+    }
+    100% {
+      box-shadow: inset 0 0 var(--ripple-spread, 80px)
+        calc(var(--ripple-spread, 80px) / 2) rgba(6, 182, 212, 0);
+    }
+  }
+
+  /* Utility classes for fallback effects */
+  .hero-sweep-fallback {
+    animation: hero-sweep-fallback 0.6s ease-in-out forwards;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(6, 182, 212, 0.2) 40%,
+      rgba(245, 166, 35, 0.2) 50%,
+      rgba(6, 182, 212, 0.2) 60%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  .hero-vignette-fallback {
+    animation: hero-vignette-fallback 0.4s ease-in-out forwards;
+    background: radial-gradient(
+      ellipse 80% 60% at center,
+      transparent 30%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+  }
+
+  .dark .hero-vignette-fallback {
+    --vignette-peak: 0.25;
+    background: radial-gradient(
+      ellipse 80% 60% at center,
+      transparent 30%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+  }
+
+  .hero-ripple-fallback {
+    animation: hero-ripple-fallback 0.5s ease-out forwards;
+  }
+
   /* Text balance for headings */
   .text-balance {
     text-wrap: balance;
