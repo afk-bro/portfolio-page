@@ -1,6 +1,7 @@
 // components/ui/__tests__/HeroWebGLOverlay.test.tsx
+import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { HeroWebGLOverlay } from '../HeroWebGLOverlay';
+import { HeroWebGLOverlay, HeroWebGLOverlayRef } from '../HeroWebGLOverlay';
 
 // Mock PixiJS
 jest.mock('pixi.js', () => ({
@@ -24,10 +25,17 @@ jest.mock('pixi.js', () => ({
     clear: jest.fn().mockReturnThis(),
     circle: jest.fn().mockReturnThis(),
     fill: jest.fn().mockReturnThis(),
+    stroke: jest.fn().mockReturnThis(),
     rect: jest.fn().mockReturnThis(),
     alpha: 0,
     x: 0,
     y: 0,
+    destroy: jest.fn(),
+  })),
+  Container: jest.fn().mockImplementation(() => ({
+    addChild: jest.fn(),
+    removeChild: jest.fn(),
+    children: [],
   })),
   DisplacementFilter: jest.fn().mockImplementation(() => ({
     scale: { x: 0, y: 0 },
@@ -114,5 +122,49 @@ describe('HeroWebGLOverlay', () => {
 
     const overlay = screen.getByTestId('webgl-overlay');
     expect(overlay).toHaveClass('pointer-events-none');
+  });
+
+  it('exposes addEffect and clearEffects methods via ref', () => {
+    const ref = React.createRef<HeroWebGLOverlayRef>();
+
+    render(
+      <HeroWebGLOverlay
+        ref={ref}
+        containerRef={{ current: document.createElement('div') }}
+        visible={true}
+        intensity={1}
+      />
+    );
+
+    expect(ref.current).not.toBeNull();
+    expect(ref.current?.addEffect).toBeInstanceOf(Function);
+    expect(ref.current?.clearEffects).toBeInstanceOf(Function);
+  });
+
+  it('applies intensity to opacity', () => {
+    render(
+      <HeroWebGLOverlay
+        containerRef={{ current: document.createElement('div') }}
+        visible={true}
+        intensity={0.5}
+      />
+    );
+
+    const overlay = screen.getByTestId('webgl-overlay');
+    expect(overlay).toHaveStyle({ opacity: '0.5' });
+  });
+
+  it('accepts custom className', () => {
+    render(
+      <HeroWebGLOverlay
+        containerRef={{ current: document.createElement('div') }}
+        visible={true}
+        intensity={1}
+        className="custom-class"
+      />
+    );
+
+    const overlay = screen.getByTestId('webgl-overlay');
+    expect(overlay).toHaveClass('custom-class');
   });
 });
