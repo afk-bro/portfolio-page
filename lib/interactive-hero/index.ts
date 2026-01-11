@@ -33,9 +33,12 @@ export {
 
 // Effects
 export * from './effects/tier1';
+export * from './effects/cssFallbacks';
 
 // Hooks
 export { useLetterClick } from './hooks/useLetterClick';
+export { useWebGLSupport, checkWebGLSupport, resetWebGLSupportCache } from './hooks/useWebGLSupport';
+export type { UseWebGLSupportReturn, WebGLSupportResult } from './hooks/useWebGLSupport';
 export { useHeroScroll } from './hooks/useHeroScroll';
 export { useScrollLinkedProps } from './hooks/useScrollLinkedProps';
 export { useParallaxExit } from './hooks/useParallaxExit';
