@@ -32,7 +32,7 @@ const proofPoints = [
 
 export function ProofStrip() {
   return (
-    <section className="relative py-20 bg-transparent">
+    <section className="relative pt-8 pb-20 bg-transparent">
       <div className="container-content relative">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {proofPoints.map((point, index) => (

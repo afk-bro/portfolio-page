@@ -280,6 +280,18 @@
     );
   }
 
+  /* Hero bottom fade connector - connects hero to metrics section */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, rgba(3, 5, 8, 0.2));
+    pointer-events: none;
+  }
+
   /* ===========================================
    * CTA BUTTON - Gold with intense glow
    * =========================================== */
