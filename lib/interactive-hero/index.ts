@@ -44,6 +44,18 @@ export { useScrollLinkedProps } from './hooks/useScrollLinkedProps';
 export { useParallaxExit } from './hooks/useParallaxExit';
 export { useTier2Effects } from './hooks/useTier2Effects';
 export { useTier3Effects } from './hooks/useTier3Effects';
+export {
+  useLowPowerMode,
+  detectLowPower,
+  resetLowPowerCache,
+  LOW_POWER_CONFIG,
+  NORMAL_CONFIG,
+} from './hooks/useLowPowerMode';
+export type {
+  LowPowerConfig,
+  ForceMode,
+  UseLowPowerModeReturn,
+} from './hooks/useLowPowerMode';
 
 // WebGL effects
 export * from './effects/webgl/ripple';
