@@ -30,12 +30,12 @@ export function createElasticBounce(
   tl.to(element, {
     y: -20 * intensity,
     scale: scale,
-    duration: 0.15,
-    ease: "power2.out",
+    duration: 0.08,
+    ease: "power3.out",
   }).to(element, {
     y: 0,
     scale: 1,
-    duration: 0.45,
+    duration: 0.4,
     ease: "elastic.out(1, 0.3)",
   });
 
@@ -54,11 +54,11 @@ export function createFlipX(
 
   tl.to(element, {
     rotationY: rotation,
-    duration: 0.25,
-    ease: "power2.in",
+    duration: 0.15,
+    ease: "power3.in",
   }).to(element, {
     rotationY: 0,
-    duration: 0.25,
+    duration: 0.2,
     ease: "power2.out",
   });
 
@@ -77,11 +77,11 @@ export function createFlipY(
 
   tl.to(element, {
     rotationX: rotation,
-    duration: 0.25,
-    ease: "power2.in",
+    duration: 0.15,
+    ease: "power3.in",
   }).to(element, {
     rotationX: 0,
-    duration: 0.25,
+    duration: 0.2,
     ease: "power2.out",
   });
 
@@ -102,12 +102,12 @@ export function createRubberStretch(
   tl.to(element, {
     scaleX: scaleX,
     scaleY: scaleY,
-    duration: 0.15,
-    ease: "power2.out",
+    duration: 0.06,
+    ease: "power3.out",
   }).to(element, {
     scaleX: 1,
     scaleY: 1,
-    duration: 0.55,
+    duration: 0.45,
     ease: "elastic.out(1, 0.4)",
   });
 
@@ -195,14 +195,14 @@ export function createNeighborRipple(
 ): gsap.core.Timeline {
   const tl = gsap.timeline();
 
-  // Center letter bounces
+  // Center letter bounces - instant response
   tl.to(
     element,
     {
-      y: -10 * intensity,
-      scale: 1.1,
-      duration: 0.1,
-      ease: "power2.out",
+      y: -12 * intensity,
+      scale: 1.15,
+      duration: 0.06,
+      ease: "power3.out",
     },
     0,
   ).to(
@@ -210,33 +210,33 @@ export function createNeighborRipple(
     {
       y: 0,
       scale: 1,
-      duration: 0.3,
+      duration: 0.25,
       ease: "power2.out",
     },
-    0.1,
+    0.06,
   );
 
   // Neighbors ripple outward
   neighbors.forEach((neighbor, i) => {
-    const delay = 0.05 * (i + 1);
-    const yOffset = -6 * intensity * (1 - i * 0.3);
+    const delay = 0.03 * (i + 1);
+    const yOffset = -8 * intensity * (1 - i * 0.3);
 
     tl.to(
       neighbor,
       {
         y: yOffset,
-        duration: 0.15,
-        ease: "power2.out",
+        duration: 0.08,
+        ease: "power3.out",
       },
       delay,
     ).to(
       neighbor,
       {
         y: 0,
-        duration: 0.25,
+        duration: 0.2,
         ease: "power2.out",
       },
-      delay + 0.15,
+      delay + 0.08,
     );
   });
 

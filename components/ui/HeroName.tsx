@@ -37,6 +37,7 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const letterRefsArray = useRef<HTMLSpanElement[]>([]);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const gsapContextRef = useRef<gsap.Context | null>(null);
 
   const [introComplete, setIntroComplete] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -143,7 +144,7 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
     return () => observer.disconnect();
   }, [prefersReducedMotion]);
 
-  // INTRO: Drop-in animation
+  // INTRO: Drop-in animation with proper cleanup using gsap.context()
   useEffect(() => {
     if (!containerRef.current || prefersReducedMotion) {
       setIntroComplete(true);
@@ -152,17 +153,24 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
 
     const container = containerRef.current;
 
-    gsap.set(container, { y: -30, opacity: 0 });
-    gsap.to(container, {
-      y: 0,
-      opacity: 1,
-      duration: 0.6,
-      ease: "power2.out",
-      onComplete: () => setIntroComplete(true),
-    });
+    // Create GSAP context for proper cleanup
+    const ctx = gsap.context(() => {
+      // Use autoAlpha (visibility + opacity) to avoid FOUC
+      gsap.set(container, { y: -30, autoAlpha: 0 });
+      gsap.to(container, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.6,
+        ease: "power2.out",
+        onComplete: () => setIntroComplete(true),
+      });
+    }, nameWrapperRef);
+
+    // Cleanup: revert all GSAP changes when component unmounts
+    return () => ctx.revert();
   }, [prefersReducedMotion]);
 
-  // BLUR-TO-SHARP REVEAL
+  // BLUR-TO-SHARP REVEAL with proper cleanup
   const triggerBlurReveal = useCallback(() => {
     if (hasPlayedRef.current) return;
     hasPlayedRef.current = true;
@@ -178,64 +186,81 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
       }
     });
 
-    const tl = gsap.timeline({
-      onComplete: () => setIsSpinning(false),
-    });
-    timelineRef.current = tl;
-
-    // Set initial state for all letters
-    nonSpaceLetters.forEach((letter) => {
-      gsap.set(letter, {
-        filter: "blur(12px)",
-        opacity: 0,
-        scale: 1.1,
-        y: -40,
+    // Create context for cleanup
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => setIsSpinning(false),
       });
-    });
+      timelineRef.current = tl;
 
-    // Animate each letter with stagger
-    nonSpaceLetters.forEach((letter, i) => {
-      const staggerDelay = i * 0.05; // 50ms stagger
-      const duration = 0.6;
+      // Set initial state for all letters using autoAlpha
+      nonSpaceLetters.forEach((letter) => {
+        gsap.set(letter, {
+          filter: "blur(12px)",
+          autoAlpha: 0,
+          scale: 1.1,
+          y: -40,
+        });
+      });
 
-      const proxy = { progress: 0 };
+      // Animate each letter with stagger
+      nonSpaceLetters.forEach((letter, i) => {
+        const staggerDelay = i * 0.05; // 50ms stagger
+        const duration = 0.6;
 
-      tl.to(
-        proxy,
-        {
-          progress: 1,
-          duration: duration,
-          ease: "power3.out",
-          onUpdate: () => {
-            const { blur, scale, y, glowIntensity } = computeBlurVisuals(
-              proxy.progress,
-            );
+        const proxy = { progress: 0 };
 
-            gsap.set(letter, {
-              filter: `blur(${blur}px)`,
-              opacity: proxy.progress,
-              scale: scale,
-              y: y,
-              textShadow:
-                glowIntensity > 0.05
-                  ? `0 4px 30px rgba(${GOLD_GLOW}, ${glowIntensity * 0.5}), 0 0 60px rgba(${CYAN_GLOW}, ${glowIntensity * 0.25})`
-                  : "none",
-            });
+        tl.to(
+          proxy,
+          {
+            progress: 1,
+            duration: duration,
+            ease: "power3.out",
+            onUpdate: () => {
+              const { blur, scale, y, glowIntensity } = computeBlurVisuals(
+                proxy.progress,
+              );
+
+              gsap.set(letter, {
+                filter: `blur(${blur}px)`,
+                autoAlpha: proxy.progress,
+                scale: scale,
+                y: y,
+                textShadow:
+                  glowIntensity > 0.05
+                    ? `0 4px 30px rgba(${GOLD_GLOW}, ${glowIntensity * 0.5}), 0 0 60px rgba(${CYAN_GLOW}, ${glowIntensity * 0.25})`
+                    : "none",
+              });
+            },
+            onComplete: () => {
+              gsap.set(letter, {
+                filter: "blur(0px)",
+                autoAlpha: 1,
+                scale: 1,
+                y: 0,
+                textShadow: `0 4px 30px rgba(${GOLD_GLOW}, 0.3), 0 0 60px rgba(${CYAN_GLOW}, 0.15)`,
+              });
+            },
           },
-          onComplete: () => {
-            gsap.set(letter, {
-              filter: "blur(0px)",
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              textShadow: `0 4px 30px rgba(${GOLD_GLOW}, 0.3), 0 0 60px rgba(${CYAN_GLOW}, 0.15)`,
-            });
-          },
-        },
-        staggerDelay,
-      );
-    });
+          staggerDelay,
+        );
+      });
+    }, nameWrapperRef);
+
+    gsapContextRef.current = ctx;
   }, [characters]);
+
+  // Cleanup GSAP context on unmount
+  useEffect(() => {
+    return () => {
+      if (gsapContextRef.current) {
+        gsapContextRef.current.revert();
+      }
+      if (timelineRef.current) {
+        timelineRef.current.kill();
+      }
+    };
+  }, []);
 
   // SCROLL HANDLING: Trigger only when visible
   useEffect(() => {
@@ -318,7 +343,7 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
         <span
           ref={containerRef}
           className="inline-flex justify-center"
-          style={{ transformStyle: "preserve-3d" }}
+          style={{ transformStyle: "preserve-3d", visibility: "hidden" }}
         >
           {characters.map(({ char, isSpace, index }) => (
             <span
@@ -326,7 +351,9 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
               ref={setLetterRef(index)}
               className={cn(
                 "inline-block",
-                isSpace ? "w-[0.3em]" : "cursor-pointer select-none",
+                isSpace
+                  ? "w-[0.3em]"
+                  : "cursor-pointer select-none hover:scale-105 hover:-translate-y-0.5 hover:text-amber-500 dark:hover:text-amber-400 active:scale-95 active:translate-y-0 transition-transform duration-150 ease-out",
               )}
               style={{
                 transformStyle: "preserve-3d",

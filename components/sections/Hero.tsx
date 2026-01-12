@@ -116,13 +116,14 @@ export function Hero() {
         >
           {/* Availability Badge */}
           {siteMetadata.availability === "available" && (
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 mb-4 rounded-pill bg-success-50 dark:bg-success-500/15 text-success-600 dark:text-success-500 text-sm font-medium border border-success-500/20 dark:border-success-500/25"
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-3 py-1.5 mb-4 rounded-pill bg-success-50 dark:bg-success-500/15 text-success-600 dark:text-success-500 text-sm font-medium border border-success-500/20 dark:border-success-500/25 hover:bg-success-100 dark:hover:bg-success-500/25 transition-colors"
               style={{ transform: transforms.buttons }}
             >
               <Sparkles className="w-4 h-4" />
               <span>Open to opportunities</span>
-            </div>
+            </Link>
           )}
 
           {/* Name - Animated */}

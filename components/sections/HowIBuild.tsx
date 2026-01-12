@@ -20,7 +20,7 @@ const principles = [
     icon: Cog,
     title: "Automation-first workflows",
     description:
-      "CI pipelines, code generation, and tooling that eliminates manual toil.",
+      "CI pipelines, automated code reviews, and tooling that eliminates manual toil.",
   },
 ];
 

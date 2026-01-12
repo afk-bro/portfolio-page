@@ -21,17 +21,16 @@ export type SiteMetadata = z.infer<typeof siteMetadataSchema>;
 
 // Site metadata - Update these values for your portfolio
 export const siteMetadata: SiteMetadata = {
-  name: "Your Name",
+  name: "Tom Horne",
   title: "Full-Stack Developer",
-  role: "Senior Full-Stack Engineer focused on scalable systems, testing, and automation",
-  bio: "I build production-grade systems with strong guarantees. Schema-first data modeling, test-driven development, and automation-first workflows.",
-  email: "hello@example.com",
-  location: "San Francisco, CA",
+  role: "Full-Stack Engineer focused on scalable systems, testing, and automation",
+  bio: "I build systems that work. From schema-first data modeling, test-driven development, and automation-first workflows.",
+  email: "blockandflow@gmail.com",
+  location: "Kelowna, BC, Canada",
   availability: "available",
   social: {
     github: "https://github.com/afk-bro",
-    linkedin: "https://linkedin.com/in/yourusername",
-    twitter: "https://twitter.com/yourusername",
+    linkedin: "https://linkedin.com/in/tom-horne"
   },
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
 };
