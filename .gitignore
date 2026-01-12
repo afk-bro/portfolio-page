@@ -51,6 +51,10 @@ analyze.js
 .claude_settings.json
 claude-progress*.txt
 notes/
+tmpclaude-*
+
+# Private files
+public/resume/
 
 # Git Worktrees
 .worktrees/
