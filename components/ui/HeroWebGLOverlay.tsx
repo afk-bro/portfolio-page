@@ -3,6 +3,7 @@
 
 import {
   useEffect,
+  useLayoutEffect,
   useRef,
   useMemo,
   useCallback,
@@ -231,6 +232,10 @@ export const HeroWebGLOverlay = forwardRef<
 
     const dpr = Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 2);
 
+    // Track if component is still mounted
+    let isMounted = true;
+    let canvasElement: HTMLCanvasElement | null = null;
+
     const app = new Application();
 
     app
@@ -243,11 +248,16 @@ export const HeroWebGLOverlay = forwardRef<
         antialias: true,
       })
       .then(() => {
-        if (!canvasRef.current) return;
+        // Don't append if already unmounted
+        if (!isMounted || !canvasRef.current) {
+          app.destroy(true);
+          return;
+        }
 
-        container.appendChild(app.canvas);
-        app.canvas.style.width = "100%";
-        app.canvas.style.height = "100%";
+        canvasElement = app.canvas;
+        container.appendChild(canvasElement);
+        canvasElement.style.width = "100%";
+        canvasElement.style.height = "100%";
 
         // Create container for effects
         const effectsContainer = new Container();
@@ -258,17 +268,33 @@ export const HeroWebGLOverlay = forwardRef<
       });
 
     return () => {
+      isMounted = false;
       if (rafIdRef.current) {
         cancelAnimationFrame(rafIdRef.current);
         rafIdRef.current = null;
       }
       clearEffects();
+      // Remove canvas from DOM before destroying (prevents React conflict)
+      if (canvasElement && canvasElement.parentNode) {
+        canvasElement.parentNode.removeChild(canvasElement);
+      }
       if (appRef.current) {
         appRef.current.destroy(true);
         appRef.current = null;
       }
     };
   }, [prefersReducedMotion, containerRef, isLowPower, clearEffects]);
+
+  // Synchronous cleanup on unmount to prevent React DOM conflicts
+  useLayoutEffect(() => {
+    return () => {
+      // Kill any pending animation frames synchronously
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    };
+  }, []);
 
   // Start/stop render loop based on visibility
   useEffect(() => {

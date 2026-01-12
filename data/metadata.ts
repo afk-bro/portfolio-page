@@ -24,7 +24,7 @@ export const siteMetadata: SiteMetadata = {
   name: "Tom Horne",
   title: "Full-Stack Developer",
   role: "Full-Stack Engineer focused on scalable systems, testing, and automation",
-  bio: "I build systems that work. From schema-first data modeling, test-driven development, and automation-first workflows.",
+  bio: "I build systems that work. From schema-first data modeling to test-driven development and automation-first workflows.",
   email: "blockandflow@gmail.com",
   location: "Kelowna, BC, Canada",
   availability: "available",

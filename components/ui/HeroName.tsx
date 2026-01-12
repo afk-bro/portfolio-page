@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useMemo, useCallback } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useMemo, useCallback } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
 import {
@@ -145,7 +145,8 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
   }, [prefersReducedMotion]);
 
   // INTRO: Drop-in animation with proper cleanup using gsap.context()
-  useEffect(() => {
+  // useLayoutEffect ensures cleanup runs synchronously before React removes DOM nodes
+  useLayoutEffect(() => {
     if (!containerRef.current || prefersReducedMotion) {
       setIntroComplete(true);
       return;
@@ -167,7 +168,14 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
     }, nameWrapperRef);
 
     // Cleanup: revert all GSAP changes when component unmounts
-    return () => ctx.revert();
+    return () => {
+      // Kill all tweens on this element immediately
+      gsap.killTweensOf(container);
+      ctx.revert();
+      // Reset for StrictMode double-mount
+      hasPlayedRef.current = false;
+      setIntroComplete(false);
+    };
   }, [prefersReducedMotion]);
 
   // BLUR-TO-SHARP REVEAL with proper cleanup
@@ -250,14 +258,21 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
     gsapContextRef.current = ctx;
   }, [characters]);
 
-  // Cleanup GSAP context on unmount
-  useEffect(() => {
+  // Cleanup GSAP context on unmount - useLayoutEffect for sync cleanup before DOM removal
+  useLayoutEffect(() => {
     return () => {
-      if (gsapContextRef.current) {
-        gsapContextRef.current.revert();
-      }
+      // Kill all tweens on letter elements
+      letterRefs.current.forEach((letter) => {
+        if (letter) gsap.killTweensOf(letter);
+      });
+      // Kill timeline first before reverting context
       if (timelineRef.current) {
         timelineRef.current.kill();
+        timelineRef.current = null;
+      }
+      if (gsapContextRef.current) {
+        gsapContextRef.current.revert();
+        gsapContextRef.current = null;
       }
     };
   }, []);
@@ -319,7 +334,7 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
     return (
       <h1
         className={cn(
-          "text-[clamp(2.5rem,10vw,10rem)] font-bold leading-[1.1] whitespace-nowrap",
+          "text-[clamp(2.5rem,10vw,10rem)] font-semibold leading-[1.1] whitespace-nowrap",
           "text-ocean-800 dark:text-[#F5F5F5]",
           "mb-4",
           className,
@@ -334,7 +349,7 @@ export function HeroName({ name, className, onTier3Change }: HeroNameProps) {
     <div ref={nameWrapperRef} className="relative mb-8">
       <h1
         className={cn(
-          "text-[clamp(2.5rem,10vw,10rem)] font-bold leading-[1.1] whitespace-nowrap",
+          "text-[clamp(2.5rem,10vw,10rem)] font-semibold leading-[1.1] whitespace-nowrap",
           "text-ocean-800 dark:text-[#F5F5F5]",
           className,
         )}

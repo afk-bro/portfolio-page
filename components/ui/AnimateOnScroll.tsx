@@ -29,13 +29,18 @@ export function AnimateOnScroll({
   as: Component = "div",
   threshold = 0.1,
 }: AnimateOnScrollProps) {
-  const { ref, isVisible, prefersReducedMotion } = useScrollAnimation({
+  const { ref, isVisible, prefersReducedMotion, hasMounted } = useScrollAnimation({
     threshold,
     triggerOnce: true,
   });
 
   // Get initial and final styles based on animation variant
-  const getAnimationStyles = () => {
+  const getAnimationStyles = (): React.CSSProperties | undefined => {
+    // Before hydration, don't apply any inline styles to prevent mismatch
+    if (!hasMounted) {
+      return undefined;
+    }
+
     // If reduced motion is preferred, show content immediately without transform
     if (prefersReducedMotion) {
       return {

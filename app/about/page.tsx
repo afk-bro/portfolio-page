@@ -14,24 +14,30 @@ export const metadata: Metadata = {
 const timeline = [
   {
     year: "2024",
-    title: "Senior Full-Stack Developer",
+    title: "Full-Stack Developer",
     description:
-      "Leading development of complex web applications and mentoring junior developers.",
+      "Building end-to-end solutions with React, Node.js, and cloud infrastructure. Focused on scalable systems and automation.",
   },
   {
     year: "2022",
-    title: "Full-Stack Developer",
+    title: "Front End Developer / QA Automation",
     description:
-      "Built and maintained multiple production applications using React, Node.js, and cloud services.",
+      "Developed responsive web interfaces while building automated test suites with Selenium WebDriver for cross-browser testing and regression coverage.",
   },
   {
     year: "2020",
-    title: "Frontend Developer",
+    title: "Junior Front End Developer",
     description:
-      "Focused on creating responsive, accessible web interfaces with modern JavaScript frameworks.",
+      "First professional role. Focused on creating responsive, accessible web interfaces with modern JavaScript frameworks.",
   },
   {
-    year: "2018",
+    year: "2016",
+    title: "Enrolled at Okanagan College",
+    description:
+      "Started Computer Information Systems program, building a foundation in programming, databases, and systems analysis.",
+  },
+  {
+    year: "2015",
     title: "Started Coding Journey",
     description:
       "Discovered my passion for programming and began learning web development fundamentals.",

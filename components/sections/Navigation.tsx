@@ -36,19 +36,22 @@ function NavLink({
         // Base: larger, bolder, better spacing
         "relative px-1 py-1",
         "text-[15px] font-semibold tracking-wide",
-        "transition-colors duration-180 ease-smooth",
+        "transition-all duration-200 ease-smooth",
+        // Engraved text style - subtle shadow/highlight
+        "[text-shadow:0_1px_1px_rgba(0,0,0,0.3),0_-1px_0_rgba(255,255,255,0.1)]",
+        "dark:[text-shadow:0_1px_2px_rgba(0,0,0,0.5),0_-1px_0_rgba(255,255,255,0.05)]",
         // Cream text - high contrast on blue
         isActive ? "text-sand-50" : "text-sand-100/95 hover:text-sand-50",
         // Dark mode
         "dark:text-sand-500/90 dark:hover:text-sand-500",
-        // Underline via pseudo-element
+        // Underline via pseudo-element with glow
         "after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:rounded-full",
-        "after:transition-all after:duration-180 after:ease-smooth",
+        "after:transition-all after:duration-200 after:ease-smooth",
         isActive
-          ? "after:w-full after:bg-bronze-500" // Active: full orange underline
-          : "after:w-0 after:bg-bronze-500 hover:after:w-full", // Hover: animate in
-        // Optional subtle glow on hover
-        "hover:drop-shadow-[0_0_8px_rgba(237,174,95,0.35)]",
+          ? "after:w-full after:bg-bronze-500 after:shadow-[0_0_8px_rgba(237,174,95,0.5)]" // Active: bronze underline with glow
+          : "after:w-0 after:bg-bronze-500 hover:after:w-full hover:after:shadow-[0_0_6px_rgba(237,174,95,0.4)]",
+        // Active state glow
+        isActive && "drop-shadow-[0_0_10px_rgba(237,174,95,0.3)]",
       )}
     >
       {label}
@@ -190,12 +193,20 @@ export function Navigation() {
       className={cn(
         "sticky top-0 z-50",
         "h-14 md:h-16 w-full",
-        "backdrop-blur-lg",
         "border-b transition-all duration-300",
-        // Glassy effect with scroll state
+        // Glassy effect with enhanced scroll state
         scrolled
-          ? "bg-ocean-500/85 dark:bg-dark-surface/75 border-ocean-400/30 dark:border-white/10 shadow-lg shadow-ocean-900/10 dark:shadow-black/30"
-          : "bg-ocean-500/70 dark:bg-dark-surface/50 border-transparent",
+          ? [
+              "backdrop-blur-xl backdrop-saturate-150",
+              "bg-ocean-500/90 dark:bg-dark-surface/85",
+              "border-ocean-400/40 dark:border-white/15",
+              "shadow-lg shadow-ocean-900/15 dark:shadow-black/40",
+            ]
+          : [
+              "backdrop-blur-md",
+              "bg-ocean-500/60 dark:bg-dark-surface/40",
+              "border-transparent",
+            ],
       )}
     >
       {/* Subtle top highlight for glass effect */}

@@ -21,10 +21,19 @@ export function useScrollAnimation({
   triggerOnce = true,
 }: UseScrollAnimationOptions = {}) {
   const ref = useRef<HTMLDivElement>(null);
+  // Start with null to indicate "not yet hydrated" - prevents hydration mismatch
+  const [hasMounted, setHasMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
+  // Mark as mounted after hydration
   useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasMounted) return;
+
     // Check for reduced motion preference
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
@@ -38,9 +47,12 @@ export function useScrollAnimation({
     return () => {
       mediaQuery.removeEventListener("change", handleChange);
     };
-  }, []);
+  }, [hasMounted]);
 
   useEffect(() => {
+    // Don't run until mounted to prevent hydration issues
+    if (!hasMounted) return;
+
     // If user prefers reduced motion, show content immediately
     if (prefersReducedMotion) {
       setIsVisible(true);
@@ -72,7 +84,7 @@ export function useScrollAnimation({
     return () => {
       observer.unobserve(element);
     };
-  }, [threshold, rootMargin, triggerOnce, prefersReducedMotion]);
+  }, [threshold, rootMargin, triggerOnce, prefersReducedMotion, hasMounted]);
 
-  return { ref, isVisible, prefersReducedMotion };
+  return { ref, isVisible, prefersReducedMotion, hasMounted };
 }
