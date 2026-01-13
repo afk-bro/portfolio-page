@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { MapPin, Briefcase, Heart, Code } from "lucide-react";
-import { siteMetadata } from "@/data/metadata";
+import { Briefcase, Heart, Code } from "lucide-react";
+import { AboutProfileSection } from "@/components/sections/AboutProfileSection";
 
 export const metadata: Metadata = {
   title: "About",
@@ -79,42 +79,8 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* Profile Section */}
-        <section className="mb-16">
-          <div className="flex flex-col md:flex-row gap-8 items-start">
-            {/* Avatar Placeholder */}
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-4xl font-bold shrink-0">
-              {siteMetadata.name.charAt(0)}
-            </div>
-
-            <div>
-              <h2 className="text-h2 text-neutral-900 dark:text-neutral-50 mb-2">
-                {siteMetadata.name}
-              </h2>
-              <p className="text-lg text-primary-600 dark:text-primary-400 mb-4">
-                {siteMetadata.role}
-              </p>
-              <div className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 mb-6">
-                <MapPin className="w-4 h-4" />
-                <span>{siteMetadata.location}</span>
-              </div>
-              <div className="prose-content">
-                <p>
-                  I&apos;m a passionate developer who loves turning complex
-                  problems into elegant solutions. With a strong foundation in
-                  both frontend and backend technologies, I build applications
-                  that are not only functional but also delightful to use.
-                </p>
-                <p>
-                  My journey in tech started with curiosity about how things
-                  work. Today, that curiosity drives me to continuously learn
-                  and stay updated with the latest technologies and best
-                  practices.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Profile Section with massive background initial */}
+        <AboutProfileSection />
 
         {/* Career Timeline */}
         <section className="mb-16">
