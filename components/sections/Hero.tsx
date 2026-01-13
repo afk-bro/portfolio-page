@@ -55,7 +55,6 @@ const slideUp: Variants = {
   }),
 };
 
-
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
 
