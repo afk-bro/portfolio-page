@@ -17,44 +17,41 @@ export function AboutProfileSection() {
     <section className="mb-16">
       {/* Name block with background T */}
       <div className="relative mb-6">
-        {/* Massive background T - aligned to the T in Tom */}
+        {/* Background Initial - shadow of the name, not focal point */}
         <motion.span
           aria-hidden="true"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 0.05, y: 0 }}
           transition={{
-            duration: 1.6,
+            duration: 2,
             ease: [0.25, 0.1, 0.25, 1],
             delay: 0,
           }}
           className="
             absolute
-            select-none pointer-events-none
-            -left-[0.08em] -top-[0.15em]
-            text-[10rem] md:text-[12rem]
-            font-bold
-            opacity-[0.05] dark:opacity-[0.06]
-            text-bronze-700 dark:text-sand-500
-            z-0
+            -left-8 -top-10
+            text-[11rem]
+            font-black
+            tracking-tight
+            text-[#d4a15a]
+            select-none
+            pointer-events-none
             leading-none
           "
-          style={{
-            fontFamily: "var(--font-inter), system-ui, sans-serif",
-          }}
         >
           {firstLetter}
         </motion.span>
 
-        {/* Name - the T aligns with the background T */}
+        {/* Name - the hero */}
         <motion.h2
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 0.7,
             ease: [0.25, 0.1, 0.25, 1],
-            delay: 0.3,
+            delay: 0.4,
           }}
-          className="text-h1 text-neutral-900 dark:text-neutral-50 relative z-10"
+          className="relative z-10 text-4xl font-semibold text-neutral-900 dark:text-neutral-50 tracking-tight"
         >
           {siteMetadata.name}
         </motion.h2>
@@ -66,7 +63,7 @@ export function AboutProfileSection() {
           transition={{
             duration: 0.6,
             ease: [0.25, 0.1, 0.25, 1],
-            delay: 0.45,
+            delay: 0.55,
           }}
           className="text-lg text-primary-600 dark:text-primary-400 mt-2 relative z-10"
         >
