@@ -50,7 +50,7 @@ export function ResumeDetails() {
           <div>
             <div className="flex items-baseline justify-between mb-1">
               <h4 className="font-medium text-neutral-900 dark:text-neutral-50">
-                Senior Software Engineer
+                Software Engineer
               </h4>
               <span className="text-sm text-neutral-500">2022 – Present</span>
             </div>

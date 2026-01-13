@@ -37,9 +37,9 @@ export default function ResumePage() {
         {/* Primary CTA: Download PDF */}
         <div className="card p-8 mb-12 text-center">
           <Button asChild size="lg">
-            <a href="/resume/resume.pdf" download>
+            <a href="/resume/resume.md" download="Tom_Horne_Resume.md">
               <Download className="w-4 h-4 mr-2" />
-              Download Resume (PDF)
+              Download Resume
             </a>
           </Button>
           <div className="flex items-center justify-center gap-4 mt-4 text-sm text-neutral-500 dark:text-neutral-400">
