@@ -53,8 +53,7 @@ claude-progress*.txt
 notes/
 tmpclaude-*
 
-# Private files
-public/resume/
+# Private files (resume is intentionally committed for deployment)
 
 # Git Worktrees
 .worktrees/
