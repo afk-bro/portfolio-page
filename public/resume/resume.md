@@ -23,7 +23,7 @@ Node.js, REST APIs, Supabase (Postgres, RLS), authentication, audit logging
 Python, FastAPI
 
 **Automation & Tooling**  
-n8n workflows, GitHub Actions, CI pipelines, local & cloud tooling, MCPs, Subagents
+n8n workflows, GitHub Actions, CI pipelines, local & cloud tooling, agent-assisted development
 
 **Testing & Quality**  
 Test-Driven Development (TDD), Playwright/Puppeteer/Selenium, regression & smoke testing, schema validation (Zod), TypeChecks
