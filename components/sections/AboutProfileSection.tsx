@@ -17,27 +17,30 @@ export function AboutProfileSection() {
     <section className="mb-16">
       {/* Name block with background T */}
       <div className="relative mb-6">
-        {/* Background Initial - shadow of the name, not focal point */}
+        {/* Background Initial - a trace, noticed on second glance */}
         <motion.span
           aria-hidden="true"
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 0.05, y: 0 }}
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 0.04, y: 0 }}
           transition={{
-            duration: 2,
+            duration: 0.4,
             ease: [0.25, 0.1, 0.25, 1],
             delay: 0,
           }}
           className="
             absolute
-            -left-8 -top-10
-            text-[11rem]
+            -left-12 -top-6
+            text-[12rem]
             font-black
             tracking-tight
-            text-[#d4a15a]
             select-none
             pointer-events-none
             leading-none
           "
+          style={{
+            color: "#bfa77a",
+            filter: "blur(0.5px)",
+          }}
         >
           {firstLetter}
         </motion.span>
