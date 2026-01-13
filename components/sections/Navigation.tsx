@@ -42,8 +42,11 @@ function NavLink({
         "dark:[text-shadow:0_1px_2px_rgba(0,0,0,0.5),0_-1px_0_rgba(255,255,255,0.05)]",
         // Cream text - high contrast on blue
         isActive ? "text-sand-50" : "text-sand-100/95 hover:text-sand-50",
+        // Subtle glow on hover
+        "hover:[text-shadow:0_0_12px_rgba(237,174,95,0.4),0_1px_1px_rgba(0,0,0,0.3)]",
         // Dark mode
         "dark:text-sand-500/90 dark:hover:text-sand-500",
+        "dark:hover:[text-shadow:0_0_16px_rgba(245,166,35,0.5),0_0_24px_rgba(6,182,212,0.2)]",
         // Underline via pseudo-element with glow
         "after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:rounded-full",
         "after:transition-all after:duration-200 after:ease-smooth",

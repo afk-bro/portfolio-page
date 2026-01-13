@@ -62,7 +62,6 @@ export function AnimateOnScroll({
         initial: {
           opacity: 0,
           transform: "translateY(24px)",
-          transition: delayedTransition,
         },
         visible: {
           opacity: 1,
@@ -73,7 +72,6 @@ export function AnimateOnScroll({
       "fade-in": {
         initial: {
           opacity: 0,
-          transition: delayedTransition,
         },
         visible: {
           opacity: 1,
@@ -84,7 +82,6 @@ export function AnimateOnScroll({
         initial: {
           opacity: 0,
           transform: "translateX(24px)",
-          transition: delayedTransition,
         },
         visible: {
           opacity: 1,
@@ -96,7 +93,6 @@ export function AnimateOnScroll({
         initial: {
           opacity: 0,
           transform: "translateX(-24px)",
-          transition: delayedTransition,
         },
         visible: {
           opacity: 1,

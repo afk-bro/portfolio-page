@@ -17,8 +17,10 @@ This portfolio emphasizes clarity, credibility, and signal over novelty. It pres
 - **Framework**: Next.js 14+ (App Router)
 - **Language**: TypeScript (strict mode)
 - **Styling**: Tailwind CSS
+- **Animation**: Framer Motion (React-safe animations)
 - **Validation**: Zod (schema validation)
 - **Icons**: Lucide React
+- **Fonts**: Inter (sans), Cutive Mono (typewriter)
 - **Package Manager**: pnpm (preferred) or npm
 - **Deployment**: Vercel
 
@@ -120,6 +122,7 @@ portfolio_page/
 - 🔍 SEO optimized with OpenGraph metadata
 - ⚡ Performance optimized (Lighthouse 90+)
 - 🔐 Security headers configured
+- ✨ Calm, deliberate hero animations (typewriter name, cascading reveals)
 
 ## Content Management
 

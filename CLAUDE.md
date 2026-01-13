@@ -38,11 +38,25 @@ Types are inferred from Zod schemas: `type Project = z.infer<typeof projectSchem
 - **URL State**: Projects filtering uses `useSearchParams` for browser history sync
 - **Local State**: React `useState` for component-level state
 
+### Animation System
+
+Two complementary animation approaches:
+
+**Framer Motion (Hero animations)**
+- `TypewriterName` component - Character-by-character stagger reveal with mechanical timing
+- Hero section uses Framer Motion `Variants` with cascading delays
+- Directional animations: `slideFromLeft`, `slideFromRight`, `slideUp`, `slideDown`, `fadeIn`
+- Timing synchronized via `getTypewriterDuration()` helper
+
+**CSS-based (Scroll animations)**
+- `AnimateOnScroll` component - Wrapper with animation variants (fade-up, fade-in, fade-left, fade-right)
+- `useScrollAnimation` hook - Intersection Observer for scroll-triggered animations, respects `prefers-reduced-motion`
+- Uses `hasMounted` pattern to prevent hydration mismatches
+
 ### Key Custom Utilities
 
 - `cn()` in `/lib/utils.ts` - Tailwind class merging (clsx + twMerge)
-- `useScrollAnimation` hook - Intersection Observer for scroll-triggered animations, respects `prefers-reduced-motion`
-- `AnimateOnScroll` component - Wrapper with animation variants (fade-up, fade-in, fade-left, fade-right)
+- `getTypewriterDuration()` in `/components/ui/TypewriterName.tsx` - Calculate animation duration for cascade timing
 
 ### Import Aliases (tsconfig paths)
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Cutive_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/sections/Navigation";
 import { Footer } from "@/components/sections/Footer";
@@ -33,6 +33,13 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+const cutiveMono = Cutive_Mono({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-cutive-mono",
 });
 
 export const metadata: Metadata = {
@@ -90,7 +97,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${cutiveMono.variable}`} suppressHydrationWarning>
       <head>
         {/* Preconnect hints for external resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

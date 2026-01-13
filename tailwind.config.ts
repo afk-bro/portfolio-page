@@ -163,8 +163,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "Fira Code", "monospace"],
+        typewriter: ["var(--font-cutive-mono)", "Cutive Mono", "monospace"],
       },
       fontSize: {
         // Custom scale matching design system
