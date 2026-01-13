@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 // Status indicator config - using design system colors
 const statusConfig = {
-  complete: { label: "Complete", color: "bg-bronze-700" },
+  complete: { label: "Complete", color: "bg-success-500" },
   "in-progress": { label: "In Progress", color: "bg-bronze-400" },
   archived: { label: "Archived", color: "bg-muted-300" },
 };

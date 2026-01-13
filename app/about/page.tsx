@@ -28,7 +28,7 @@ const timeline = [
     year: "2020",
     title: "Junior Front End Developer",
     description:
-      "First professional role. Focused on creating responsive, accessible web interfaces with modern JavaScript frameworks.",
+      "First professional role after graduating with a Bachelor of Computer Information Systems Degree. Focused on creating responsive, accessible web interfaces with modern JavaScript frameworks.",
   },
   {
     year: "2016",

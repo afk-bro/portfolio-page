@@ -32,6 +32,9 @@ export function HowIBuild() {
           <h2 className="text-h2 text-neutral-900 dark:text-neutral-50 mb-4">
             How I Build Software
           </h2>
+          <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+            I build systems that work. From schema-first data modeling to test-driven development and automation-first workflows.
+          </p>
         </AnimateOnScroll>
 
         <div className="grid md:grid-cols-3 gap-10 max-w-4xl mx-auto">

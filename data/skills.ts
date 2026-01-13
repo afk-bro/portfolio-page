@@ -39,7 +39,14 @@ export const skills: Skill[] = [
     name: "TypeScript",
     category: "languages",
     proficiency: "expert",
-    years: 4,
+    years: 2,
+    featured: true,
+  },
+  {
+    name: "JavaScript",
+    category: "languages",
+    proficiency: "expert",
+    years: 5,
     featured: true,
   },
   {
@@ -48,13 +55,6 @@ export const skills: Skill[] = [
     proficiency: "advanced",
     years: 3,
     featured: true,
-  },
-  {
-    name: "Vue.js",
-    category: "frontend",
-    proficiency: "intermediate",
-    years: 2,
-    featured: false,
   },
 
   // Backend
@@ -73,13 +73,6 @@ export const skills: Skill[] = [
     featured: true,
   },
   {
-    name: "Go",
-    category: "languages",
-    proficiency: "intermediate",
-    years: 2,
-    featured: false,
-  },
-  {
     name: "PostgreSQL",
     category: "backend",
     proficiency: "advanced",
@@ -93,6 +86,13 @@ export const skills: Skill[] = [
     years: 3,
     featured: false,
   },
+  {
+    name: "FastAPI",
+    category: "backend",
+    proficiency: "advanced",
+    years: 2,
+    featured: false,
+  },
 
   // DevOps
   {
@@ -103,10 +103,10 @@ export const skills: Skill[] = [
     featured: true,
   },
   {
-    name: "Kubernetes",
+    name: "N8n",
     category: "devops",
     proficiency: "intermediate",
-    years: 2,
+    years: 1,
     featured: false,
   },
   {
@@ -153,6 +153,20 @@ export const skills: Skill[] = [
     category: "tools",
     proficiency: "expert",
     years: 5,
+    featured: false,
+  },
+  {
+    name: "Vitest",
+    category: "tools",
+    proficiency: "intermediate",
+    years: 2,
+    featured: false,
+  },
+  {
+    name: "Playwright",
+    category: "tools",
+    proficiency: "intermediate",
+    years: 1,
     featured: false,
   },
 ];

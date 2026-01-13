@@ -31,7 +31,7 @@ export function TypewriterName({ name, className }: TypewriterNameProps) {
       <div
         className="absolute -inset-x-6 -inset-y-2 rounded-sm pointer-events-none"
         style={{
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
         }}
         aria-hidden="true"
       />
@@ -40,7 +40,7 @@ export function TypewriterName({ name, className }: TypewriterNameProps) {
         className={cn(
           "font-typewriter",
           "text-[clamp(3.9rem,6.8vw,6.2rem)]",
-          "tracking-[0.1em]",
+          "tracking-[0.1em] md:tracking-[-0.02em]",
           "leading-[1.2]",
           // Higher contrast - name pops forward
           "text-ocean-900 dark:text-white/95",

@@ -48,50 +48,20 @@ export function ResumeDetails() {
       <CollapsibleSection title="Experience History">
         <div className="space-y-6">
           <div>
-            <div className="flex items-baseline justify-between mb-1">
-              <h4 className="font-medium text-neutral-900 dark:text-neutral-50">
-                Software Engineer
-              </h4>
-              <span className="text-sm text-neutral-500">2022 – Present</span>
-            </div>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
-              Company Name
+            <h4 className="font-medium text-neutral-900 dark:text-neutral-50">
+              TCS Canada
+            </h4>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400">
+              Kelowna, BC · 2021 – 2023
             </p>
-            <ul className="text-sm space-y-1">
-              <li>
-                • Led development of customer-facing platform serving 100K+
-                users
-              </li>
-              <li>
-                • Established testing practices, improving coverage from 40% to
-                90%
-              </li>
-              <li>
-                • Designed and implemented CI/CD pipelines reducing deploy time
-                by 60%
-              </li>
-            </ul>
           </div>
           <div>
-            <div className="flex items-baseline justify-between mb-1">
-              <h4 className="font-medium text-neutral-900 dark:text-neutral-50">
-                Software Engineer
-              </h4>
-              <span className="text-sm text-neutral-500">2020 – 2022</span>
-            </div>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
-              Previous Company
+            <h4 className="font-medium text-neutral-900 dark:text-neutral-50">
+              WestGrid Canada
+            </h4>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400">
+              Kelowna, BC · 2020 – 2021
             </p>
-            <ul className="text-sm space-y-1">
-              <li>
-                • Built real-time data processing pipelines handling 1M+
-                events/day
-              </li>
-              <li>
-                • Migrated legacy systems to modern React/TypeScript stack
-              </li>
-              <li>• Mentored junior developers and conducted code reviews</li>
-            </ul>
           </div>
         </div>
       </CollapsibleSection>
@@ -100,25 +70,19 @@ export function ResumeDetails() {
         <div>
           <div className="flex items-baseline justify-between mb-1">
             <h4 className="font-medium text-neutral-900 dark:text-neutral-50">
-              B.S. Computer Science
+              B.S. Computer Information Systems
             </h4>
-            <span className="text-sm text-neutral-500">2016 – 2020</span>
           </div>
           <p className="text-sm text-neutral-500 dark:text-neutral-400">
-            University Name
+            Okanagan College · Kelowna, BC · 2016 – 2020
           </p>
         </div>
       </CollapsibleSection>
 
       <CollapsibleSection title="Certifications & Training">
         <ul className="text-sm space-y-2">
-          <li className="flex items-baseline justify-between">
-            <span>AWS Certified Solutions Architect</span>
-            <span className="text-neutral-500">2023</span>
-          </li>
-          <li className="flex items-baseline justify-between">
-            <span>Kubernetes Application Developer (CKAD)</span>
-            <span className="text-neutral-500">2022</span>
+          <li>
+            <span>Canadian Securities Course</span>
           </li>
         </ul>
       </CollapsibleSection>

@@ -98,10 +98,9 @@ export function Hero() {
   // Sequence timing
   const timing = {
     role: typewriterDuration + 0.15,
-    bio: typewriterDuration + 0.65,
-    ctas: typewriterDuration + 1.15,
-    trust: typewriterDuration + 1.65,
-    badge: typewriterDuration + 2.1,
+    ctas: typewriterDuration + 0.65,
+    trust: typewriterDuration + 1.15,
+    badge: typewriterDuration + 1.6,
   };
 
   return (
@@ -135,25 +134,6 @@ export function Hero() {
       <div className="container-content relative z-10">
         <div className="max-w-3xl mx-auto text-center">
 
-          {/* Availability Badge - floats down from top (last in sequence) */}
-          {siteMetadata.availability === "available" && (
-            <motion.div
-              className="mb-4"
-              initial="hidden"
-              animate="visible"
-              variants={slideDown}
-              custom={timing.badge}
-            >
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill bg-success-50 dark:bg-success-500/15 text-success-600 dark:text-success-500 text-sm font-medium border border-success-500/20 dark:border-success-500/25 hover:bg-success-100 dark:hover:bg-success-500/25 transition-colors"
-              >
-                <Sparkles className="w-4 h-4" />
-                <span>Available for freelance & contract work</span>
-              </Link>
-            </motion.div>
-          )}
-
           {/* 1. Name - Typewriter effect */}
           <div className="mb-8">
             <TypewriterName name={siteMetadata.name} />
@@ -170,18 +150,7 @@ export function Hero() {
             {siteMetadata.role}
           </motion.p>
 
-          {/* 3. Bio - Slides in from left */}
-          <motion.p
-            className="text-body text-ocean-400 dark:text-sand-100/70 mb-12 max-w-2xl mx-auto leading-relaxed"
-            initial="hidden"
-            animate="visible"
-            variants={slideFromLeft}
-            custom={timing.bio}
-          >
-            {siteMetadata.bio}
-          </motion.p>
-
-          {/* 4. CTAs - Slide in from right */}
+          {/* 3. CTAs - Slide in from right */}
           <motion.div
             className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10"
             initial="hidden"
@@ -202,6 +171,25 @@ export function Hero() {
               </Link>
             </HeroButton>
           </motion.div>
+
+          {/* 4. Availability Badge */}
+          {siteMetadata.availability === "available" && (
+            <motion.div
+              className="mb-4"
+              initial="hidden"
+              animate="visible"
+              variants={slideUp}
+              custom={timing.badge}
+            >
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill bg-success-50 dark:bg-success-500/15 text-success-600 dark:text-success-500 text-sm font-medium border border-success-500/20 dark:border-success-500/25 hover:bg-success-100 dark:hover:bg-success-500/25 transition-colors"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>Available for freelance & contract work</span>
+              </Link>
+            </motion.div>
+          )}
 
           {/* 5. Trust anchor - Slides up from bottom */}
           <motion.p
