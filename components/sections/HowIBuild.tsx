@@ -33,7 +33,8 @@ export function HowIBuild() {
             How I Build Software
           </h2>
           <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            I build systems that work. From schema-first data modeling to test-driven development and automation-first workflows.
+            I build systems that work. From schema-first data modeling to
+            test-driven development and automation-first workflows.
           </p>
         </AnimateOnScroll>
 

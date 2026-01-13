@@ -100,16 +100,15 @@ export function AboutProfileSection() {
         className="prose-content max-w-2xl"
       >
         <p>
-          I&apos;m a passionate developer who loves turning complex
-          problems into elegant solutions. With a strong foundation in
-          both frontend and backend technologies, I build applications
-          that are not only functional but also delightful to use.
+          I&apos;m a passionate developer who loves turning complex problems
+          into elegant solutions. With a strong foundation in both frontend and
+          backend technologies, I build applications that are not only
+          functional but also delightful to use.
         </p>
         <p>
-          My journey in tech started with curiosity about how things
-          work. Today, that curiosity drives me to continuously learn
-          and stay updated with the latest technologies and best
-          practices.
+          My journey in tech started with curiosity about how things work.
+          Today, that curiosity drives me to continuously learn and stay updated
+          with the latest technologies and best practices.
         </p>
       </motion.div>
     </section>

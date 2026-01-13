@@ -37,9 +37,7 @@ export function HeroNameSimple({ name, className }: HeroNameProps) {
         </span>
       </h1>
       {/* Gradient underline */}
-      <div
-        className="absolute left-1/2 -translate-x-1/2 mt-2 h-0.5 w-24 rounded-full hero-divider"
-      />
+      <div className="absolute left-1/2 -translate-x-1/2 mt-2 h-0.5 w-24 rounded-full hero-divider" />
     </div>
   );
 }

@@ -8,7 +8,10 @@ import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { useRef } from "react";
 import { siteMetadata } from "@/data/metadata";
 import { HeroButton } from "@/components/ui/HeroButton";
-import { TypewriterName, getTypewriterDuration } from "@/components/ui/TypewriterName";
+import {
+  TypewriterName,
+  getTypewriterDuration,
+} from "@/components/ui/TypewriterName";
 
 // Calm, slower animations
 const fadeIn: Variants = {
@@ -133,7 +136,6 @@ export function Hero() {
 
       <div className="container-content relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-
           {/* 1. Name - Typewriter effect */}
           <div className="mb-8">
             <TypewriterName name={siteMetadata.name} />
@@ -201,7 +203,6 @@ export function Hero() {
           >
             Previously at WestGrid Canada & TCS Canada
           </motion.p>
-
         </div>
       </div>
     </section>

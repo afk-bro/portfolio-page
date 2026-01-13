@@ -1,6 +1,6 @@
 # Tom Horne
 
-**Software Engineer (Full-Stack) — Systems, Testing & Automation**  
+**Software Engineer (Full-Stack) — Systems, Testing & Automation**
 
 Canada · Remote  
 [blockandflow@gmail.com](blockandflow@gmail.com) · [afk-bro@GitHub](https://github.com/afk-bro) · [Website](https://portfolio-page-gamma-self.vercel.app)
@@ -113,4 +113,4 @@ Canadian Investment Regulatory Organization
 
 ## Availability
 
-Currently accepting freelance projects (small to mid-size).  Particularly well-suited for internal tools, dashboards, admin systems, and automation-heavy workflows.
+Currently accepting freelance projects (small to mid-size). Particularly well-suited for internal tools, dashboards, admin systems, and automation-heavy workflows.

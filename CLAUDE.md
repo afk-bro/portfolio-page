@@ -43,12 +43,14 @@ Types are inferred from Zod schemas: `type Project = z.infer<typeof projectSchem
 Two complementary animation approaches:
 
 **Framer Motion (Hero animations)**
+
 - `TypewriterName` component - Character-by-character stagger reveal with mechanical timing
 - Hero section uses Framer Motion `Variants` with cascading delays
 - Directional animations: `slideFromLeft`, `slideFromRight`, `slideUp`, `slideDown`, `fadeIn`
 - Timing synchronized via `getTypewriterDuration()` helper
 
 **CSS-based (Scroll animations)**
+
 - `AnimateOnScroll` component - Wrapper with animation variants (fade-up, fade-in, fade-left, fade-right)
 - `useScrollAnimation` hook - Intersection Observer for scroll-triggered animations, respects `prefers-reduced-motion`
 - Uses `hasMounted` pattern to prevent hydration mismatches

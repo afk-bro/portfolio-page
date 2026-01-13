@@ -30,7 +30,7 @@ export const siteMetadata: SiteMetadata = {
   availability: "available",
   social: {
     github: "https://github.com/afk-bro",
-    linkedin: "https://linkedin.com/in/tom-horne"
+    linkedin: "https://linkedin.com/in/tom-horne",
   },
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
 };

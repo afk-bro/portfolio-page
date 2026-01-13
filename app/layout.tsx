@@ -97,7 +97,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${cutiveMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${cutiveMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* Preconnect hints for external resources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

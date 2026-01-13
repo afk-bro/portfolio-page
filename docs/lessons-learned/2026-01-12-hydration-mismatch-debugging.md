@@ -10,6 +10,7 @@
 ## Symptoms
 
 1. Navigating away from the landing page crashed the app with:
+
    ```
    NotFoundError: Failed to execute 'removeChild' on 'Node':
    The node to be removed is not a child of this node.
@@ -24,6 +25,7 @@
 ## Red Herrings We Chased
 
 ### 1. GSAP Animations in HeroName
+
 - **Suspicion:** GSAP was manipulating DOM nodes that React thought it owned
 - **Actions taken:**
   - Added `useLayoutEffect` for cleanup
@@ -32,6 +34,7 @@
 - **Result:** Still crashed
 
 ### 2. PixiJS WebGL Overlay
+
 - **Suspicion:** `container.appendChild(app.canvas)` was adding DOM nodes outside React
 - **Actions taken:**
   - Added `isMounted` flag to prevent async canvas append after unmount
@@ -40,6 +43,7 @@
 - **Result:** Still crashed
 
 ### 3. Interactive Hero Hooks
+
 - **Suspicion:** Complex scroll/parallax hooks with GSAP
 - **Actions taken:**
   - Removed all interactive hooks from Hero component
@@ -141,6 +145,7 @@ The stack trace pointed to various components (HeroName, WebGLOverlay, etc.), bu
 ### 3. Client-Only Code Needs the "hasMounted" Pattern
 
 Any component that:
+
 - Uses `window` or `document`
 - Reads from `localStorage`
 - Uses `matchMedia`
@@ -159,6 +164,7 @@ StrictMode double-invokes effects, which can expose race conditions and make hyd
 ### 5. "Try Again Working" Is a Diagnostic Clue
 
 If the error boundary recovery works, it means:
+
 - The component works fine on fresh mount
 - The issue is specifically with hydration or cleanup
 - Look for server/client mismatches

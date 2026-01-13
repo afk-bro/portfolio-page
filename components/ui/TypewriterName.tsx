@@ -22,7 +22,7 @@ export function TypewriterName({ name, className }: TypewriterNameProps) {
   const delays = useMemo(
     () => letters.map((_, i) => i * 0.09 + Math.random() * 0.025),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [name]
+    [name],
   );
 
   return (
@@ -31,7 +31,8 @@ export function TypewriterName({ name, className }: TypewriterNameProps) {
       <div
         className="absolute -inset-x-6 -inset-y-2 rounded-sm pointer-events-none"
         style={{
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
+          background:
+            "linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
         }}
         aria-hidden="true"
       />
@@ -45,7 +46,7 @@ export function TypewriterName({ name, className }: TypewriterNameProps) {
           // Higher contrast - name pops forward
           "text-ocean-900 dark:text-white/95",
           "relative",
-          className
+          className,
         )}
         style={{
           // Deeper ink impression - stamped, not glowing

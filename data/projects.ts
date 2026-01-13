@@ -64,7 +64,11 @@ export const projects: Project[] = [
       github: "https://github.com/afk-bro/trading-RAG",
     },
     team: "solo",
-    highlights: ["Semantic search", "n8n orchestration", "Graceful degradation"],
+    highlights: [
+      "Semantic search",
+      "n8n orchestration",
+      "Graceful degradation",
+    ],
     caseStudy: {
       problem:
         "Trading knowledge is scattered across YouTube videos, articles, and notes. Finding relevant insights requires manually searching through hours of content.",
