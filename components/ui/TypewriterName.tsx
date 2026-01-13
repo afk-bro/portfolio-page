@@ -14,11 +14,9 @@ interface TypewriterNameProps {
  * TypewriterName - Calm, mechanical typewriter reveal
  *
  * Slower, deliberate typing with proper mechanical rhythm
- * Features a massive background initial for visual anchoring
  */
 export function TypewriterName({ name, className }: TypewriterNameProps) {
   const letters = useMemo(() => Array.from(name), [name]);
-  const firstLetter = name.charAt(0).toUpperCase();
 
   // Pre-compute delays - slower base speed with subtle variance
   const delays = useMemo(
@@ -29,43 +27,9 @@ export function TypewriterName({ name, className }: TypewriterNameProps) {
 
   return (
     <div className="relative inline-block">
-      {/* Massive background initial - visual anchor */}
-      <motion.span
-        aria-hidden="true"
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 1.2,
-          ease: [0.25, 0.1, 0.25, 1] as const,
-          delay: 0,
-        }}
-        className={cn(
-          "absolute",
-          "select-none pointer-events-none",
-          // Position: left-aligned, vertically centered
-          "-left-[0.15em] top-1/2 -translate-y-[52%]",
-          // Size: ~4x the name height
-          "text-[clamp(14rem,28vw,22rem)]",
-          // Weight: heavier than name
-          "font-black",
-          // Opacity: subtle but present
-          "opacity-[0.045] dark:opacity-[0.06]",
-          // Color
-          "text-ocean-950 dark:text-white",
-          // Behind the text
-          "z-0"
-        )}
-        style={{
-          lineHeight: 1,
-          fontFamily: "var(--font-inter), system-ui, sans-serif",
-        }}
-      >
-        {firstLetter}
-      </motion.span>
-
       {/* Paper strip background - subtle gradient for anchoring */}
       <div
-        className="absolute -inset-x-6 -inset-y-2 rounded-sm pointer-events-none z-0"
+        className="absolute -inset-x-6 -inset-y-2 rounded-sm pointer-events-none"
         style={{
           background: "linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
         }}
@@ -80,8 +44,7 @@ export function TypewriterName({ name, className }: TypewriterNameProps) {
           "leading-[1.2]",
           // Higher contrast - name pops forward
           "text-ocean-900 dark:text-white/95",
-          // Above the background initial
-          "relative z-10",
+          "relative",
           className
         )}
         style={{
@@ -98,7 +61,7 @@ export function TypewriterName({ name, className }: TypewriterNameProps) {
             transition={{
               delay: delays[i],
               duration: 0.15,
-              ease: [0.2, 0, 0.4, 1] as const,
+              ease: [0.2, 0, 0.4, 1],
             }}
             className="inline-block"
           >
