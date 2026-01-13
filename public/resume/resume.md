@@ -1,7 +1,6 @@
 # Tom Horne
 
-**Freelance Frontend / Full-Stack Developer**  
-Modern Web Apps • Automation • Data & Research Systems
+**Software Engineer (Full-Stack) — Systems, Testing & Automation**  
 
 Canada · Remote  
 [blockandflow@gmail.com](blockandflow@gmail.com) · [afk-bro@GitHub](https://github.com/afk-bro) · [Website](https://portfolio-page-gamma-self.vercel.app)
@@ -10,7 +9,7 @@ Canada · Remote
 
 ## Summary
 
-Freelance frontend and full-stack developer specializing in reliable, testable web systems and workflow automation. Experienced building production applications with modern JavaScript frameworks, backend APIs, and CI-driven testing pipelines. Strong focus on maintainable architecture, operational clarity, and automation-first workflows, with hands-on experience in data-driven and financial research tooling.
+Frontend and full-stack engineer focused on reliable, testable web systems and workflow automation. Experienced building production applications with modern JavaScript frameworks, backend APIs, and CI-driven testing pipelines. Strong focus on maintainable architecture, operational clarity, and automation-first workflows, with hands-on experience in data-driven and financial research tooling.
 
 ---
 
@@ -27,7 +26,7 @@ Python, FastAPI
 n8n workflows, GitHub Actions, CI pipelines, local & cloud tooling, MCPs, Subagents
 
 **Testing & Quality**  
-Test-Driven Development (TDD), Playwright/Puppeteer/Selenium, regression & smoke tests, schema validation (Zod)
+Test-Driven Development (TDD), Playwright/Puppeteer/Selenium, regression & smoke testing, schema validation (Zod), TypeChecks
 
 ---
 
@@ -37,8 +36,8 @@ Test-Driven Development (TDD), Playwright/Puppeteer/Selenium, regression & smoke
 
 _Next.js, TypeScript, Supabase, Playwright_
 
-- Enabled administrators to manage bookings, availability, and operations in a single system, reducing manual coordination and error-prone workflows
 - Designed and built a calendar-driven resource booking platform for administrative and operational workflows
+- Enabled administrators to manage bookings, availability, and operations in a single system, reducing manual coordination and error-prone workflows
 - Implemented row-level security (RLS), role-based access control, and audit logging
 - Built end-to-end booking and availability flows with automated E2E test coverage
 - Structured the system for maintainability and future expansion while keeping MVP scope controlled
@@ -49,9 +48,9 @@ _Next.js, TypeScript, Supabase, Playwright_
 
 _n8n, APIs_
 
-- _Save time:_ Automation pipelines to orchestrate data ingestion, processing, and system coordination
-- _Reduce errors:_ Designed workflows with explicit error handling, retries, and observability
-- _Work smarter:_ Reduced manual operational effort by automating repetitive and failure-prone tasks
+- Designed automation pipelines to orchestrate data ingestion, processing, and system coordination
+- Reduced manual operational effort by automating repetitive and failure-prone workflows
+- Implemented explicit error handling, retries, and observability for production reliability
 
 ---
 

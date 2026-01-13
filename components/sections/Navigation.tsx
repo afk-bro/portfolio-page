@@ -239,7 +239,7 @@ export function Navigation() {
               "transition-colors duration-180",
             )}
           >
-            Portfolio
+            Tom Horne
           </Link>
 
           {/* Desktop Navigation - Better spacing */}

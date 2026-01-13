@@ -45,11 +45,11 @@ const statusOptions = [
   { value: "archived", label: "Archived" },
 ];
 
-// Status indicator config - using accent palette
+// Status indicator config - matching FeaturedProjects
 const statusConfig = {
-  complete: { label: "Complete", color: "bg-primary-500" },
-  "in-progress": { label: "In Progress", color: "bg-primary-300" },
-  archived: { label: "Archived", color: "bg-neutral-400" },
+  complete: { label: "Complete", color: "bg-success-500" },
+  "in-progress": { label: "In Progress", color: "bg-bronze-400" },
+  archived: { label: "Archived", color: "bg-muted-300" },
 };
 
 export function ProjectsContent() {
