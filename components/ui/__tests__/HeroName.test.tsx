@@ -345,7 +345,7 @@ describe("HeroName - Animation Lifecycle", () => {
     const toCall = gsap.to.mock.calls[0];
     expect(toCall[1]).toMatchObject({
       y: 0,
-      opacity: 1,
+      autoAlpha: 1,
       duration: expect.any(Number),
     });
   });
@@ -357,7 +357,7 @@ describe("HeroName - Animation Lifecycle", () => {
     const setCall = gsap.set.mock.calls[0];
     expect(setCall[1]).toMatchObject({
       y: -30,
-      opacity: 0,
+      autoAlpha: 0,
     });
   });
 

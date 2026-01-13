@@ -50,6 +50,13 @@ global.setMockScrollY = (value) => {
   mockScrollY = value;
 };
 
+// Mock GSAP context helper
+const createMockContext = () => ({
+  revert: jest.fn(),
+  kill: jest.fn(),
+  clear: jest.fn(),
+});
+
 // Mock GSAP
 jest.mock("gsap", () => ({
   set: jest.fn(),
@@ -74,6 +81,11 @@ jest.mock("gsap", () => ({
       return Promise.resolve();
     }),
   })),
+  context: jest.fn((fn) => {
+    fn();
+    return createMockContext();
+  }),
+  killTweensOf: jest.fn(),
   registerPlugin: jest.fn(),
   default: {
     set: jest.fn(),
@@ -97,6 +109,11 @@ jest.mock("gsap", () => ({
         return Promise.resolve();
       }),
     })),
+    context: jest.fn((fn) => {
+      fn();
+      return createMockContext();
+    }),
+    killTweensOf: jest.fn(),
     registerPlugin: jest.fn(),
   },
 }));
