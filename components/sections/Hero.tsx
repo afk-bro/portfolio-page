@@ -27,20 +27,6 @@ const fadeIn: Variants = {
   }),
 };
 
-// Slide from left
-const slideFromLeft: Variants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: (delay: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.7,
-      ease: [0.25, 0.1, 0.25, 1],
-      delay,
-    },
-  }),
-};
-
 // Slide from right
 const slideFromRight: Variants = {
   hidden: { opacity: 0, x: 30 },
@@ -69,19 +55,6 @@ const slideUp: Variants = {
   }),
 };
 
-// Slide down from top - elegant entrance
-const slideDown: Variants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: (delay: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1],
-      delay,
-    },
-  }),
-};
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
