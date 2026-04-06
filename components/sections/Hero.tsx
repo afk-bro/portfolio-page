@@ -92,11 +92,11 @@ export function Hero() {
           src="/images/old-tw.jpg"
           alt=""
           fill
-          className="object-cover opacity-[0.22] dark:opacity-[0.20]"
+          className="object-cover opacity-[0.38] dark:opacity-[0.20]"
           priority
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-sand-50/70 via-sand-100/50 to-sand-50/75 dark:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-b from-sand-50/40 via-sand-50/65 to-sand-50/85 dark:hidden" />
         <div className="absolute inset-0 hidden dark:block bg-gradient-to-b from-black/65 via-black/50 to-black/75 mix-blend-multiply" />
       </motion.div>
 
