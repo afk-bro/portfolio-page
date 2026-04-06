@@ -40,8 +40,8 @@ export function TypewriterName({ name, className }: TypewriterNameProps) {
       <h1
         className={cn(
           "font-typewriter",
-          "text-[clamp(3.9rem,6.8vw,6.2rem)]",
-          "tracking-[0.1em] md:tracking-[-0.02em]",
+          "text-[clamp(2.4rem,6.8vw,6.2rem)]",
+          "tracking-normal md:tracking-[-0.02em]",
           "leading-[1.2]",
           // Higher contrast - name pops forward
           "text-ocean-900 dark:text-white/95",

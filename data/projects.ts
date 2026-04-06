@@ -157,6 +157,49 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
+    id: "4",
+    title: "Tiger English",
+    slug: "tiger-english",
+    summary:
+      "AI-powered English learning platform for Thai speakers with interactive flashcards, XP progression, and a bilingual Thai/English interface.",
+    description:
+      "A full-stack English learning platform built for Thai speakers. Features AI-generated vocabulary flashcards, a gamified XP and level system, and a FastAPI backend that secures privileged Supabase operations. Fully bilingual with i18next-powered Thai/English support.",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "FastAPI",
+      "Python",
+      "Supabase",
+      "Tailwind CSS",
+      "Zustand",
+      "i18next",
+    ],
+    domain: "web",
+    type: "personal",
+    status: "in-progress",
+    featured: true,
+    order: 4,
+    links: {
+      github: "https://github.com/afk-bro/gain-english",
+    },
+    team: "solo",
+    highlights: ["AI flashcards", "Bilingual EN/TH", "XP system"],
+    caseStudy: {
+      problem:
+        "Thai speakers learning English lack tools that meet them in their native language context with adaptive, engaging content that keeps them progressing.",
+      solution:
+        "Built a gamified full-stack platform with AI-generated flashcards, XP-based progression, and complete Thai/English i18n. A FastAPI backend keeps the Supabase service role key off the client.",
+      keyFeatures: [
+        "AI-generated vocabulary flashcards with contextual images and audio",
+        "XP and level progression system with study streak tracking",
+        "Full Thai/English bilingual interface via i18next",
+        "Secure registration and auth flow through FastAPI backend",
+        "Protected dashboard routes with Zustand-managed auth state",
+      ],
+    },
+  },
 ];
 
 // Validate all projects at build time
