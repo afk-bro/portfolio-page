@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Building2, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { useRef } from "react";
 import { siteMetadata } from "@/data/metadata";
@@ -92,11 +92,11 @@ export function Hero() {
           src="/images/old-tw.jpg"
           alt=""
           fill
-          className="object-cover opacity-[0.22] dark:opacity-[0.20]"
+          className="object-cover opacity-[0.38] dark:opacity-[0.20]"
           priority
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-sand-50/70 via-sand-100/50 to-sand-50/75 dark:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-b from-sand-50/40 via-sand-50/65 to-sand-50/85 dark:hidden" />
         <div className="absolute inset-0 hidden dark:block bg-gradient-to-b from-black/65 via-black/50 to-black/75 mix-blend-multiply" />
       </motion.div>
 
@@ -166,15 +166,20 @@ export function Hero() {
           )}
 
           {/* 5. Trust anchor - Slides up from bottom */}
-          <motion.p
-            className="text-sm text-ocean-400/70 dark:text-sand-100/50"
+          <motion.div
+            className="flex justify-center"
             initial="hidden"
             animate="visible"
             variants={slideUp}
             custom={timing.trust}
           >
-            Previously at WestGrid Canada & TCS Canada
-          </motion.p>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-ocean-300/30 dark:border-white/15 bg-white/40 dark:bg-white/5">
+              <Building2 className="w-3.5 h-3.5 text-ocean-500 dark:text-sand-100/60" />
+              <span className="text-sm font-medium text-ocean-600 dark:text-sand-100/75">
+                Previously at WestGrid Canada &amp; TCS Canada
+              </span>
+            </span>
+          </motion.div>
         </div>
       </div>
     </section>

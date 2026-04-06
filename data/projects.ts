@@ -182,7 +182,7 @@ export const projects: Project[] = [
     featured: true,
     order: 4,
     links: {
-      github: "https://github.com/afk-bro/gain-english",
+      github: "https://github.com/afk-bro/tiger-english",
     },
     team: "solo",
     highlights: ["AI flashcards", "Bilingual EN/TH", "XP system"],
