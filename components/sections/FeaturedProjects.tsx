@@ -15,7 +15,7 @@ const statusConfig = {
 };
 
 export function FeaturedProjects() {
-  const projects = getFeaturedProjects().slice(0, 3);
+  const projects = getFeaturedProjects();
 
   return (
     <section className="section relative">
@@ -32,7 +32,7 @@ export function FeaturedProjects() {
         </AnimateOnScroll>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
           {projects.map((project, index) => {
             const status = statusConfig[project.status];
             return (
