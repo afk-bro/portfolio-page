@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Building2, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { useRef } from "react";
 import { siteMetadata } from "@/data/metadata";
@@ -166,15 +166,20 @@ export function Hero() {
           )}
 
           {/* 5. Trust anchor - Slides up from bottom */}
-          <motion.p
-            className="text-sm text-ocean-400/70 dark:text-sand-100/50"
+          <motion.div
+            className="flex justify-center"
             initial="hidden"
             animate="visible"
             variants={slideUp}
             custom={timing.trust}
           >
-            Previously at WestGrid Canada & TCS Canada
-          </motion.p>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-ocean-300/30 dark:border-white/15 bg-white/40 dark:bg-white/5">
+              <Building2 className="w-3.5 h-3.5 text-ocean-500 dark:text-sand-100/60" />
+              <span className="text-sm font-medium text-ocean-600 dark:text-sand-100/75">
+                Previously at WestGrid Canada &amp; TCS Canada
+              </span>
+            </span>
+          </motion.div>
         </div>
       </div>
     </section>
