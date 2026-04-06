@@ -125,6 +125,39 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "3",
+    title: "The Watershed Campground",
+    slug: "watershed-campground",
+    summary:
+      "Modern marketing site for a family-owned lakeside campground with perfect SEO score and WCAG AA accessibility.",
+    description:
+      "A production-ready website rebuild for a lakeside campground on Kootenay Lake, BC. Features immersive parallax hero sections, interactive photo gallery with keyboard navigation, and comprehensive accessibility support.",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    domain: "web",
+    type: "professional",
+    status: "complete",
+    featured: true,
+    order: 3,
+    links: {
+      github: "https://github.com/afk-bro/watershed-campground",
+    },
+    team: "solo",
+    highlights: ["SEO 100", "WCAG AA", "Parallax effects"],
+    caseStudy: {
+      problem:
+        "A family-owned campground needed a modern web presence that would rank well in search and be accessible to all visitors, including those using assistive technologies.",
+      solution:
+        "Rebuilt the site with Next.js, implementing comprehensive SEO with structured data, Open Graph tags, and automatic sitemap generation. Ensured WCAG AA compliance throughout.",
+      keyFeatures: [
+        "Immersive hero with parallax and reduced-motion support",
+        "Interactive lightbox gallery with keyboard navigation",
+        "Structured data via JSON-LD for rich snippets",
+        "Image optimization with AVIF/WebP formats",
+        "Full screen reader support with ARIA labels",
+      ],
+    },
+  },
+  {
     id: "4",
     title: "Tiger English",
     slug: "tiger-english",
@@ -164,39 +197,6 @@ export const projects: Project[] = [
         "Full Thai/English bilingual interface via i18next",
         "Secure registration and auth flow through FastAPI backend",
         "Protected dashboard routes with Zustand-managed auth state",
-      ],
-    },
-  },
-  {
-    id: "3",
-    title: "The Watershed Campground",
-    slug: "watershed-campground",
-    summary:
-      "Modern marketing site for a family-owned lakeside campground with perfect SEO score and WCAG AA accessibility.",
-    description:
-      "A production-ready website rebuild for a lakeside campground on Kootenay Lake, BC. Features immersive parallax hero sections, interactive photo gallery with keyboard navigation, and comprehensive accessibility support.",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    domain: "web",
-    type: "professional",
-    status: "complete",
-    featured: true,
-    order: 3,
-    links: {
-      github: "https://github.com/afk-bro/watershed-campground",
-    },
-    team: "solo",
-    highlights: ["SEO 100", "WCAG AA", "Parallax effects"],
-    caseStudy: {
-      problem:
-        "A family-owned campground needed a modern web presence that would rank well in search and be accessible to all visitors, including those using assistive technologies.",
-      solution:
-        "Rebuilt the site with Next.js, implementing comprehensive SEO with structured data, Open Graph tags, and automatic sitemap generation. Ensured WCAG AA compliance throughout.",
-      keyFeatures: [
-        "Immersive hero with parallax and reduced-motion support",
-        "Interactive lightbox gallery with keyboard navigation",
-        "Structured data via JSON-LD for rich snippets",
-        "Image optimization with AVIF/WebP formats",
-        "Full screen reader support with ARIA labels",
       ],
     },
   },
