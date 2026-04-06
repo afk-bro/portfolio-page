@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 
 export function ProofStrip() {
+  const [badgeError, setBadgeError] = useState(false);
+
   return (
     <section className="relative pt-8 pb-20 bg-transparent">
       <div className="container-content relative">
@@ -37,13 +40,21 @@ export function ProofStrip() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Tiger English CI status"
-              className="inline-flex items-center"
+              className="inline-flex items-center gap-1.5 text-sm text-ocean-500 dark:text-sand-100/70 hover:text-bronze-700 dark:hover:text-bronze-400 transition-colors duration-180"
             >
-              <img
-                src="https://github.com/afk-bro/tiger-english/actions/workflows/ci.yml/badge.svg"
-                alt="CI status"
-                className="h-5"
-              />
+              {badgeError ? (
+                <span>CI</span>
+              ) : (
+                <img
+                  src="https://github.com/afk-bro/tiger-english/actions/workflows/ci.yml/badge.svg"
+                  alt="CI status"
+                  width={104}
+                  height={20}
+                  loading="eager"
+                  decoding="async"
+                  onError={() => setBadgeError(true)}
+                />
+              )}
             </a>
           </div>
         </AnimateOnScroll>

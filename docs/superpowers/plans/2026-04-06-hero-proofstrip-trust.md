@@ -12,29 +12,30 @@
 
 ## File Map
 
-| File | What changes |
-|------|-------------|
-| `/home/x/dev/projects/gain-english/.github/workflows/ci.yml` | **Create** — CI workflow for Tiger English (prerequisite for badge) |
-| `data/projects.ts` | **Modify line 152** — `gain-english` → `tiger-english` in GitHub URL |
-| `components/sections/Hero.tsx` | **Modify lines 95, 99, 1, 169–177** — image opacity, gradient, trust line pill |
-| `components/sections/ProofStrip.tsx` | **Replace entirely** — philosophy statement + proof links |
+| File                                     | What changes                                                                   |
+| ---------------------------------------- | ------------------------------------------------------------------------------ |
+| `tiger-english/.github/workflows/ci.yml` | **Create** — CI workflow for Tiger English (prerequisite for badge)            |
+| `data/projects.ts`                       | **Modify** — search for `gain-english` URL → replace with `tiger-english`      |
+| `components/sections/Hero.tsx`           | **Modify lines 95, 99, 1, 169–177** — image opacity, gradient, trust line pill |
+| `components/sections/ProofStrip.tsx`     | **Replace entirely** — philosophy statement + proof links                      |
 
 ---
 
 ## Task 1: Tiger English CI Workflow
 
-**Repo:** `/home/x/dev/projects/gain-english/` (the tiger-english GitHub repo)
+**Repo:** tiger-english (separate repo from portfolio-page)
 
 **Files:**
-- Create: `/home/x/dev/projects/gain-english/.github/workflows/ci.yml`
+
+- Create: `tiger-english/.github/workflows/ci.yml`
 
 - [ ] **Step 1: Create the workflow directory and file**
 
 ```bash
-mkdir -p /home/x/dev/projects/gain-english/.github/workflows
+mkdir -p .github/workflows
 ```
 
-Then create `/home/x/dev/projects/gain-english/.github/workflows/ci.yml` with this exact content:
+Then create `.github/workflows/ci.yml` with this exact content:
 
 ```yaml
 name: CI
@@ -53,8 +54,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -94,7 +95,8 @@ The badge URL will be:
 **Repo:** portfolio-page
 
 **Files:**
-- Modify: `data/projects.ts:152`
+
+- Modify: `data/projects.ts` — search for `gain-english` in the Tiger English entry
 
 - [ ] **Step 1: Create the feature branch**
 
@@ -108,7 +110,7 @@ git checkout -b feat/hero-proofstrip-trust
 In `data/projects.ts`, find and replace the Tiger English GitHub link:
 
 ```ts
-// Before (line ~152):
+// Before (search for this string):
 github: "https://github.com/afk-bro/gain-english",
 
 // After:
@@ -135,6 +137,7 @@ git commit -m "fix: update Tiger English GitHub URL to renamed repo"
 ## Task 3: Hero Image — Increase Light Mode Opacity and Reshape Gradient
 
 **Files:**
+
 - Modify: `components/sections/Hero.tsx:95,99`
 
 - [ ] **Step 1: Update the image opacity class**
@@ -143,10 +146,10 @@ In `components/sections/Hero.tsx`, find the `<Image>` tag around line 91–98 an
 
 ```tsx
 // Before:
-className="object-cover opacity-[0.22] dark:opacity-[0.20]"
+className = "object-cover opacity-[0.22] dark:opacity-[0.20]";
 
 // After:
-className="object-cover opacity-[0.38] dark:opacity-[0.20]"
+className = "object-cover opacity-[0.38] dark:opacity-[0.20]";
 ```
 
 - [ ] **Step 2: Reshape the light mode gradient overlay**
@@ -200,6 +203,7 @@ git commit -m "fix: increase hero background image visibility in light mode"
 ## Task 4: Trust Line — Pill Treatment
 
 **Files:**
+
 - Modify: `components/sections/Hero.tsx:1, 169–177`
 
 - [ ] **Step 1: Add Building2 to the lucide-react import**
@@ -221,7 +225,9 @@ import { ArrowRight, Building2, Sparkles } from "lucide-react";
 Find the trust anchor block around lines 168–177:
 
 ```tsx
-{/* 5. Trust anchor - Slides up from bottom */}
+{
+  /* 5. Trust anchor - Slides up from bottom */
+}
 <motion.p
   className="text-sm text-ocean-400/70 dark:text-sand-100/50"
   initial="hidden"
@@ -230,13 +236,15 @@ Find the trust anchor block around lines 168–177:
   custom={timing.trust}
 >
   Previously at WestGrid Canada & TCS Canada
-</motion.p>
+</motion.p>;
 ```
 
 Replace it with:
 
 ```tsx
-{/* 5. Trust anchor - Slides up from bottom */}
+{
+  /* 5. Trust anchor - Slides up from bottom */
+}
 <motion.div
   className="flex justify-center"
   initial="hidden"
@@ -250,7 +258,7 @@ Replace it with:
       Previously at WestGrid Canada &amp; TCS Canada
     </span>
   </span>
-</motion.div>
+</motion.div>;
 ```
 
 - [ ] **Step 3: Visual check with Playwright**
@@ -291,6 +299,7 @@ git commit -m "fix: give trust line credential weight with pill treatment"
 ## Task 5: ProofStrip — Replace with Philosophy + Proof Links
 
 **Files:**
+
 - Modify: `components/sections/ProofStrip.tsx` (full replacement)
 
 - [ ] **Step 1: Replace the entire file content**
@@ -387,6 +396,7 @@ python3 /tmp/check_proofstrip.py
 ```
 
 Expected output:
+
 ```
 Philosophy text: True
 watershed-campground link: True
@@ -446,6 +456,7 @@ python3 /tmp/final_check.py
 ```
 
 Review all three screenshots. Confirm:
+
 - Hero image texture is visible in light mode
 - Text (name, role, CTAs) remains clearly readable
 - Trust line shows as a pill with Building2 icon
