@@ -100,15 +100,23 @@ export function AboutProfileSection() {
         className="prose-content max-w-2xl"
       >
         <p>
-          I&apos;m a passionate developer who loves turning complex problems
-          into elegant solutions. With a strong foundation in both frontend and
-          backend technologies, I build applications that are not only
-          functional but also delightful to use.
+          I build full-stack web applications, internal tools, and
+          automation-driven systems with a focus on reliability, clarity, and
+          real-world usefulness. My work spans React/Next.js frontends, backend
+          APIs, and data-driven systems — from reservation platforms and
+          learning apps to backtesting engines and analytics dashboards.
         </p>
         <p>
-          My journey in tech started with curiosity about how things work.
-          Today, that curiosity drives me to continuously learn and stay updated
-          with the latest technologies and best practices.
+          I care about building things properly: typed systems, strong testing,
+          clean architecture, and production-ready workflows with CI/CD and
+          monitoring. I&apos;m especially interested in solving practical
+          problems — improving workflows, reducing friction, and turning complex
+          logic into tools people can actually use.
+        </p>
+        <p>
+          My background combines hands-on trade experience with software
+          development, which shapes how I approach projects: pragmatic,
+          execution-focused, and outcome-driven.
         </p>
       </motion.div>
     </section>
