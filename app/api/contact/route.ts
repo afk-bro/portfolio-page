@@ -2,7 +2,6 @@ import { z } from "zod";
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const TO_EMAIL = process.env.CONTACT_EMAIL || "contact@tomhorne.dev";
 
 const contactSchema = z.object({
@@ -34,6 +33,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
+  const resend = new Resend(process.env.RESEND_API_KEY);
   const { name, email, message, honeypot } = parsed.data;
 
   // Silent discard for bots
