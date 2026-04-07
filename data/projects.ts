@@ -63,7 +63,7 @@ export const projects: Project[] = [
     type: "personal",
     status: "in-progress",
     featured: true,
-    order: 1,
+    order: 2,
     links: {
       github: "https://github.com/afk-bro/trading-RAG",
     },
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     type: "personal",
     status: "in-progress",
     featured: true,
-    order: 2,
+    order: 3,
     links: {
       github: "https://github.com/afk-bro/outdoor-management-system",
     },
@@ -148,7 +148,7 @@ export const projects: Project[] = [
     type: "professional",
     status: "complete",
     featured: true,
-    order: 3,
+    order: 4,
     links: {
       github: "https://github.com/afk-bro/watershed-campground",
     },
@@ -191,9 +191,10 @@ export const projects: Project[] = [
     type: "personal",
     status: "in-progress",
     featured: true,
-    order: 4,
+    order: 1,
     links: {
       github: "https://github.com/afk-bro/tiger-english",
+      demo: "https://tiger-english.com",
     },
     team: "solo",
     highlights: ["AI flashcards", "Bilingual EN/TH", "XP system"],
