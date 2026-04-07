@@ -11,28 +11,44 @@ export const metadata: Metadata = {
   },
 };
 
-const timeline = [
+type TimelineItem = {
+  year: string;
+  title: string;
+  description: string;
+  company?: string;
+  period?: string;
+};
+
+const timeline: TimelineItem[] = [
   {
     year: "2024",
     title: "Full-Stack Developer",
+    company: "UpWork — Freelance",
+    period: "2024–Present",
     description:
       "Building end-to-end solutions with React, Node.js, and cloud infrastructure. Focused on scalable systems and automation.",
   },
   {
     year: "2022",
     title: "Front End Developer / QA Automation",
+    company: "Tata Consultancy Services Canada",
+    period: "2022–2024",
     description:
       "Developed responsive web interfaces while building automated test suites with Selenium WebDriver for cross-browser testing and regression coverage.",
   },
   {
     year: "2020",
     title: "Junior Front End Developer",
+    company: "WestGrid Canada",
+    period: "2020–2022",
     description:
       "First professional role after graduating with a Bachelor of Computer Information Systems Degree. Focused on creating responsive, accessible web interfaces with modern JavaScript frameworks.",
   },
   {
     year: "2016",
     title: "Enrolled at Okanagan College",
+    company: "Okanagan College",
+    period: "2016–2020",
     description:
       "Started Computer Information Systems program, building a foundation in programming, databases, and systems analysis.",
   },
@@ -99,9 +115,19 @@ export default function AboutPage() {
                   )}
                 </div>
                 <div className="pb-8">
-                  <h3 className="text-h4 text-neutral-900 dark:text-neutral-50 mb-2">
+                  <h3 className="text-h4 text-neutral-900 dark:text-neutral-50 mb-1">
                     {item.title}
                   </h3>
+                  {item.company && (
+                    <p className="text-sm font-medium text-primary-600 dark:text-primary-400 mb-1">
+                      {item.company}
+                      {item.period && (
+                        <span className="text-neutral-400 dark:text-neutral-500 font-normal ml-2">
+                          {item.period}
+                        </span>
+                      )}
+                    </p>
+                  )}
                   <p className="text-neutral-600 dark:text-neutral-400">
                     {item.description}
                   </p>
