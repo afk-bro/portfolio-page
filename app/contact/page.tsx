@@ -94,25 +94,38 @@ export default function ContactPage() {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    // Record the submission timestamp for rate limiting
-    submissionTimestamps.current.push(Date.now());
+      // Record the submission timestamp for rate limiting
+      submissionTimestamps.current.push(Date.now());
 
-    // In a real app, you would send this to an API endpoint
-    console.log("Form submitted:", formData);
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        addToast(
+          data.error ?? "Something went wrong. Please try emailing directly.",
+          "error",
+          6000,
+        );
+        return;
+      }
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: "", email: "", message: "", honeypot: "" });
-
-    // Show success toast notification
-    addToast(
-      "Message sent successfully! I'll get back to you soon.",
-      "success",
-      5000,
-    );
+      setIsSubmitted(true);
+      setFormData({ name: "", email: "", message: "", honeypot: "" });
+      addToast(
+        "Message sent successfully! I'll get back to you soon.",
+        "success",
+        5000,
+      );
+    } catch {
+      addToast("Network error. Please try emailing directly.", "error", 6000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
