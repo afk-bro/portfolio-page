@@ -50,7 +50,7 @@ const timeline: TimelineItem[] = [
     company: "Okanagan College",
     period: "2016–2020",
     description:
-      "Graduated with a BSc in Computer Information Systems, building a foundation in programming, databases, and systems analysis.",
+      "Studied Computer Information Systems, building a foundation in programming, databases, and systems analysis. Graduated 2020.",
   },
   {
     year: "2015",
