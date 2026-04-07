@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Briefcase, Heart, Code } from "lucide-react";
+import { Cpu, Bot, Server, HardHat } from "lucide-react";
 import { AboutProfileSection } from "@/components/sections/AboutProfileSection";
 
 export const metadata: Metadata = {
@@ -62,22 +62,28 @@ const timeline: TimelineItem[] = [
 
 const howIWork = [
   {
-    icon: Code,
-    title: "Code Quality",
+    icon: Cpu,
+    title: "Engineering Discipline",
     description:
-      "I write clean, maintainable code with comprehensive tests. Type safety and documentation are non-negotiable.",
+      "Strong typing, testing, and CI/CD from the start — not added later. I use automated pipelines (lint, type-check, coverage, build) to ensure code quality and reliable deployments.",
   },
   {
-    icon: Heart,
-    title: "User-Centric",
+    icon: Bot,
+    title: "Automation-Driven Workflow",
     description:
-      "Every technical decision starts with the user experience. Performance and accessibility are priorities.",
+      "I leverage AI tools (ChatGPT, GitHub Copilot, Claude Code) to accelerate development while maintaining control over architecture, logic, and final implementation.",
   },
   {
-    icon: Briefcase,
-    title: "Collaboration",
+    icon: Server,
+    title: "Production-Ready Systems",
     description:
-      "I thrive in team environments, value clear communication, and believe in continuous learning.",
+      "I build with real-world usage in mind: monitoring (Sentry), error tracking, and scalable architecture. My projects are deployed, observable, and maintainable.",
+  },
+  {
+    icon: HardHat,
+    title: "Pragmatic Execution",
+    description:
+      "I focus on shipping useful systems quickly, then iterating based on real usage. My background in construction influences how I work — practical, efficient, and outcome-driven.",
   },
 ];
 
@@ -142,7 +148,7 @@ export default function AboutPage() {
           <h2 className="text-h2 text-neutral-900 dark:text-neutral-50 mb-8">
             How I Work
           </h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             {howIWork.map((item) => (
               <div key={item.title} className="card p-6">
                 <item.icon className="w-8 h-8 text-primary-600 dark:text-primary-400 mb-4" />
@@ -154,29 +160,6 @@ export default function AboutPage() {
                 </p>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* What I'm Looking For */}
-        <section>
-          <h2 className="text-h2 text-neutral-900 dark:text-neutral-50 mb-4">
-            What I&apos;m Looking For
-          </h2>
-          <div className="prose-content">
-            <p>
-              I&apos;m interested in full-stack development roles where I can
-              make a meaningful impact. I thrive in environments that value:
-            </p>
-            <ul>
-              <li>Technical excellence and continuous improvement</li>
-              <li>Collaborative, cross-functional teams</li>
-              <li>Products that solve real problems for users</li>
-              <li>Learning opportunities and professional growth</li>
-            </ul>
-            <p>
-              Open to both remote and hybrid positions. Let&apos;s talk if you
-              think we&apos;d be a good fit!
-            </p>
           </div>
         </section>
       </div>
