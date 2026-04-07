@@ -190,7 +190,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   rel="noopener noreferrer"
                 >
                   <ExternalLink className="w-4 h-4 mr-2" />
-                  Live Demo
+                  Visit Website
                 </a>
               </Button>
             )}
