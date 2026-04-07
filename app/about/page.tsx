@@ -11,7 +11,15 @@ export const metadata: Metadata = {
   },
 };
 
-const timeline = [
+type TimelineItem = {
+  year: string;
+  title: string;
+  description: string;
+  company?: string;
+  period?: string;
+};
+
+const timeline: TimelineItem[] = [
   {
     year: "2024",
     title: "Full-Stack Developer",
@@ -110,10 +118,10 @@ export default function AboutPage() {
                   <h3 className="text-h4 text-neutral-900 dark:text-neutral-50 mb-1">
                     {item.title}
                   </h3>
-                  {"company" in item && item.company && (
+                  {item.company && (
                     <p className="text-sm font-medium text-primary-600 dark:text-primary-400 mb-1">
                       {item.company}
-                      {"period" in item && item.period && (
+                      {item.period && (
                         <span className="text-neutral-400 dark:text-neutral-500 font-normal ml-2">
                           {item.period}
                         </span>

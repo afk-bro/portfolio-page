@@ -1,18 +1,40 @@
+import { z } from "zod";
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const TO_EMAIL = process.env.CONTACT_EMAIL ?? "blockandflow@gmail.com";
+const TO_EMAIL = process.env.CONTACT_EMAIL || "contact@tomhorne.dev";
+
+const contactSchema = z.object({
+  name: z.string().optional(),
+  email: z.string(),
+  message: z.string(),
+  honeypot: z.string().optional(),
+});
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+}
 
 export async function POST(req: NextRequest) {
-  let body: Record<string, string>;
+  let body: unknown;
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
-  const { name, email, message, honeypot } = body;
+  const parsed = contactSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
+
+  const { name, email, message, honeypot } = parsed.data;
 
   // Silent discard for bots
   if (honeypot) {
@@ -35,6 +57,10 @@ export async function POST(req: NextRequest) {
     ? `Portfolio contact from ${name.trim()}`
     : "New portfolio contact form message";
 
+  const safeName = escapeHtml(senderName);
+  const safeEmail = escapeHtml(email);
+  const safeMessage = escapeHtml(message);
+
   const autoReplyText = [
     `Hi${name?.trim() ? ` ${name.trim()}` : ""},`,
     "",
@@ -49,12 +75,12 @@ export async function POST(req: NextRequest) {
   ].join("\n");
 
   const autoReplyHtml = `
-    <p>Hi${name?.trim() ? ` ${name.trim()}` : ""},</p>
+    <p>Hi${name?.trim() ? ` ${safeName},` : ","}</p>
     <p>Thanks for reaching out — I've received your message and will get back to you within 24–48 hours.</p>
     <p>— Tom Horne<br /><a href="https://tomhorne.dev">tomhorne.dev</a></p>
     <hr />
     <p style="color:#888;font-size:13px"><em>Your message:</em></p>
-    <p style="color:#555;white-space:pre-wrap;font-size:13px">${message}</p>
+    <p style="color:#555;white-space:pre-wrap;font-size:13px">${safeMessage}</p>
   `;
 
   try {
@@ -65,7 +91,7 @@ export async function POST(req: NextRequest) {
         replyTo: email,
         subject,
         text: `From: ${senderName}\nEmail: ${email}\n\n${message}`,
-        html: `<p><strong>From:</strong> ${senderName}</p><p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p><hr /><p style="white-space:pre-wrap">${message}</p>`,
+        html: `<p><strong>From:</strong> ${safeName}</p><p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p><hr /><p style="white-space:pre-wrap">${safeMessage}</p>`,
       }),
       resend.emails.send({
         from: "Tom Horne <contact@tomhorne.dev>",
