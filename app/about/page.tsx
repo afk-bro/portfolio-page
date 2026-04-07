@@ -42,15 +42,15 @@ const timeline: TimelineItem[] = [
     company: "WestGrid Canada",
     period: "2020–2022",
     description:
-      "First professional role after graduating with a Bachelor of Computer Information Systems Degree. Focused on creating responsive, accessible web interfaces with modern JavaScript frameworks.",
+      "First professional role. Focused on creating responsive, accessible web interfaces with modern JavaScript frameworks.",
   },
   {
     year: "2016",
-    title: "Enrolled at Okanagan College",
+    title: "Bachelor of Science — Computer Information Systems",
     company: "Okanagan College",
     period: "2016–2020",
     description:
-      "Started Computer Information Systems program, building a foundation in programming, databases, and systems analysis.",
+      "Studied Computer Information Systems, building a foundation in programming, databases, and systems analysis. Graduated 2020.",
   },
   {
     year: "2015",

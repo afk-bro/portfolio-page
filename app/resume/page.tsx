@@ -43,7 +43,7 @@ export default function ResumePage() {
             </a>
           </Button>
           <div className="flex items-center justify-center gap-4 mt-4 text-sm text-neutral-500 dark:text-neutral-400">
-            <span>Updated: Jan 2025</span>
+            <span>Updated: Apr 2026</span>
             <span className="text-neutral-300 dark:text-neutral-600">|</span>
             <span>Focus: Full-Stack / Systems</span>
           </div>
